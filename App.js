@@ -27,6 +27,7 @@ const Application =StackNavigator({
 //dfdsjfksdjfkjdksjfksdjkfjksdjfksdkj
 //nareshkunta
 //hello
+//naresh
 
 export default class App extends Component {
   render(){
