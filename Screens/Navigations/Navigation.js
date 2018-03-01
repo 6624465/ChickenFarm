@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactNative from 'react-native';
 
-import {DrawerNavigator, StackNavigator} from 'react-navigation';
+import {DrawerNavigator} from 'react-navigation';
 
 import MainDashboard from '../Dashboard/MainDashboard';
 import FarmProfileList from '../FarmProfile/FarmProfileList';
@@ -39,8 +39,10 @@ const NavLinks = DrawerNavigator({
     contentOptions: {
       activeTintColor:'red',
     },
-    
+    navigationOptions:{
+      header:false,
   }
+}
 )
 
 export default class Navigation extends Component {

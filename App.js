@@ -9,24 +9,16 @@ import ReactNative from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
 
-import Login from './Screens/Registration/Login';
-import Navigation from './Screens/Navigations/Navigation';
+import LoginNavigation from './Screens/Navigations/LoginNavigation';
 
-//import MainDashboard from './Screens/Dashboard/MainDashboard';
-import Registration from './Screens/Registration/Registration';
-import ForgotPassword from './Screens/Registration/ForgotPassword';
 
 
 const Application =StackNavigator({
-      Home:{screen:Login},
-      Navigation:{screen:Navigation},
-      //MainDashboard:{screen:MainDashboard},
-      Registration:{screen:Registration},
-      ForgotPassword:{screen:ForgotPassword}
+      Home:{screen:LoginNavigation}
     },
     {
       navigationOptions:{
-        header:false,
+        header:true,
     }
   }
 )

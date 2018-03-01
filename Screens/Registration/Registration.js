@@ -1,44 +1,35 @@
 import React, { Component } from 'react';
-import {View, Text, Button, Header, Left, Icon, Body, Title} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
+
+import { Container, Content, Header, Icon, Left, Title, Body, Button } from 'native-base';
 
 import {StackNavigator} from 'react-navigation';
+
+// import Login from './Screens/Registration/Login';
 
 
 export default class Registration extends Component{
     static navigationOptions={
-        title : 'Farm Profile List',
+        title : 'Registration',
         headerStyle:{backgroundColor:'#fff'},
-        headerTitleStyle:{color:'#212121'}
+        headerTitleStyle:{color:'#212121'},
+        Header:true
     }
     render(){
-            return(        
-                <View>
-                    
-                    <View>
+            return(          
+            <Container>
+                    <Content contentContainerStyle={{
+                        flex:1,
+                        alignItems:'center',
+                        justifyContent:'center'
+                    }}>
                         <Text>My Farm Dashboard</Text>
-                    </View>
-                </View>        
-            // <Container>
-            //         <Header>
-            //             <Left>
-            //                 <Button transparent onPress={()=>this.props.navigation.navigate('DrawerOpen')}>
-            //                 <Icon ios='ios-menu' android="md-menu" />
-            //                 </Button>
-            //             </Left>
-            //             <Body>
-            //                 <Title>My Farm Dashboard</Title>
-            //             </Body>
-            //         </Header>
-
-            //         <Content contentContainerStyle={{
-            //             flex:1,
-            //             alignItems:'center',
-            //             justifyContent:'center'
-            //         }}>
-            //             <Text>My Farm Dashboard</Text>
-            //         </Content>
-            //     </Container>
+                    </Content>
+                </Container>
             );
 
     }
+    BackToLogin=()=>{
+        this.props.navigation.navigate('Login');
+      }
 }

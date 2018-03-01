@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {View, Text,StyleSheet,Button,TouchableOpacity,Image,} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
+
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
 
@@ -32,7 +33,10 @@ var LoginCredential = t.struct({
   }
 
 export default class Login extends Component{
-   
+
+  static navigationOptions={
+     header:false
+}
 
     render(){
       return(

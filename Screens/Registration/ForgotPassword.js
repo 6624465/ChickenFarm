@@ -6,14 +6,14 @@ import {StackNavigator} from 'react-navigation';
 
 export default class ForgotPassword extends Component{
     static navigationOptions={
-        title : 'Farm Profile List',
+        title : 'Forgot Password',
         headerStyle:{backgroundColor:'#fff'},
         headerTitleStyle:{color:'#212121'}
     }
     render(){
             return(        
                 <View>
-                    <Text>sdfsdf</Text>
+                   
                     </View>        
             // <Container>
             //         <Header>
