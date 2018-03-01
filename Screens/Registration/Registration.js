@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Button, Header, Left, Icon, Body, Title} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
 
@@ -13,8 +13,11 @@ export default class Registration extends Component{
     render(){
             return(        
                 <View>
-                    <Text>sdfsdf</Text>
-                    </View>        
+                    
+                    <View>
+                        <Text>My Farm Dashboard</Text>
+                    </View>
+                </View>        
             // <Container>
             //         <Header>
             //             <Left>

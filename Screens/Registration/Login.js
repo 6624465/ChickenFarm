@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import {View, Text} from 'react-native';
+import {View, Text,StyleSheet,Button,TouchableOpacity,Image,} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
-
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
 
@@ -12,19 +11,110 @@ var LoginCredential = t.struct({
        
   });
 
-  export default class Login extends Component{
-    
-    render(){
-            return(        
-            <View>
-                  <Form
-                  ref='form'
-                  type={LoginCredential}
-                //   options={LoginCredentialOption}
-                  />
-             </View>        
-           
-            );
+  var LoginCredentialOption={
+    //auto: 'placeholders'
+    fields:{
+        MobileNo: {
+            label: 'Mobile No',
+            placeholder:'Enter Your Mobile No',
+            error:'Please Enter Your Mobile Number'
 
+          },
+          Password: {
+            label: 'Password',
+            placeholder:'Enter Your Password',
+            password: true,
+            secureTextEntry: true,
+            error:'Please Enter Your Password'
+
+          }
+      }
+  }
+
+export default class Login extends Component{
+   
+
+    render(){
+      return(
+      <View style={styles.container}>                 
+        <View style={{alignItems:'center'}}>
+          <Image source = { require('../../android/app/src/main/assets/chicken.png') } style={{width:100,height:100}}/>
+        </View>
+        <Form
+          ref='form'
+          type={LoginCredential}
+          options={LoginCredentialOption}
+        />
+
+        <Button
+          title='Login'
+          onPress={this.LoginUser}
+        />
+
+        <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+          <TouchableOpacity style={{paddingTop:25}} onPress={this.NewUserRegistration}>
+            <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
+              New User?
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={{paddingTop:25,paddingLeft:150}} onPress={this.ForgotPassword}>
+            <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
+              Forgot Password?
+            </Text>
+          </TouchableOpacity>
+        </View> 
+        </View>
+      );
+    }
+
+    LoginUser=()=>
+    {
+        debugger;
+        var value = this.refs.form.getValue();
+        if (value) {
+          if(value.MobileNo=='123' && value.Password=='a'){
+            debugger;
+            this.props.navigation.navigate('Navigation');
+          }
+        }
+    }
+
+    NewUserRegistration=()=>{
+      this.props.navigation.navigate('Registration');
+    }
+
+    ForgotPassword=()=>{
+        this.props.navigation.navigate('ForgotPassword');
     }
 }
+
+
+var styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        //marginTop: 120,
+        padding: 20,
+        backgroundColor: '#ffffff',      
+    },
+    title: {
+      fontSize: 30,
+      alignSelf: 'center',
+      marginBottom: 30
+    },
+    buttonText: {
+      fontSize: 18,
+      color: 'white',
+      alignSelf: 'center'
+    },
+    button: {
+      height: 36,
+      backgroundColor: '#48BBEC',
+      borderColor: '#48BBEC',
+      borderWidth: 1,
+      borderRadius: 8,
+      marginBottom: 10,
+      alignSelf: 'stretch',
+      justifyContent: 'center'
+    }
+  });
