@@ -23,6 +23,7 @@ const Application =StackNavigator({
     }
   }
 )
+//asdfasdfasdfsadfsdfasdfasdf sf asdf asdf asdf asdf asdf asdf asdf
 
 //dfdsjfksdjfkjdksjfksdjkfjksdjfksdkj
 //nareshkunta
