@@ -3,8 +3,7 @@
  * https://github.com/facebook/react-native
  * @flow
  */
-//git testing
-//test again
+
 import React, { Component } from 'react';
 import ReactNative from 'react-native';
 
@@ -23,10 +22,7 @@ const Application =StackNavigator({
     }
   }
 )
-//asdfasdfasdfsadfsdfasdfasdf sf asdf asdf asdf asdf asdf asdf asdf
 
-//dfdsjfksdjfkjdksjfksdjkfjksdjfksdkj
-//nareshkunta
 
 export default class App extends Component {
   render(){
