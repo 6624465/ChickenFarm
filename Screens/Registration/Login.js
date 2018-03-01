@@ -12,28 +12,11 @@ export default class Login extends Component{
     render(){
             return(        
                 <View>
-                    <Text>sdfsdf</Text>
+                  <Form
+                  
+                  />
                     </View>        
-            // <Container>
-            //         <Header>
-            //             <Left>
-            //                 <Button transparent onPress={()=>this.props.navigation.navigate('DrawerOpen')}>
-            //                 <Icon ios='ios-menu' android="md-menu" />
-            //                 </Button>
-            //             </Left>
-            //             <Body>
-            //                 <Title>My Farm Dashboard</Title>
-            //             </Body>
-            //         </Header>
-
-            //         <Content contentContainerStyle={{
-            //             flex:1,
-            //             alignItems:'center',
-            //             justifyContent:'center'
-            //         }}>
-            //             <Text>My Farm Dashboard</Text>
-            //         </Content>
-            //     </Container>
+           
             );
 
     }
