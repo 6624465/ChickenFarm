@@ -10,6 +10,10 @@ export default class MainDashboard extends Component{
         headerStyle:{backgroundColor:'#fff'},
         headerTitleStyle:{color:'#212121'}
     }
+
+
+
+    
     render(){
             return(        
                 <View>
