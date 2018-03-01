@@ -11,7 +11,7 @@ import {StackNavigator} from 'react-navigation';
 
 import Login from './Screens/Registration/Login';
 import Navigation from './Screens/Navigations/Navigation';
-
+//test again
 const Application =StackNavigator({
       Home:{screen:Login},
       Navigation:{screen:Navigation}
