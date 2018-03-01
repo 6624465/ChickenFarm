@@ -11,7 +11,12 @@ export default class MainDashboard extends Component{
         headerTitleStyle:{color:'#212121'}
     }
 
+<<<<<<< HEAD
 //naresh commitdfjsdfjdsfjlsd
+=======
+
+//asdfsadfasdfsadf
+>>>>>>> 6c9011495d43b4229f10d578cb4532c0cddc43e9
     
     render(){
             return(        
