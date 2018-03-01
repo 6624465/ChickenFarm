@@ -23,6 +23,7 @@ const Application =StackNavigator({
   }
 )
 //dasdasd
+//dfjdskjkfds
 
 export default class App extends Component {
   render(){
