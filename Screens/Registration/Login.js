@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet,TouchableOpacity,Image,} from 'react-native';
+import {View, Text,StyleSheet,TouchableOpacity,Image,Keyboard} from 'react-native';
 import { Button } from 'native-base';
 import {StackNavigator} from 'react-navigation';
 
@@ -72,6 +72,7 @@ export default class Login extends Component{
 
     LoginUser=()=>
     {
+      Keyboard.dismiss();
         debugger;
         var value = this.refs.form.getValue();
         if (value) {
