@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet,Button,TouchableOpacity,Image,} from 'react-native';
-
+import {View, Text,StyleSheet,TouchableOpacity,Image,} from 'react-native';
+import { Button } from 'native-base';
 import {StackNavigator} from 'react-navigation';
 
 var t = require('tcomb-form-native');
@@ -50,10 +50,9 @@ export default class Login extends Component{
           options={LoginCredentialOption}
         />
 
-        <Button
-          title='Login'
-          onPress={this.LoginUser}
-        />
+        <Button primary block rounded onPress={this.LoginUser}>
+            <Text style={{color:'#fff', fontWeight:'bold', fontSize:18}}>Login</Text>
+        </Button>
 
         <View style={{flexDirection:'row', flexWrap:'wrap'}}>
           <TouchableOpacity style={{paddingTop:25}} onPress={this.NewUserRegistration}>

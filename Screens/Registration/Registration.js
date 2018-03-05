@@ -119,9 +119,9 @@ export default class Registration extends Component{
                         type={this.state.status? registration:Otp}
                         options={this.state.status? registrationOption:OtpOptions}
                         />
-                        
+
                         <Button success block rounded onPress={this.ShowHideTextComponentView}>
-                            <Text>SignUp</Text>
+                            <Text style={{color:'#fff', fontWeight:'bold', fontSize:18}}>{this.state.status?'Sign Up':'Submit'}</Text>
                         </Button>
                     </View>
                     </Content>
