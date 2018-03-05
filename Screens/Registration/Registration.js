@@ -74,19 +74,21 @@ export default class Registration extends Component{
 
     constructor(){
         super();
-        // this.state ={
-        //   status:false
-        // }
+        this.state ={
+          status:true
+        }
       }
 
-      toggleStatus(){
-        status = true;
-        // this.setState({
-        //   status:true
-        // });
-        debugger;
-       this._renderCancel();
-        
+      ShowHideTextComponentView = () =>{
+ 
+        if(this.state.status == true)
+        {
+          this.setState({status: false})
+        }
+        else
+        {
+          this.setState({status: true})
+        }
       }
 
     static navigationOptions={
@@ -95,40 +97,7 @@ export default class Registration extends Component{
         headerTitleStyle:{color:'#212121'},
         Header:true
     }
-    _renderCancel() {
-        debugger;
-        if (!status) {
-            return (
-                <View style={styles.container}>
-                <Form
-                ref='form'
-                type={registration}
-                options={registrationOption}
-                />
-                <Button success block rounded onPress={this.toggleStatus}>
-                    <Text>SignUp</Text>
-                </Button>
-            </View>
-            );
-        } 
-        else {
-            return (
-            <View  style={styles.container}>
-                <Form
-                    ref='form'
-                    type={Otp}
-                    options={OtpOptions}
-                />
-                    <Button success block rounded onPress={this.toggleStatus}>
-                    <Text>Submit</Text>
-                    </Button>
-            </View>
-            )
-        }
-    }
-    
 
-    
     render(){
             return(    
                  
@@ -144,7 +113,17 @@ export default class Registration extends Component{
                         </Body>
                     </Header>
                     <Content>
-                    {this._renderCancel()}
+                    <View style={styles.container}>
+                        <Form
+                        ref='form'
+                        type={this.state.status? registration:Otp}
+                        options={this.state.status? registrationOption:OtpOptions}
+                        />
+                        
+                        <Button success block rounded onPress={this.ShowHideTextComponentView}>
+                            <Text>SignUp</Text>
+                        </Button>
+                    </View>
                     </Content>
                 </Container>
                 
