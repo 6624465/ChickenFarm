@@ -5,7 +5,7 @@ import { Container, Content, Header, Icon, Left, Title, Body, Button } from 'nat
 
 import {StackNavigator} from 'react-navigation';
 
-// import Login from './Screens/Registration/Login';
+import Login from '../Registration/Login'
 
 
 export default class Registration extends Component{
@@ -18,18 +18,26 @@ export default class Registration extends Component{
     render(){
             return(          
             <Container>
+                 <Header>
+                        <Left>
+                            <Button transparent onPress={() => this.props.navigation.goBack()}>
+                            <Icon name='arrow-back'/>
+                            </Button>
+                        </Left>
+                        <Body>
+                            <Title>Registration</Title>
+                        </Body>
+                    </Header>
                     <Content contentContainerStyle={{
                         flex:1,
                         alignItems:'center',
                         justifyContent:'center'
                     }}>
-                        <Text>My Farm Dashboard</Text>
+                        <Text>Registration</Text>
                     </Content>
                 </Container>
             );
 
     }
-    BackToLogin=()=>{
-        this.props.navigation.navigate('Login');
-      }
+  
 }
