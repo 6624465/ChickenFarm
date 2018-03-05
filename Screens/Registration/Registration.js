@@ -4,9 +4,7 @@ import {View, Text,StyleSheet, TouchableOpacity} from 'react-native';
 import { Container, Content, Header, Icon, Left, Title, Body, Button } from 'native-base';
 
 import {StackNavigator} from 'react-navigation';
-
-import Login from '../Registration/Login'
-
+import Login from '../Registration/Login';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
@@ -128,7 +126,9 @@ export default class Registration extends Component{
             )
         }
     }
+    
 
+    
     render(){
             return(    
                  
