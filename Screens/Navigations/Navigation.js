@@ -6,6 +6,7 @@ import {DrawerNavigator} from 'react-navigation';
 import MainDashboard from '../Dashboard/MainDashboard';
 import FarmProfileList from '../FarmProfile/FarmProfileList';
 import FarmProfileDetails from '../FarmProfile/FarmProfileDetails';
+import Logout from '../Registration/Login';
 // import FarmPhotoGallery from '../Details/ThirdScreen';
 // import GeneticsTree from './CompanyList';
 
@@ -20,29 +21,30 @@ import FarmProfileDetails from '../FarmProfile/FarmProfileDetails';
 
 const NavLinks = DrawerNavigator({
 
-    MainDashboard:{screen:MainDashboard},
-    FarmProfileList:{screen:FarmProfileList},
-    FarmProfileDetails:{screen:FarmProfileDetails}
-    // FarmPhotoGallery:{screen:FarmPhotoGallery},
-    // GeneticsTree:{screen: GeneticsTree},
+      MainDashboard:{screen:MainDashboard},
+      FarmProfileList:{screen:FarmProfileList},
+      FarmProfileDetails:{screen:FarmProfileDetails},
+      Logout:{screen:Logout}
+      // FarmPhotoGallery:{screen:FarmPhotoGallery},
+      // GeneticsTree:{screen: GeneticsTree},
 
-    // ChickenProfile:{screen:ChickenProfile},
-    // Vaccine:{screen:Vaccine},
-    // ChickenTreatments:{screen:ChickenTreatments},
-    // Sales:{screen: Sales},
-    
-    // Expense:{screen:Expense},
-    // QuickSearch:{screen: QuickSearch}
-  },
-  {
-    drawerPosition:'left',
-    contentOptions: {
-      activeTintColor:'red',
+      // ChickenProfile:{screen:ChickenProfile},
+      // Vaccine:{screen:Vaccine},
+      // ChickenTreatments:{screen:ChickenTreatments},
+      // Sales:{screen: Sales},
+      
+      // Expense:{screen:Expense},
+      // QuickSearch:{screen: QuickSearch}
     },
-    navigationOptions:{
-      header:false,
+    {
+      drawerPosition:'left',
+      contentOptions: {
+        activeTintColor:'red',
+      },
+      navigationOptions:{
+        header:false,
+    }
   }
-}
 )
 
 export default class Navigation extends Component {

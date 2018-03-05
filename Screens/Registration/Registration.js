@@ -119,67 +119,44 @@ export default class Registration extends Component{
       }
 
     render(){
-            return(
+        return(
             <Container>
-                 <Header>
-                        <Left>
-                            <Button transparent onPress={() => this.props.navigation.goBack()}>
-                            <Icon name='arrow-back'/>
-                            </Button>
-                        </Left>
-                        <Body>
-                            <Title>Registration</Title>
-                        </Body>
-                    </Header>
-                    <Content>
-                    <View style={styles.container}>
+                <Header>
+                    <Left>
+                        <Button transparent onPress={() => this.props.navigation.goBack()}>
+                        <Icon name='arrow-back'/>
+                        </Button>
+                    </Left>
+                    <Body>
+                        <Title>Registration</Title>
+                    </Body>
+                </Header>
+                <Content style={styles.container}>
+                    <View>
                         <Form
-                        ref='form'
-                        type={this.state.status? this.registration:this.Otp}
-                        options={this.state.status? this.registrationOption:this.OtpOptions}
-                        value={this.state.value}
-                        onChange={this.onChange}
+                            ref='form'
+                            type={this.state.status? this.registration:this.Otp}
+                            options={this.state.status? this.registrationOption:this.OtpOptions}
+                            value={this.state.value}
+                            onChange={this.onChange}
                         />
 
                         <Button success block rounded onPress={this.ShowHideTextComponentView}>
                             <Text style={{color:'#fff', fontWeight:'bold', fontSize:18}}>{this.state.status?'Sign Up':'Submit'}</Text>
                         </Button>
                     </View>
-                    </Content>
-                </Container>
-                
-            );
-
-    }
-  
+                </Content>
+            </Container>                
+        );
+    }  
 }
 
 var styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        //justifyContent: 'center',
         //marginTop: 120,
         padding: 20,
         backgroundColor: '#ffffff',      
-    },
-    title: {
-      fontSize: 30,
-      alignSelf: 'center',
-      marginBottom: 30
-    },
-    buttonText: {
-      fontSize: 18,
-      color: 'white',
-      alignSelf: 'center'
-    },
-    button: {
-      height: 36,
-      backgroundColor: '#48BBEC',
-      borderColor: '#48BBEC',
-      borderWidth: 1,
-      borderRadius: 8,
-      marginBottom: 10,
-      alignSelf: 'stretch',
-      justifyContent: 'center'
     }
   });

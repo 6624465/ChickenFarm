@@ -98,8 +98,8 @@ export default class ForgotPassword extends Component{
                            <Title>Forgot Password</Title>
                        </Body>
                    </Header>
-                   <Content>
-                       <View style={styles.container}>
+                   <Content style={styles.container}>
+                       <View>
                            <Form
                            ref='form'
                            type={this.state.status?forgotpassword:forgotpasswordnew}
@@ -120,7 +120,7 @@ export default class ForgotPassword extends Component{
 var styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        //justifyContent: 'center',
         //marginTop: 120,
         padding: 20,
         backgroundColor: '#ffffff',      
