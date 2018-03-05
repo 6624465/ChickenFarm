@@ -18,17 +18,19 @@ var OtpOptions={
         Otp:{
             label: 'OTP',
             placeholder:'Pleasse Enter OTP Number',
+            help: 'Resend OTP'
         }
     }
 }
+
+
 
 var registration = t.struct({
     FullName: t.String,             
     MobileNo: t.Number,  
     EmailId:t.maybe(t.String),
     Password: t.String,
-    ReEnterPassword: t.String,
-       
+    ReEnterPassword: t.String,       
   });
 
   var registrationOption={
@@ -80,14 +82,16 @@ export default class Registration extends Component{
       }
 
       ShowHideTextComponentView = () =>{
- 
-        if(this.state.status == true)
-        {
-          this.setState({status: false})
-        }
-        else
-        {
-          this.setState({status: true})
+        var value = this.refs.form.getValue();
+        if (value) {
+            if(this.state.status == true)
+            {
+            this.setState({status: false})
+            }
+            else
+            {
+            this.setState({status: true})
+            }
         }
       }
 
