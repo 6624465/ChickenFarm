@@ -9,53 +9,6 @@ import { Container, Content, Header, Icon, Left, Title, Body, Button } from 'nat
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
 
-var forgotpassword=t.struct({
-    MobileNo:t.Number
-})
-
-var forgotpasswordOption={
-    fields:{
-        MobileNo:{
-            label: 'Mobile No',
-            placeholder:'Pleasse Enter Mobile Number',
-            error:'Please Enter Your Mobile Number'
-            
-        }
-    }
-}
-
-var forgotpasswordnew = t.struct({
-    Otp:t.Number,
-    Password: t.String,
-    ConfirmPassword: t.String,
-       
-  });
-
-  var forgotpasswordNewOption={
-    fields:{
-        Otp:{
-            label: 'OTP',
-            placeholder:'Pleasse Enter OTP Number',
-            error:'Please Enter OTP Number'
-        },
-        Password: {
-            label: 'New Password',
-            placeholder:'Enter New Password',
-            password: true,
-            secureTextEntry: true,
-            error:'Please Enter New Password'
-
-          } ,
-          ConfirmPassword: {
-            label: 'Confirm Password',
-            placeholder:'Confirm New Password',
-            password: true,
-            secureTextEntry: true,
-            error:'Please Enter Confirm New Password'
-
-          }
-    }
-}
 export default class ForgotPassword extends Component{
     static navigationOptions={
         title : 'Forgot Password',
@@ -65,8 +18,61 @@ export default class ForgotPassword extends Component{
     constructor(){
         super();
         this.state ={
-          status:true
+          status:true,
+          value:{
+
+          }
+        },
+        this.forgotpassword=t.struct({
+            MobileNo:t.Number
+        })
+        
+       this.forgotpasswordOption={
+            fields:{
+                MobileNo:{
+                    label: 'Mobile No',
+                    placeholder:'Pleasse Enter Mobile Number',
+                    error:'Please Enter Your Mobile Number'
+                    
+                }
+            }
         }
+        const ConfirmPasswordEquality = t.refinement(t.String, value => {
+            return value === this.state.value.Password
+          })
+       this.forgotpasswordnew = t.struct({
+            Otp:t.Number,
+            Password: t.String,
+            ConfirmPassword: ConfirmPasswordEquality,
+               
+          });
+        
+         this.forgotpasswordNewOption={
+            fields:{
+                Otp:{
+                    label: 'OTP',
+                    placeholder:'Pleasse Enter OTP Number',
+                    error:'Please Enter OTP Number'
+                },
+                Password: {
+                    label: 'New Password',
+                    placeholder:'Enter New Password',
+                    password: true,
+                    secureTextEntry: true,
+                    error:'Please Enter New Password'
+        
+                  } ,
+                  ConfirmPassword: {
+                    label: 'Confirm Password',
+                    placeholder:'Confirm New Password',
+                    password: true,
+                    secureTextEntry: true,
+                    error:'Password Mismatch'
+        
+                  }
+            }
+        }
+
       }
 
       ShowHideTextComponentView = () =>{
@@ -84,6 +90,9 @@ export default class ForgotPassword extends Component{
         }
       }
     }
+    onChange = (value) => {
+        this.setState({value});
+      }
 
     render(){
             return(        
@@ -102,8 +111,10 @@ export default class ForgotPassword extends Component{
                        <View>
                            <Form
                            ref='form'
-                           type={this.state.status?forgotpassword:forgotpasswordnew}
-                           options={this.state.status?forgotpasswordOption:forgotpasswordNewOption}
+                           type={this.state.status?this.forgotpassword:this.forgotpasswordnew}
+                           options={this.state.status?this.forgotpasswordOption:this.forgotpasswordNewOption}
+                           value={this.state.value}
+                           onChange={this.onChange}
                            />
                            <Button success block rounded onPress={this.ShowHideTextComponentView}>
                             <Text style={{color:'#fff', fontWeight:'bold', fontSize:18}}>{this.state.status?'Continue':'Submit'}</Text>
