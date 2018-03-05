@@ -15,6 +15,7 @@ export default class Registration extends Component{
         headerTitleStyle:{color:'#212121'},
         Header:true
     }
+    
     render(){
             return(          
             <Container>
