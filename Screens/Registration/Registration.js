@@ -34,7 +34,7 @@ export default class Registration extends Component{
             fields:{
                 Otp:{
                     label: 'OTP',
-                    placeholder:'Pleasse Enter OTP Number',
+                    placeholder:'Please Enter OTP Number',
                     help: 'Resend OTP'
                 }
             }
