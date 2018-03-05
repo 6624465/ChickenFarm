@@ -10,75 +10,86 @@ var t = require('tcomb-form-native');
 var Form = t.form.Form;
 
 
-var Otp=t.struct({
-    Otp:t.Number
-})
-var OtpOptions={
-    fields:{
-        Otp:{
-            label: 'OTP',
-            placeholder:'Pleasse Enter OTP Number',
-            help: 'Resend OTP'
-        }
-    }
-}
 
 
 
-var registration = t.struct({
-    FullName: t.String,             
-    MobileNo: t.Number,  
-    EmailId:t.maybe(t.String),
-    Password: t.String,
-    ReEnterPassword: t.String,       
-  });
-
-  var registrationOption={
-    //auto: 'placeholders'
-    fields:{
-        FullName: {
-            label: 'Full Name',
-            placeholder:'Enter Your Full Name',
-            error:'Please Enter Your Name'
-
-          },
-        MobileNo: {
-            label: 'Mobile No',
-            placeholder:'Enter Your Mobile No',
-            error:'Please Enter Your Mobile Number'
-
-          },
-          EmailId: {
-            label: 'Email ID',
-            placeholder:'Enter Your Email ID'
-          },
-          Password: {
-            label: 'Password',
-            placeholder:'Enter Your Password',
-            password: true,
-            secureTextEntry: true,
-            error:'Please Enter Your Password'
-
-          } ,
-          ReEnterPassword: {
-            label: 'Re-Password',
-            placeholder:'Re-Enter Your Password',
-            password: true,
-            secureTextEntry: true,
-            error:'Please Enter Your Password'
-
-          }
-      }
-  }
-
-var status= false;
 export default class Registration extends Component{
 
     constructor(){
         super();
         this.state ={
-          status:true
+            status:true,
+            value:{
+                // FullName: '',             
+                // MobileNo: '',  
+                // EmailId:'',
+                // Password: '',
+                // ReEnterPassword:''
+            }
+        },
+        this.Otp=t.struct({
+            Otp:t.Number
+        })
+        this.OtpOptions={
+            fields:{
+                Otp:{
+                    label: 'OTP',
+                    placeholder:'Pleasse Enter OTP Number',
+                    help: 'Resend OTP'
+                }
+            }
         }
+        
+        const ConfirmPasswordEquality = t.refinement(t.String, value => {
+            debugger;
+            return value === this.state.value.Password
+          })
+        
+        this.registration = t.struct({
+            FullName: t.String,             
+            MobileNo: t.Number,  
+            EmailId:t.maybe(t.String),
+            Password: t.String,
+            ReEnterPassword: ConfirmPasswordEquality,       
+          });
+        
+          this.registrationOption={
+            //auto: 'placeholders'
+            fields:{
+                FullName: {
+                    label: 'Full Name',
+                    placeholder:'Enter Your Full Name',
+                    error:'Please Enter Your Name'
+        
+                  },
+                MobileNo: {
+                    label: 'Mobile No',
+                    placeholder:'Enter Your Mobile No',
+                    error:'Please Enter Your Mobile Number'
+        
+                  },
+                  EmailId: {
+                    label: 'Email ID',
+                    placeholder:'Enter Your Email ID'
+                  },
+                  Password: {
+                    label: 'Password',
+                    placeholder:'Enter Your Password',
+                    password: true,
+                    secureTextEntry: true,
+                    error:'Please Enter Your Password'
+        
+                  } ,
+                  ReEnterPassword: {
+                    label: 'Re-Password',
+                    placeholder:'Re-Enter Your Password',
+                    password: true,
+                    secureTextEntry: true,
+                    error:'Password Mismatch'
+        
+                  }
+              }
+          }
       }
 
       ShowHideTextComponentView = () =>{
@@ -102,9 +113,13 @@ export default class Registration extends Component{
         Header:true
     }
 
+    onChange = (value) => {
+        debugger;
+        this.setState({value});
+      }
+
     render(){
-            return(    
-                 
+            return(
             <Container>
                  <Header>
                         <Left>
@@ -120,8 +135,10 @@ export default class Registration extends Component{
                     <View style={styles.container}>
                         <Form
                         ref='form'
-                        type={this.state.status? registration:Otp}
-                        options={this.state.status? registrationOption:OtpOptions}
+                        type={this.state.status? this.registration:this.Otp}
+                        options={this.state.status? this.registrationOption:this.OtpOptions}
+                        value={this.state.value}
+                        onChange={this.onChange}
                         />
 
                         <Button success block rounded onPress={this.ShowHideTextComponentView}>
