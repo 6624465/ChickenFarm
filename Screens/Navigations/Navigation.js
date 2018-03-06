@@ -5,8 +5,11 @@ import {DrawerNavigator} from 'react-navigation';
 
 import MainDashboard from '../Dashboard/MainDashboard';
 import FarmProfileList from '../FarmProfile/FarmProfileList';
-import FarmProfileDetails from '../FarmProfile/FarmProfileDetails';
+//import FarmProfileDetails from '../FarmProfile/FarmProfileDetails';
+
+import ChickenProfile from '../ChikenProfile/ChikenProfileList'
 import Logout from '../Registration/Login';
+
 // import FarmPhotoGallery from '../Details/ThirdScreen';
 // import GeneticsTree from './CompanyList';
 
@@ -23,7 +26,8 @@ const NavLinks = DrawerNavigator({
 
       MainDashboard:{screen:MainDashboard},
       FarmProfileList:{screen:FarmProfileList},
-      FarmProfileDetails:{screen:FarmProfileDetails},
+     // FarmProfileDetails:{screen:FarmProfileDetails},
+      ChickenProfile:{screen:ChickenProfile},
       Logout:{screen:Logout}
       // FarmPhotoGallery:{screen:FarmPhotoGallery},
       // GeneticsTree:{screen: GeneticsTree},
