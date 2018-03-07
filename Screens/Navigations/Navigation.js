@@ -11,6 +11,8 @@ import ChickenProfile from '../ChikenProfile/ChikenProfileList'
 import Logout from '../Registration/Login';
 
 import Vaccine from '../Vaccine/VaccineList';
+import ChickenTreatment from '../ChickenTreatments/ChickenTreatmentList';
+import Expense from '../Expense/ExpenseList';
 // import FarmPhotoGallery from '../Details/ThirdScreen';
 // import GeneticsTree from './CompanyList';
 
@@ -29,6 +31,8 @@ const NavLinks = DrawerNavigator({
       FarmProfileList:{screen:FarmProfileList},
       ChickenProfile:{screen:ChickenProfile},
       Vaccine:{screen:Vaccine},
+      ChickenTreatment:{screen:ChickenTreatment},
+      Expense:{screen:Expense},
       Logout:{screen:Logout},
       // FarmProfileDetails:{screen:FarmProfileDetails},
       // GeneticsTree:{screen: GeneticsTree},

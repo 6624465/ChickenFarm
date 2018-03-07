@@ -23,7 +23,7 @@ export default class AddVaccineSchedule extends Component{
                     fields:{
                         FromDate:{
                             label: 'From Date',
-                            minimumDate: new Date(),
+                           // minimumDate: new Date(),
                             mode: 'date',
                             config: {
                               format: (date) => String(moment(date).format("MM/DD/YYYY")),
@@ -32,7 +32,7 @@ export default class AddVaccineSchedule extends Component{
                         },
                         ToDate:{
                             label: 'ToDate',
-                            minimumDate: new Date(),
+                           // minimumDate: new Date(),
                             mode: 'date',
                             config: {
                               format: (date) => String(moment(date).format("MM/DD/YYYY")),

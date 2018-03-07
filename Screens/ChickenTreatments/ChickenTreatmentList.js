@@ -3,14 +3,11 @@ import {View, StyleSheet,TouchableOpacity,Image,Keyboard} from 'react-native';
 import { Container, Header, Tab, Tabs, TabHeading,Button, Body,Icon, Text,Left,Title } from 'native-base';
 import {StackNavigator} from 'react-navigation';
 
-import Tab1 from '../Vaccine/AddPurchasedVaccine';
-import Tab2 from '../Vaccine/AddVaccineSchedule';
-import Tab3 from '../Vaccine/GiveVaccine';
-import Tab4 from '../Vaccine/VaccineDue';
+import Tab1 from '../ChickenTreatments/AddPurchasedMedicine';
+import Tab2 from '../ChickenTreatments/AddChickenTreatment';
 
 
-export default class Vaccine extends Component{
-
+export default class ChickenTreatment extends Component{
 
     render(){
       return(
@@ -22,23 +19,16 @@ export default class Vaccine extends Component{
                             </Button>
                         </Left>
                         <Body>
-                            <Title>Vaccine</Title>
+                            <Title>Record chicken treatments</Title>
                         </Body>
                     </Header>
         <Tabs>
-          <Tab heading={ <TabHeading><Text>Purchased</Text></TabHeading>}>
+          <Tab heading={ <TabHeading><Text>AddPurchasedMedicine</Text></TabHeading>}>
             <Tab1 />
           </Tab>
-          <Tab heading={ <TabHeading><Text> Schedule</Text></TabHeading>}>
+          <Tab heading={ <TabHeading><Text> AddChickenTreatment</Text></TabHeading>}>
             <Tab2 />
           </Tab>
-          <Tab heading={ <TabHeading><Text>Give</Text></TabHeading>}>
-            <Tab3 />
-          </Tab>
-          {/* <Tab heading={ <TabHeading><Text> Due</Text></TabHeading>}>
-            <Tab4 />
-          </Tab> */}
-       
          
         </Tabs>
       </Container>

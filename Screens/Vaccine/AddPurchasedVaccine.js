@@ -36,7 +36,7 @@ export default class AddPurchasedVaccine extends Component{
                         DateOfPurchased:{
                             label: 'Date Of Purchased',
                             placeholder:'Date Of Purchased',
-                            minimumDate: new Date(),
+                           // minimumDate: new Date(),
                             mode: 'date',
                             config: {
                               format: (date) => String(moment(date).format("MM/DD/YYYY")),
@@ -48,7 +48,7 @@ export default class AddPurchasedVaccine extends Component{
                         ExpiryDate:{
                             label: 'Expiry Date',
                             placeholder:'Expiry Date',
-                            minimumDate: new Date(),
+                           // minimumDate: new Date(),
                             mode: 'date',
                             config: {
                               format: (date) => String(moment(date).format("MM/DD/YYYY")),
