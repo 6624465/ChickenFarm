@@ -95,11 +95,9 @@ export default class Login extends Component{
     LoginUser=()=>
     {
       Keyboard.dismiss();
-        debugger;
         var value = this.refs.form.getValue();
         if (value) {
           if(value.MobileNo=='123' && value.Password=='a'){
-            debugger;
             this.props.navigation.navigate('Navigation');
           }
         }

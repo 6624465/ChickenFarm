@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet} from 'react-native';
+import {View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer } from 'native-base';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
-
+var ImagePicker = NativeModules.ImageCropPicker;
 
 export default class FarmProfileList extends Component{
     static navigationOptions={
@@ -14,87 +14,157 @@ export default class FarmProfileList extends Component{
         headerStyle:{backgroundColor:'#fff'},
         headerTitleStyle:{color:'#212121'}
     }
-            constructor()
-                 {
-                super();
-                this.state ={
-                    value:{}
-                },
-                this.AddFarmProfile=t.struct({
-                FullName:t.String,
-                FarmAddress:t.String,
-                ContactDetails:t.Number,
-                Page:t.String,
-                WebSite:t.String,
-                AboutUs:t.String,
-                AddLogo:t.String
 
-                })
-                this.AddFarmProfileOptions={
-                    fields:{
-                        FullName:{
-                            label: 'Full Name',
-                            placeholder:'Please Enter Your Full Name',
-                            error:'Please Enter Your Full Name'
-                        
-                        },
-                        FarmAddress:{
-                            label: 'Farm Address',
-                            placeholder:'Please Enter Farm Address',
-                            error:'Please Enter Farm Address'
-                        
-                        },
-                        ContactDetails:{
-                            label: 'Contact Details',
-                            placeholder:'Please Enter Tel/Line Number',
-                            error:'Please Enter Tel/Line Number'
-                        
-                        },
-                        Page:{
-                            label: 'Social Page',
-                            placeholder:'Social Page Name',
-                           // error:'Please Enter Your Full Name'
-                        
-                        },
-                        WebSite:{
-                            label: 'Web Site',
-                            placeholder:' Web Site Name',
-                           // error:'Please Enter Your Full Name'
-                        
-                        },
-                        AboutUs:{
-                            label: 'About Us',
-                            placeholder:'About Us',
-                            multiline:true,
-                           
-                            //error:'Please Enter Your Full Name'
-                        
-                        },
-                    }
-                }
+    constructor()
+    {
+        super();
+        this.state ={
+            value:{
+                FullName:null,
+                FarmAddress:null,
+                ContactDetails:null,
+                Page:null,
+                WebSite:null,
+                AboutUs:null,
+                Logo:null
+            },
+            isLogo:false
+        },
+
+        this.AddFarmProfile=t.struct({
+        FullName:t.String,
+        FarmAddress:t.String,
+        ContactDetails:t.Number,
+        Page:t.String,
+        WebSite:t.String,
+        AboutUs:t.String,
+        //AddLogo:t.String
+
+        }),
+
+        this.AddFarmProfileOptions={
+            fields:{
+                FullName:{
+                    label: 'Full Name',
+                    placeholder:'Please Enter Your Full Name',
+                    //error:'Please Enter Your Full Name'
+                
+                },
+                FarmAddress:{
+                    label: 'Farm Address',
+                    placeholder:'Please Enter Farm Address',
+                    //error:'Please Enter Farm Address'
+                
+                },
+                ContactDetails:{
+                    label: 'Contact Details',
+                    placeholder:'Please Enter Tel/Line Number',
+                    //error:'Please Enter Tel/Line Number'
+                
+                },
+                Page:{
+                    label: 'Social Page',
+                    placeholder:'Social Page Name',
+                    // error:'Please Enter Your Full Name'
+                
+                },
+                WebSite:{
+                    label: 'Web Site',
+                    placeholder:' Web Site Name',
+                    // error:'Please Enter Your Full Name'
+                
+                },
+                AboutUs:{
+                    label: 'About Us',
+                    placeholder:'About Us',
+                    multiline:true,                           
+                    //error:'Please Enter Your Full Name'                        
+                },
+            }
         }
-        onChange = (value) => {
-            this.setState({value});
-          }
+    }
+
+    onChange = (value) => {
+        this.setState({value});
+    }
+
+    cleanupImages() {
+        // ImagePicker.clean().then(() => {
+
+        //   console.log('removed tmp images from tmp directory');
+        // }).catch(e => {
+        //   alert(e);
+        // });
+
+        this.setState({
+            value:{    
+                FullName:this.state.value.FullName,
+                FarmAddress:this.state.value.FarmAddress,
+                ContactDetails:this.state.value.ContactDetails,
+                Page:this.state.value.Page,
+                WebSite:this.state.value.WebSite,
+                AboutUs:this.state.value.AboutUs,
+
+                Logo: null
+            },
+            isLogo:false
+        });
+    }
     
+    pickMultiple() {
+    ImagePicker.openPicker({
+        multiple: true,
+        waitAnimationEnd: false,
+        includeExif: true,
+    }).then(images => {
+        debugger;
+        this.setState({
+            value:{
+                FullName:this.state.value.FullName,
+                FarmAddress:this.state.value.FarmAddress,
+                ContactDetails:this.state.value.ContactDetails,
+                Page:this.state.value.Page,
+                WebSite:this.state.value.WebSite,
+                AboutUs:this.state.value.AboutUs,
+
+                Logo: images.map(i => {
+                    console.log('received image', i);
+                    return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
+                })
+            },
+            isLogo:true
+          });
+        }).catch(e => alert(e));
+    }
+
+    renderImage(image) {
+        return <Image style={{width: 300, height: 300, resizeMode: 'contain'}} source={image} />
+    }
+        
+    renderAsset(image) {
+        // if (image.mime && image.mime.toLowerCase().indexOf('video/') !== -1) {
+        //   return this.renderVideo(image);
+        // }
+
+        return this.renderImage(image);
+    }
 
     render(){
-            return(        
-                  
+        return(
             <Container>
-                    <Header>
-                        <Left>
-                            <Button transparent onPress={()=>this.props.navigation.navigate('DrawerOpen')}>
-                            <Icon ios='ios-menu' android="md-menu" />
-                            </Button>
-                        </Left>
-                        <Body>
-                            <Title>Add Farm Profile</Title>
-                        </Body>
-                    </Header>
+                <Header>
+                    <Left>
+                        <Button transparent onPress={()=>this.props.navigation.navigate('DrawerOpen')}>
+                        <Icon ios='ios-menu' android="md-menu" />
+                        </Button>
+                    </Left>
+                    <Body>
+                        <Title>Add Farm Profile</Title>
+                    </Body>
+                </Header>
 
-                    <Content>
-                       <View style={styles.container}>
+                <Content>
+                    <View style={styles.container}>
                         <Form
                             ref='form'
                             type={this.AddFarmProfile}
@@ -102,25 +172,39 @@ export default class FarmProfileList extends Component{
                             value={this.state.value}
                             onChange={this.onChange}
                         />
-                    </View>
-                    </Content>
-                    <Footer style={{backgroundColor:'white'}}>
-                        <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
-                            <View style={{width:'50%'}}>
-                                <Button success  block rounded onPress={this.ResetFarmProfile} style={{width:'100%',justifyContent:'center'}}>
-                                    <Text style={{color:'white'}} >Reset</Text>
-                                </Button>
-                            </View>
-                            <View style={{width:'50%', alignItems:'flex-end'}}>
-                                <Button primary  block rounded onPress={this.SaveFarmProfile} style={{width:'100%',justifyContent:'center'}}>
-                                    <Text style={{color:'white'}}>Save</Text>
-                                </Button>
-                            </View>
-                        </View>
-                    </Footer>
-                </Container>
-            );
 
+                         <TouchableOpacity onPress={this.state.isLogo ? this.cleanupImages.bind(this) : this.pickMultiple.bind(this)} style={{marginBottom: 10}}>
+                            <Text style={{color:'blue'}}>{this.state.isLogo ? 'Clear Logos' : 'Select Logos'}</Text>
+                        </TouchableOpacity>
+
+                        {/* <TouchableOpacity onPress={this.cleanupImages.bind(this)} style={{marginBottom: 10}}>
+                            <Text style={{color:'blue'}}>Clear Logo</Text>
+                        </TouchableOpacity>
+                         */}
+
+                        <ScrollView>
+                            {/* {this.state.value.image ? this.renderAsset(this.state.value.image) : null} */}
+                            {this.state.value.Logo ? this.state.value.Logo.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null}
+                        </ScrollView>
+                    </View>
+                </Content>
+                
+                <Footer style={{backgroundColor:'white'}}>
+                    <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
+                        <View style={{width:'50%'}}>
+                            <Button success  block rounded onPress={this.ResetFarmProfile} style={{width:'100%',justifyContent:'center'}}>
+                                <Text style={{color:'white'}} >Reset</Text>
+                            </Button>
+                        </View>
+                        <View style={{width:'50%', alignItems:'flex-end'}}>
+                            <Button primary  block rounded onPress={this.SaveFarmProfile} style={{width:'100%',justifyContent:'center'}}>
+                                <Text style={{color:'white'}}>Save</Text>
+                            </Button>
+                        </View>
+                    </View>
+                </Footer>
+            </Container>
+        );
     }
 }
 
