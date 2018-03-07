@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import {View, Text} from 'react-native';
 
-import { Container, Content, Header, Icon, Left, Title, Body, Button } from 'native-base';
+import { Container, Content, Header, Icon, Left, Title, Body, Button, Right } from 'native-base';
 
 import {StackNavigator} from 'react-navigation';
-
+// import LoginNavigation from '../Registration/Login'
 
 export default class MainDashboard extends Component{
-    
-    
+    // Logout=()=>{
+    //     this.props.navigation.navigate('LoginNavigation');
+    // }
     render(){
             return(     
             <Container>
@@ -19,8 +20,13 @@ export default class MainDashboard extends Component{
                             </Button>
                         </Left>
                         <Body>
-                            <Title>My Farm Dashboard123</Title>
+                            <Title >My Farm Dashboard</Title>
                         </Body>
+                        {/* <Right>
+                        <Button transparent onPress={this.Logout}>
+                            <Icon ios='ios-menu' android="md-menu" />
+                            </Button>
+                        </Right> */}
                     </Header>
 
                     <Content contentContainerStyle={{
@@ -34,4 +40,5 @@ export default class MainDashboard extends Component{
             );
 
     }
+    
 }

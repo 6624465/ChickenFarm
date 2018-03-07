@@ -10,7 +10,6 @@ import Registration from '../Registration/Registration';
 import ForgotPassword from '../Registration/ForgotPassword';
 import Navigation from '../Navigations/Navigation';
 
-
 const NavLinksLogin = StackNavigator({
     Home:{screen:Login},
     Navigation:{screen:Navigation},
@@ -21,7 +20,7 @@ const NavLinksLogin = StackNavigator({
     navigationOptions:{
         header:false,
     }
-    }
+  }
 )
 
 export default class LoginNavigation extends Component {
