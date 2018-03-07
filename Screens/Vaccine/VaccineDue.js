@@ -61,7 +61,7 @@ export default class AddVaccineSchedule extends Component{
                             onChange={this.onChange}
                         />
                         <View >
-                        <Button success style={{paddingLeft:30,paddingRight:30}} onPress={this.ResetFarmProfile}>
+                        <Button success block rounded style={{paddingLeft:30,paddingRight:30}} onPress={this.ResetFarmProfile}>
                             <Text style={{color:'white'}} >Search</Text>
                         </Button>
                         </View>

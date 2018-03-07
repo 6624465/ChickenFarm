@@ -85,14 +85,18 @@ export default class AddPurchasedMedicine extends Component{
                     </View>
                     </Content>
                     <Footer style={{backgroundColor:'white'}}>
-                                <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
-                                    <Button success style={{paddingLeft:'10%',paddingRight:'10%'}} onPress={this.ResetFarmProfile}>
-                                        <Text style={{color:'white'}} >Reset</Text>
-                                    </Button>
-                                    <Button primary style={{marginLeft:'35%',paddingLeft:'10%',paddingRight:'10%',}} onPress={this.SaveFarmProfile}>
-                                        <Text style={{color:'white'}}>Save</Text>
-                                    </Button>
-                                </View>
+                        <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
+                            <View style={{width:'50%'}}>
+                                <Button success block rounded onPress={this.ResetFarmProfile} style={{width:'100%',justifyContent:'center'}}>
+                                    <Text style={{color:'white'}} >Reset</Text>
+                                </Button>
+                            </View>
+                            <View style={{width:'50%', alignItems:'flex-end'}}>
+                                <Button primary onPress={this.SaveFarmProfile} style={{width:'100%',justifyContent:'center'}}>
+                                    <Text style={{color:'white'}}>Save</Text>
+                                </Button>
+                            </View>
+                        </View>
                     </Footer>
                 </Container>
             );

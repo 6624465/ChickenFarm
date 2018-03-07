@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {View, Text,StyleSheet} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
-import { Container, Content, Header, Icon, Left, Title, Body, Button } from 'native-base';
+import { Container, Content, Header, Icon, Left, Title, Body, Button,Footer } from 'native-base';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
@@ -71,16 +71,22 @@ export default class AddVaccineSchedule extends Component{
                             value={this.state.value}
                             onChange={this.onChange}
                         />
-                         <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
-                        <Button success style={{paddingLeft:'10%',paddingRight:'10%'}} onPress={this.ResetFarmProfile}>
-                            <Text style={{color:'white'}} >Reset</Text>
-                        </Button>
-                        <Button primary style={{marginLeft:'35%',paddingLeft:'10%',paddingRight:'10%',}} onPress={this.SaveFarmProfile}>
-                            <Text style={{color:'white'}}>Save</Text>
-                        </Button>
-                        </View>
                     </View>
                     </Content>
+                    <Footer style={{backgroundColor:'white'}}>
+                        <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
+                            <View style={{width:'50%'}}>
+                                <Button success block rounded onPress={this.ResetFarmProfile} style={{width:'100%',justifyContent:'center'}}>
+                                    <Text style={{color:'white'}} >Reset</Text>
+                                </Button>
+                            </View>
+                            <View style={{width:'50%', alignItems:'flex-end'}}>
+                                <Button primary block rounded onPress={this.SaveFarmProfile} style={{width:'100%',justifyContent:'center'}}>
+                                    <Text style={{color:'white'}}>Save</Text>
+                                </Button>
+                            </View>
+                        </View>
+                    </Footer>
                 </Container>
             );
 

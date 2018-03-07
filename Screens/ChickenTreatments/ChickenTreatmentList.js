@@ -8,33 +8,30 @@ import Tab2 from '../ChickenTreatments/AddChickenTreatment';
 
 
 export default class ChickenTreatment extends Component{
-
-    render(){
-      return(
-        <Container>
-                 <Header>
-                        <Left>
-                            <Button transparent onPress={()=>this.props.navigation.navigate('DrawerOpen')}>
-                            <Icon ios='ios-menu' android="md-menu" />
-                            </Button>
-                        </Left>
-                        <Body>
-                            <Title>Record chicken treatments</Title>
-                        </Body>
-                    </Header>
+  render(){
+    return(
+      <Container>
+        <Header>
+          <Left>
+              <Button transparent onPress={()=>this.props.navigation.navigate('DrawerOpen')}>
+              <Icon ios='ios-menu' android="md-menu" />
+              </Button>
+          </Left>
+          <Body>
+              <Title>Record chicken treatments</Title>
+          </Body>
+        </Header>
         <Tabs>
           <Tab heading={ <TabHeading><Text>AddPurchasedMedicine</Text></TabHeading>}>
             <Tab1 />
           </Tab>
           <Tab heading={ <TabHeading><Text> AddChickenTreatment</Text></TabHeading>}>
             <Tab2 />
-          </Tab>
-         
+          </Tab>          
         </Tabs>
-      </Container>
-      );
-    }
-
+    </Container>
+    );
+  }
 }
 
 
