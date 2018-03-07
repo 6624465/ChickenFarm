@@ -55,12 +55,12 @@ export default class Login extends Component{
         </Button>
 
         <View style={{flexDirection:'row', flexWrap:'wrap'}}>
-          <TouchableOpacity style={{paddingTop:25}} onPress={this.NewUserRegistration}>
+          <TouchableOpacity style={{paddingTop:'10%'}} onPress={this.NewUserRegistration}>
             <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
               New User?
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{paddingTop:25,paddingLeft:150}} onPress={this.ForgotPassword}>
+          <TouchableOpacity style={{paddingTop:'10%',paddingLeft:'35%'}} onPress={this.ForgotPassword}>
             <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
               Forgot Password?
             </Text>

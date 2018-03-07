@@ -103,10 +103,10 @@ export default class FarmProfileList extends Component{
                             onChange={this.onChange}
                         />
                         <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
-                        <Button success style={{paddingLeft:30,paddingRight:30}} onPress={this.ResetFarmProfile}>
+                        <Button success style={{paddingLeft:'10%',paddingRight:'10%'}} onPress={this.ResetFarmProfile}>
                             <Text style={{color:'white'}} >Reset</Text>
                         </Button>
-                        <Button primary style={{marginLeft:180,paddingLeft:30,paddingRight:30,}} onPress={this.SaveFarmProfile}>
+                        <Button primary style={{marginLeft:'35%',paddingLeft:'10%',paddingRight:'10%',}} onPress={this.SaveFarmProfile}>
                             <Text style={{color:'white'}}>Save</Text>
                         </Button>
                         </View>
