@@ -4,6 +4,12 @@ import ReactNative from 'react-native';
 import {DrawerNavigator} from 'react-navigation';
 
 import MainDashboard from '../Dashboard/MainDashboard';
+import SalesReport from '../Reports/SalesReport';
+import ExpenseReport from '../Reports/ExpenseReport';
+import ProfitsAndLossReport from '../Reports/ProfitsAndLossReport';
+import StockReport from '../Reports/StockReport';
+
+
 import FarmProfileList from '../FarmProfile/FarmProfileList';
 //import FarmProfileDetails from '../FarmProfile/FarmProfileDetails';
 
@@ -29,8 +35,11 @@ import Expense from '../Expense/ExpenseList';
 import Logout from '../Registration/Login';
 
 const NavLinks = DrawerNavigator({
-
       MainDashboard:{screen:MainDashboard},
+      SalesReport:{screen:SalesReport},
+      ExpenseReport:{screen:ExpenseReport},
+      ProfitsAndLossReport:{screen:ProfitsAndLossReport},
+      StockReport:{screen:StockReport},
       FarmProfileList:{screen:FarmProfileList},
       ChickenProfileList:{screen:ChickenProfileList},
       ChickenProfileDetails:{screen:ChickenProfileDetails},
