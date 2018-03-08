@@ -34,22 +34,22 @@ export default class MainDashboard extends Component{
                         justifyContent:'center'
                     }}>
                     <View>
-                        <TouchableOpacity style={{paddingTop:'10%'}} onPress={()=>this.props.navigation.navigate('SalesReport')}>
+                        <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('SalesReport')}>
                             <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
                             Sales report
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{paddingTop:'10%'}} onPress={()=>this.props.navigation.navigate('ExpenseReport')}>
+                        <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('ExpenseReport')}>
                             <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
                             Expense report
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{paddingTop:'10%'}} onPress={()=>this.props.navigation.navigate('ProfitsAndLossReport')}>
+                        <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('ProfitsAndLossReport')}>
                             <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
                             Profits & loss report
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{paddingTop:'10%'}} onPress={()=>this.props.navigation.navigate('StockReport')}>
+                        <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('StockReport')}>
                             <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
                             Stock report 
                             </Text>

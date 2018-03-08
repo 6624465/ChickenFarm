@@ -8,20 +8,17 @@ import {StackNavigator} from 'react-navigation';
 
 export default class ExpenseReport extends Component{
     static navigationOptions={
-        title : 'Chicken Profile Details',
-        headerStyle:{backgroundColor:'#fff'},
-        headerTitleStyle:{color:'#212121'},
         drawerLabel: () => null
     }
     render(){
             return(     
             <Container>
                     <Header>
-                    <Left>
-                           <Button transparent onPress={() => this.props.navigation.goBack()}>
-                           <Icon name='arrow-back'/>
-                           </Button>
-                       </Left>
+                        <Left>
+                            <Button transparent onPress={() => this.props.navigation.goBack()}>
+                                <Icon name='arrow-back'/>
+                            </Button>
+                        </Left>
                         <Body>
                             <Title >Expense Report</Title>
                         </Body>

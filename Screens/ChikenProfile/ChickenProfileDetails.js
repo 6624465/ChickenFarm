@@ -8,8 +8,7 @@ var t = require('tcomb-form-native');
 var Form = t.form.Form;
 import moment from 'moment';
 
-var Gender = t.enums({
-  
+var Gender = t.enums({  
     M: 'Male',
     F: 'Female'
   });
@@ -21,119 +20,118 @@ export default class ChickenProfileDetails extends Component{
         headerTitleStyle:{color:'#212121'},
         drawerLabel: () => null
     }
-   Gender = t.enums({
+    Gender = t.enums({
         M: 'Male',
         F: 'Female'
-      });
-            constructor()
-                 {
-                super();
-                this.state ={
-                    value:{}
+    });
+    constructor()
+    {
+        super();
+        this.state ={
+            value:{}
+        },
+
+        this.AddChickenProfile=t.struct({
+            ChooseStatus:t.String,
+            Name:t.String,
+            ChickenCode:t.Number,
+            ChickenSymbol:t.String,
+            DateOfBirth:t.Date,
+            gender:Gender,
+            SireCode:t.String,
+            BreederCode:t.String,
+            Breed:t.String,
+            Talents:t.Number,
+            Weight:t.Number,
+            FightingRecord :t.String,
+            StandardPrice :t.Number,
+            AdditionalNote :t.String,
+            AddPhoto:t.String
+        }),
+
+        this.AddChickenProfileOptions={
+            fields:{
+                ChooseStatus:{
+                    label: 'Choose Staues',
+                    //placeholder:'Please Enter Your Full Name',
+                    //error:'Please Enter Your Full Name'                        
                 },
-
-                this.AddChickenProfile=t.struct({
-                    ChooseStatus:t.String,
-                    Name:t.String,
-                    ChickenCode:t.Number,
-                    ChickenSymbol:t.String,
-                    DateOfBirth:t.Date,
-                    gender:Gender,
-                    SireCode:t.String,
-                    BreederCode:t.String,
-                    Breed:t.String,
-                    Talents:t.Number,
-                    Weight:t.Number,
-                    FightingRecord :t.String,
-                    StandardPrice :t.Number,
-                    AdditionalNote :t.String,
-                    AddPhoto:t.String
-                }),
-
-                this.AddChickenProfileOptions={
-                    fields:{
-                        ChooseStatus:{
-                            label: 'Choose Staues',
-                            //placeholder:'Please Enter Your Full Name',
-                            //error:'Please Enter Your Full Name'                        
-                        },
-                        Name:{
-                            label: 'Name',
-                           placeholder:'Name',
-                            //error:'Please Enter Farm Address'                        
-                        },
-                        ChickenCode:{
-                            label: 'Chicken Code',
-                            placeholder:'Chicken Code',
-                           // error:'Please Enter ChikenCode'                        
-                        },
-                        ChickenSymbol:{
-                            label: 'Chicken Symbol',
-                            placeholder:'Chicken Symbol',
-                           // error:'Please Enter Your Full Name'                        
-                        },
-                        gender:{
-                            label: 'Gender',
-                            //placeholder:' Web Site Name',
-                           // error:'Please Enter Your Full Name'                        
-                        },
-                        SireCode:{
-                            label: 'Sire Code',
-                            placeholder:'Sire Code',
-                            //multiline:true,
-                            //error:'Please Enter Your Full Name'                        
-                        },
-                        DateOfBirth: {
-                            label: 'Date Of Birth:',
-                            placeholder: 'Date Of Birth',
-                            minimumDate: new Date(),
-                            mode: 'date',
-                            config: {
-                              format: (date) => String(moment(date).format("MM/DD/YYYY")),
-                            }
-                          },
-                          BreederCode:{
-                            label: 'Breeder Code',
-                            placeholder:'Breeder Code',
-                            //error:'Please Enter Your Full Name'                        
-                        },
-                        Breed:{
-                            label: 'Breed',
-                           placeholder:'Breed',
-                            //error:'Please Enter Farm Address'                        
-                        },
-                        Talents:{
-                            label: 'Talents',
-                            placeholder:'Talents',
-                           // error:'Please Enter ChikenCode'                        
-                        },
-                        Weight:{
-                            label: 'Weight',
-                            placeholder:'Weight',
-                           // error:'Please Enter Your Full Name'                        
-                        },
-                        FightingRecord:{
-                            label: 'Fighting Record',
-                            placeholder:'Fighting Record',
-                            //error:'Please Enter Your Full Name'                        
-                        },
-                        StandardPrice:{
-                            label: 'Standard Price',
-                           placeholder:'Standard Price',
-                            //error:'Please Enter Farm Address'                        
-                        },
-                        AdditionalNote:{
-                            label: 'Additional Note',
-                            placeholder:'Additional Note',
-                           // error:'Please Enter ChikenCode'                        
-                        }
+                Name:{
+                    label: 'Name',
+                    placeholder:'Name',
+                    //error:'Please Enter Farm Address'                        
+                },
+                ChickenCode:{
+                    label: 'Chicken Code',
+                    placeholder:'Chicken Code',
+                    // error:'Please Enter ChikenCode'                        
+                },
+                ChickenSymbol:{
+                    label: 'Chicken Symbol',
+                    placeholder:'Chicken Symbol',
+                    // error:'Please Enter Your Full Name'                        
+                },
+                gender:{
+                    label: 'Gender',
+                    //placeholder:' Web Site Name',
+                    // error:'Please Enter Your Full Name'                        
+                },
+                SireCode:{
+                    label: 'Sire Code',
+                    placeholder:'Sire Code',
+                    //multiline:true,
+                    //error:'Please Enter Your Full Name'                        
+                },
+                DateOfBirth: {
+                    label: 'Date Of Birth:',
+                    placeholder: 'Date Of Birth',
+                    minimumDate: new Date(),
+                    mode: 'date',
+                    config: {
+                        format: (date) => String(moment(date).format("MM/DD/YYYY")),
                     }
+                },
+                BreederCode:{
+                    label: 'Breeder Code',
+                    placeholder:'Breeder Code',
+                    //error:'Please Enter Your Full Name'                        
+                },
+                Breed:{
+                    label: 'Breed',
+                    placeholder:'Breed',
+                    //error:'Please Enter Farm Address'                        
+                },
+                Talents:{
+                    label: 'Talents',
+                    placeholder:'Talents',
+                    // error:'Please Enter ChikenCode'                        
+                },
+                Weight:{
+                    label: 'Weight',
+                    placeholder:'Weight',
+                    // error:'Please Enter Your Full Name'                        
+                },
+                FightingRecord:{
+                    label: 'Fighting Record',
+                    placeholder:'Fighting Record',
+                    //error:'Please Enter Your Full Name'                        
+                },
+                StandardPrice:{
+                    label: 'Standard Price',
+                    placeholder:'Standard Price',
+                    //error:'Please Enter Farm Address'                        
+                },
+                AdditionalNote:{
+                    label: 'Additional Note',
+                    placeholder:'Additional Note',
+                    // error:'Please Enter ChikenCode'                        
                 }
+            }
         }
-        onChange = (value) => {
-            this.setState({value});
-          }
-    
+    }
+    onChange = (value) => {
+        this.setState({value});
+    }    
 
     render(){
             return(        

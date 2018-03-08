@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet, ActivityIndicator, ListView, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator, ListView, TouchableOpacity} from 'react-native';
 
-import {StackNavigator} from 'react-navigation';
+import { StackNavigator } from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer } from 'native-base';
 
 import api from '../../API/API';
   
-export default class ChickenProfileList extends Component{
+export default class PurchasedVaccineList extends Component{
 
     static navigationOptions={
-        title : 'Chicken Profile List',
-        headerStyle:{backgroundColor:'#fff'},
-        headerTitleStyle:{color:'#212121'}
+        drawerLabel: () => null
     }
 
     constructor(props) {
@@ -38,8 +36,8 @@ export default class ChickenProfileList extends Component{
         });
     }
 
-    login=(companycode)=>{            
-        this.props.navigation.navigate('ChickenProfileDetails');
+    NavigateToDetail=(companycode)=>{            
+        this.props.navigation.navigate('AddPurchasedVaccine');
     }   
     
     render(){
@@ -56,19 +54,19 @@ export default class ChickenProfileList extends Component{
             <Container>
                 <Header>
                     <Left>
-                        <Button transparent onPress={()=>this.props.navigation.navigate('DrawerOpen')}>
-                            <Icon ios='ios-menu' android="md-menu" />
+                        <Button transparent onPress={()=>this.props.navigation.navigate('Vaccine')}>
+                            <Icon name='arrow-back'/>
                         </Button>
                     </Left>
                     <Body>
-                        <Title>Chicken Profile List</Title>
+                        <Title>Purchased Vaccine List</Title>
                     </Body>
                 </Header>
 
                 <Content contentContainerStyle={{flex:1, justifyContent:'center'}}>
                     <ListView
                         dataSource={this.state.dataSource}
-                        renderRow={(rowData) => <View><TouchableOpacity  onPress={() => this.login(rowData.CompanyCode)}><Text>{rowData.CompanyCode}, {rowData.CompanyName}</Text></TouchableOpacity></View>}
+                        renderRow={(rowData) => <View><TouchableOpacity  onPress={() => this.NavigateToDetail(rowData.CompanyCode)}><Text>{rowData.CompanyCode}, {rowData.CompanyName}</Text></TouchableOpacity></View>}
                     />
                 </Content>
             </Container>

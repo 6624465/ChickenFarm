@@ -17,6 +17,15 @@ import ChickenProfileList from '../ChikenProfile/ChikenProfileList';
 import ChickenProfileDetails from '../ChikenProfile/ChickenProfileDetails';
 
 import Vaccine from '../Vaccine/VaccineList';
+import PurchasedVaccineList from '../Vaccine/PurchasedVaccineList';
+import AddPurchasedVaccine from '../Vaccine/AddPurchasedVaccine';
+import VaccineScheduleList from '../Vaccine/VaccineScheduleList';
+import AddVaccineSchedule from '../Vaccine/AddVaccineSchedule';
+import GiveVaccineList from '../Vaccine/GiveVaccineList';
+import GiveVaccine from '../Vaccine/GiveVaccine';
+import VaccineDue from '../Vaccine/VaccineDue';
+
+
 import ChickenTreatment from '../ChickenTreatments/ChickenTreatmentList';
 import Expense from '../Expense/ExpenseList';
 
@@ -44,6 +53,14 @@ const NavLinks = DrawerNavigator({
       ChickenProfileList:{screen:ChickenProfileList},
       ChickenProfileDetails:{screen:ChickenProfileDetails},
       Vaccine:{screen:Vaccine},
+      PurchasedVaccineList:{screen:PurchasedVaccineList},
+      AddPurchasedVaccine:{screen:AddPurchasedVaccine},
+      VaccineScheduleList:{screen:VaccineScheduleList},
+      AddVaccineSchedule:{screen:AddVaccineSchedule},
+      GiveVaccineList:{screen:GiveVaccineList},
+      GiveVaccine:{screen:GiveVaccine},
+      VaccineDue:{screen:VaccineDue},
+
       ChickenTreatment:{screen:ChickenTreatment},
       Expense:{screen:Expense},
       Logout:{screen:Logout},

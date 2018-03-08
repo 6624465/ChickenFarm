@@ -8,9 +8,6 @@ import {StackNavigator} from 'react-navigation';
 
 export default class ProfitsAndLossReport extends Component{
     static navigationOptions={
-        title : 'Chicken Profile Details',
-        headerStyle:{backgroundColor:'#fff'},
-        headerTitleStyle:{color:'#212121'},
         drawerLabel: () => null
     }
     render(){
