@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet} from 'react-native';
+import {View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer } from 'native-base';
+import moment from 'moment';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
-import moment from 'moment';
+var ImagePicker = NativeModules.ImageCropPicker;
 
 
 export default class AddPurchasedVaccine extends Component{
@@ -17,24 +18,33 @@ export default class AddPurchasedVaccine extends Component{
     {
         super();
         this.state ={
-            value:{}
+            PurchasedVaccineDetails:{
+                Vaccine:null,
+                DateOfPurchased:null,
+                ExpiryDate:null,
+                BatchNumberOfVaccine:null,
+                QuantityPurchased:null,
+                SuppliedBy:null,
+                MedicinePhoto:null,
+            },
+            isMedicinePhoto:false
         },
 
-        this.AddPurchasedVaccine=t.struct({
-        AddNewVaccine:t.String,
-        DateOfPurchased:t.Date,
-        ExpiryDate:t.Date,
-        BatchNumberOfVaccine:t.String,
-        QuantityPurchased:t.Number,
-        SuppliedBy:t.String,
-        AddMedicinePhoto:t.String
+        this.PurchasedVaccine=t.struct({
+            Vaccine:t.String,
+            DateOfPurchased:t.Date,
+            ExpiryDate:t.Date,
+            BatchNumberOfVaccine:t.String,
+            QuantityPurchased:t.Number,
+            SuppliedBy:t.String,
+            //MedicinePhoto:t.String
         }),
 
         this.AddPurchasedVaccineOptions={
             fields:{
-                AddNewVaccine:{
-                    label: 'Add New Vaccine',
-                    placeholder:'Add New Vaccine',
+                Vaccine:{
+                    label: 'Vaccine',
+                    placeholder:'Vaccine',
                     //error:'Please Enter Your Full Name'                
                 },
                 DateOfPurchased:{
@@ -76,9 +86,70 @@ export default class AddPurchasedVaccine extends Component{
         }
     }
     
-    onChange = (value) => {
-        this.setState({value});
+    onChange = (PurchasedVaccineDetails) => {
+        this.setState({PurchasedVaccineDetails});
     }    
+
+    cleanupImages() {
+        // ImagePicker.clean().then(() => {
+
+        //   console.log('removed tmp images from tmp directory');
+        // }).catch(e => {
+        //   alert(e);
+        // });
+
+        this.setState({
+            PurchasedVaccineDetails:{    
+                Vaccine:this.state.PurchasedVaccineDetails.Vaccine,
+                DateOfPurchased:this.state.PurchasedVaccineDetails.DateOfPurchased,
+                ExpiryDate:this.state.PurchasedVaccineDetails.ExpiryDate,
+                BatchNumberOfVaccine:this.state.PurchasedVaccineDetails.BatchNumberOfVaccine,
+                QuantityPurchased:this.state.PurchasedVaccineDetails.QuantityPurchased,
+                SuppliedBy:this.state.PurchasedVaccineDetails.SuppliedBy,
+
+                MedicinePhoto:null
+            },
+            isMedicinePhoto:false
+        });
+    }
+    
+    pickMultiple() {
+        ImagePicker.openPicker({
+            multiple: true,
+            waitAnimationEnd: false,
+            includeExif: true,
+        }).then(images => {
+        debugger;
+        this.setState({
+            PurchasedVaccineDetails:{
+                Vaccine:this.state.PurchasedVaccineDetails.Vaccine,
+                DateOfPurchased:this.state.PurchasedVaccineDetails.DateOfPurchased,
+                ExpiryDate:this.state.PurchasedVaccineDetails.ExpiryDate,
+                BatchNumberOfVaccine:this.state.PurchasedVaccineDetails.BatchNumberOfVaccine,
+                QuantityPurchased:this.state.PurchasedVaccineDetails.QuantityPurchased,
+                SuppliedBy:this.state.PurchasedVaccineDetails.SuppliedBy,
+
+                MedicinePhoto: images.map(i => {
+                    console.log('received image', i);
+                    return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
+                })
+            },
+            isMedicinePhoto:true
+          });
+        }).catch(e => alert(e));
+    }
+
+    renderImage(image) {
+        return <Image style={{width: 300, height: 300, resizeMode: 'contain'}} source={image} />
+    }
+        
+    renderAsset(image) {
+        // if (image.mime && image.mime.toLowerCase().indexOf('video/') !== -1) {
+        //   return this.renderVideo(image);
+        // }
+
+        return this.renderImage(image);
+    }
 
     render(){
         return(                  
@@ -97,11 +168,18 @@ export default class AddPurchasedVaccine extends Component{
                     <View style={styles.container}>
                         <Form
                             ref='form'
-                            type={this.AddPurchasedVaccine}
+                            type={this.PurchasedVaccine}
                             options={this.AddPurchasedVaccineOptions}
-                            value={this.state.value}
+                            value={this.state.PurchasedVaccineDetails}
                             onChange={this.onChange}
                         />
+                        <TouchableOpacity onPress={this.state.isMedicinePhoto ? this.cleanupImages.bind(this) : this.pickMultiple.bind(this)} style={{marginBottom: 10}}>
+                            <Text style={{color:'blue'}}>{this.state.isMedicinePhoto ? 'Clear Photo' : 'Select Photo'}</Text>
+                        </TouchableOpacity>
+                        <ScrollView>
+                            {/* {this.state.value.image ? this.renderAsset(this.state.value.image) : null} */}
+                            {this.state.PurchasedVaccineDetails.MedicinePhoto ? this.state.PurchasedVaccineDetails.MedicinePhoto.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null}
+                        </ScrollView>
                     </View>
                 </Content>
                 <Footer style={{backgroundColor:'white'}}>

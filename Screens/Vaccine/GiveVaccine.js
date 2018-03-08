@@ -82,14 +82,14 @@ export default class GiveVaccine extends Component{
                 </Header>
                 <Content>
                     <View style={styles.container}>
-                    <Form
-                        ref='form'
-                        type={this.GiveVaccine}
-                        options={this.GiveVaccineOptions}
-                        value={this.state.value}
-                        onChange={this.onChange}
-                    />
-                </View>
+                        <Form
+                            ref='form'
+                            type={this.GiveVaccine}
+                            options={this.GiveVaccineOptions}
+                            value={this.state.value}
+                            onChange={this.onChange}
+                        />
+                    </View>
                 </Content>
                 <Footer style={{backgroundColor:'white'}}>
                     <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >

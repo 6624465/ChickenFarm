@@ -19,7 +19,7 @@ export default class FarmProfileList extends Component{
     {
         super();
         this.state ={
-            value:{
+            FarmProfileDetails:{
                 FullName:null,
                 FarmAddress:null,
                 ContactDetails:null,
@@ -32,14 +32,13 @@ export default class FarmProfileList extends Component{
         },
 
         this.AddFarmProfile=t.struct({
-        FullName:t.String,
-        FarmAddress:t.String,
-        ContactDetails:t.Number,
-        Page:t.String,
-        WebSite:t.String,
-        AboutUs:t.String,
-        //AddLogo:t.String
-
+            FullName:t.String,
+            FarmAddress:t.String,
+            ContactDetails:t.Number,
+            Page:t.String,
+            WebSite:t.String,
+            AboutUs:t.String,
+            //AddLogo:t.String
         }),
 
         this.AddFarmProfileOptions={
@@ -84,8 +83,8 @@ export default class FarmProfileList extends Component{
         }
     }
 
-    onChange = (value) => {
-        this.setState({value});
+    onChange = (FarmProfileDetails) => {
+        this.setState({FarmProfileDetails});
     }
 
     cleanupImages() {
@@ -97,13 +96,13 @@ export default class FarmProfileList extends Component{
         // });
 
         this.setState({
-            value:{    
-                FullName:this.state.value.FullName,
-                FarmAddress:this.state.value.FarmAddress,
-                ContactDetails:this.state.value.ContactDetails,
-                Page:this.state.value.Page,
-                WebSite:this.state.value.WebSite,
-                AboutUs:this.state.value.AboutUs,
+            FarmProfileDetails:{    
+                FullName:this.state.FarmProfileDetails.FullName,
+                FarmAddress:this.state.FarmProfileDetails.FarmAddress,
+                ContactDetails:this.state.FarmProfileDetails.ContactDetails,
+                Page:this.state.FarmProfileDetails.Page,
+                WebSite:this.state.FarmProfileDetails.WebSite,
+                AboutUs:this.state.FarmProfileDetails.AboutUs,
 
                 Logo: null
             },
@@ -112,20 +111,20 @@ export default class FarmProfileList extends Component{
     }
     
     pickMultiple() {
-    ImagePicker.openPicker({
-        multiple: true,
-        waitAnimationEnd: false,
-        includeExif: true,
-    }).then(images => {
+        ImagePicker.openPicker({
+            multiple: true,
+            waitAnimationEnd: false,
+            includeExif: true,
+        }).then(images => {
         debugger;
         this.setState({
-            value:{
-                FullName:this.state.value.FullName,
-                FarmAddress:this.state.value.FarmAddress,
-                ContactDetails:this.state.value.ContactDetails,
-                Page:this.state.value.Page,
-                WebSite:this.state.value.WebSite,
-                AboutUs:this.state.value.AboutUs,
+            FarmProfileDetails:{
+                FullName:this.state.FarmProfileDetails.FullName,
+                FarmAddress:this.state.FarmProfileDetails.FarmAddress,
+                ContactDetails:this.state.FarmProfileDetails.ContactDetails,
+                Page:this.state.FarmProfileDetails.Page,
+                WebSite:this.state.FarmProfileDetails.WebSite,
+                AboutUs:this.state.FarmProfileDetails.AboutUs,
 
                 Logo: images.map(i => {
                     console.log('received image', i);
@@ -169,7 +168,7 @@ export default class FarmProfileList extends Component{
                             ref='form'
                             type={this.AddFarmProfile}
                             options={this.AddFarmProfileOptions}
-                            value={this.state.value}
+                            value={this.state.FarmProfileDetails}
                             onChange={this.onChange}
                         />
 
@@ -184,7 +183,7 @@ export default class FarmProfileList extends Component{
 
                         <ScrollView>
                             {/* {this.state.value.image ? this.renderAsset(this.state.value.image) : null} */}
-                            {this.state.value.Logo ? this.state.value.Logo.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null}
+                            {this.state.FarmProfileDetails.Logo ? this.state.FarmProfileDetails.Logo.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null}
                         </ScrollView>
                     </View>
                 </Content>
