@@ -7,12 +7,13 @@ import MainDashboard from '../Dashboard/MainDashboard';
 import FarmProfileList from '../FarmProfile/FarmProfileList';
 //import FarmProfileDetails from '../FarmProfile/FarmProfileDetails';
 
-import ChickenProfile from '../ChikenProfile/ChikenProfileList'
-import Logout from '../Registration/Login';
+import ChickenProfileList from '../ChikenProfile/ChikenProfileList';
+import ChickenProfileDetails from '../ChikenProfile/ChickenProfileDetails';
 
 import Vaccine from '../Vaccine/VaccineList';
 import ChickenTreatment from '../ChickenTreatments/ChickenTreatmentList';
 import Expense from '../Expense/ExpenseList';
+
 // import FarmPhotoGallery from '../Details/ThirdScreen';
 // import GeneticsTree from './CompanyList';
 
@@ -25,11 +26,14 @@ import Expense from '../Expense/ExpenseList';
 // import Expense from '../Details/ThirdScreen';
 // import QuickSearch from './CompanyList';
 
+import Logout from '../Registration/Login';
+
 const NavLinks = DrawerNavigator({
 
       MainDashboard:{screen:MainDashboard},
       FarmProfileList:{screen:FarmProfileList},
-      ChickenProfile:{screen:ChickenProfile},
+      ChickenProfileList:{screen:ChickenProfileList},
+      ChickenProfileDetails:{screen:ChickenProfileDetails},
       Vaccine:{screen:Vaccine},
       ChickenTreatment:{screen:ChickenTreatment},
       Expense:{screen:Expense},
