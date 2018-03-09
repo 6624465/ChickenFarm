@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {View, Text, StyleSheet, ActivityIndicator, ListView, TouchableOpacity, Image, TextInput} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
-import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer } from 'native-base';
+import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer, Right, Item, Input } from 'native-base';
 //import Search from '../Common/Search'
 import api from '../../API/API';
   
@@ -75,19 +75,22 @@ export default class PurchasedMedicineList extends Component{
                     <Body>
                         <Title>Purchased Medicine List</Title>
                     </Body>
+                    <Right>
+                        <Button transparent onPress={() => this.NavigateToDetails(-1)}>
+                            <Icon ios='ios-add-circle' android="md-add-circle"/>
+                        </Button>
+                    </Right>
+                </Header>
+                <Header searchBar rounded>
+                    <Item>
+                        <Icon ios="ios-search" android='md-search' />
+                        <Input placeholder="Search"  onChangeText={(text) => this.FilterListData(text)}/>
+                        {/* <Icon name="ios-people" /> */}
+                    </Item>
                 </Header>
 
                 <Content>
                     <View style={styles.container}>
-                        <View style={styles.searchcontainer}> 
-                            <TextInput
-                                style={styles.input}
-                                placeholder="Search..."
-                                value={this.state.text}
-                                onChangeText={(text) => this.FilterListData(text)}
-                                underlineColorAndroid='transparent'
-                            />
-                        </View>
                         <ListView 
                             dataSource={this.state.dataSource}
                             renderRow={(rowData) => 
@@ -134,41 +137,25 @@ var styles = StyleSheet.create({
         padding: 5,
         backgroundColor: '#C1C1C1',      
     },
-    searchcontainer: {
-         //flex: 1,
-         padding: 4,
-         flexDirection: 'row',
-         alignItems: 'center',
-         backgroundColor: '#C1C1C1',
-      },
-      input: {
-        height: 40,
-        flex: 1,
-        paddingHorizontal: 20,
-        padding:5,
-        fontSize: 20,
-        backgroundColor: '#FFFFFF',
-        borderRadius: 15,
-      },
     listcontainer: {
         flex: 1,
         padding: 12,
         flexDirection: 'row',
         alignItems: 'center',
-      },
-      text: {
+    },
+    text: {
         marginLeft: 12,
         fontSize: 18,
         color:'#000'
-      },
-      photo: {
+    },
+    photo: {
         height: 70,
         width: 70,
         borderRadius: 35,
-      },
-      separator: {
+    },
+    separator: {
         flex: 1,
         height: StyleSheet.hairlineWidth,
         backgroundColor: '#8E8E8E',
-      },
+    },
   });
