@@ -126,7 +126,6 @@ export default class VaccineScheduleList extends Component{
             </Container>
         );
     }
-
 }
 
 var styles = StyleSheet.create({
