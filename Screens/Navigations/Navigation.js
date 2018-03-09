@@ -33,6 +33,12 @@ import MExpenseDetails from '../Expense/MExpenseDetails';
 import MyExpenseList from '../Expense/MyExpenseList';
 import MyExpenseDetails from '../Expense/MyExpenseDetails';
 
+import Sales from '../Sales/SalesList';
+import ChickenForSaleList from '../Sales/ChickenForSaleList';
+import ChickenForSaleDetail from '../Sales/ChickenForSaleDetail';
+import SaleEntryList from '../Sales/SaleEntryList';
+import SaleEntryDetail from '../Sales/SaleEntryDetail';
+
 // import FarmPhotoGallery from '../Details/ThirdScreen';
 // import GeneticsTree from './CompanyList';
 
@@ -53,7 +59,9 @@ const NavLinks = DrawerNavigator({
       ExpenseReport:{screen:ExpenseReport},
       ProfitsAndLossReport:{screen:ProfitsAndLossReport},
       StockReport:{screen:StockReport},
+
       FarmProfileList:{screen:FarmProfileList},
+
       ChickenProfileList:{screen:ChickenProfileList},
       ChickenProfileDetails:{screen:ChickenProfileDetails},
 
@@ -73,6 +81,12 @@ const NavLinks = DrawerNavigator({
       MExpenseDetails:{screen:MExpenseDetails},
       MyExpenseList:{screen:MyExpenseList},
       MyExpenseDetails:{screen:MyExpenseDetails},
+
+      Sales:{screen:Sales},
+      ChickenForSaleList:{screen:ChickenForSaleList},
+      ChickenForSaleDetail:{screen:ChickenForSaleDetail},
+      SaleEntryList:{screen:SaleEntryList},
+      SaleEntryDetail:{screen:SaleEntryDetail},
 
       Logout:{screen:Logout},
       // FarmProfileDetails:{screen:FarmProfileDetails},
