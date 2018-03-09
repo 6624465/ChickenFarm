@@ -44,6 +44,9 @@ import ChickenForSaleDetail from '../Sales/ChickenForSaleDetail';
 import SaleEntryList from '../Sales/SaleEntryList';
 import SaleEntryDetail from '../Sales/SaleEntryDetail';
 
+import BreedList from '../Breed/BreedList';
+import BreedDetail from '../Breed/BreedDetail';
+
 // import FarmPhotoGallery from '../Details/ThirdScreen';
 // import GeneticsTree from './CompanyList';
 
@@ -99,7 +102,11 @@ const NavLinks = DrawerNavigator({
       SaleEntryList:{screen:SaleEntryList},
       SaleEntryDetail:{screen:SaleEntryDetail},
 
+      BreedList:{screen:BreedList},
+      BreedDetail:{screen:BreedDetail},
+
       Logout:{screen:Logout},
+
       // FarmProfileDetails:{screen:FarmProfileDetails},
       // GeneticsTree:{screen: GeneticsTree},
 
