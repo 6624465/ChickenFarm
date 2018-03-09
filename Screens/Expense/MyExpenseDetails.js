@@ -1,22 +1,31 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet} from 'react-native';
+import {View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
-import { Container, Content, Header, Icon, Left, Title, Body, Button,Footer } from 'native-base';
+import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer } from 'native-base';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
 
-
-
-export default class CreateMyExpense extends Component{
+export default class MyExpenseDetails extends Component{
+    static navigationOptions={
+        drawerLabel: () => null
+    }
     constructor()
     {
         super();
         this.state ={
-            value:{}
+            Expense:{
+                ExpenseCode:null,
+                ExpenseName:null,
+                ExpenseType:null,
+                VendorName:null,
+                VendorDetails:null,
+                ExpenseAmout:null,
+                AdditionalNotes:null
+            }
         },
-        this.CreateMyExpense=t.struct({
+        this.MyExpense=t.struct({
             ExpenseCode:t.String,
             ExpenseName:t.String,
             ExpenseType:t.String,
@@ -25,7 +34,7 @@ export default class CreateMyExpense extends Component{
             ExpenseAmout:t.Number,
             AdditionalNotes:t.String
         })
-        this.CreateMyExpenseOptions={
+        this.MyExpenseOptions={
             fields:{
                 ExpenseName:{
                     label: 'Expense Name',
@@ -65,24 +74,34 @@ export default class CreateMyExpense extends Component{
             }
         }
     }
-    onChange = (value) => {
-        this.setState({value});
+
+    onChange = (Expense) => {
+        this.setState({Expense});
     }    
 
     render(){
-        return(        
-                  
+        return(
             <Container>
+                <Header>
+                    <Left>
+                        <Button transparent onPress={()=>this.props.navigation.navigate('MyExpenseList')}>
+                            <Icon name='arrow-back'/>
+                        </Button>
+                    </Left>
+                    <Body>
+                        <Title>My Expense Details</Title>
+                    </Body>
+                </Header>
                 <Content>
                     <View style={styles.container}>
-                    <Form
-                        ref='form'
-                        type={this.CreateMyExpense}
-                        options={this.CreateMyExpenseOptions}
-                        value={this.state.value}
-                        onChange={this.onChange}
-                    />
-                </View>
+                        <Form
+                            ref='form'
+                            type={this.MyExpense}
+                            options={this.MyExpenseOptions}
+                            value={this.state.Expense}
+                            onChange={this.onChange}
+                        />
+                    </View>
                 </Content>
                 <Footer style={{backgroundColor:'white'}}>
                     <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >

@@ -28,6 +28,10 @@ import VaccineDue from '../Vaccine/VaccineDue';
 
 import ChickenTreatment from '../ChickenTreatments/ChickenTreatmentList';
 import Expense from '../Expense/ExpenseList';
+import MExpenseList from '../Expense/MExpenseList';
+import MExpenseDetails from '../Expense/MExpenseDetails';
+import MyExpenseList from '../Expense/MyExpenseList';
+import MyExpenseDetails from '../Expense/MyExpenseDetails';
 
 // import FarmPhotoGallery from '../Details/ThirdScreen';
 // import GeneticsTree from './CompanyList';
@@ -52,6 +56,7 @@ const NavLinks = DrawerNavigator({
       FarmProfileList:{screen:FarmProfileList},
       ChickenProfileList:{screen:ChickenProfileList},
       ChickenProfileDetails:{screen:ChickenProfileDetails},
+
       Vaccine:{screen:Vaccine},
       PurchasedVaccineList:{screen:PurchasedVaccineList},
       AddPurchasedVaccine:{screen:AddPurchasedVaccine},
@@ -62,7 +67,13 @@ const NavLinks = DrawerNavigator({
       VaccineDue:{screen:VaccineDue},
 
       ChickenTreatment:{screen:ChickenTreatment},
+
       Expense:{screen:Expense},
+      MExpenseList:{screen:MExpenseList},
+      MExpenseDetails:{screen:MExpenseDetails},
+      MyExpenseList:{screen:MyExpenseList},
+      MyExpenseDetails:{screen:MyExpenseDetails},
+
       Logout:{screen:Logout},
       // FarmProfileDetails:{screen:FarmProfileDetails},
       // GeneticsTree:{screen: GeneticsTree},

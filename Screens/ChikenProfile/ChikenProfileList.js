@@ -88,6 +88,7 @@ export default class ChickenProfileList extends Component{
                                 placeholder="Search..."
                                 value={this.state.text}
                                 onChangeText={(text) => this.FilterListData(text)}
+                                underlineColorAndroid='transparent'
                             />
                         </View>
                         <ListView 
