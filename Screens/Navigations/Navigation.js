@@ -29,6 +29,12 @@ import VaccineDue from '../Vaccine/VaccineDue';
 import ChickenTreatment from '../ChickenTreatments/ChickenTreatmentList';
 import Expense from '../Expense/ExpenseList';
 
+import Sales from '../Sales/SalesList';
+import ChickenForSaleList from '../Sales/ChickenForSaleList';
+import ChickenForSaleDetail from '../Sales/ChickenForSaleDetail';
+import SaleEntryList from '../Sales/SaleEntryList';
+import SaleEntryDetail from '../Sales/SaleEntryDetail';
+
 // import FarmPhotoGallery from '../Details/ThirdScreen';
 // import GeneticsTree from './CompanyList';
 
@@ -49,9 +55,12 @@ const NavLinks = DrawerNavigator({
       ExpenseReport:{screen:ExpenseReport},
       ProfitsAndLossReport:{screen:ProfitsAndLossReport},
       StockReport:{screen:StockReport},
+
       FarmProfileList:{screen:FarmProfileList},
+
       ChickenProfileList:{screen:ChickenProfileList},
       ChickenProfileDetails:{screen:ChickenProfileDetails},
+
       Vaccine:{screen:Vaccine},
       PurchasedVaccineList:{screen:PurchasedVaccineList},
       AddPurchasedVaccine:{screen:AddPurchasedVaccine},
@@ -63,6 +72,13 @@ const NavLinks = DrawerNavigator({
 
       ChickenTreatment:{screen:ChickenTreatment},
       Expense:{screen:Expense},
+
+      Sales:{screen:Sales},
+      ChickenForSaleList:{screen:ChickenForSaleList},
+      ChickenForSaleDetail:{screen:ChickenForSaleDetail},
+      SaleEntryList:{screen:SaleEntryList},
+      SaleEntryDetail:{screen:SaleEntryDetail},
+
       Logout:{screen:Logout},
       // FarmProfileDetails:{screen:FarmProfileDetails},
       // GeneticsTree:{screen: GeneticsTree},
