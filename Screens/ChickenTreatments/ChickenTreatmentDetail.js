@@ -8,7 +8,10 @@ var t = require('tcomb-form-native');
 var Form = t.form.Form;
 import moment from 'moment';
 
-export default class AddChickenTreatment extends Component{
+export default class ChickenTreatmentDetail extends Component{
+    static navigationOptions={
+        drawerLabel: () => null
+     }
             constructor()
                  {
                 super();
@@ -103,6 +106,16 @@ export default class AddChickenTreatment extends Component{
             return(        
                   
             <Container>
+                   <Header>
+                    <Left>
+                        <Button transparent onPress={()=>this.props.navigation.navigate('ChickenTreatmentList')}>
+                            <Icon name='arrow-back'/>
+                        </Button>
+                    </Left>
+                    <Body>
+                        <Title>Chicken Treatment Detail</Title>
+                    </Body>
+                </Header>
 
                     <Content>
                        <View style={styles.container}>
