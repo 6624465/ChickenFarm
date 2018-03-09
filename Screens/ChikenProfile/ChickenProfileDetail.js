@@ -21,7 +21,7 @@ var ChickenStatus = t.enums({
     4: 'Death on Farm'
 });
   
-export default class ChickenProfileDetails extends Component{
+export default class ChickenProfileDetail extends Component{
     static navigationOptions={
         title : 'Chicken Profile Details',
         headerStyle:{backgroundColor:'#fff'},

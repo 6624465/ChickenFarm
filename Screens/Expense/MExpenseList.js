@@ -37,7 +37,7 @@ export default class MExpenseList extends Component{
     }
 
     NavigateToDetail=(companycode)=>{            
-        this.props.navigation.navigate('MExpenseDetails');
+        this.props.navigation.navigate('MExpenseDetail');
     }   
     
     render(){

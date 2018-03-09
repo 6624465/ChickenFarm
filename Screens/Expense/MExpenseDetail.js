@@ -1,99 +1,78 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet} from 'react-native';
+import {View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
-import { Container, Content, Header, Icon, Left, Title, Body, Button,Footer } from 'native-base';
+import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer } from 'native-base';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
 
-
-export default class GiveVaccineDetails extends Component{
+export default class MExpenseDetail extends Component{
     static navigationOptions={
         drawerLabel: () => null
     }
-
     constructor()
     {
         super();
         this.state ={
-            VaccineDetails:{
-                ChickenCode:null,
-                ChickenAge:null,
-                TypeofVaccine:null,
-                VaccineName:null,
-                VaccineCompany:null,
-                HowtogetVaccine:null
+            ExpenseDetails:{
+                ExpenseName:null,
+                ExpenseCode:null,
+                ExpenseType:null
             }
         },
-        this.GiveVaccine=t.struct({
-            ChickenCode:t.String,
-            ChickenAge:t.Number,
-            TypeofVaccine:t.String,
-            VaccineName:t.String,
-            VaccineCompany:t.String,
-            HowtogetVaccine:t.String
-        })
-        this.GiveVaccineOptions={
+
+        this.AddNewExpense=t.struct({
+        ExpenseName:t.String,
+        ExpenseCode:t.String,
+        ExpenseType:t.String
+        }),
+
+        this.AddNewExpenseOptions={
             fields:{
-                ChickenCode:{
-                    label: 'Chicken Code',
-                    placeholder:'Chicken Code',
+                ExpenseName:{
+                    label: 'Expense Name',
+                    placeholder:'Expense Name',
                     //error:'Please Enter Your Full Name'                
                 },
-                ChickenAge:{
-                    label: 'Chicken Age',
-                    placeholder:'Chicken Age',
-                    //error:'Please Enter Your Full Name'                
-                },
-                TypeofVaccine:{
-                    label: 'Type Of Vaccine',
-                    placeholder:'Type Of Vaccine',
+                ExpenseCode:{
+                    label: 'Expense Code',
+                    placeholder:'Expense Code',
                     //error:'Please Enter Farm Address'                
                 },
-                VaccineName:{
-                    label: 'Vaccine Name',
-                    placeholder:'Vaccine Name',
+                ExpenseType:{
+                    label: 'Expense Type',
+                    placeholder:'Expense Type',
                     //error:'Please Enter Tel/Line Number'                
-                },
-                VaccineCompany:{
-                    label: 'Vaccine Company',
-                    placeholder:'Vaccine Company',
-                    // error:'Please Enter Your Full Name'                
-                },
-                HowtogetVaccine:{
-                    label: 'How To Get Vaccine',
-                    placeholder:'How To Get Vaccine',
-                    // error:'Please Enter Your Full Name'                
                 }
             }
         }
     }
 
-    onChange = (VaccineDetails) => {
-        this.setState({VaccineDetails});
-    }
+    onChange = (ExpenseDetails) => {
+        this.setState({ExpenseDetails});
+    }  
 
     render(){
-        return( 
+        return(
             <Container>
                 <Header>
                     <Left>
-                        <Button transparent onPress={()=>this.props.navigation.navigate('GiveVaccineList')}>
+                        <Button transparent onPress={()=>this.props.navigation.navigate('MExpenseList')}>
                             <Icon name='arrow-back'/>
                         </Button>
                     </Left>
                     <Body>
-                        <Title>Give Vaccine</Title>
+                        <Title>Master Expense Details</Title>
                     </Body>
                 </Header>
                 <Content>
                     <View style={styles.container}>
                         <Form
                             ref='form'
-                            type={this.GiveVaccine}
-                            options={this.GiveVaccineOptions}
-                            value={this.state.VaccineDetails}
+                            type={this.AddNewExpense}
+                            options={this.AddNewExpenseOptions}
+                            value={this.state.ExpenseDetails}
                             onChange={this.onChange}
                         />
                     </View>

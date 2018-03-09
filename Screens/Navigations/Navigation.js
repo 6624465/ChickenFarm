@@ -9,29 +9,32 @@ import ExpenseReport from '../Reports/ExpenseReport';
 import ProfitsAndLossReport from '../Reports/ProfitsAndLossReport';
 import StockReport from '../Reports/StockReport';
 
-
 import FarmProfileList from '../FarmProfile/FarmProfileList';
 //import FarmProfileDetails from '../FarmProfile/FarmProfileDetails';
 
 import ChickenProfileList from '../ChikenProfile/ChikenProfileList';
-import ChickenProfileDetails from '../ChikenProfile/ChickenProfileDetails';
+import ChickenProfileDetail from '../ChikenProfile/ChickenProfileDetail';
 
 import Vaccine from '../Vaccine/VaccineList';
 import PurchasedVaccineList from '../Vaccine/PurchasedVaccineList';
-import PurchasedVaccineDetails from '../Vaccine/PurchasedVaccineDetails';
+import PurchasedVaccineDetail from '../Vaccine/PurchasedVaccineDetail';
 import VaccineScheduleList from '../Vaccine/VaccineScheduleList';
-import VaccineScheduleDetails from '../Vaccine/VaccineScheduleDetails';
+import VaccineScheduleDetail from '../Vaccine/VaccineScheduleDetail';
 import GiveVaccineList from '../Vaccine/GiveVaccineList';
-import GiveVaccineDetails from '../Vaccine/GiveVaccineDetails';
+import GiveVaccineDetail from '../Vaccine/GiveVaccineDetail';
 import VaccineDue from '../Vaccine/VaccineDue';
 
+import ChickenTreatment from '../ChickenTreatments/ChickenTreatment';
+import ChickenTreatmentList from '../ChickenTreatments/ChickenTreatmentList';
+import ChickenTreatmentDetail from '../ChickenTreatments/ChickenTreatmentDetail';
+import PurchasedMedicineList from '../ChickenTreatments/PurchasedMedicineList';
+import PurchasedMedicineDetail from '../ChickenTreatments/PurchasedMedicineDetail';
 
-import ChickenTreatment from '../ChickenTreatments/ChickenTreatmentList';
 import Expense from '../Expense/ExpenseList';
 import MExpenseList from '../Expense/MExpenseList';
-import MExpenseDetails from '../Expense/MExpenseDetails';
+import MExpenseDetail from '../Expense/MExpenseDetail';
 import MyExpenseList from '../Expense/MyExpenseList';
-import MyExpenseDetails from '../Expense/MyExpenseDetails';
+import MyExpenseDetail from '../Expense/MyExpenseDetail';
 
 import Sales from '../Sales/SalesList';
 import PriceList from '../Sales/PriceList';
@@ -65,24 +68,28 @@ const NavLinks = DrawerNavigator({
       FarmProfileList:{screen:FarmProfileList},
 
       ChickenProfileList:{screen:ChickenProfileList},
-      ChickenProfileDetails:{screen:ChickenProfileDetails},
+      ChickenProfileDetail:{screen:ChickenProfileDetail},
 
       Vaccine:{screen:Vaccine},
       PurchasedVaccineList:{screen:PurchasedVaccineList},
-      PurchasedVaccineDetails:{screen:PurchasedVaccineDetails},
+      PurchasedVaccineDetail:{screen:PurchasedVaccineDetail},
       VaccineScheduleList:{screen:VaccineScheduleList},
-      VaccineScheduleDetails:{screen:VaccineScheduleDetails},
+      VaccineScheduleDetail:{screen:VaccineScheduleDetail},
       GiveVaccineList:{screen:GiveVaccineList},
-      GiveVaccineDetails:{screen:GiveVaccineDetails},
+      GiveVaccineDetail:{screen:GiveVaccineDetail},
       VaccineDue:{screen:VaccineDue},
 
       ChickenTreatment:{screen:ChickenTreatment},
+      ChickenTreatmentList:{screen:ChickenTreatmentList},
+      ChickenTreatmentDetail:{screen:ChickenTreatmentDetail},
+      PurchasedMedicineList:{screen:PurchasedMedicineList},
+      PurchasedMedicineDetail:{screen:PurchasedMedicineDetail},
 
       Expense:{screen:Expense},
       MExpenseList:{screen:MExpenseList},
-      MExpenseDetails:{screen:MExpenseDetails},
+      MExpenseDetail:{screen:MExpenseDetail},
       MyExpenseList:{screen:MyExpenseList},
-      MyExpenseDetails:{screen:MyExpenseDetails},
+      MyExpenseDetail:{screen:MyExpenseDetail},
 
       Sales:{screen:Sales},
       PriceList:{screen:PriceList},

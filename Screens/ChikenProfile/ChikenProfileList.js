@@ -42,7 +42,7 @@ export default class ChickenProfileList extends Component{
     }
 
     NavigateToDetails=(companycode)=>{            
-        this.props.navigation.navigate('ChickenProfileDetails');
+        this.props.navigation.navigate('ChickenProfileDetail');
     }   
 
     FilterListData=(text)=>{   

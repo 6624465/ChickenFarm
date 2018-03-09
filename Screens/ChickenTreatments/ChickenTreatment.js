@@ -3,7 +3,7 @@ import { View, StyleSheet,TouchableOpacity,Image,Keyboard,Text} from 'react-nati
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Right } from 'native-base';
 import {StackNavigator} from 'react-navigation';
 
-export default class Sale extends Component{
+export default class ChickenTreatment extends Component{
     render(){
         return(     
             <Container>
@@ -14,7 +14,7 @@ export default class Sale extends Component{
                         </Button>
                     </Left>
                     <Body>
-                        <Title>Sales</Title>
+                        <Title>Chicken Treatment</Title>
                     </Body>
                     {/* <Right>
                         <Button transparent onPress={this.Logout}>
@@ -29,21 +29,14 @@ export default class Sale extends Component{
                     justifyContent:'center'
                     }}>
                     <View>
-                        <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('PriceList')}>
+                        <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('ChickenTreatmentList')}>
                             <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
-                                Price List
+                            Chicken Treatment List
                             </Text>
                         </TouchableOpacity>
-
-                        <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('ChickenForSaleList')}>
+                        <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('PurchasedMedicineList')}>
                             <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
-                                Chicken For Sales
-                            </Text>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('SaleEntryList')}>
-                            <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
-                                Sale Entry
+                            Purchased Medicine List
                             </Text>
                         </TouchableOpacity>
                     </View>

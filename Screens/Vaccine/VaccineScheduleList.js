@@ -37,7 +37,7 @@ export default class VaccineScheduleList extends Component{
     }
 
     NavigateToDetail=(companycode)=>{            
-        this.props.navigation.navigate('VaccineScheduleDetails');
+        this.props.navigation.navigate('VaccineScheduleDetail');
     }   
     
     render(){

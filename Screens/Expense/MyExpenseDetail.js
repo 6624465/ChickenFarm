@@ -7,7 +7,7 @@ import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer } f
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
 
-export default class MExpenseDetails extends Component{
+export default class MyExpenseDetail extends Component{
     static navigationOptions={
         drawerLabel: () => null
     }
@@ -15,20 +15,26 @@ export default class MExpenseDetails extends Component{
     {
         super();
         this.state ={
-            ExpenseDetails:{
-                ExpenseName:null,
+            Expense:{
                 ExpenseCode:null,
-                ExpenseType:null
+                ExpenseName:null,
+                ExpenseType:null,
+                VendorName:null,
+                VendorDetails:null,
+                ExpenseAmout:null,
+                AdditionalNotes:null
             }
         },
-
-        this.AddNewExpense=t.struct({
-        ExpenseName:t.String,
-        ExpenseCode:t.String,
-        ExpenseType:t.String
-        }),
-
-        this.AddNewExpenseOptions={
+        this.MyExpense=t.struct({
+            ExpenseCode:t.String,
+            ExpenseName:t.String,
+            ExpenseType:t.String,
+            VendorName:t.String,
+            VendorDetails:t.String,
+            ExpenseAmout:t.Number,
+            AdditionalNotes:t.String
+        })
+        this.MyExpenseOptions={
             fields:{
                 ExpenseName:{
                     label: 'Expense Name',
@@ -44,35 +50,55 @@ export default class MExpenseDetails extends Component{
                     label: 'Expense Type',
                     placeholder:'Expense Type',
                     //error:'Please Enter Tel/Line Number'                
+                },
+                VendorName:{
+                    label: 'Vendor Name',
+                    placeholder:'Vendor Name',
+                    //error:'Please Enter Your Full Name'                
+                },
+                VendorDetails:{
+                    label: 'Vendor Contract Details',
+                    placeholder:'Vendor Contract Details',
+                    //error:'Please Enter Farm Address'                
+                },
+                ExpenseAmout:{
+                    label: 'Expense Amout',
+                    placeholder:'Expense Amout',
+                    //error:'Please Enter Tel/Line Number'                
+                } ,
+                AdditionalNotes:{
+                    label: 'Additional Notes',
+                    placeholder:'Additional Notes',
+                    //error:'Please Enter Tel/Line Number'                
                 }
             }
         }
     }
 
-    onChange = (ExpenseDetails) => {
-        this.setState({ExpenseDetails});
-    }  
+    onChange = (Expense) => {
+        this.setState({Expense});
+    }    
 
     render(){
         return(
             <Container>
                 <Header>
                     <Left>
-                        <Button transparent onPress={()=>this.props.navigation.navigate('MExpenseList')}>
+                        <Button transparent onPress={()=>this.props.navigation.navigate('MyExpenseList')}>
                             <Icon name='arrow-back'/>
                         </Button>
                     </Left>
                     <Body>
-                        <Title>Master Expense Details</Title>
+                        <Title>My Expense Details</Title>
                     </Body>
                 </Header>
                 <Content>
                     <View style={styles.container}>
                         <Form
                             ref='form'
-                            type={this.AddNewExpense}
-                            options={this.AddNewExpenseOptions}
-                            value={this.state.ExpenseDetails}
+                            type={this.MyExpense}
+                            options={this.MyExpenseOptions}
+                            value={this.state.Expense}
                             onChange={this.onChange}
                         />
                     </View>
