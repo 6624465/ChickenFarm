@@ -61,8 +61,8 @@ export default class BreedList extends Component{
         const {navigate}=this.props.navigation;
         if (this.state.isLoading) {
             return (
-            <View style={{flex: 1, paddingTop: 0}}>
-                <ActivityIndicator />
+            <View style={{flex: 1, justifyContent:'center', alignItems:'center'}}>
+                <ActivityIndicator size="large"/>
             </View>
             );
         }

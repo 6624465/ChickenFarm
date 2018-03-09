@@ -58,7 +58,7 @@ export default class PriceList extends Component{
         const {navigate}=this.props.navigation;
         if (this.state.isLoading) {
             return (
-            <View style={{flex: 1, paddingTop: 0}}>
+                <View style={{flex: 1, justifyContent:'center', alignItems:'center'}}>
                 <ActivityIndicator />
             </View>
             );
