@@ -33,32 +33,42 @@ export default class MainDashboard extends Component{
                         alignItems:'center',
                         justifyContent:'center'
                     }}>
-                    <View>
-                        <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('SalesReport')}>
-                            <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
-                            Sales report
-                            </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('ExpenseReport')}>
-                            <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
-                            Expense report
-                            </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('ProfitsAndLossReport')}>
-                            <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
-                            Profits & loss report
-                            </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('StockReport')}>
-                            <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
-                            Stock report 
-                            </Text>
-                        </TouchableOpacity>
+                    <View style={{flex:1, padding:8 }} >
+                        <View style={{flexDirection:'row' ,flexWrap:'wrap', height:'50%'}} >
+                            <View style={{width:'50%', padding:8}}>
+                                <TouchableOpacity style={{paddingTop:'10%', backgroundColor:'green', alignItems:'center', height:'100%', justifyContent:'center'}} onPress={()=>this.props.navigation.navigate('SalesReport')}>
+                                    <Text style={{color:'#fff',fontSize:24,fontWeight:'bold'}}>
+                                        Sales report
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={{width:'50%', padding:8}}>
+                                <TouchableOpacity style={{paddingTop:'10%', backgroundColor:'red', alignItems:'center', height:'100%', justifyContent:'center'}} onPress={()=>this.props.navigation.navigate('ExpenseReport')}>
+                                    <Text style={{color:'#fff',fontSize:24,fontWeight:'bold'}}>
+                                        Expense report
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        <View style={{flexDirection:'row' ,flexWrap:'wrap', height:'50%'}} >
+                            <View style={{width:'50%', padding:8}}>
+                                <TouchableOpacity style={{paddingTop:'10%', backgroundColor:'orange', alignItems:'center', height:'100%', justifyContent:'center'}} onPress={()=>this.props.navigation.navigate('ProfitsAndLossReport')}>
+                                    <Text style={{color:'#fff', fontSize:24, fontWeight:'bold'}}>
+                                        P & L report
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={{width:'50%', padding:8}}>
+                                <TouchableOpacity style={{paddingTop:'10%', backgroundColor:'gray', alignItems:'center', height:'100%', justifyContent:'center'}} onPress={()=>this.props.navigation.navigate('StockReport')}>
+                                    <Text style={{color:'#fff',fontSize:24, fontWeight:'bold'}}>
+                                        Stock report 
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
                     </View>
-                    </Content>
-                </Container>
-            );
-
-    }
-    
+                </Content>
+            </Container>
+        );
+    }    
 }

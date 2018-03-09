@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Image} from 'react-native';
 
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Right } from 'native-base';
 
@@ -34,7 +34,10 @@ export default class ProfitsAndLossReport extends Component{
                         alignItems:'center',
                         justifyContent:'center'
                     }}>
-                        <Text>ProfitsAndLossReport</Text>
+                    <View style={{alignItems:'center'}}>
+                            <Image source = { require('../../android/app/src/main/assets/capture.png') }/>
+                        </View>
+                        {/* <Text style={{fontSize:30}}>ProfitsAndLossReport</Text> */}
                     </Content>
                 </Container>
             );
