@@ -29,11 +29,18 @@ export default class Sale extends Component{
                 justifyContent:'center'
             }}>
             <View>
+                <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('PriceList')}>
+                    <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
+                    Price List
+                    </Text>
+                </TouchableOpacity>
+
                 <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('ChickenForSaleList')}>
                     <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
                     Chicken For Sales
                     </Text>
                 </TouchableOpacity>
+
                 <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('SaleEntryList')}>
                     <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
                      Sale Entry

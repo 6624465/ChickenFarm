@@ -34,6 +34,8 @@ import MyExpenseList from '../Expense/MyExpenseList';
 import MyExpenseDetails from '../Expense/MyExpenseDetails';
 
 import Sales from '../Sales/SalesList';
+import PriceList from '../Sales/PriceList';
+import PriceDetail from '../Sales/PriceDetail';
 import ChickenForSaleList from '../Sales/ChickenForSaleList';
 import ChickenForSaleDetail from '../Sales/ChickenForSaleDetail';
 import SaleEntryList from '../Sales/SaleEntryList';
@@ -83,6 +85,8 @@ const NavLinks = DrawerNavigator({
       MyExpenseDetails:{screen:MyExpenseDetails},
 
       Sales:{screen:Sales},
+      PriceList:{screen:PriceList},
+      PriceDetail:{screen:PriceDetail},
       ChickenForSaleList:{screen:ChickenForSaleList},
       ChickenForSaleDetail:{screen:ChickenForSaleDetail},
       SaleEntryList:{screen:SaleEntryList},
