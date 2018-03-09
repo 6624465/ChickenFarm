@@ -46,6 +46,11 @@ export default class AddVaccineSchedule extends Component{
                     label: 'Vaccine Company',
                     placeholder:'Vaccine Company',
                     // error:'Please Enter Your Full Name'                
+                },
+                HowtogetVaccine:{
+                    label: 'How To Get Vaccine',
+                    placeholder:'How To Get Vaccine',
+                    // error:'Please Enter Your Full Name'                
                 }
             }
         }

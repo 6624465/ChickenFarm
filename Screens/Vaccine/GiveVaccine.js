@@ -55,8 +55,8 @@ export default class GiveVaccine extends Component{
                     // error:'Please Enter Your Full Name'                
                 },
                 HowtogetVaccine:{
-                    label: 'How to get Vaccine',
-                    placeholder:'How to get Vaccine',
+                    label: 'How To Get Vaccine',
+                    placeholder:'How To Get Vaccine',
                     // error:'Please Enter Your Full Name'                
                 }
             }
