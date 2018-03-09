@@ -98,14 +98,19 @@ export default class SaleEntryDetail extends Component{
                 </Content>
                 <Footer style={{backgroundColor:'white'}}>
                     <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
-                        <View style={{width:'50%'}}>
+                        <View style={{width:'33%'}}>
                             <Button success block rounded onPress={this.ResetFarmProfile} style={{width:'100%',justifyContent:'center'}}>
-                                <Text style={{color:'white'}} >Reset</Text>
+                                <Text style={{color:'white'}} >Save</Text>
                             </Button>
                         </View>
-                        <View style={{width:'50%', alignItems:'flex-end'}}>
+                        <View style={{width:'33%', alignItems:'flex-end'}}>
                             <Button primary block rounded onPress={this.SaveFarmProfile} style={{width:'100%',justifyContent:'center'}}>
-                                <Text style={{color:'white'}}>Save</Text>
+                                <Text style={{color:'white'}}>Print Certificate  </Text>
+                            </Button>
+                        </View>
+                        <View style={{width:'33%', alignItems:'flex-end'}}>
+                            <Button primary block rounded onPress={this.SaveFarmProfile} style={{width:'100%',justifyContent:'center'}}>
+                                <Text style={{color:'white'}}>Delivery </Text>
                             </Button>
                         </View>
                     </View>
