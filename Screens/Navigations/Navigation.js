@@ -18,11 +18,11 @@ import ChickenProfileDetails from '../ChikenProfile/ChickenProfileDetails';
 
 import Vaccine from '../Vaccine/VaccineList';
 import PurchasedVaccineList from '../Vaccine/PurchasedVaccineList';
-import AddPurchasedVaccine from '../Vaccine/AddPurchasedVaccine';
+import PurchasedVaccineDetails from '../Vaccine/PurchasedVaccineDetails';
 import VaccineScheduleList from '../Vaccine/VaccineScheduleList';
-import AddVaccineSchedule from '../Vaccine/AddVaccineSchedule';
+import VaccineScheduleDetails from '../Vaccine/VaccineScheduleDetails';
 import GiveVaccineList from '../Vaccine/GiveVaccineList';
-import GiveVaccine from '../Vaccine/GiveVaccine';
+import GiveVaccineDetails from '../Vaccine/GiveVaccineDetails';
 import VaccineDue from '../Vaccine/VaccineDue';
 
 
@@ -67,11 +67,11 @@ const NavLinks = DrawerNavigator({
 
       Vaccine:{screen:Vaccine},
       PurchasedVaccineList:{screen:PurchasedVaccineList},
-      AddPurchasedVaccine:{screen:AddPurchasedVaccine},
+      PurchasedVaccineDetails:{screen:PurchasedVaccineDetails},
       VaccineScheduleList:{screen:VaccineScheduleList},
-      AddVaccineSchedule:{screen:AddVaccineSchedule},
+      VaccineScheduleDetails:{screen:VaccineScheduleDetails},
       GiveVaccineList:{screen:GiveVaccineList},
-      GiveVaccine:{screen:GiveVaccine},
+      GiveVaccineDetails:{screen:GiveVaccineDetails},
       VaccineDue:{screen:VaccineDue},
 
       ChickenTreatment:{screen:ChickenTreatment},

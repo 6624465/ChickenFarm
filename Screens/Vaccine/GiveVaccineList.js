@@ -37,7 +37,7 @@ export default class GiveVaccineList extends Component{
     }
 
     NavigateToDetail=(companycode)=>{            
-        this.props.navigation.navigate('GiveVaccine');
+        this.props.navigation.navigate('GiveVaccineDetails');
     }   
     
     render(){

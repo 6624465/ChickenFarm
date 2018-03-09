@@ -8,7 +8,7 @@ var t = require('tcomb-form-native');
 var Form = t.form.Form;
 
 
-export default class GiveVaccine extends Component{
+export default class GiveVaccineDetails extends Component{
     static navigationOptions={
         drawerLabel: () => null
     }
@@ -17,7 +17,14 @@ export default class GiveVaccine extends Component{
     {
         super();
         this.state ={
-            value:{}
+            VaccineDetails:{
+                ChickenCode:null,
+                ChickenAge:null,
+                TypeofVaccine:null,
+                VaccineName:null,
+                VaccineCompany:null,
+                HowtogetVaccine:null
+            }
         },
         this.GiveVaccine=t.struct({
             ChickenCode:t.String,
@@ -63,8 +70,8 @@ export default class GiveVaccine extends Component{
         }
     }
 
-    onChange = (value) => {
-        this.setState({value});
+    onChange = (VaccineDetails) => {
+        this.setState({VaccineDetails});
     }
 
     render(){
@@ -86,7 +93,7 @@ export default class GiveVaccine extends Component{
                             ref='form'
                             type={this.GiveVaccine}
                             options={this.GiveVaccineOptions}
-                            value={this.state.value}
+                            value={this.state.VaccineDetails}
                             onChange={this.onChange}
                         />
                     </View>

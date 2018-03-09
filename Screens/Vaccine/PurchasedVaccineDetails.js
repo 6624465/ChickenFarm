@@ -10,7 +10,7 @@ var Form = t.form.Form;
 var ImagePicker = NativeModules.ImageCropPicker;
 
 
-export default class AddPurchasedVaccine extends Component{
+export default class PurchasedVaccineDetail extends Component{
     static navigationOptions={
         drawerLabel: () => null
     }

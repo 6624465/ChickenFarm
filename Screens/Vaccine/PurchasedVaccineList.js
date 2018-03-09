@@ -37,7 +37,7 @@ export default class PurchasedVaccineList extends Component{
     }
 
     NavigateToDetail=(companycode)=>{            
-        this.props.navigation.navigate('AddPurchasedVaccine');
+        this.props.navigation.navigate('PurchasedVaccineDetails');
     }   
     
     render(){

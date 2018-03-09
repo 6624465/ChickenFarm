@@ -7,7 +7,7 @@ import { Container, Content, Header, Icon, Left, Title, Body, Button,Footer } fr
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
 
-export default class AddVaccineSchedule extends Component{
+export default class VaccineScheduleDetail extends Component{
     static navigationOptions={
         drawerLabel: () => null
     }
@@ -16,14 +16,20 @@ export default class AddVaccineSchedule extends Component{
     {
         super();
         this.state ={
-            value:{}
+            VaccineScheduleDetails:{
+                ChickenAge:null,
+                TypeofVaccine:null,
+                VaccineName:null,
+                VaccineCompany:null,
+                HowtogetVaccine:null
+            }
         },
         this.AddVaccineSchedule=t.struct({
-        ChickenAge:t.Number,
-        TypeofVaccine:t.String,
-        VaccineName:t.String,
-        VaccineCompany:t.String,
-        HowtogetVaccine:t.String
+            ChickenAge:t.Number,
+            TypeofVaccine:t.String,
+            VaccineName:t.String,
+            VaccineCompany:t.String,
+            HowtogetVaccine:t.String
         })
         this.AddVaccineScheduleOptions={
             fields:{
@@ -51,8 +57,8 @@ export default class AddVaccineSchedule extends Component{
         }
     }
 
-    onChange = (value) => {
-        this.setState({value});
+    onChange = (VaccineScheduleDetails) => {
+        this.setState({VaccineScheduleDetails});
     }
     
     render(){
@@ -74,7 +80,7 @@ export default class AddVaccineSchedule extends Component{
                             ref='form'
                             type={this.AddVaccineSchedule}
                             options={this.AddVaccineScheduleOptions}
-                            value={this.state.value}
+                            value={this.state.VaccineScheduleDetails}
                             onChange={this.onChange}
                         />
                     </View>
