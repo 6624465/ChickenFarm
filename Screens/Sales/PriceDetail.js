@@ -7,85 +7,74 @@ import { Container, Content, Header, Icon, Left, Title, Body, Button,Footer } fr
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
 
-export default class VaccineScheduleDetail extends Component{
+
+export default class PriceDetail extends Component{
     static navigationOptions={
         drawerLabel: () => null
     }
-    
+
     constructor()
     {
         super();
         this.state ={
-            VaccineScheduleDetails:{
-                ChickenAge:null,
-                TypeofVaccine:null,
-                VaccineName:null,
-                VaccineCompany:null,
-                HowtogetVaccine:null
-            }
+            value:{}
         },
-        this.AddVaccineSchedule=t.struct({
-            ChickenAge:t.Number,
-            TypeofVaccine:t.String,
-            VaccineName:t.String,
-            VaccineCompany:t.String,
-            HowtogetVaccine:t.String
+        this.PriceDetail=t.struct({
+            SireCode:t.String,
+            BreederCode:t.String,
+            Price:t.Number,
+            Currency:t.String
         })
-        this.AddVaccineScheduleOptions={
+        this.PriceDetailOptions={
             fields:{
-                ChickenAge:{
-                    label: 'Chicken Age',
-                    placeholder:'Chicken Age',
+                SireCode:{
+                    label: 'Sire Code',
+                    placeholder:'Sire Code',
                     //error:'Please Enter Your Full Name'                
                 },
-                TypeofVaccine:{
-                    label: 'Type Of Vaccine',
-                    placeholder:'Type Of Vaccine',
+                BreederCode:{
+                    label: 'Breeder Code',
+                    placeholder:'Breeder Code',
+                    //error:'Please Enter Your Full Name'                
+                },
+                Price:{
+                    label: 'Price',
+                    placeholder:'Price',
                     //error:'Please Enter Farm Address'                
                 },
-                VaccineName:{
-                    label: 'Vaccine Name',
-                    placeholder:'Vaccine Name',
+                Currency:{
+                    label: 'Currency',
+                    placeholder:'Currency',
                     //error:'Please Enter Tel/Line Number'                
-                },
-                VaccineCompany:{
-                    label: 'Vaccine Company',
-                    placeholder:'Vaccine Company',
-                    // error:'Please Enter Your Full Name'                
-                },
-                HowtogetVaccine:{
-                    label: 'How To Get Vaccine',
-                    placeholder:'How To Get Vaccine',
-                    // error:'Please Enter Your Full Name'                
                 }
             }
         }
     }
 
-    onChange = (VaccineScheduleDetails) => {
-        this.setState({VaccineScheduleDetails});
+    onChange = (value) => {
+        this.setState({value});
     }
-    
+
     render(){
-        return(
+        return( 
             <Container>
                 <Header>
                     <Left>
-                        <Button transparent onPress={()=>this.props.navigation.navigate('VaccineScheduleList')}>
+                        <Button transparent onPress={()=>this.props.navigation.navigate('PriceList')}>
                             <Icon name='arrow-back'/>
                         </Button>
                     </Left>
                     <Body>
-                        <Title>Vaccine Schedule</Title>
+                        <Title>Price Details</Title>
                     </Body>
                 </Header>
                 <Content>
                     <View style={styles.container}>
                         <Form
                             ref='form'
-                            type={this.AddVaccineSchedule}
-                            options={this.AddVaccineScheduleOptions}
-                            value={this.state.VaccineScheduleDetails}
+                            type={this.PriceDetail}
+                            options={this.PriceDetailOptions}
+                            value={this.state.value}
                             onChange={this.onChange}
                         />
                     </View>
@@ -106,7 +95,6 @@ export default class VaccineScheduleDetail extends Component{
                 </Footer>
             </Container>
         );
-
     }
 }
 
