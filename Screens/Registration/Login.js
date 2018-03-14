@@ -5,7 +5,7 @@ import {StackNavigator} from 'react-navigation';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
-
+import axios from 'axios';
 
 
 export default class Login extends Component{
@@ -13,10 +13,21 @@ export default class Login extends Component{
   static navigationOptions={
      header:false
   }
+  componentDidMount() {
+    debugger;
+    axios.defaults.baseURL = 'http://192.168.0.112/ChickenAPI/api';
+    axios.defaults.headers.common['AUTH_TOKEN'] = 'sdfsdfgsdfgsdfdsfgsdfgsdfg';
+    axios.defaults.headers.common['Content-Type'] = 'application/json';
+    
+    axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-  constructor()
+    
+  }
+
+  constructor(props)
   {
-    super();
+    super(props);
+    //const nav = this.props.navigation; 
     this.state ={
         value:{
           MobileNo:'123',
@@ -55,6 +66,7 @@ export default class Login extends Component{
   }
 
     render(){
+      //const { navigate } = this.props.navigation;
       return(
       <View style={styles.container}>                 
         <View style={{alignItems:'center'}}>
@@ -67,8 +79,8 @@ export default class Login extends Component{
           value={this.state.value}
           onChange={this.onChange}
         />
-
-        <Button primary block rounded onPress={this.LoginUser}>
+        
+        <Button primary block rounded onPress={this.LoginUser.bind(this)}>
             <Text style={{color:'#fff', fontWeight:'bold', fontSize:18}}>Login</Text>
         </Button>
 
@@ -96,10 +108,27 @@ export default class Login extends Component{
     {
       Keyboard.dismiss();
         var value = this.refs.form.getValue();
+        debugger;
+        var data = {
+          MobileNo:'123',
+          Password:'a'
+        }
         if (value) {
-          if(value.MobileNo=='123' && value.Password=='a'){
+          axios({
+            method: 'post',
+            url: '/Registration/Login',
+            data: data
+          }).then(function (response) { 
+            debugger;               
             this.props.navigation.navigate('Navigation');
-          }
+          }.bind(this))
+          .catch(function (error) {
+            console.log(error);
+          });
+          // if(value.MobileNo=='123' && value.Password=='a'){
+
+          //   this.props.navigation.navigate('Navigation');
+          // }
         }
     }
 
@@ -120,25 +149,5 @@ var styles = StyleSheet.create({
         //marginTop: 120,
         padding: 20,
         backgroundColor: '#ffffff',      
-    },
-    title: {
-      fontSize: 30,
-      alignSelf: 'center',
-      marginBottom: 30
-    },
-    buttonText: {
-      fontSize: 18,
-      color: 'white',
-      alignSelf: 'center'
-    },
-    button: {
-      height: 36,
-      backgroundColor: '#48BBEC',
-      borderColor: '#48BBEC',
-      borderWidth: 1,
-      borderRadius: 8,
-      marginBottom: 10,
-      alignSelf: 'stretch',
-      justifyContent: 'center'
     }
   });

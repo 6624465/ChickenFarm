@@ -4,7 +4,9 @@ import {View, Text, StyleSheet, ActivityIndicator, ListView, TouchableOpacity, I
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer, Right, Item, Input } from 'native-base';
 //import Search from '../Common/Search'
-import api from '../../API/API';
+//import api from '../../API/API';
+
+import axios from 'axios';
   
 export default class ChickenProfileList extends Component{
 
@@ -24,16 +26,18 @@ export default class ChickenProfileList extends Component{
     }
 
     componentDidMount() {
-        return api.getCountryList()
+        debugger;
+        return axios.get('http://1tradeapi.logiconglobal.com/api/master/country/list')
             .then((responseJson) => {
-                
+                //alert(responseJson)
+                debugger;
             let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
             this.setState({
                 isLoading: false,
-                dataSource: ds.cloneWithRows(responseJson),
+                dataSource: ds.cloneWithRows(responseJson.data),
             }, function() {
                 // do something with new state
-                this.arrayholder = responseJson ;
+                this.arrayholder = responseJson.data ;
             });
             })
             .catch((error) => {
