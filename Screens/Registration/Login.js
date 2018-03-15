@@ -14,14 +14,10 @@ export default class Login extends Component{
      header:false
   }
   componentDidMount() {
-    debugger;
-    axios.defaults.baseURL = 'http://192.168.0.112/ChickenAPI/api';
+    axios.defaults.baseURL = 'http://192.168.0.109/ChickenAPI/api';
     axios.defaults.headers.common['AUTH_TOKEN'] = 'sdfsdfgsdfgsdfdsfgsdfgsdfg';
-    axios.defaults.headers.common['Content-Type'] = 'application/json';
-    
-    axios.defaults.headers.post['Content-Type'] = 'application/json';
-
-    
+    axios.defaults.headers.common['Content-Type'] = 'application/json';    
+    axios.defaults.headers.post['Content-Type'] = 'application/json';    
   }
 
   constructor(props)
@@ -112,11 +108,14 @@ export default class Login extends Component{
           Password:'a'
         }
         if (value) {
+          debugger;
           axios({
             method: 'post',
             url: '/Registration/Login',
             data: data
-          }).then(function (response) { 
+          })
+          //axios.post('http://localhost/ChickenAPI/api/Registration/Login', data)
+          .then(function (response) { 
             debugger;               
             this.props.navigation.navigate('Navigation');
           }.bind(this))

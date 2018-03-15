@@ -62,13 +62,15 @@ import BreedDetail from '../Breed/BreedDetail';
 import Logout from '../Registration/Login';
 
 const NavLinks = DrawerNavigator({
+  
       MainDashboard:{screen:MainDashboard},
+
+      FarmProfileList:{screen:FarmProfileList},
+
       SalesReport:{screen:SalesReport},
       ExpenseReport:{screen:ExpenseReport},
       ProfitsAndLossReport:{screen:ProfitsAndLossReport},
       StockReport:{screen:StockReport},
-
-      FarmProfileList:{screen:FarmProfileList},
 
       ChickenProfileList:{screen:ChickenProfileList},
       ChickenProfileDetail:{screen:ChickenProfileDetail},
