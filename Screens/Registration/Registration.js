@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text,StyleSheet, TouchableOpacity, Keyboard} from 'react-native';
 
 import { Container, Content, Header, Icon, Left, Title, Body, Button } from 'native-base';
 
@@ -60,7 +60,8 @@ export default class Registration extends Component{
                     OTPN:{
                         label: 'OTP',
                         placeholder:'Please Enter OTP Number',
-                        help: 'Resend OTP'
+                        //help: 'Resend OTP'
+                        secureTextEntry: true,
                     }
                 }
             },
@@ -162,19 +163,30 @@ export default class Registration extends Component{
             })
             .then(function (response) { 
                 debugger;  
-                    if(response.data.msg=="Failed"){
-                        alert("Invalid OTP. Please try with correct OTP.");
-                    }
-                    else
-                    {
-                        this.props.navigation.navigate('FarmProfile'); 
-                    }
+                if(response.data.msg=="Failed"){
+                    alert("Invalid OTP. Please try with correct OTP.");
+                }
+                else
+                {
+                    this.props.navigation.navigate('FarmProfile'); 
+                }
             }.bind(this))
-
             .catch(function (error) {
                 console.log(error);
             });
         }
+    }
+
+    ResendOTP=()=>{
+        Keyboard.dismiss();
+        axios.get('/Register/ResendOTP/'+this.state.reg.MobileNo)
+        .then(function (response) { 
+            debugger;  
+                alert('OTP successfully resend to registered mobile number.');
+        }.bind(this))
+        .catch(function (error) {
+            console.log(error);
+        });
     }
 
     onChange = (reg) => {
@@ -203,7 +215,12 @@ export default class Registration extends Component{
                             value={this.state.reg}
                             onChange={this.onChange}
                         />
-
+                        
+                        <TouchableOpacity onPress={this.ResendOTP.bind(this)}>
+                        <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
+                            {this.state.status?'':'Resend OTP'}
+                        </Text>
+                        </TouchableOpacity>
                         <Button success block rounded onPress={this.state.status ? this.SaveRegistration.bind(this):this.UpdateOTPStatus.bind(this)}>
                             <Text style={{color:'#fff', fontWeight:'bold', fontSize:18}}>{this.state.status?'Sign Up':'Submit'}</Text>
                         </Button>
