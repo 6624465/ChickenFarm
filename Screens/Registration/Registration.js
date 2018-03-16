@@ -20,19 +20,17 @@ export default class Registration extends Component{
 
     componentDidMount() {
         debugger;
-        axios.get('/Registration/GetRegistration', {
-            params: {
-              ID: -1
-            }
-        })
+        axios.get('/Register/GetRegistration/'+this.props.navigation.state.params.UserID)
         .then(function (response) {
             debugger;
+            var regi= response.data.registration;
             this.setState({
-                status: (responseJson.data.registration.IsOTPVerified===null || responseJson.data.registration.IsOTPVerified)===true?true:false,
-                reg: responseJson.data.registration,
+                status: (response.data.registration.IsOTPVerified === null || response.data.registration.IsOTPVerified === true) ? true : false,
+                reg: response.data.registration,
             });
-            console.log(response);
-        })
+            //alert(this.state.status+'<<<<>>>>'+response.data.registration.IsOTPVerified);
+            console.log(this.state.status);
+        }.bind(this))
         .catch(function (error) {
             console.log(error);
         });
@@ -118,6 +116,7 @@ export default class Registration extends Component{
     }
 
     SaveRegistration = () => {
+        Keyboard.dismiss();
         var value = this.refs.form.getValue();
         
         if (value) {
@@ -130,7 +129,7 @@ export default class Registration extends Component{
             }
             axios({
                 method: 'post',
-                url: '/Registration/Save',
+                url: '/Register/Save',
                 data: data
               })
               .then(function (response) { 
@@ -148,6 +147,7 @@ export default class Registration extends Component{
 
     
     UpdateOTPStatus = () => {
+        Keyboard.dismiss();
         var value = this.refs.form.getValue();        
         if (value) {
             var data = {
@@ -157,13 +157,20 @@ export default class Registration extends Component{
             debugger;
             axios({
                 method: 'post',
-                url: '/Registration/UpdateOTPStatus',
+                url: '/Register/UpdateOTPStatus',
                 data: data
             })
             .then(function (response) { 
-                debugger;      
-                this.props.navigation.navigate('Navigation'); 
+                debugger;  
+                    if(response.data.msg=="Failed"){
+                        alert("Invalid OTP. Please try with correct OTP.");
+                    }
+                    else
+                    {
+                        this.props.navigation.navigate('FarmProfile'); 
+                    }
             }.bind(this))
+
             .catch(function (error) {
                 console.log(error);
             });

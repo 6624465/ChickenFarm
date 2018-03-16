@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image} from 'react-native';
+import {View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image, Keyboard} from 'react-native';
 
-import {StackNavigator} from 'react-navigation';
+//import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer } from 'native-base';
 
 var t = require('tcomb-form-native');
@@ -147,15 +147,24 @@ export default class FarmProfileList extends Component{
 
         return this.renderImage(image);
     }
-
+    SaveFarmProfile=()=>
+    {
+      Keyboard.dismiss();
+      this.props.navigation.navigate('Navigation');
+    }
+    ResetFarmProfile=()=>
+    {
+      Keyboard.dismiss();
+      this.props.navigation.navigate('Navigation');
+    }
     render(){
         return(
             <Container>
                 <Header>
-                    <Left>
+                    <Left>                        
                         <Button transparent onPress={()=>this.props.navigation.navigate('DrawerOpen')}>
-                        <Icon ios='ios-menu' android="md-menu" />
-                        </Button>
+                            <Icon ios='ios-menu' android="md-menu" />
+                        </Button>                        
                     </Left>
                     <Body>
                         <Title>Add Farm Profile</Title>
@@ -191,12 +200,12 @@ export default class FarmProfileList extends Component{
                 <Footer style={{backgroundColor:'white'}}>
                     <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
                         <View style={{width:'50%'}}>
-                            <Button success  block rounded onPress={this.ResetFarmProfile} style={{width:'100%',justifyContent:'center'}}>
+                            <Button success  block rounded onPress={this.ResetFarmProfile.bind(this)} style={{width:'100%',justifyContent:'center'}}>
                                 <Text style={{color:'white'}} >Reset</Text>
                             </Button>
                         </View>
                         <View style={{width:'50%', alignItems:'flex-end'}}>
-                            <Button primary  block rounded onPress={this.SaveFarmProfile} style={{width:'100%',justifyContent:'center'}}>
+                            <Button primary  block rounded onPress={this.SaveFarmProfile.bind(this)} style={{width:'100%',justifyContent:'center'}}>
                                 <Text style={{color:'white'}}>Save</Text>
                             </Button>
                         </View>

@@ -14,7 +14,7 @@ export default class Login extends Component{
      header:false
   }
   componentDidMount() {
-    axios.defaults.baseURL = 'http://192.168.0.109/ChickenAPI/api';
+    axios.defaults.baseURL = 'http://192.168.0.109/FMS/api';
     axios.defaults.headers.common['AUTH_TOKEN'] = 'sdfsdfgsdfgsdfdsfgsdfgsdfg';
     axios.defaults.headers.common['Content-Type'] = 'application/json';    
     axios.defaults.headers.post['Content-Type'] = 'application/json';    
@@ -25,13 +25,13 @@ export default class Login extends Component{
     super(props);
     //const nav = this.props.navigation; 
     this.state ={
-        value:{
-          MobileNo:'123',
-          Password:'a'
+        user:{
+          UserID:'',
+          Password:''
         }
     },
     this.LoginCredential = t.struct({
-      MobileNo: t.Number,             
+      UserID: t.Number,             
       Password: t.String,  
          
     });
@@ -39,7 +39,7 @@ export default class Login extends Component{
     this.LoginCredentialOption={
       //auto: 'placeholders'
       fields:{
-          MobileNo: {
+        UserID: {
               label: 'Mobile No',
               placeholder:'Enter Your Mobile No',
               error:'Please Enter Your Mobile Number'  
@@ -55,8 +55,8 @@ export default class Login extends Component{
     }
   };
 
-  onChange = (value) => {
-    this.setState({value});
+  onChange = (user) => {
+    this.setState({user:user});
   }
 
     render(){
@@ -70,7 +70,7 @@ export default class Login extends Component{
           ref='form'
           type={this.LoginCredential}
           options={this.LoginCredentialOption}
-          value={this.state.value}
+          value={this.state.user}
           onChange={this.onChange}
         />
         
@@ -104,20 +104,38 @@ export default class Login extends Component{
         var value = this.refs.form.getValue();
         debugger;
         var data = {
-          MobileNo:'123',
-          Password:'a'
+          UserID:value.UserID,
+          Password:value.Password
         }
         if (value) {
           debugger;
           axios({
             method: 'post',
-            url: '/Registration/Login',
+            url: '/Register/Login',
             data: data
           })
-          //axios.post('http://localhost/ChickenAPI/api/Registration/Login', data)
           .then(function (response) { 
-            debugger;               
-            this.props.navigation.navigate('Navigation');
+            debugger; 
+            if(response.data.message=="goto farm")
+            {
+              this.props.navigation.navigate('FarmProfile');
+            }
+            else if(response.data.message=="goto otp")
+            {
+              //this.props.navigation.navigate('Registration');
+              this.props.navigation.navigate(
+                'Registration',
+                { UserID: data.UserID }
+              );
+            }
+            else if(response.data.message=="goto registration")
+            {
+              alert('MobileNo not registered.');
+            }
+            else
+            {
+              this.props.navigation.navigate('Navigation');
+            }            
           }.bind(this))
           .catch(function (error) {
             console.log(error);
@@ -130,7 +148,7 @@ export default class Login extends Component{
     }
 
     NewUserRegistration=()=>{
-      this.props.navigation.navigate('Registration');
+      this.props.navigation.navigate('Registration', { UserID: 0 });
     }
 
     ForgotPassword=()=>{

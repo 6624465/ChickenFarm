@@ -8,13 +8,17 @@ import Login from '../Registration/Login';
 
 import Registration from '../Registration/Registration';
 import ForgotPassword from '../Registration/ForgotPassword';
+
+import FarmProfile from '../FarmProfile/FarmProfileList';
+
 import Navigation from '../Navigations/Navigation';
 
 const NavLinksLogin = StackNavigator({
     Home:{screen:Login},
     Navigation:{screen:Navigation},
     Registration:{screen:Registration},
-    ForgotPassword:{screen:ForgotPassword}
+    ForgotPassword:{screen:ForgotPassword},
+    FarmProfile:{screen:FarmProfile}
   },
   {
     navigationOptions:{
