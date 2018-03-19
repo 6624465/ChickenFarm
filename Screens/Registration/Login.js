@@ -104,11 +104,11 @@ export default class Login extends Component{
       Keyboard.dismiss();
         var value = this.refs.form.getValue();
         debugger;
-        var data = {
-          UserID:value.UserID,
-          Password:value.Password
-        }
         if (value) {
+          var data = {
+            UserID:value.UserID,
+            Password:value.Password
+          }
           debugger;
           axios({
             method: 'post',
