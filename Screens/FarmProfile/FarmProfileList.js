@@ -29,6 +29,7 @@ export default class FarmProfileList extends Component{
                 SocialPage:null,
                 WebSite:null,
                 AboutUs:null,
+                FarmLogo:null,
                 FileName:null
             },
             isLogo:false
@@ -123,7 +124,8 @@ export default class FarmProfileList extends Component{
                 WebSite:this.state.FarmProfileDetails.WebSite,
                 AboutUs:this.state.FarmProfileDetails.AboutUs,
 
-                FileName: null
+                FarmLogo: null,
+                FileName:null
             },
             isLogo:false
         });
@@ -131,10 +133,11 @@ export default class FarmProfileList extends Component{
     
     pickMultiple() {
         ImagePicker.openPicker({
-            multiple: true,
+            //multiple: true,
             waitAnimationEnd: false,
             includeExif: true,
-        }).then(images => {
+            includeBase64: true,
+        }).then(image => {
         debugger;
         this.setState({
             FarmProfileDetails:{
@@ -147,15 +150,24 @@ export default class FarmProfileList extends Component{
                 WebSite:this.state.FarmProfileDetails.WebSite,
                 AboutUs:this.state.FarmProfileDetails.AboutUs,
 
+                FarmLogo: {uri: `data:${image.mime};base64,`+ image.data, width: image.width, height: image.height},
+                FileName: image.data
 
-                FileName: images.map(i => {
-                    console.log('received image', i);
-                    return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
-                })
+                // FarmLogo: images.map(i => {
+                //     console.log('received image', i);
+                //     debugger;
+                //     //var file = 'data:image/png;base64,' + i.data;
+                //     //return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
+                //     return {uri: `data:${i.mime};base64,`+ i.data, width: i.width, height: i.height}
+                // }),
+                // FileName:images.map(i => {
+                //     return i.data
+                // })
             },
             isLogo:true
           });
         }).catch(e => alert(e));
+        debugger;
     }
 
     renderImage(image) {
@@ -184,8 +196,10 @@ export default class FarmProfileList extends Component{
             SocialPage:this.state.FarmProfileDetails.SocialPage,
             WebSite:this.state.FarmProfileDetails.WebSite,
             AboutUs:this.state.FarmProfileDetails.AboutUs,
+            FileName:this.state.FarmProfileDetails.FileName,
             Status:true
         }
+        debugger;
         axios({
             method: 'post',
             url: '/FarmProfile/save',
@@ -248,8 +262,8 @@ export default class FarmProfileList extends Component{
                          */}
 
                         <ScrollView>
-                            {/* {this.state.value.image ? this.renderAsset(this.state.value.image) : null} */}
-                            {this.state.FarmProfileDetails.FileName ? this.state.FarmProfileDetails.FileName.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null}
+                            {this.state.FarmProfileDetails.FarmLogo ? this.renderAsset(this.state.FarmProfileDetails.FarmLogo) : null}
+                            {/* {this.state.FarmProfileDetails.FarmLogo ? this.state.FarmProfileDetails.FarmLogo.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null} */}
                         </ScrollView>
                     </View>
                 </Content>
