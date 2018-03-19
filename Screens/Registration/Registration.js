@@ -19,10 +19,8 @@ export default class Registration extends Component{
     }
 
     componentDidMount() {
-        debugger;
         axios.get('/Register/GetRegistration/'+this.props.navigation.state.params.UserID)
         .then(function (response) {
-            debugger;
             var regi= response.data.registration;
             this.setState({
                 status: (response.data.registration.IsOTPVerified === null || response.data.registration.IsOTPVerified === true) ? true : false,
@@ -53,7 +51,7 @@ export default class Registration extends Component{
                 IsOTPReSent:null,
                 OTPSentCount:null,
                 CountryCode:null,
-                IsOTPVerified:null
+                IsOTPVerified:null,
             },
             OtpOptions:{
                 fields:{
@@ -76,7 +74,23 @@ export default class Registration extends Component{
                     MobileNo: {
                         label: 'Mobile No',
                         placeholder:'Enter Your Mobile No',
-                        //error:'Please Enter Your Mobile Number'        
+                        onBlur:()=>{
+                            var data = {
+                                MobileNo:this.state.reg.MobileNo
+                            }
+                            axios.get('/Register/IsMobileNoExists/'+this.state.reg.MobileNo)
+                            .then(function (response) {
+                                if(response.data!="")
+                                {
+                                    alert('MobileNo Already Exists...');
+                                    this.refs.form.getComponent('MobileNo').refs.input.focus()
+                                }
+                                 console.log(this.state.status);
+                                }.bind(this))
+                                .catch(function (error) {
+                                    console.log(error);
+                                });
+                          },
                     },
                     Email: {
                         label: 'Email ID',
