@@ -29,7 +29,7 @@ export default class FarmProfileList extends Component{
                 SocialPage:null,
                 WebSite:null,
                 AboutUs:null,
-                FarmLogo:null
+                FileName:null
             },
             isLogo:false
         },
@@ -123,7 +123,7 @@ export default class FarmProfileList extends Component{
                 WebSite:this.state.FarmProfileDetails.WebSite,
                 AboutUs:this.state.FarmProfileDetails.AboutUs,
 
-                FarmLogo: null
+                FileName: null
             },
             isLogo:false
         });
@@ -148,7 +148,7 @@ export default class FarmProfileList extends Component{
                 AboutUs:this.state.FarmProfileDetails.AboutUs,
 
 
-                FarmLogo: images.map(i => {
+                FileName: images.map(i => {
                     console.log('received image', i);
                     return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
                 })
@@ -249,7 +249,7 @@ export default class FarmProfileList extends Component{
 
                         <ScrollView>
                             {/* {this.state.value.image ? this.renderAsset(this.state.value.image) : null} */}
-                            {this.state.FarmProfileDetails.FarmLogo ? this.state.FarmProfileDetails.FarmLogo.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null}
+                            {this.state.FarmProfileDetails.FileName ? this.state.FarmProfileDetails.FileName.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null}
                         </ScrollView>
                     </View>
                 </Content>
