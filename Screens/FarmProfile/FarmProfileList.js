@@ -7,6 +7,7 @@ import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer } f
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
 var ImagePicker = NativeModules.ImageCropPicker;
+import axios from 'axios';
 
 export default class FarmProfileList extends Component{
     static navigationOptions={
@@ -20,32 +21,36 @@ export default class FarmProfileList extends Component{
         super();
         this.state ={
             FarmProfileDetails:{
-                FullName:null,
+                FarmName:null,
                 FarmAddress:null,
-                ContactDetails:null,
-                Page:null,
+                PhoneNo:null,
+                MobileNo:axios.defaults.headers.common['MOBILE_NO'],
+                LineID:null,
+                SocialPage:null,
                 WebSite:null,
                 AboutUs:null,
-                Logo:null
+                FarmLogo:null
             },
             isLogo:false
         },
 
         this.AddFarmProfile=t.struct({
-            FullName:t.String,
+            FarmName:t.String,
             FarmAddress:t.String,
-            ContactDetails:t.Number,
-            Page:t.String,
-            WebSite:t.String,
-            AboutUs:t.String,
+            PhoneNo:t.Number,
+            MobileNo:t.Number,
+            LineID:t.maybe(t.String),
+            SocialPage:t.maybe(t.String),
+            WebSite:t.maybe(t.String),
+            AboutUs:t.maybe(t.String),
             //AddLogo:t.String
         }),
 
         this.AddFarmProfileOptions={
             fields:{
-                FullName:{
-                    label: 'Full Name',
-                    placeholder:'Please Enter Your Full Name',
+                FarmName:{
+                    label: 'Farm Name',
+                    placeholder:'Please Enter Your Farm Name',
                     //error:'Please Enter Your Full Name'
                 
                 },
@@ -55,21 +60,28 @@ export default class FarmProfileList extends Component{
                     //error:'Please Enter Farm Address'
                 
                 },
-                ContactDetails:{
-                    label: 'Contact Details',
-                    placeholder:'Please Enter Tel/Line Number',
+                PhoneNo:{
+                    label: 'Phone Number',
+                    placeholder:'Please Enter Phone Number',
                     //error:'Please Enter Tel/Line Number'
                 
                 },
-                Page:{
+                MobileNo:{
+                    label: 'Mobile Number',
+                    placeholder:'Please Enter Mobile Number',
+                    //error:'Please Enter Tel/Line Number'
+                    editable:false
+                
+                },
+                SocialPage:{
                     label: 'Social Page',
-                    placeholder:'Social Page Name',
+                    placeholder:'Social Page ',
                     // error:'Please Enter Your Full Name'
                 
                 },
                 WebSite:{
-                    label: 'Web Site',
-                    placeholder:' Web Site Name',
+                    label: 'Website',
+                    placeholder:' Website Name',
                     // error:'Please Enter Your Full Name'
                 
                 },
@@ -78,6 +90,11 @@ export default class FarmProfileList extends Component{
                     placeholder:'About Us',
                     multiline:true,                           
                     //error:'Please Enter Your Full Name'                        
+                },
+                LineID:{
+                    label: 'LineID',
+                    placeholder:'LineID',
+                  
                 },
             }
         }
@@ -97,14 +114,16 @@ export default class FarmProfileList extends Component{
 
         this.setState({
             FarmProfileDetails:{    
-                FullName:this.state.FarmProfileDetails.FullName,
+                FarmName:this.state.FarmProfileDetails.FarmName,
                 FarmAddress:this.state.FarmProfileDetails.FarmAddress,
-                ContactDetails:this.state.FarmProfileDetails.ContactDetails,
-                Page:this.state.FarmProfileDetails.Page,
+                PhoneNo:this.state.FarmProfileDetails.PhoneNo,
+                MobileNo:this.state.FarmProfileDetails.MobileNo,
+                LineID:this.state.FarmProfileDetails.LineID,
+                SocialPage:this.state.FarmProfileDetails.SocialPage,
                 WebSite:this.state.FarmProfileDetails.WebSite,
                 AboutUs:this.state.FarmProfileDetails.AboutUs,
 
-                Logo: null
+                FarmLogo: null
             },
             isLogo:false
         });
@@ -119,14 +138,17 @@ export default class FarmProfileList extends Component{
         debugger;
         this.setState({
             FarmProfileDetails:{
-                FullName:this.state.FarmProfileDetails.FullName,
+                FarmName:this.state.FarmProfileDetails.FarmName,
                 FarmAddress:this.state.FarmProfileDetails.FarmAddress,
-                ContactDetails:this.state.FarmProfileDetails.ContactDetails,
-                Page:this.state.FarmProfileDetails.Page,
+                PhoneNo:this.state.FarmProfileDetails.PhoneNo,
+                MobileNo:this.state.FarmProfileDetails.MobileNo,
+                LineID:this.state.FarmProfileDetails.LineID,
+                SocialPage:this.state.FarmProfileDetails.SocialPage,
                 WebSite:this.state.FarmProfileDetails.WebSite,
                 AboutUs:this.state.FarmProfileDetails.AboutUs,
 
-                Logo: images.map(i => {
+
+                FarmLogo: images.map(i => {
                     console.log('received image', i);
                     return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
                 })
@@ -149,13 +171,48 @@ export default class FarmProfileList extends Component{
     }
     SaveFarmProfile=()=>
     {
+
       Keyboard.dismiss();
-      this.props.navigation.navigate('Navigation');
+      var value = this.refs.form.getValue();
+      if (value) {
+        var data = {
+            FarmName:this.state.FarmProfileDetails.FarmName,
+            FarmAddress:this.state.FarmProfileDetails.FarmAddress,
+            PhoneNo:this.state.FarmProfileDetails.PhoneNo,
+            MobileNo:this.state.FarmProfileDetails.MobileNo,
+            LineID:this.state.FarmProfileDetails.LineID,
+            SocialPage:this.state.FarmProfileDetails.SocialPage,
+            WebSite:this.state.FarmProfileDetails.WebSite,
+            AboutUs:this.state.FarmProfileDetails.AboutUs,
+            Status:true
+        }
+        axios({
+            method: 'post',
+            url: '/FarmProfile/save',
+            data: data
+          })
+          .then(function (response) { 
+            debugger;   
+            this.props.navigation.navigate('Navigation');
+            
+            // this.setState({
+            //     reg: response.data.registration,
+            //     status: response.data.registration.IsOTPVerified===null || response.data.registration.IsOTPVerified===true ? true : false
+            // });       
+          }.bind(this))
+          .catch(function (error) {
+            console.log(error);
+        });
+    }
     }
     ResetFarmProfile=()=>
     {
       Keyboard.dismiss();
-      this.props.navigation.navigate('Navigation');
+     this.setState({
+        FarmProfileDetails:{
+
+        }
+    })
     }
     render(){
         return(
@@ -192,7 +249,7 @@ export default class FarmProfileList extends Component{
 
                         <ScrollView>
                             {/* {this.state.value.image ? this.renderAsset(this.state.value.image) : null} */}
-                            {this.state.FarmProfileDetails.Logo ? this.state.FarmProfileDetails.Logo.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null}
+                            {this.state.FarmProfileDetails.FarmLogo ? this.state.FarmProfileDetails.FarmLogo.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null}
                         </ScrollView>
                     </View>
                 </Content>
