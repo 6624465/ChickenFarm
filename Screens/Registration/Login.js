@@ -113,10 +113,10 @@ export default class Login extends Component{
           debugger;
          services.Login(data)
           .then(function (response) { 
+            axios.defaults.headers.common['MOBILE_NO'] = data.UserID; 
             debugger; 
             if(response.data.message=="goto farm")
             {
-              axios.defaults.headers.common['MOBILE_NO'] = data.UserID; 
               this.props.navigation.navigate('FarmProfile');
             }
             else if(response.data.message=="goto otp")

@@ -62,8 +62,25 @@ ForgotPasswordUpdate = () =>
             MobileNo:this.props.navigation.state.params.MobileNo ,
             Password:this.state.value.Password, 
             ConfirmPassword:this.state.value.ConfirmPassword
-
         }
+             
+        services.UpdateForgotPasswrod(data.MobileNo,data.Password)
+        .then(function (response) {
+            if(response.data=="Success")
+            {  
+                alert("SuccessFully Changed Your Password..")
+                this.props.navigation.navigate('Login');
+                
+            }
+            else
+            {  
+              alert("Invalid Otp Number..Please Enter Valid Otp Number")
+            }
+            console.log(this.state.status);
+            }.bind(this))
+            .catch(function (error) {
+                console.log(error);
+            });
 
     }
 }

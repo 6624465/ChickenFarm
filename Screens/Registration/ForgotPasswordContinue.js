@@ -48,10 +48,9 @@ export default class ForgotPasswordContinue extends Component{
                 MobileNo:this.props.navigation.state.params.MobileNo ,
                 OTP:this.state.value.Otp
             }
-            debugger;
+           
             services.IsOtpVerify(data.MobileNo,data.OTP)
             .then(function (response) {
-                debugger;
                 if(response.data=="Success")
                 {  
                     
