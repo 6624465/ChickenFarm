@@ -10,7 +10,7 @@ var t = require('tcomb-form-native');
 var Form = t.form.Form;
 import services from './Services';
 
-export default class ForgotPassword extends Component{
+export default class ForgotPasswordContinue extends Component{
     static navigationOptions={
         title : 'Forgot Password',
         headerStyle:{backgroundColor:'#fff'},
@@ -19,64 +19,59 @@ export default class ForgotPassword extends Component{
     constructor(){
         super();
         this.state ={
+          status:true,
           value:{
-            MobileNo:null
+
           }
-        },
-        this.forgotpassword=t.struct({
-            MobileNo:t.Number
-        })
+        }
         
-       this.forgotpasswordOption={
+       this.forgotpasswordnew = t.struct({
+            Otp:t.Number,
+          });
+        
+         this.forgotpasswordNewOption={
             fields:{
-                MobileNo:{
-                    label: 'Mobile No',
-                    placeholder:'Pleasse Enter Mobile Number',
-                   
+                Otp:{
+                    label: 'OTP',
+                    placeholder:'Pleasse Enter OTP Number',
                 }
             }
         }
-    
-        }
 
-
-        ForgotPasswordContinue = () =>{
+      }
+      ForgotPasswordContinueOtp = () =>{
 
         var value = this.refs.form.getValue();
         if(value)
         {
-        var data = {
-            MobileNo:value.MobileNo
-        }
-        services.IsMobileNoExists(data.MobileNo)
-        .then(function (response) {
-            if(response.data)
-            {
-                services.ResendOTP(data.MobileNo)
-                .then(function (response) {
+            var data = {
+                MobileNo:this.props.navigation.state.params.MobileNo ,
+                OTP:this.state.value.Otp
+            }
+            debugger;
+            services.IsOtpVerify(data.MobileNo,data.OTP)
+            .then(function (response) {
+                debugger;
+                if(response.data=="Success")
+                {  
                     
-                        alert('OTP successfully resend to registered mobile number.');
-                        // axios.defaults.headers.common['MOBILE_NO'] = data.MobileNo; 
-                        // this.props.navigation.navigate('ForgotPasswordContinoue');
-                        this.props.navigation.navigate(
-                            'ForgotPasswordContinue',
-                            { MobileNo: data.MobileNo }
-                          );
+                    this.props.navigation.navigate(
+                        'ForgotPasswordUpdate',
+                        { MobileNo: data.MobileNo }
+                      );
+                }
+                else
+                {  
+                        alert("Invalid Otp Number..Please Enter Valid Otp Number")
+                }
+                console.log(this.state.status);
                 }.bind(this))
                 .catch(function (error) {
                     console.log(error);
                 });
-            }
-            else{
-                alert('Mobile Number Is Not Exists....')
-            }
-             console.log(this.state.status);
-            }.bind(this))
-            .catch(function (error) {
-                console.log(error);
-            });
         }   
     }
+
     onChange = (value) => {
         this.setState({value});
       }
@@ -98,12 +93,12 @@ export default class ForgotPassword extends Component{
                        <View>
                            <Form
                            ref='form'
-                           type={this.forgotpassword}
-                           options={this.forgotpasswordOption}
+                           type={this.forgotpasswordnew}
+                           options={this.forgotpasswordNewOption}
                            value={this.state.value}
                            onChange={this.onChange}
                            />
-                           <Button success block rounded onPress={this.ForgotPasswordContinue}>
+                           <Button success block rounded onPress={this.ForgotPasswordContinueOtp}>
                             <Text style={{color:'#fff', fontWeight:'bold', fontSize:18}}>{'Continue'}</Text>
                         </Button>
                        </View>

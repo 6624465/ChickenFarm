@@ -8,6 +8,8 @@ import Login from '../Registration/Login';
 
 import Registration from '../Registration/Registration';
 import ForgotPassword from '../Registration/ForgotPassword';
+import ForgotPasswordContinue from '../Registration/ForgotPasswordContinue';
+import ForgotPasswordUpdate from '../Registration/ForgotPasswordUpdate'
 
 import FarmProfile from '../FarmProfile/FarmProfileList';
 
@@ -18,6 +20,8 @@ const NavLinksLogin = StackNavigator({
     Navigation:{screen:Navigation},
     Registration:{screen:Registration},
     ForgotPassword:{screen:ForgotPassword},
+    ForgotPasswordContinue:{screen:ForgotPasswordContinue}, 
+    ForgotPasswordUpdate:{screen:ForgotPasswordUpdate},
     FarmProfile:{screen:FarmProfile}
   },
   {
