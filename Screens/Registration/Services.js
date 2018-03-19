@@ -22,7 +22,12 @@ var reg={
     IsOtpVerify(MobileNo,Otp)
     {
         return   axios.get('/Register/IsOtpVerify/'+MobileNo+'/'+Otp)
-    }
+    },
+    UpdateForgotPasswrod(MobileNo,Password)
+    {
+        return   axios.get('/Register/UpdatePassword/'+MobileNo+'/'+Password)
+    },
+    
 
 
   };
