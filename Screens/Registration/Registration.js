@@ -80,7 +80,7 @@ export default class Registration extends Component{
                             }
                             axios.get('/Register/IsMobileNoExists/'+this.state.reg.MobileNo)
                             .then(function (response) {
-                                if(response.data!="")
+                                if(response.data.isMobileExist)
                                 {
                                     alert('MobileNo Already Exists...');
                                     this.refs.form.getComponent('MobileNo').refs.input.focus()

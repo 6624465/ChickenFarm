@@ -6,7 +6,7 @@ import {StackNavigator} from 'react-navigation';
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
 import axios from 'axios';
-
+import services from './Services';
 
 export default class Login extends Component{
 
@@ -14,7 +14,7 @@ export default class Login extends Component{
      header:false
   }
   componentDidMount() {
-    axios.defaults.baseURL = 'http://192.168.0.109/FMS/api';
+    axios.defaults.baseURL = 'http://192.168.0.107/FMS/api';
     //axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com/api';
     axios.defaults.headers.common['AUTH_TOKEN'] = 'sdfsdfgsdfgsdfdsfgsdfgsdfg';
     axios.defaults.headers.common['Content-Type'] = 'application/json';    
@@ -111,11 +111,7 @@ export default class Login extends Component{
             Password:value.Password
           }
           debugger;
-          axios({
-            method: 'post',
-            url: '/Register/Login',
-            data: data
-          })
+         services.Login(data)
           .then(function (response) { 
             debugger; 
             if(response.data.message=="goto farm")
@@ -139,10 +135,8 @@ export default class Login extends Component{
               alert('invalid credentials.');
             }
             else
-            {                
-           
+            {           
               this.props.navigation.navigate('Navigation');
-            
             }            
           }.bind(this))
           .catch(function (error) {

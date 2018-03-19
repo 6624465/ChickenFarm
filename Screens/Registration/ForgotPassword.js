@@ -8,6 +8,7 @@ import { Container, Content, Header, Icon, Left, Title, Body, Button } from 'nat
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
+import axios from 'axios';
 
 export default class ForgotPassword extends Component{
     static navigationOptions={
@@ -19,8 +20,8 @@ export default class ForgotPassword extends Component{
         super();
         this.state ={
           status:true,
-          value:{
-
+          UserDetails:{
+            MobileNo:null
           }
         },
         this.forgotpassword=t.struct({
@@ -32,8 +33,6 @@ export default class ForgotPassword extends Component{
                 MobileNo:{
                     label: 'Mobile No',
                     placeholder:'Pleasse Enter Mobile Number',
-                    error:'Please Enter Your Mobile Number'
-                    
                 }
             }
         }
@@ -75,20 +74,60 @@ export default class ForgotPassword extends Component{
 
       }
 
-      ShowHideTextComponentView = () =>{
+      ForgotPasswordDetails = () =>{
 
         var value = this.refs.form.getValue();
         if(value)
         {
-        if(this.state.status == true)
-        {
-          this.setState({status: false})
+        var data = {
+            MobileNo:this.state.reg.MobileNo
         }
-        else
-        {
-          this.setState({status: true})
+        axios.get('/Register/IsMobileNoExists/'+this.state.reg.MobileNo)
+        .then(function (response) {
+            if(response.data.isMobileExist)
+            {
+                this.setState({status: false})
+                axios.get('/Register/ResendOTP/'+this.state.reg.MobileNo)
+                .then(function (response) { 
+                    debugger;  
+                        alert('OTP successfully resend to registered mobile number.');
+                }.bind(this))
+                .catch(function (error) {
+                    console.log(error);
+                });
+            }
+            else{
+                alert('Mobile Number Is Not Exists....')
+            }
+             console.log(this.state.status);
+            }.bind(this))
+            .catch(function (error) {
+                console.log(error);
+            });
         }
-      }
+   
+    }
+    UpdateForgotPasswordDetails = () =>{
+
+        var value = this.refs.form.getValue();
+        if(value)
+        {
+        var data = {
+            MobileNo:this.state.reg.MobileNo
+        }
+        axios.get('/Register/IsMobileNoExists/'+this.state.reg.MobileNo)
+        .then(function (response) {
+            if(response.data.isMobileExist)
+            {
+                this.setState({status: true})
+            }
+             console.log(this.state.status);
+            }.bind(this))
+            .catch(function (error) {
+                console.log(error);
+            });
+        }
+    
     }
     onChange = (value) => {
         this.setState({value});
@@ -116,7 +155,7 @@ export default class ForgotPassword extends Component{
                            value={this.state.value}
                            onChange={this.onChange}
                            />
-                           <Button success block rounded onPress={this.ShowHideTextComponentView}>
+                           <Button success block rounded onPress={this.state.status ? this.ForgotPasswordDetails.bind(this):this.UpdateForgotPasswordDetails.bind(this)}>
                             <Text style={{color:'#fff', fontWeight:'bold', fontSize:18}}>{this.state.status?'Continue':'Submit'}</Text>
                         </Button>
                        </View>
