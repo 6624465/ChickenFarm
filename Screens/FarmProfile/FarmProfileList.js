@@ -15,6 +15,22 @@ export default class FarmProfileList extends Component{
         headerStyle:{backgroundColor:'#fff'},
         headerTitleStyle:{color:'#212121'}
     }
+    componentDidMount() {
+        axios.get('/FarmProfile/GetFarmProfile/'+axios.defaults.headers.common['MOBILE_NO'])
+        .then(function (response) {
+            debugger;
+            //var regi= response.data.farmProfile;
+            this.setState({
+                //status: (response.data.registration.IsOTPVerified === null || response.data.registration.IsOTPVerified === true) ? true : false,
+                FarmProfileDetails: response.data.farmProfile,
+            });
+            //alert(this.state.status+'<<<<>>>>'+response.data.registration.IsOTPVerified);
+            console.log(this.state.status);
+        }.bind(this))
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
 
     constructor()
     {
@@ -262,6 +278,7 @@ export default class FarmProfileList extends Component{
                          */}
 
                         <ScrollView>
+                            
                             {this.state.FarmProfileDetails.FarmLogo ? this.renderAsset(this.state.FarmProfileDetails.FarmLogo) : null}
                             {/* {this.state.FarmProfileDetails.FarmLogo ? this.state.FarmProfileDetails.FarmLogo.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null} */}
                         </ScrollView>
