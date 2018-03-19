@@ -14,7 +14,11 @@ export default class Login extends Component{
      header:false
   }
   componentDidMount() {
+<<<<<<< HEAD
     axios.defaults.baseURL = 'http://192.168.0.107/FMS/api';
+=======
+    axios.defaults.baseURL = 'http://192.168.0.109/FMS/api';
+>>>>>>> 1b6201ff2b9cb58a64324c78c68fdde86eb0550e
     //axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com/api';
     axios.defaults.headers.common['AUTH_TOKEN'] = 'sdfsdfgsdfgsdfdsfgsdfgsdfg';
     axios.defaults.headers.common['Content-Type'] = 'application/json';    
@@ -125,7 +129,6 @@ export default class Login extends Component{
             }
             else if(response.data.message=="goto otp")
             {
-              //this.props.navigation.navigate('Registration');
               this.props.navigation.navigate(
                 'Registration',
                 { UserID: data.UserID }
@@ -134,6 +137,10 @@ export default class Login extends Component{
             else if(response.data.message=="goto registration")
             {
               alert('MobileNo not registered.');
+            }
+            else if(response.data.message=="invalid password")
+            {
+              alert('invalid credentials.');
             }
             else
             {                
