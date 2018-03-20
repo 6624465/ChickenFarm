@@ -29,14 +29,15 @@ export default class ChickenProfileList extends Component{
 
     componentDidMount() {
         debugger;
-        return axios.get('http://1tradeapi.logiconglobal.com/api/master/country/list')
+     // axios.get('http://1tradeapi.logiconglobal.com/api/master/country/list')
+     services.GetAnimalProfileList(0)
             .then((responseJson) => {
                 //alert(responseJson)
                 debugger;
             let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
             this.setState({
                 isLoading: false,
-                dataSource: ds.cloneWithRows(responseJson.data),
+                dataSource: ds.cloneWithRows(responseJson.data.animalProfileList),
             }, function() {
                 // do something with new state
                 this.arrayholder = responseJson.data ;
@@ -110,16 +111,10 @@ export default class ChickenProfileList extends Component{
                                         </View>
                                         <View style={{width:'80%', alignItems:'flex-start'}}>
                                             <Text style={styles.text}>
-                                                {rowData.CompanyCode}
+                                                {rowData.AnimalCode}
                                             </Text>
                                             <Text style={styles.text}>
-                                                {rowData.CompanyName}
-                                            </Text>
-                                            <Text style={styles.text}>
-                                                {rowData.CompanyName}
-                                            </Text>
-                                            <Text style={styles.text}>
-                                                {rowData.CompanyName}
+                                                {rowData.AnimalName}
                                             </Text>
                                         </View>
                                     </View>                            
