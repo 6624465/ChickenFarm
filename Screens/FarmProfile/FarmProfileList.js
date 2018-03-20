@@ -9,10 +9,7 @@ var Form = t.form.Form;
 var ImagePicker = NativeModules.ImageCropPicker;
 import axios from 'axios';
 
-<<<<<<< HEAD
-=======
 import services from '../Registration/Services';
->>>>>>> 982aef0d12ca2213f932163c559e94448d1127e9
 
 export default class FarmProfileList extends Component{
     static navigationOptions={
@@ -298,13 +295,9 @@ export default class FarmProfileList extends Component{
 
                         <ScrollView>
                             {
-                                (this.state.FarmProfileDetails.FarmName != null)
-                                ?                            
                                 (this.state.FarmProfileDetails.FarmLogo ? this.renderAsset(this.state.FarmProfileDetails.FarmLogo) : null)
-                                :
-                                (
-                                <Image style={{width: 300, height: 300, resizeMode: 'contain'}} source={{uri: this.state.imageLink}}  />)
-                                }
+                            }
+                            <Image style={{width: 300, height: 300, resizeMode: 'contain'}} source={{uri: this.state.imageLink}}  />
                             {/* {this.state.FarmProfileDetails.FarmLogo ? this.state.FarmProfileDetails.FarmLogo.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null} */}
                         </ScrollView>
                     </View>
