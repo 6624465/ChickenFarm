@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet, TouchableOpacity, Keyboard} from 'react-native';
+import {View, Text, TouchableOpacity, Keyboard} from 'react-native';
 
 import { Container, Content, Header, Icon, Left, Title, Body, Button } from 'native-base';
 
@@ -9,7 +9,10 @@ var t = require('tcomb-form-native');
 var Form = t.form.Form;
 import axios from 'axios';
 import services from './Services';
-export default class Registration extends Component{
+import styles from '../stylesheet';
+
+
+export default class Registration extends Component {
     
     static navigationOptions={
         title : 'Registration',
@@ -227,7 +230,7 @@ export default class Registration extends Component{
                         <Title>Registration</Title>
                     </Body>
                 </Header>
-                <Content style={styles.container}>
+                <Content style={styles.regcontainer}>
                     <View>
                         <Form
                             ref='form'
@@ -251,13 +254,3 @@ export default class Registration extends Component{
         );
     }  
 }
-
-var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        //justifyContent: 'center',
-        //marginTop: 120,
-        padding: 20,
-        backgroundColor: '#ffffff',      
-    }
-  });
