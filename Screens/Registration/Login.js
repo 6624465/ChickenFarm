@@ -44,12 +44,12 @@ export default class Login extends Component{
         UserID: {
               label: 'Mobile No',
               placeholder:'Enter Your Mobile No',
+              maxLength:10 
               //error:'Please Enter Your Mobile Number'  
             },
             Password: {
               label: 'Password',
               placeholder:'Enter Your Password',
-              password: true,
               secureTextEntry: true,
               //error:'Please Enter Your Password'  
             }

@@ -8,7 +8,7 @@ import {StackNavigator} from 'react-navigation';
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
 import axios from 'axios';
-
+import services from './Services';
 export default class Registration extends Component{
     
     static navigationOptions={
@@ -19,7 +19,8 @@ export default class Registration extends Component{
     }
 
     componentDidMount() {
-        axios.get('/Register/GetRegistration/'+this.props.navigation.state.params.UserID)
+       // axios.get('/Register/GetRegistration/'+this.props.navigation.state.params.UserID)
+        services.GetRegistration(this.props.navigation.state.params.UserID)
         .then(function (response) {
             var regi= response.data.registration;
             this.setState({
@@ -74,11 +75,13 @@ export default class Registration extends Component{
                     MobileNo: {
                         label: 'Mobile No',
                         placeholder:'Enter Your Mobile No',
+                        maxLength:10,
                         onBlur:()=>{
                             var data = {
                                 MobileNo:this.state.reg.MobileNo
                             }
-                            axios.get('/Register/IsMobileNoExists/'+this.state.reg.MobileNo)
+                            //axios.get('/Register/IsMobileNoExists/'+this.state.reg.MobileNo)
+                            services.IsMobileNoExists(data.MobileNo)
                             .then(function (response) {
                                 if(response.data)
                                 {
@@ -142,11 +145,13 @@ export default class Registration extends Component{
                 MobileNo:this.state.reg.MobileNo,
                 Password:this.state.reg.Password
             }
-            axios({
-                method: 'post',
-                url: '/Register/Save',
-                data: data
-              })
+            // axios({
+            //     method: 'post',
+            //     url: '/Register/Save',
+            //     data: data
+            //   })
+
+            services.RegistrationSave(data)
               .then(function (response) { 
                 debugger;   
                 this.setState({
@@ -170,11 +175,12 @@ export default class Registration extends Component{
                 OTPNo:value.OTPN
             }
             debugger;
-            axios({
-                method: 'post',
-                url: '/Register/UpdateOTPStatus',
-                data: data
-            })
+            // axios({
+            //     method: 'post',
+            //     url: '/Register/UpdateOTPStatus',
+            //     data: data
+            // })
+            services.UpdateOTPStatus(data)
             .then(function (response) { 
                 debugger;  
                 if(response.data.msg=="Failed"){
@@ -193,7 +199,8 @@ export default class Registration extends Component{
 
     ResendOTP=()=>{
         Keyboard.dismiss();
-        axios.get('/Register/ResendOTP/'+this.state.reg.MobileNo)
+        //axios.get('/Register/ResendOTP/'+this.state.reg.MobileNo)
+        services.ResendOTP(this.state.reg.MobileNo)
         .then(function (response) { 
             debugger;  
                 alert('OTP successfully resend to registered mobile number.');
