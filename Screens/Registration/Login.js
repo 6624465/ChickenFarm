@@ -104,17 +104,14 @@ export default class Login extends Component{
     {
       Keyboard.dismiss();
         var value = this.refs.form.getValue();
-        debugger;
         if (value) {
           var data = {
             UserID:value.UserID,
             Password:value.Password
           }
-          debugger;
          services.Login(data)
           .then(function (response) { 
             axios.defaults.headers.common['MOBILE_NO'] = data.UserID; 
-            debugger; 
             if(response.data.message=="goto farm")
             {
               this.props.navigation.navigate('FarmProfile');

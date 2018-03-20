@@ -9,7 +9,7 @@ var Form = t.form.Form;
 var ImagePicker = NativeModules.ImageCropPicker;
 import axios from 'axios';
 
-import services from '../Registration/Services';
+import services from './Services';
 
 export default class FarmProfileList extends Component{
     static navigationOptions={
@@ -21,8 +21,6 @@ export default class FarmProfileList extends Component{
         //axios.get('/FarmProfile/GetFarmProfile/'+axios.defaults.headers.common['MOBILE_NO'])
         services.GetFarmProfile(axios.defaults.headers.common['MOBILE_NO'])
         .then(function (response) {
-            debugger;
-
             //var regi= response.data.farmProfile;
             if(response.data.farmProfile!=null)
             {
@@ -31,7 +29,6 @@ export default class FarmProfileList extends Component{
                     FarmProfileDetails: response.data.farmProfile,
                     imageLink: 'http://192.168.0.109/FMS/Uploads/FarmProfile/'+response.data.farmProfile.MobileNo+'/'+response.data.farmProfile.FarmLogo
                 });
-                debugger;
             }
             //alert(this.state.status+'<<<<>>>>'+response.data.registration.IsOTPVerified);
             console.log(this.state.imageLink);
@@ -166,7 +163,6 @@ export default class FarmProfileList extends Component{
             includeExif: true,
             includeBase64: true,
         }).then(image => {
-        debugger;
         this.setState({
             FarmProfileDetails:{
                 FarmID:this.state.FarmProfileDetails.FarmID,
@@ -196,7 +192,6 @@ export default class FarmProfileList extends Component{
             isLogo:true
           });
         }).catch(e => alert(e));
-        debugger;
     }
 
     renderImage(image) {
@@ -217,6 +212,7 @@ export default class FarmProfileList extends Component{
       Keyboard.dismiss();
       var value = this.refs.form.getValue();
       if (value) {
+          debugger;
         var data = {
             FarmID:this.state.FarmProfileDetails.FarmID,
             FarmName:this.state.FarmProfileDetails.FarmName,
@@ -230,7 +226,6 @@ export default class FarmProfileList extends Component{
             FileName:this.state.FarmProfileDetails.FileName,
             Status:true
         }
-        debugger;
         // axios({
         //     method: 'post',
         //     url: '/FarmProfile/save',
@@ -238,7 +233,6 @@ export default class FarmProfileList extends Component{
         //   })
         services.SaveFarmProfile(data)
           .then(function (response) { 
-            debugger;   
             if(data.FarmID!=0){
                 alert('Farm profile saved successfully.')
                 this.props.navigation.navigate('MainDashboard');
