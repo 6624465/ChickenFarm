@@ -7,7 +7,7 @@ var reg={
     {   
       return  axios({
             method: 'post',
-            url: '/Register/Login',
+            url: '/api/Register/Login',
             data: obj
           })
     },
@@ -15,30 +15,30 @@ var reg={
 
     IsMobileNoExists(MobileNo)
     {
-          return  axios.get('/Register/IsMobileNoExists/'+MobileNo)
+          return  axios.get('/api/Register/IsMobileNoExists/'+MobileNo)
     },
     ResendOTP(MobileNo)
     {
-        return   axios.get('/Register/ResendOTP/'+MobileNo)
+        return   axios.get('/api/Register/ResendOTP/'+MobileNo)
     },
     IsOtpVerify(MobileNo,Otp)
     {
-        return   axios.get('/Register/IsOtpVerify/'+MobileNo+'/'+Otp)
+        return   axios.get('/api/Register/IsOtpVerify/'+MobileNo+'/'+Otp)
     },
     UpdateForgotPasswrod(MobileNo,Password)
     {
-        return   axios.get('/Register/UpdatePassword/'+MobileNo+'/'+Password)
+        return   axios.get('/api/Register/UpdatePassword/'+MobileNo+'/'+Password)
     },
 
     GetRegistration(UserID)
     {
-        return    axios.get('/Register/GetRegistration/'+UserID)
+        return    axios.get('/api/Register/GetRegistration/'+UserID)
     },
     RegistrationSave(obj)
     {   
       return  axios({
             method: 'post',
-            url: '/Register/Save',
+            url: '/api/Register/Save',
             data: obj
           })
     },
@@ -46,7 +46,7 @@ var reg={
     {   
       return  axios({
             method: 'post',
-            url: '/Register/UpdateOTPStatus',
+            url: '/api/Register/UpdateOTPStatus',
             data: obj
           })
     },
@@ -54,13 +54,13 @@ var reg={
     //FarmProfile
     GetFarmProfile(MobileNo)
     {
-        return    axios.get('/FarmProfile/GetFarmProfile/'+MobileNo)
+        return    axios.get('/api/FarmProfile/GetFarmProfile/'+MobileNo)
     },
     SaveFarmProfile(obj)
     {   
       return  axios({
             method: 'post',
-            url: '/FarmProfile/save',
+            url: '/api/FarmProfile/save',
             data: obj
           })
     },

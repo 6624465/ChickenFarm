@@ -24,10 +24,11 @@ export default class FarmProfileList extends Component{
             //var regi= response.data.farmProfile;
             if(response.data.farmProfile!=null)
             {
+                debugger;
                 this.setState({
                     //status: (response.data.registration.IsOTPVerified === null || response.data.registration.IsOTPVerified === true) ? true : false,
                     FarmProfileDetails: response.data.farmProfile,
-                    imageLink: 'http://192.168.0.109/FMS/Uploads/FarmProfile/'+response.data.farmProfile.MobileNo+'/'+response.data.farmProfile.FarmLogo
+                    imageLink: axios.defaults.baseURL+'/Uploads/FarmProfile/'+response.data.farmProfile.MobileNo+'/'+response.data.farmProfile.FarmLogo
                 });
             }
             //alert(this.state.status+'<<<<>>>>'+response.data.registration.IsOTPVerified);
