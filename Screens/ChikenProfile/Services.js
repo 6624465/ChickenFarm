@@ -3,19 +3,19 @@ var Animal={
     //AnimalProfile
     GetAnimalProfile(AnimalCode,FarmId)
     {
-        return axios.get('AnimalProfile/GetAnimalProfile/'+AnimalCode+'/'+FarmId)
+        return axios.get('/apiAnimalProfile/GetAnimalProfile/'+AnimalCode+'/'+FarmId)
     },
 
     GetAnimalProfileList(FarmId)
     {
-        return axios.get('AnimalProfile/GetAnimalProfileList/'+FarmId)
+        return axios.get('/apiAnimalProfile/GetAnimalProfileList/'+FarmId)
     },
 
     SaveAnimalProfile(obj)
     {   
       return axios({
             method: 'post',
-            url: '/AnimalProfile/save',
+            url: '/api/AnimalProfile/save',
             data: obj
         })
     },

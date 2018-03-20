@@ -7,6 +7,7 @@ var t = require('tcomb-form-native');
 var Form = t.form.Form;
 import axios from 'axios';
 import services from './Services';
+import styles from '../stylesheet';
 
 export default class Login extends Component{
 
@@ -14,8 +15,8 @@ export default class Login extends Component{
      header:false
   }
   componentDidMount() {
-    axios.defaults.baseURL = 'http://192.168.0.107/FMS/api';
-    //axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com/api';
+    axios.defaults.baseURL = 'http://192.168.0.109/FMS';
+    //axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com';
     axios.defaults.headers.common['AUTH_TOKEN'] = 'sdfsdfgsdfgsdfdsfgsdfgsdfg';
     axios.defaults.headers.common['Content-Type'] = 'application/json';    
     axios.defaults.headers.post['Content-Type'] = 'application/json';  
@@ -64,7 +65,7 @@ export default class Login extends Component{
     render(){
       //const { navigate } = this.props.navigation;
       return(
-      <View style={styles.container}>                 
+      <View style={styles.login_container}>                 
         <View style={{alignItems:'center'}}>
           <Image source = { require('../../android/app/src/main/assets/chicken.png') } style={{width:100,height:100}}/>
         </View>
@@ -155,13 +156,3 @@ export default class Login extends Component{
     }
 }
 
-
-var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        //marginTop: 120,
-        padding: 20,
-        backgroundColor: '#ffffff',      
-    }
-  });
