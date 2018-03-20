@@ -3,12 +3,12 @@ var Animal={
     //AnimalProfile
     GetAnimalProfile(AnimalCode,FarmId)
     {
-        return axios.get('/apiAnimalProfile/GetAnimalProfile/'+AnimalCode+'/'+FarmId)
+        return axios.get('/api/AnimalProfile/GetAnimalProfile/'+AnimalCode+'/'+FarmId)
     },
 
     GetAnimalProfileList(FarmId)
     {
-        return axios.get('/apiAnimalProfile/GetAnimalProfileList/'+FarmId)
+        return axios.get('/api/AnimalProfile/GetAnimalProfileList/'+FarmId)
     },
 
     SaveAnimalProfile(obj)
