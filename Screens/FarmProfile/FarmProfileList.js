@@ -218,7 +218,7 @@ export default class FarmProfileList extends Component{
       var value = this.refs.form.getValue();
       if (value) {
         var data = {
-            //FarmID:this.state.FarmProfileDetails.FarmID,
+            FarmID:this.state.FarmProfileDetails.FarmID,
             FarmName:this.state.FarmProfileDetails.FarmName,
             FarmAddress:this.state.FarmProfileDetails.FarmAddress,
             PhoneNo:this.state.FarmProfileDetails.PhoneNo,
@@ -239,7 +239,13 @@ export default class FarmProfileList extends Component{
         services.SaveFarmProfile(data)
           .then(function (response) { 
             debugger;   
-            this.props.navigation.navigate('Navigation');
+            if(data.FarmID!=0){
+                alert('Farm profile saved successfully.')
+                this.props.navigation.navigate('MainDashboard');
+            }
+            else{
+                this.props.navigation.navigate('Navigation');
+            }
             
             // this.setState({
             //     reg: response.data.registration,
