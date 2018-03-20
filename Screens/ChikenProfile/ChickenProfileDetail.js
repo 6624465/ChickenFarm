@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image,Keyboard } from 'react-native';
 
 import { StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer } from 'native-base';
@@ -8,10 +8,11 @@ var t = require('tcomb-form-native');
 var Form = t.form.Form;
 import moment from 'moment';
 var ImagePicker = NativeModules.ImageCropPicker;
+import services from './Services'
 
 var Gender = t.enums({  
-    M: 'Male',
-    F: 'Female'
+    1: 'Male',
+    2: 'Female'
   });
 
 var ChickenStatus = t.enums({
@@ -34,27 +35,43 @@ export default class ChickenProfileDetail extends Component{
         super();
         this.state ={            
             ChickenProfileDetails:{
-                ChooseStatus:null,
+                AnimalName:null,
+                AnimalCode:null,
+                AnimalSymbol:null,
+                AnimalStatus:null,
                 CauseOfDeath:null,
-                Name:null,
-                ChickenCode:null,
-                ChickenSymbol:null,
                 DateOfBirth:null,
-                gender:null,
+                Gender:null,
                 SireCode:null,
                 BreederCode:null,
-                Breed:null,
+                BreederFormula:null,
                 Talents:null,
                 Weight:null,
                 FightingRecord :null,
                 StandardPrice :null,
-                AdditionalNote :null,
-                AddPhoto:null,
+                Remarks :null,
+                AnimalPhoto:null,
             },
             isPhoto:false,
             options:{
                 fields:{
-                    ChooseStatus:{
+               
+                    AnimalName:{
+                        label: 'Name',
+                        placeholder:'Name',
+                        //error:'Please Enter Farm Address'                        
+                    },
+                    AnimalCode:{
+                        label: 'Code',
+                        placeholder:'Code',
+                        // error:'Please Enter ChikenCode'                        
+                    },
+                    AnimalSymbol:{
+                        label: 'Symbol',
+                        placeholder:'Symbol',
+                        // error:'Please Enter Your Full Name'                        
+                    },
+                    AnimalStatus:{
                         label: 'Choose Staues',
                         //placeholder:'Please Enter Your Full Name',
                         //error:'Please Enter Your Full Name'                        
@@ -65,22 +82,7 @@ export default class ChickenProfileDetail extends Component{
                         //error:'Please Enter Your Full Name'  
                         editable: false                      
                     },
-                    Name:{
-                        label: 'Name',
-                        placeholder:'Name',
-                        //error:'Please Enter Farm Address'                        
-                    },
-                    ChickenCode:{
-                        label: 'Chicken Code',
-                        placeholder:'Chicken Code',
-                        // error:'Please Enter ChikenCode'                        
-                    },
-                    ChickenSymbol:{
-                        label: 'Chicken Symbol',
-                        placeholder:'Chicken Symbol',
-                        // error:'Please Enter Your Full Name'                        
-                    },
-                    gender:{
+                    Gender:{
                         label: 'Gender',
                         //placeholder:' Web Site Name',
                         // error:'Please Enter Your Full Name'                        
@@ -105,9 +107,9 @@ export default class ChickenProfileDetail extends Component{
                         placeholder:'Breeder Code',
                         //error:'Please Enter Your Full Name'                        
                     },
-                    Breed:{
-                        label: 'Breed',
-                        placeholder:'Breed',
+                    BreederFormula:{
+                        label: 'Breeder Formula',
+                        placeholder:'Breeder Formula',
                         //error:'Please Enter Farm Address'                        
                     },
                     Talents:{
@@ -130,9 +132,9 @@ export default class ChickenProfileDetail extends Component{
                         placeholder:'Standard Price',
                         //error:'Please Enter Farm Address'                        
                     },
-                    AdditionalNote:{
-                        label: 'Additional Note',
-                        placeholder:'Additional Note',
+                    Remarks:{
+                        label: 'Remarks',
+                        placeholder:'Remarks',
                         // error:'Please Enter ChikenCode'                        
                     }
                 }
@@ -140,117 +142,34 @@ export default class ChickenProfileDetail extends Component{
         },
 
         this.AddChickenProfile=t.struct({
-            ChooseStatus:ChickenStatus,
-            CauseOfDeath:t.String,
-            Name:t.String,
-            ChickenCode:t.Number,
-            ChickenSymbol:t.String,
-            DateOfBirth:t.Date,
-            gender:Gender,
-            SireCode:t.String,
-            BreederCode:t.String,
-            Breed:t.String,
-            Talents:t.Number,
-            Weight:t.Number,
-            FightingRecord :t.String,
-            StandardPrice :t.Number,
-            AdditionalNote :t.String,
-            //AddPhoto:t.String
-        })
 
-        // this.AddChickenProfileOptions={
-        //     fields:{
-        //         ChooseStatus:{
-        //             label: 'Choose Staues',
-        //             //placeholder:'Please Enter Your Full Name',
-        //             //error:'Please Enter Your Full Name'                        
-        //         },
-        //         CauseOfDeath:{
-        //             label: 'Cause Of Death',
-        //             placeholder:'CauseOfDeath',
-        //             //error:'Please Enter Your Full Name'  
-        //             editable: false,
-        //         },
-        //         Name:{
-        //             label: 'Name',
-        //             placeholder:'Name',
-        //             //error:'Please Enter Farm Address'                        
-        //         },
-        //         ChickenCode:{
-        //             label: 'Chicken Code',
-        //             placeholder:'Chicken Code',
-        //             // error:'Please Enter ChikenCode'                        
-        //         },
-        //         ChickenSymbol:{
-        //             label: 'Chicken Symbol',
-        //             placeholder:'Chicken Symbol',
-        //             // error:'Please Enter Your Full Name'                        
-        //         },
-        //         gender:{
-        //             label: 'Gender',
-        //             //placeholder:' Web Site Name',
-        //             // error:'Please Enter Your Full Name'                        
-        //         },
-        //         SireCode:{
-        //             label: 'Sire Code',
-        //             placeholder:'Sire Code',
-        //             //multiline:true,
-        //             //error:'Please Enter Your Full Name'                        
-        //         },
-        //         DateOfBirth: {
-        //             label: 'Date Of Birth:',
-        //             placeholder: 'Date Of Birth',
-        //             minimumDate: new Date(),
-        //             mode: 'date',
-        //             config: {
-        //                 format: (date) => String(moment(date).format("MM/DD/YYYY")),
-        //             }
-        //         },
-        //         BreederCode:{
-        //             label: 'Breeder Code',
-        //             placeholder:'Breeder Code',
-        //             //error:'Please Enter Your Full Name'                        
-        //         },
-        //         Breed:{
-        //             label: 'Breed',
-        //             placeholder:'Breed',
-        //             //error:'Please Enter Farm Address'                        
-        //         },
-        //         Talents:{
-        //             label: 'Talents',
-        //             placeholder:'Talents',
-        //             // error:'Please Enter ChikenCode'                        
-        //         },
-        //         Weight:{
-        //             label: 'Weight',
-        //             placeholder:'Weight',
-        //             // error:'Please Enter Your Full Name'                        
-        //         },
-        //         FightingRecord:{
-        //             label: 'Fighting Record',
-        //             placeholder:'Fighting Record',
-        //             //error:'Please Enter Your Full Name'                        
-        //         },
-        //         StandardPrice:{
-        //             label: 'Standard Price',
-        //             placeholder:'Standard Price',
-        //             //error:'Please Enter Farm Address'                        
-        //         },
-        //         AdditionalNote:{
-        //             label: 'Additional Note',
-        //             placeholder:'Additional Note',
-        //             // error:'Please Enter ChikenCode'                        
-        //         }
-        //     }
-        // }
+                            AnimalName:t.String,    
+                            AnimalCode:t.String,    
+                            AnimalSymbol:t.String,  
+                            AnimalStatus:ChickenStatus, 
+                            CauseOfDeath:t.String,  
+                            DateOfBirth:t.Date,   
+                            Gender:Gender,        
+                            SireCode:t.String,      
+                            BreederCode:t.String,  
+                            BreederFormula:t.String,
+                            Talents:t.String,       
+                            Weight:t.Number,       
+                            FightingRecord:t.String,
+                            StandardPrice:t.Number,
+                            Remarks:t.String,       
+                            //[AnimalPhoto]   
+
+                })
+
+       
     }
 
     onChange = (ChickenProfileDetails) => {
-        debugger;
         var options = t.update(this.state.options, {
             fields: {
                 CauseOfDeath: {
-                editable: { '$set': ChickenProfileDetails.ChooseStatus==='4' ? true : false }
+                editable: { '$set': ChickenProfileDetails.AnimalStatus==='4' ? true : false }
               }
             }
         });
@@ -260,24 +179,24 @@ export default class ChickenProfileDetail extends Component{
     
     cleanupImages() {
         this.setState({
-            ChickenProfileDetails:{    
-                ChooseStatus:this.state.ChickenProfileDetails.ChooseStatus,
+            ChickenProfileDetails:{  
+                AnimalName:this.state.ChickenProfileDetails.AnimalName,
+                AnimalCode:this.state.ChickenProfileDetails.AnimalCode,
+                AnimalSymbol:this.state.ChickenProfileDetails.AnimalSymbol,
+                AnimalStatus:this.state.ChickenProfileDetails.AnimalStatus,
                 CauseOfDeath:this.state.ChickenProfileDetails.CauseOfDeath,
-                Name:this.state.ChickenProfileDetails.Name,
-                ChickenCode:this.state.ChickenProfileDetails.ChickenCode,
-                ChickenSymbol:this.state.ChickenProfileDetails.ChickenSymbol,
                 DateOfBirth:this.state.ChickenProfileDetails.DateOfBirth,
-                gender:this.state.ChickenProfileDetails.gender,
+                Gender:this.state.ChickenProfileDetails.Gender,
                 SireCode:this.state.ChickenProfileDetails.SireCode,
                 BreederCode:this.state.ChickenProfileDetails.BreederCode,
-                Breed:this.state.ChickenProfileDetails.Breed,
+                BreederFormula:this.state.ChickenProfileDetails.BreederFormula,
                 Talents:this.state.ChickenProfileDetails.Talents,
                 Weight:this.state.ChickenProfileDetails.Weight,
                 FightingRecord :this.state.ChickenProfileDetails.FightingRecord,
                 StandardPrice :this.state.ChickenProfileDetails.StandardPrice,
-                AdditionalNote :this.state.ChickenProfileDetails.AdditionalNote,
+                Remarks :this.state.ChickenProfileDetails.Remarks,
 
-                AddPhoto: null
+                AnimalPhoto: null
             },
             isPhoto:false
         });
@@ -292,23 +211,23 @@ export default class ChickenProfileDetail extends Component{
         debugger;
         this.setState({
             ChickenProfileDetails:{
-                ChooseStatus:this.state.ChickenProfileDetails.ChooseStatus,
+                AnimalName:this.state.ChickenProfileDetails.AnimalName,
+                AnimalCode:this.state.ChickenProfileDetails.AnimalCode,
+                AnimalSymbol:this.state.ChickenProfileDetails.AnimalSymbol,
+                AnimalStatus:this.state.ChickenProfileDetails.AnimalStatus,
                 CauseOfDeath:this.state.ChickenProfileDetails.CauseOfDeath,
-                Name:this.state.ChickenProfileDetails.Name,
-                ChickenCode:this.state.ChickenProfileDetails.ChickenCode,
-                ChickenSymbol:this.state.ChickenProfileDetails.ChickenSymbol,
                 DateOfBirth:this.state.ChickenProfileDetails.DateOfBirth,
-                gender:this.state.ChickenProfileDetails.gender,
+                Gender:this.state.ChickenProfileDetails.Gender,
                 SireCode:this.state.ChickenProfileDetails.SireCode,
                 BreederCode:this.state.ChickenProfileDetails.BreederCode,
-                Breed:this.state.ChickenProfileDetails.Breed,
+                BreederFormula:this.state.ChickenProfileDetails.BreederFormula,
                 Talents:this.state.ChickenProfileDetails.Talents,
                 Weight:this.state.ChickenProfileDetails.Weight,
                 FightingRecord :this.state.ChickenProfileDetails.FightingRecord,
                 StandardPrice :this.state.ChickenProfileDetails.StandardPrice,
-                AdditionalNote :this.state.ChickenProfileDetails.AdditionalNote,
+                Remarks :this.state.ChickenProfileDetails.Remarks,
 
-                AddPhoto: images.map(i => {
+                AnimalPhoto: images.map(i => {
                     console.log('received image', i);
                     return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
                 })
@@ -325,6 +244,54 @@ export default class ChickenProfileDetail extends Component{
     renderAsset(image) {
         return this.renderImage(image);
     }
+    SavechikenProfile=()=>{
+        debugger;
+        Keyboard.dismiss();
+        var value = this.refs.form.getValue();
+        if (value) {
+            debugger;
+          var data = {
+            AnimalName:value.AnimalName,
+            AnimalCode:value.AnimalCode,
+            AnimalSymbol:value.AnimalSymbol,
+            AnimalStatus:value.AnimalStatus,
+            CauseOfDeath:value.CauseOfDeath,
+            DateOfBirth:value.DateOfBirth,
+            Gender:value.Gender,
+            SireCode:value.SireCode,
+            BreederCode:value.BreederCode,
+            BreederFormula:value.BreederFormula,
+            Talents:value.Talents,
+            Weight:value.Weight,
+            FightingRecord :value.FightingRecord,
+            StandardPrice :value.StandardPrice,
+            Remarks :value.Remarks,
+          }
+     
+          services.SaveAnimalProfile(data)
+            .then(function (response) { 
+              if(data.FarmID!=0){
+                  alert('Animal profile saved successfully.')
+                  this.props.navigation.navigate('MainDashboard');
+              }
+              else{
+                  this.props.navigation.navigate('Navigation');
+              }
+                   
+            }.bind(this))
+            .catch(function (error) {
+              console.log(error);
+          });
+      }
+
+    }
+    ResetchikenProfile=()=>{
+        Keyboard.dismiss();
+        this.setState({
+            ChickenProfileDetails:{ }
+            })
+    }
+
 
     render(){
         return(
@@ -361,12 +328,12 @@ export default class ChickenProfileDetail extends Component{
                 <Footer style={{backgroundColor:'white'}}>
                     <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
                         <View style={{width:'50%'}}>
-                            <Button success block rounded onPress={this.ResetFarmProfile} style={{width:'100%',justifyContent:'center'}}>
+                            <Button success block rounded onPress={this.ResetchikenProfile} style={{width:'100%',justifyContent:'center'}}>
                                 <Text style={{color:'white'}} >Reset</Text>
                             </Button>
                         </View>
                         <View style={{width:'50%', alignItems:'flex-end'}}>
-                            <Button primary block rounded onPress={this.SaveFarmProfile} style={{width:'100%',justifyContent:'center'}}>
+                            <Button primary block rounded onPress={this.SavechikenProfile} style={{width:'100%',justifyContent:'center'}}>
                                 <Text style={{color:'white'}}>Save</Text>
                             </Button>
                         </View>

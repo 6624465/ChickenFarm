@@ -11,7 +11,7 @@ var Animal={
         return axios.get('AnimalProfile/GetAnimalProfileList/'+FarmId)
     },
 
-    AnimalProfileSave(obj)
+    SaveAnimalProfile(obj)
     {   
       return axios({
             method: 'post',
