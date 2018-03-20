@@ -8,6 +8,7 @@ var t = require('tcomb-form-native');
 var Form = t.form.Form;
 var ImagePicker = NativeModules.ImageCropPicker;
 import axios from 'axios';
+import services from './Services';
 
 export default class FarmProfileList extends Component{
     static navigationOptions={
@@ -16,7 +17,8 @@ export default class FarmProfileList extends Component{
         headerTitleStyle:{color:'#212121'}
     }
     componentDidMount() {
-        axios.get('/FarmProfile/GetFarmProfile/'+axios.defaults.headers.common['MOBILE_NO'])
+        //axios.get('/FarmProfile/GetFarmProfile/'+axios.defaults.headers.common['MOBILE_NO'])
+        services.GetFarmProfile(axios.defaults.headers.common['MOBILE_NO'])
         .then(function (response) {
             debugger;
 
@@ -220,11 +222,12 @@ export default class FarmProfileList extends Component{
             Status:true
         }
         debugger;
-        axios({
-            method: 'post',
-            url: '/FarmProfile/save',
-            data: data
-          })
+        // axios({
+        //     method: 'post',
+        //     url: '/FarmProfile/save',
+        //     data: data
+        //   })
+        services.SaveFarmProfile(data)
           .then(function (response) { 
             debugger;   
             this.props.navigation.navigate('Navigation');
@@ -242,7 +245,7 @@ export default class FarmProfileList extends Component{
     ResetFarmProfile=()=>
     {
       Keyboard.dismiss();
-     this.setState({
+        this.setState({
         FarmProfileDetails:{
 
         }
