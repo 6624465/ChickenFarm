@@ -29,6 +29,27 @@ export default class ChickenProfileDetail extends Component{
         headerTitleStyle:{color:'#212121'},
         drawerLabel: () => null
     }
+    
+    componentDidMount() {
+        services.GetAnimalProfile(0,1000)
+        .then(function (response) {
+            //var regi= response.data.farmProfile;
+            if(response.data.animalProfile!=null)
+            {
+                debugger;
+                this.setState({
+                    //status: (response.data.registration.IsOTPVerified === null || response.data.registration.IsOTPVerified === true) ? true : false,
+                    ChickenProfileDetails: response.data.animalProfile,
+                    imageLink: axios.defaults.baseURL+'/Uploads/AnimalProfile/'+response.data.animalProfile.AnimalCode+'/'+response.data.animalProfile.AnimalPhoto
+                });
+            }
+            //alert(this.state.status+'<<<<>>>>'+response.data.registration.IsOTPVerified);
+            console.log(this.state.imageLink);
+        }.bind(this))
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
    
     constructor()
     {
@@ -51,8 +72,10 @@ export default class ChickenProfileDetail extends Component{
                 StandardPrice :null,
                 Remarks :null,
                 AnimalPhoto:null,
+                FileName:null
             },
             isPhoto:false,
+            imageLink:null,
             options:{
                 fields:{
                
@@ -196,7 +219,8 @@ export default class ChickenProfileDetail extends Component{
                 StandardPrice :this.state.ChickenProfileDetails.StandardPrice,
                 Remarks :this.state.ChickenProfileDetails.Remarks,
 
-                AnimalPhoto: null
+                AnimalPhoto: null,
+                FileName:null
             },
             isPhoto:false
         });
@@ -207,7 +231,7 @@ export default class ChickenProfileDetail extends Component{
             multiple: true,
             waitAnimationEnd: false,
             includeExif: true,
-        }).then(images => {
+        }).then(image => {
         debugger;
         this.setState({
             ChickenProfileDetails:{
@@ -227,10 +251,13 @@ export default class ChickenProfileDetail extends Component{
                 StandardPrice :this.state.ChickenProfileDetails.StandardPrice,
                 Remarks :this.state.ChickenProfileDetails.Remarks,
 
-                AnimalPhoto: images.map(i => {
-                    console.log('received image', i);
-                    return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
-                })
+                AnimalPhoto: {uri: `data:${image.mime};base64,`+ image.data, width: image.width, height: image.height},
+                FileName: image.data
+
+                // AnimalPhoto: images.map(i => {
+                //     console.log('received image', i);
+                //     return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
+                // })
             },
             isPhoto:true
           });
@@ -251,21 +278,22 @@ export default class ChickenProfileDetail extends Component{
         if (value) {
             debugger;
           var data = {
-            AnimalName:value.AnimalName,
-            AnimalCode:value.AnimalCode,
-            AnimalSymbol:value.AnimalSymbol,
-            AnimalStatus:value.AnimalStatus,
-            CauseOfDeath:value.CauseOfDeath,
-            DateOfBirth:value.DateOfBirth,
-            Gender:value.Gender,
-            SireCode:value.SireCode,
-            BreederCode:value.BreederCode,
-            BreederFormula:value.BreederFormula,
-            Talents:value.Talents,
-            Weight:value.Weight,
-            FightingRecord :value.FightingRecord,
-            StandardPrice :value.StandardPrice,
-            Remarks :value.Remarks,
+            AnimalName:this.state.ChickenProfileDetails.AnimalName,
+            AnimalCode:this.state.ChickenProfileDetails.AnimalCode,
+            AnimalSymbol:this.state.ChickenProfileDetails.AnimalSymbol,
+            AnimalStatus:this.state.ChickenProfileDetails.AnimalStatus,
+            CauseOfDeath:this.state.ChickenProfileDetails.CauseOfDeath,
+            DateOfBirth:this.state.ChickenProfileDetails.DateOfBirth,
+            Gender:this.state.ChickenProfileDetails.Gender,
+            SireCode:this.state.ChickenProfileDetails.SireCode,
+            BreederCode:this.state.ChickenProfileDetails.BreederCode,
+            BreederFormula:this.state.ChickenProfileDetails.BreederFormula,
+            Talents:this.state.ChickenProfileDetails.Talents,
+            Weight:this.state.ChickenProfileDetails.Weight,
+            FightingRecord :this.state.ChickenProfileDetails.FightingRecord,
+            StandardPrice :this.state.ChickenProfileDetails.StandardPrice,
+            Remarks :this.state.ChickenProfileDetails.Remarks,
+            FileName:this.state.ChickenProfileDetails.FileName,
           }
      
           services.SaveAnimalProfile(data)
@@ -320,8 +348,9 @@ export default class ChickenProfileDetail extends Component{
                             <Text style={{color:'blue'}}>{this.state.isPhoto ? 'Clear Photo' : 'Select Photo'}</Text>
                         </TouchableOpacity>
                         <ScrollView>
-                            {/* {this.state.value.image ? this.renderAsset(this.state.value.image) : null} */}
-                            {this.state.ChickenProfileDetails.AddPhoto ? this.state.ChickenProfileDetails.AddPhoto.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null}
+                            {/* this.state.ChickenProfileDetails.AnimalPhoto ? this.state.ChickenProfileDetails.AnimalPhoto.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null */}
+                            {(this.state.ChickenProfileDetails.AnimalPhoto ? this.renderAsset(this.state.ChickenProfileDetails.AnimalPhoto) : null)}
+                            <Image style={{width: 300, height: 300, resizeMode: 'contain'}} source={{uri: this.state.imageLink}}  />
                         </ScrollView>
                     </View>
                 </Content>
