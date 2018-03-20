@@ -1,17 +1,17 @@
 import axios from 'axios';
 var Animal={
     //AnimalProfile
-    GetFarmProfile(AnimalCode,FarmId)
+    GetAnimalProfile(AnimalCode,FarmId)
     {
-        return axios.get('AnimalProfile/GetFarmProfile/'+AnimalCode+'/'+FarmId)
+        return axios.get('AnimalProfile/GetAnimalProfile/'+AnimalCode+'/'+FarmId)
     },
 
-    GetFarmProfileList(FarmId)
+    GetAnimalProfileList(FarmId)
     {
-        return axios.get('AnimalProfile/GetFarmProfileList/'+FarmId)
+        return axios.get('AnimalProfile/GetAnimalProfileList/'+FarmId)
     },
 
-    ChickenProfileSave(obj)
+    AnimalProfileSave(obj)
     {   
       return axios({
             method: 'post',
