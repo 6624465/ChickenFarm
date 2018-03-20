@@ -9,10 +9,7 @@ var Form = t.form.Form;
 var ImagePicker = NativeModules.ImageCropPicker;
 import axios from 'axios';
 
-<<<<<<< HEAD
-=======
 import services from '../Registration/Services';
->>>>>>> 982aef0d12ca2213f932163c559e94448d1127e9
 
 export default class FarmProfileList extends Component{
     static navigationOptions={
