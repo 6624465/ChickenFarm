@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet} from 'react-native';
+import {View, Text,StyleSheet,TouchableOpacity} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
 
@@ -31,16 +31,16 @@ export default class ForgotPasswordContinue extends Component{
         
          this.forgotpasswordNewOption={
             fields:{
-                Otp:{
-                    label: 'OTP',
-                    placeholder:'Pleasse Enter OTP Number',
-                }
+                    Otp:{
+                            label: 'OTP',
+                            placeholder:'Pleasse Enter OTP Number',
+                            secureTextEntry: true,
+                    }
             }
         }
 
       }
       ForgotPasswordContinueOtp = () =>{
-
         var value = this.refs.form.getValue();
         if(value)
         {
@@ -70,6 +70,34 @@ export default class ForgotPasswordContinue extends Component{
                 });
         }   
     }
+    IsResendOTP = () =>{
+        var data = {
+            MobileNo:this.props.navigation.state.params.MobileNo
+        }
+        services.IsMobileNoExists(data.MobileNo)
+        .then(function (response) {
+            if(response.data)
+            {
+                services.ResendOTP(data.MobileNo)
+                .then(function (response) {
+                    
+                        alert('OTP successfully send to registered mobile number.');
+                        // this.props.navigation.navigate(
+                        //     'ForgotPasswordContinue',
+                        //     { MobileNo: data.MobileNo }
+                        //   );
+                }.bind(this))
+                .catch(function (error) {
+                    console.log(error);
+                });
+            }
+             console.log(this.state.status);
+            }.bind(this))
+            .catch(function (error) {
+                console.log(error);
+            });
+           
+    }
 
     onChange = (value) => {
         this.setState({value});
@@ -97,6 +125,13 @@ export default class ForgotPasswordContinue extends Component{
                            value={this.state.value}
                            onChange={this.onChange}
                            />
+
+                                <View>
+                                        <TouchableOpacity onPress={this.IsResendOTP}>
+                                        <Text style={{color:'blue'}}> Resend Otp </Text>
+                                        </TouchableOpacity>
+                                </View>
+
                            <Button success block rounded onPress={this.ForgotPasswordContinueOtp}>
                             <Text style={{color:'#fff', fontWeight:'bold', fontSize:18}}>{'Continue'}</Text>
                         </Button>

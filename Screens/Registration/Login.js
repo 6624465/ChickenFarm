@@ -49,7 +49,6 @@ export default class Login extends Component{
             Password: {
               label: 'Password',
               placeholder:'Enter Your Password',
-              password: true,
               secureTextEntry: true,
               //error:'Please Enter Your Password'  
             }

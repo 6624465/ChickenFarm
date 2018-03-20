@@ -11,6 +11,8 @@ var reg={
             data: obj
           })
     },
+
+
     IsMobileNoExists(MobileNo)
     {
           return  axios.get('/Register/IsMobileNoExists/'+MobileNo)
@@ -27,8 +29,28 @@ var reg={
     {
         return   axios.get('/Register/UpdatePassword/'+MobileNo+'/'+Password)
     },
-    
 
+    GetRegistration(UserID)
+    {
+        return    axios.get('/Register/GetRegistration/'+UserID)
+    },
+    RegisterSave(obj)
+    {   
+      return  axios({
+            method: 'post',
+            url: '/Register/Save',
+            data: obj
+          })
+    },
+    UpdateOTPStatus(obj)
+    {   
+      return  axios({
+            method: 'post',
+            url: '/Register/UpdateOTPStatus',
+            data: obj
+          })
+    },
+    
 
   };
   module.exports=reg;
