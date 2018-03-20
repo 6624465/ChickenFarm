@@ -9,6 +9,7 @@ var Form = t.form.Form;
 var ImagePicker = NativeModules.ImageCropPicker;
 import axios from 'axios';
 
+
 export default class FarmProfileList extends Component{
     static navigationOptions={
         title : 'Farm Profile',
@@ -26,10 +27,12 @@ export default class FarmProfileList extends Component{
                 this.setState({
                     //status: (response.data.registration.IsOTPVerified === null || response.data.registration.IsOTPVerified === true) ? true : false,
                     FarmProfileDetails: response.data.farmProfile,
+                    imageLink: 'http://192.168.0.109/FMS/Uploads/FarmProfile/'+response.data.farmProfile.MobileNo+'/'+response.data.farmProfile.FarmLogo
                 });
+                debugger;
             }
             //alert(this.state.status+'<<<<>>>>'+response.data.registration.IsOTPVerified);
-            console.log(this.state.status);
+            console.log(this.state.imageLink);
         }.bind(this))
         .catch(function (error) {
             console.log(error);
@@ -41,6 +44,7 @@ export default class FarmProfileList extends Component{
         super();
         this.state ={
             FarmProfileDetails:{
+                FarmID:0,
                 FarmName:null,
                 FarmAddress:null,
                 PhoneNo:null,
@@ -52,7 +56,8 @@ export default class FarmProfileList extends Component{
                 FarmLogo:null,
                 FileName:null
             },
-            isLogo:false
+            isLogo:false,
+            imageLink:null
         },
 
         this.AddFarmProfile=t.struct({
@@ -135,6 +140,7 @@ export default class FarmProfileList extends Component{
 
         this.setState({
             FarmProfileDetails:{    
+                FarmID:this.state.FarmProfileDetails.FarmID,
                 FarmName:this.state.FarmProfileDetails.FarmName,
                 FarmAddress:this.state.FarmProfileDetails.FarmAddress,
                 PhoneNo:this.state.FarmProfileDetails.PhoneNo,
@@ -161,6 +167,7 @@ export default class FarmProfileList extends Component{
         debugger;
         this.setState({
             FarmProfileDetails:{
+                FarmID:this.state.FarmProfileDetails.FarmID,
                 FarmName:this.state.FarmProfileDetails.FarmName,
                 FarmAddress:this.state.FarmProfileDetails.FarmAddress,
                 PhoneNo:this.state.FarmProfileDetails.PhoneNo,
@@ -201,6 +208,7 @@ export default class FarmProfileList extends Component{
 
         return this.renderImage(image);
     }
+
     SaveFarmProfile=()=>
     {
 
@@ -208,6 +216,7 @@ export default class FarmProfileList extends Component{
       var value = this.refs.form.getValue();
       if (value) {
         var data = {
+            //FarmID:this.state.FarmProfileDetails.FarmID,
             FarmName:this.state.FarmProfileDetails.FarmName,
             FarmAddress:this.state.FarmProfileDetails.FarmAddress,
             PhoneNo:this.state.FarmProfileDetails.PhoneNo,
@@ -282,8 +291,14 @@ export default class FarmProfileList extends Component{
                          */}
 
                         <ScrollView>
-                            
-                            {this.state.FarmProfileDetails.FarmLogo ? this.renderAsset(this.state.FarmProfileDetails.FarmLogo) : null}
+                            {
+                                (this.state.FarmProfileDetails.FarmName != null)
+                                ?                            
+                                (this.state.FarmProfileDetails.FarmLogo ? this.renderAsset(this.state.FarmProfileDetails.FarmLogo) : null)
+                                :
+                                (
+                                <Image style={{width: 300, height: 300, resizeMode: 'contain'}} source={{uri: this.state.imageLink}}  />)
+                                }
                             {/* {this.state.FarmProfileDetails.FarmLogo ? this.state.FarmProfileDetails.FarmLogo.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null} */}
                         </ScrollView>
                     </View>
