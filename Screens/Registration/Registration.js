@@ -75,6 +75,7 @@ export default class Registration extends Component{
                     MobileNo: {
                         label: 'Mobile No',
                         placeholder:'Enter Your Mobile No',
+                        maxLength:10,
                         onBlur:()=>{
                             var data = {
                                 MobileNo:this.state.reg.MobileNo

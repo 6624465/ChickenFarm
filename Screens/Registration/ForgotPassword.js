@@ -32,6 +32,7 @@ export default class ForgotPassword extends Component{
                 MobileNo:{
                     label: 'Mobile No',
                     placeholder:'Pleasse Enter Mobile Number',
+                    maxLength:10
                    
                 }
             }
