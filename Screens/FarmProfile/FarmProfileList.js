@@ -8,7 +8,8 @@ var t = require('tcomb-form-native');
 var Form = t.form.Form;
 var ImagePicker = NativeModules.ImageCropPicker;
 import axios from 'axios';
-import services from './Services';
+
+import services from '../Registration/Services';
 
 export default class FarmProfileList extends Component{
     static navigationOptions={
