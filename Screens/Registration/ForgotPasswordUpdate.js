@@ -68,7 +68,7 @@ ForgotPasswordUpdate = () =>
         .then(function (response) {
             if(response.data=="Success")
             {  
-                alert("SuccessFully Changed Your Password..")
+                alert("Successfully Changed Your Password..")
                 this.props.navigation.navigate('Login');
                 
             }

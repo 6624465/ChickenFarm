@@ -55,7 +55,7 @@ export default class ForgotPassword extends Component{
                 services.ResendOTP(data.MobileNo)
                 .then(function (response) {
                     
-                        alert('OTP successfully resend to registered mobile number.');
+                        alert('OTP successfully send to registered mobile number.');
                         // axios.defaults.headers.common['MOBILE_NO'] = data.MobileNo; 
                         // this.props.navigation.navigate('ForgotPasswordContinoue');
                         this.props.navigation.navigate(

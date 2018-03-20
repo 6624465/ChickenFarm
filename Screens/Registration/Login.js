@@ -14,7 +14,7 @@ export default class Login extends Component{
      header:false
   }
   componentDidMount() {
-    axios.defaults.baseURL = 'http://192.168.0.109/FMS/api';
+    axios.defaults.baseURL = 'http://192.168.0.107/FMS/api';
     //axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com/api';
     axios.defaults.headers.common['AUTH_TOKEN'] = 'sdfsdfgsdfgsdfdsfgsdfgsdfg';
     axios.defaults.headers.common['Content-Type'] = 'application/json';    
@@ -44,14 +44,14 @@ export default class Login extends Component{
         UserID: {
               label: 'Mobile No',
               placeholder:'Enter Your Mobile No',
-              error:'Please Enter Your Mobile Number'  
+              //error:'Please Enter Your Mobile Number'  
             },
             Password: {
               label: 'Password',
               placeholder:'Enter Your Password',
               password: true,
               secureTextEntry: true,
-              error:'Please Enter Your Password'  
+              //error:'Please Enter Your Password'  
             }
         }
     }

@@ -16,7 +16,7 @@ import FarmProfile from '../FarmProfile/FarmProfileList';
 import Navigation from '../Navigations/Navigation';
 
 const NavLinksLogin = StackNavigator({
-    Home:{screen:Login},
+    Login:{screen:Login},
     Navigation:{screen:Navigation},
     Registration:{screen:Registration},
     ForgotPassword:{screen:ForgotPassword},
