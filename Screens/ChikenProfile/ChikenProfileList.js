@@ -7,6 +7,8 @@ import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer, Ri
 //import api from '../../API/API';
 
 import axios from 'axios';
+import services from './Services';
+
   
 export default class ChickenProfileList extends Component{
 
