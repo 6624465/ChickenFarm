@@ -150,7 +150,7 @@ export default class Registration extends Component{
             //     data: data
             //   })
 
-            services.RegisterSave(data)
+            services.RegistrationSave(data)
               .then(function (response) { 
                 debugger;   
                 this.setState({

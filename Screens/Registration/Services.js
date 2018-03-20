@@ -34,7 +34,7 @@ var reg={
     {
         return    axios.get('/Register/GetRegistration/'+UserID)
     },
-    RegisterSave(obj)
+    RegistrationSave(obj)
     {   
       return  axios({
             method: 'post',
