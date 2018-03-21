@@ -40,7 +40,7 @@ export default class ChickenProfileList extends Component{
                 dataSource: ds.cloneWithRows(responseJson.data.animalProfileList),
             }, function() {
                 // do something with new state
-                this.arrayholder = responseJson.data ;
+                this.arrayholder = responseJson.data.animalProfileList ;
             });
             })
             .catch((error) => {
@@ -48,13 +48,17 @@ export default class ChickenProfileList extends Component{
         });
     }
 
-    NavigateToDetails=(companycode)=>{            
-        this.props.navigation.navigate('ChickenProfileDetail');
+    NavigateToDetails=(animalCode)=>{        
+        this.props.navigation.navigate(
+            'ChickenProfileDetail',
+            { animalCode: animalCode }
+          );    
+        //this.props.navigation.navigate('ChickenProfileDetail');
     }   
 
     FilterListData=(text)=>{   
         const newData = this.arrayholder.filter(function(item){
-            const itemData = item.CompanyName.toUpperCase()
+            const itemData = item.AnimalName.toUpperCase()
             const textData = text.toUpperCase()
             return itemData.indexOf(textData) > -1
         })
@@ -104,7 +108,7 @@ export default class ChickenProfileList extends Component{
                             dataSource={this.state.dataSource}
                             renderRow={(rowData) => 
                             <View style={styles.listcontainer}>
-                                <TouchableOpacity  onPress={() => this.NavigateToDetails(rowData.CompanyCode)}>
+                                <TouchableOpacity  onPress={() => this.NavigateToDetails(rowData.AnimalCode)}>
                                     <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
                                         <View style={{width:'20%', alignItems:'center'}}>
                                             <Image source = { require('../../android/app/src/main/assets/chicken.png') } style={styles.photo}/>                       
