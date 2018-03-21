@@ -38,13 +38,17 @@ export default class PurchasedVaccineList extends Component{
         });
     }
 
-    NavigateToDetails=(VaccineName)=>{            
-        this.props.navigation.navigate('PurchasedVaccineDetail');
+    NavigateToDetails=(VaccineCode)=>{    
+        this.props.navigation.navigate(
+            'PurchasedVaccineDetail',
+            { VaccineCode: VaccineCode }
+          );         
+       // this.props.navigation.navigate('PurchasedVaccineDetail');
     }   
 
     FilterListData=(text)=>{   
         const newData = this.arrayholder.filter(function(item){
-            const itemData = item.VaccineName.toUpperCase()
+            const itemData = item.VaccineCode.toUpperCase()
             const textData = text.toUpperCase()
             return itemData.indexOf(textData) > -1
         })
@@ -95,14 +99,14 @@ export default class PurchasedVaccineList extends Component{
                             dataSource={this.state.dataSource}
                             renderRow={(rowData) => 
                             <View style={styles.listcontainer}>
-                                <TouchableOpacity  onPress={() => this.NavigateToDetails(rowData.VaccineName)}>
+                                <TouchableOpacity  onPress={() => this.NavigateToDetails(rowData.VaccineCode)}>
                                     <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
                                         <View style={{width:'20%', alignItems:'center'}}>
                                             <Image source = { require('../../android/app/src/main/assets/chicken.png') } style={styles.photo}/>                       
                                         </View>
                                         <View style={{width:'80%', alignItems:'flex-start'}}>
                                             <Text style={styles.text}>
-                                                {rowData.VaccineName}
+                                                {rowData.VaccineCode}
                                             </Text>
                                             <Text style={styles.text}>
                                                 {rowData.BatchNo}

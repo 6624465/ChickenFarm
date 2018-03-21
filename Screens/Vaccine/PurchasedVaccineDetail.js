@@ -157,8 +157,32 @@ export default class PurchasedVaccineDetail extends Component{
 
         return this.renderImage(image);
     }
+
+
+    componentDidMount() {
+        services.GetVaccineMaster(this.props.navigation.state.params.VaccineCode, 0)
+        .then(function (response) {
+            if(response.data!=null)
+            {
+                var dtls = response.data.vaccineMaster;
+                dtls.PurchaseDate = dtls.PurchaseDate != null ? moment(dtls.PurchaseDate).toDate() : null;
+                dtls.ExpiryDate = dtls.ExpiryDate != null ? moment(dtls.ExpiryDate).toDate() : null;
+
+                this.setState({
+                    PurchasedVaccineDetails: dtls,
+                  //  imageLink: axios.defaults.baseURL+'/Uploads/AnimalProfile/'+response.data.animalProfile.AnimalCode+'/'+response.data.animalProfile.AnimalPhoto
+                });
+            }
+        
+            console.log(this.state.imageLink);
+        }.bind(this))
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
+
+
     SaveVaccineMaster=()=>{
-        debugger;
         Keyboard.dismiss();
         var value = this.refs.form.getValue();
         if (value) {
