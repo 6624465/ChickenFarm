@@ -111,13 +111,13 @@ export default class Login extends Component{
 
     LoginUser=()=>
     {
-      this.setState({
-        isLoading: true
-      });
 
       Keyboard.dismiss();
         var value = this.refs.form.getValue();
         if (value) {
+          this.setState({
+            isLoading: true
+          });
           var data = {
             UserID:value.UserID,
             Password:value.Password

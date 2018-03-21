@@ -90,7 +90,7 @@ export default class ChickenProfileList extends Component{
                         <Title>Chicken Profile List</Title>
                     </Body>
                     <Right>
-                        <Button transparent onPress={() => this.NavigateToDetails(-1)}>
+                        <Button transparent onPress={() => this.NavigateToDetails(0)}>
                             <Icon ios='ios-add-circle' android="md-add-circle"/>
                         </Button>
                     </Right>

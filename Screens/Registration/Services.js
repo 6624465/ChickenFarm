@@ -1,69 +1,58 @@
 
 import axios from 'axios';
 var reg={
-    //Get Country List
-    
+        
     Login(obj)
     {   
-      return  axios({
+        return  axios({
             method: 'post',
             url: '/api/Register/Login',
             data: obj
-          })
+        })
     },
-
 
     IsMobileNoExists(MobileNo)
     {
-          return  axios.get('/api/Register/IsMobileNoExists/'+MobileNo)
+        return axios.get('/api/Register/IsMobileNoExists/'+MobileNo)
     },
+
     ResendOTP(MobileNo)
     {
-        return   axios.get('/api/Register/ResendOTP/'+MobileNo)
+        return axios.get('/api/Register/ResendOTP/'+MobileNo)
     },
+
     IsOtpVerify(MobileNo,Otp)
     {
-        return   axios.get('/api/Register/IsOtpVerify/'+MobileNo+'/'+Otp)
+        return axios.get('/api/Register/IsOtpVerify/'+MobileNo+'/'+Otp)
     },
+
     UpdateForgotPasswrod(MobileNo,Password)
     {
-        return   axios.get('/api/Register/UpdatePassword/'+MobileNo+'/'+Password)
+        return axios.get('/api/Register/UpdatePassword/'+MobileNo+'/'+Password)
     },
 
     GetRegistration(UserID)
     {
-        return    axios.get('/api/Register/GetRegistration/'+UserID)
+        return axios.get('/api/Register/GetRegistration/'+UserID)
     },
+
     RegistrationSave(obj)
     {   
-      return  axios({
+        return  axios({
             method: 'post',
             url: '/api/Register/Save',
             data: obj
-          })
+        })
     },
+
     UpdateOTPStatus(obj)
     {   
-      return  axios({
+        return  axios({
             method: 'post',
             url: '/api/Register/UpdateOTPStatus',
             data: obj
-          })
-    },
-    
-    //FarmProfile
-    GetFarmProfile(MobileNo)
-    {
-        return    axios.get('/api/FarmProfile/GetFarmProfile/'+MobileNo)
-    },
-    SaveFarmProfile(obj)
-    {   
-      return  axios({
-            method: 'post',
-            url: '/api/FarmProfile/save',
-            data: obj
-          })
-    },
+        })
+    }
 
-  };
-  module.exports=reg;
+};
+module.exports=reg;
