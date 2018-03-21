@@ -38,7 +38,6 @@ export default class ChickenProfileDetail extends Component{
                     gender[response.data.gender[i].LookupID] = response.data.gender[i].LookupDescription;
                 }
 
-                debugger;
                 this.setState({
                     ChickenProfileDetails: dtls,
                     lstChickenStatus: t.enums(astatus),
@@ -236,7 +235,7 @@ export default class ChickenProfileDetail extends Component{
             includeExif: true,
             includeBase64: true,
         }).then(image => {
-        debugger;
+       
         this.setState({
             ChickenProfileDetails:{
                 AnimalName:this.state.ChickenProfileDetails.AnimalName,
@@ -276,11 +275,9 @@ export default class ChickenProfileDetail extends Component{
         return this.renderImage(image);
     }
     SavechikenProfile=()=>{
-        debugger;
         Keyboard.dismiss();
         var value = this.refs.form.getValue();
         if (value) {
-            debugger;
           var data = {
             AnimalName:this.state.ChickenProfileDetails.AnimalName,
             AnimalCode:this.state.ChickenProfileDetails.AnimalCode,
