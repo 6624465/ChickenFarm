@@ -9,18 +9,7 @@ var Form = t.form.Form;
 import moment from 'moment';
 var ImagePicker = NativeModules.ImageCropPicker;
 import services from './Services'
-
-var Gender = t.enums({  
-    1: 'Male',
-    2: 'Female'
-  });
-
-var ChickenStatus = t.enums({
-    1: 'Born on Farm',
-    2: 'Purchased',
-    3: 'Sold',
-    4: 'Death on Farm'
-});
+import axios from 'axios';
   
 export default class ChickenProfileDetail extends Component{
     static navigationOptions={
@@ -33,16 +22,28 @@ export default class ChickenProfileDetail extends Component{
     componentDidMount() {
         services.GetAnimalProfile(2,0)
         .then(function (response) {
-            //var regi= response.data.farmProfile;
-            if(response.data.animalProfile!=null)
+            if(response.data!=null)
             {
                 var dtls = response.data.animalProfile;
-                //dtls.DateOfBirth = moment(dtls.DateOfBirth).format("MM/DD/YYYY")
+                dtls.DateOfBirth = moment(dtls.DateOfBirth).toDate();
+
+                var astatus = {};
+                for(let i=0;i<response.data.animalStatus.length;i++)
+                {
+                    astatus[response.data.animalStatus[i].LookupID] = response.data.animalStatus[i].LookupDescription;
+                }
+                var gender = {};
+                for(let i=0;i<response.data.gender.length;i++)
+                {
+                    gender[response.data.gender[i].LookupID] = response.data.gender[i].LookupDescription;
+                }
+
                 debugger;
                 this.setState({
-                    //status: (response.data.registration.IsOTPVerified === null || response.data.registration.IsOTPVerified === true) ? true : false,
                     ChickenProfileDetails: dtls,
-                    //imageLink: axios.defaults.baseURL+'/Uploads/AnimalProfile/'+response.data.animalProfile.AnimalCode+'/'+response.data.animalProfile.AnimalPhoto
+                    lstChickenStatus: t.enums(astatus),
+                    lstGender: t.enums(gender),
+                    imageLink: axios.defaults.baseURL+'/Uploads/AnimalProfile/'+response.data.animalProfile.AnimalCode+'/'+response.data.animalProfile.AnimalPhoto
                 });
             }
             //alert(this.state.status+'<<<<>>>>'+response.data.registration.IsOTPVerified);
@@ -63,7 +64,7 @@ export default class ChickenProfileDetail extends Component{
                 AnimalSymbol:null,
                 AnimalStatus:null,
                 CauseOfDeath:null,
-                //DateOfBirth:null,
+                DateOfBirth:null,
                 Gender:null,
                 SireCode:null,
                 BreederCode:null,
@@ -78,6 +79,8 @@ export default class ChickenProfileDetail extends Component{
             },
             isPhoto:false,
             imageLink:null,
+            lstChickenStatus:t.enums({}),
+            lstGender:t.enums({}),
             options:{
                 fields:{
                
@@ -164,37 +167,35 @@ export default class ChickenProfileDetail extends Component{
                     }
                 }
             }
-        },
+        }
+    }
 
-        this.AddChickenProfile=t.struct({
-
-                            AnimalName:t.String,    
-                            AnimalCode:t.Number,    
-                            AnimalSymbol:t.String,  
-                            AnimalStatus:ChickenStatus, 
-                            CauseOfDeath:t.String,  
-                            DateOfBirth:t.Date,   
-                            Gender:Gender,        
-                            SireCode:t.Number,      
-                            BreederCode:t.Number,  
-                            BreederFormula:t.String,
-                            Talents:t.String,       
-                            Weight:t.Number,       
-                            FightingRecord:t.String,
-                            StandardPrice:t.Number,
-                            Remarks:t.String,       
-                            //[AnimalPhoto]   
-
-                })
-
-       
+        AddChickenProfile() { 
+            return ( t.struct({
+                AnimalName:t.String,    
+                AnimalCode:t.Number,    
+                AnimalSymbol:t.String,  
+                AnimalStatus:this.state.lstChickenStatus, 
+                CauseOfDeath:t.String,  
+                DateOfBirth:t.Date,   
+                Gender:this.state.lstGender,        
+                SireCode:t.Number,      
+                BreederCode:t.Number,  
+                BreederFormula:t.String,
+                Talents:t.String,       
+                Weight:t.Number,       
+                FightingRecord:t.String,
+                StandardPrice:t.Number,
+                Remarks:t.String
+            })
+        )
     }
 
     onChange = (ChickenProfileDetails) => {
         var options = t.update(this.state.options, {
             fields: {
                 CauseOfDeath: {
-                editable: { '$set': ChickenProfileDetails.AnimalStatus==='4' ? true : false }
+                editable: { '$set': ChickenProfileDetails.AnimalStatus === '2003' ? true : false }
               }
             }
         });
@@ -342,7 +343,7 @@ export default class ChickenProfileDetail extends Component{
                     <View style={styles.container}>
                         <Form
                             ref='form'
-                            type={this.AddChickenProfile}
+                            type={this.AddChickenProfile()}
                             options={this.state.options}
                             value={this.state.ChickenProfileDetails}
                             onChange={this.onChange}
