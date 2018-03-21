@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image} from 'react-native';
+import {View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image,Keyboard} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer } from 'native-base';
@@ -9,53 +9,60 @@ var t = require('tcomb-form-native');
 var Form = t.form.Form;
 var ImagePicker = NativeModules.ImageCropPicker;
 
+import axios from 'axios';
+import services from './Services';
 
 export default class PurchasedVaccineDetail extends Component{
     static navigationOptions={
         drawerLabel: () => null
     }
-    constructor()
+    constructor(props)
     {
-        super();
+        super(props);
         this.state ={
             PurchasedVaccineDetails:{
-                Vaccine:null,
-                DateOfPurchased:null,
+                //VaccineCode:null,
+                VaccineName:null,
+                PurchaseDate:null,
                 ExpiryDate:null,
-                BatchNumberOfVaccine:null,
-                QuantityPurchased:null,
-                SuppliedBy:null,
-                MedicinePhoto:null,
+                BatchNo:null,
+                Supplier:null,
+                Quantity:null,
+                Photo:null
             },
             isMedicinePhoto:false
         },
 
         this.PurchasedVaccine=t.struct({
-            Vaccine:t.String,
-            DateOfPurchased:t.Date,
+           // VaccineCode:t.String,
+            VaccineName:t.String,
+            PurchaseDate:t.Date,
             ExpiryDate:t.Date,
-            BatchNumberOfVaccine:t.String,
-            QuantityPurchased:t.Number,
-            SuppliedBy:t.String,
+            BatchNo:t.String,
+            Supplier:t.String,
+            Quantity:t.Number,
+           
             //MedicinePhoto:t.String
         }),
 
         this.AddPurchasedVaccineOptions={
             fields:{
-                Vaccine:{
-                    label: 'Vaccine',
-                    placeholder:'Vaccine',
-                    //error:'Please Enter Your Full Name'                
+                // VaccineCode:{
+                //     label: 'Vaccine Code',
+                //     placeholder:'Vaccine Code'
+                // },
+                VaccineName:{
+                    label: 'Vaccine Name',
+                    placeholder:'Vaccine Name'                
                 },
-                DateOfPurchased:{
-                    label: 'Date Of Purchased',
-                    placeholder:'Date Of Purchased',
+                PurchaseDate:{
+                    label: 'Purchase Date',
+                    placeholder:'Purchase Date',
                     // minimumDate: new Date(),
                     mode: 'date',
                     config: {
                         format: (date) => String(moment(date).format("MM/DD/YYYY")),
-                    }                    
-                    //error:'Please Enter Farm Address'                
+                    }            
                 },
                 ExpiryDate:{
                     label: 'Expiry Date',
@@ -65,22 +72,22 @@ export default class PurchasedVaccineDetail extends Component{
                     config: {
                         format: (date) => String(moment(date).format("MM/DD/YYYY")),
                     }
-                    //error:'Please Enter Tel/Line Number'                
+                                 
                 },
-                BatchNumberOfVaccine:{
-                    label: 'Batch Number Of Vaccine',
-                    placeholder:'Batch Number Of Vaccine',
-                    // error:'Please Enter Your Full Name'                
+                BatchNo:{
+                    label: 'Batch No',
+                    placeholder:'BatchNo'
+                                
                 },
-                QuantityPurchased:{
-                    label: 'Quantity Purchased',
-                    placeholder:'Quantity Purchased',
-                    //error:'Please Enter Tel/Line Number'                
+                Quantity:{
+                    label: 'Quantity ',
+                    placeholder:'Quantity '
+                                
                 },
-                SuppliedBy:{
+                Supplier:{
                     label: 'Supplied By',
                     placeholder:'Supplied By',
-                    // error:'Please Enter Your Full Name'                
+                                
                 }
             }
         }
@@ -100,14 +107,14 @@ export default class PurchasedVaccineDetail extends Component{
 
         this.setState({
             PurchasedVaccineDetails:{    
-                Vaccine:this.state.PurchasedVaccineDetails.Vaccine,
-                DateOfPurchased:this.state.PurchasedVaccineDetails.DateOfPurchased,
+                //VaccineCode:this.state.PurchasedVaccineDetails.VaccineCode,
+                VaccineName:this.state.PurchasedVaccineDetails.VaccineName,
+                PurchaseDate:this.state.PurchasedVaccineDetails.PurchaseDate,
                 ExpiryDate:this.state.PurchasedVaccineDetails.ExpiryDate,
-                BatchNumberOfVaccine:this.state.PurchasedVaccineDetails.BatchNumberOfVaccine,
-                QuantityPurchased:this.state.PurchasedVaccineDetails.QuantityPurchased,
-                SuppliedBy:this.state.PurchasedVaccineDetails.SuppliedBy,
-
-                MedicinePhoto:null
+                BatchNo:this.state.PurchasedVaccineDetails.BatchNo,
+                Supplier:this.state.PurchasedVaccineDetails.Supplier,
+                Quantity:this.state.PurchasedVaccineDetails.Quantity,
+                Photo:null
             },
             isMedicinePhoto:false
         });
@@ -119,17 +126,17 @@ export default class PurchasedVaccineDetail extends Component{
             waitAnimationEnd: false,
             includeExif: true,
         }).then(images => {
-        debugger;
         this.setState({
             PurchasedVaccineDetails:{
-                Vaccine:this.state.PurchasedVaccineDetails.Vaccine,
-                DateOfPurchased:this.state.PurchasedVaccineDetails.DateOfPurchased,
+                //VaccineCode:this.state.PurchasedVaccineDetails.VaccineCode,
+                VaccineName:this.state.PurchasedVaccineDetails.VaccineName,
+                PurchaseDate:this.state.PurchasedVaccineDetails.PurchaseDate,
                 ExpiryDate:this.state.PurchasedVaccineDetails.ExpiryDate,
-                BatchNumberOfVaccine:this.state.PurchasedVaccineDetails.BatchNumberOfVaccine,
-                QuantityPurchased:this.state.PurchasedVaccineDetails.QuantityPurchased,
-                SuppliedBy:this.state.PurchasedVaccineDetails.SuppliedBy,
+                BatchNo:this.state.PurchasedVaccineDetails.BatchNo,
+                Supplier:this.state.PurchasedVaccineDetails.Supplier,
+                Quantity:this.state.PurchasedVaccineDetails.Quantity,
 
-                MedicinePhoto: images.map(i => {
+                Photo: images.map(i => {
                     console.log('received image', i);
                     return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
                 })
@@ -150,7 +157,45 @@ export default class PurchasedVaccineDetail extends Component{
 
         return this.renderImage(image);
     }
+    SaveVaccineMaster=()=>{
+        debugger;
+        Keyboard.dismiss();
+        var value = this.refs.form.getValue();
+        if (value) {
+          var data = {
+            //VaccineCode:this.state.PurchasedVaccineDetails.VaccineCode,
+            VaccineName:this.state.PurchasedVaccineDetails.VaccineName,
+            PurchaseDate:this.state.PurchasedVaccineDetails.PurchaseDate,
+            ExpiryDate:this.state.PurchasedVaccineDetails.ExpiryDate,
+            BatchNo:this.state.PurchasedVaccineDetails.BatchNo,
+            Supplier:this.state.PurchasedVaccineDetails.Supplier,
+            Quantity:this.state.PurchasedVaccineDetails.Quantity,
+          }
+     
+          services.SaveVaccineMaster(data)
+            .then(function (response) { 
+              if(data.FarmID!=0){
+                  alert('Vaccine profile saved successfully.')
+                  this.props.navigation.navigate('PurchasedVaccineList');
+              }
+              else{
+                  this.props.navigation.navigate('Navigation');
+              }
+                   
+            }.bind(this))
+            .catch(function (error) {
+              console.log(error);
+          });
+      }
+        
+    }
+    ResetVaccineMaster=()=>{
 
+        Keyboard.dismiss();
+        this.setState({
+            PurchasedVaccineDetails:{ }
+            })
+    }
     render(){
         return(                  
             <Container>
@@ -185,12 +230,12 @@ export default class PurchasedVaccineDetail extends Component{
                 <Footer style={{backgroundColor:'white'}}>
                     <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
                         <View style={{width:'50%'}}>
-                            <Button success block rounded onPress={this.ResetFarmProfile} style={{width:'100%',justifyContent:'center'}}>
+                            <Button success block rounded onPress={this.ResetVaccineMaster} style={{width:'100%',justifyContent:'center'}}>
                                 <Text style={{color:'white'}} >Reset</Text>
                             </Button>
                         </View>
                         <View style={{width:'50%', alignItems:'flex-end'}}>
-                            <Button primary block rounded onPress={this.SaveFarmProfile} style={{width:'100%',justifyContent:'center'}}>
+                            <Button primary block rounded onPress={this.SaveVaccineMaster} style={{width:'100%',justifyContent:'center'}}>
                                 <Text style={{color:'white'}}>Save</Text>
                             </Button>
                         </View>
