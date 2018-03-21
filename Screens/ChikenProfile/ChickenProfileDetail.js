@@ -31,7 +31,7 @@ export default class ChickenProfileDetail extends Component{
     }
     
     componentDidMount() {
-        services.GetAnimalProfile(2,0)
+        services.GetAnimalProfile(this.props.navigation.state.params.animalCode,0)
         .then(function (response) {
             if(response.data.animalProfile!=null)
             {
