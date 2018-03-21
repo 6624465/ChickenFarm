@@ -88,11 +88,11 @@ export default class ChickenProfileDetail extends Component{
                         placeholder:'Name',
                         //error:'Please Enter Farm Address'                        
                     },
-                    AnimalCode:{
-                        label: 'Code',
-                        placeholder:'Code',
-                        // error:'Please Enter ChikenCode'                        
-                    },
+                    // AnimalCode:{
+                    //     label: 'Code',
+                    //     placeholder:'Code',
+                    //     // error:'Please Enter ChikenCode'                        
+                    // },
                     AnimalSymbol:{
                         label: 'Symbol',
                         placeholder:'Symbol',
@@ -172,7 +172,7 @@ export default class ChickenProfileDetail extends Component{
         AddChickenProfile() { 
             return ( t.struct({
                 AnimalName:t.String,    
-                AnimalCode:t.Number,    
+                //AnimalCode:t.Number,    
                 AnimalSymbol:t.String,  
                 AnimalStatus:this.state.lstChickenStatus, 
                 CauseOfDeath:t.String,  
