@@ -31,16 +31,18 @@ export default class ChickenProfileDetail extends Component{
     }
     
     componentDidMount() {
-        services.GetAnimalProfile(0,1000)
+        services.GetAnimalProfile(2,0)
         .then(function (response) {
             //var regi= response.data.farmProfile;
             if(response.data.animalProfile!=null)
             {
+                var dtls = response.data.animalProfile;
+                //dtls.DateOfBirth = moment(dtls.DateOfBirth).format("MM/DD/YYYY")
                 debugger;
                 this.setState({
                     //status: (response.data.registration.IsOTPVerified === null || response.data.registration.IsOTPVerified === true) ? true : false,
-                    ChickenProfileDetails: response.data.animalProfile,
-                    imageLink: axios.defaults.baseURL+'/Uploads/AnimalProfile/'+response.data.animalProfile.AnimalCode+'/'+response.data.animalProfile.AnimalPhoto
+                    ChickenProfileDetails: dtls,
+                    //imageLink: axios.defaults.baseURL+'/Uploads/AnimalProfile/'+response.data.animalProfile.AnimalCode+'/'+response.data.animalProfile.AnimalPhoto
                 });
             }
             //alert(this.state.status+'<<<<>>>>'+response.data.registration.IsOTPVerified);
@@ -61,7 +63,7 @@ export default class ChickenProfileDetail extends Component{
                 AnimalSymbol:null,
                 AnimalStatus:null,
                 CauseOfDeath:null,
-                DateOfBirth:null,
+                //DateOfBirth:null,
                 Gender:null,
                 SireCode:null,
                 BreederCode:null,
@@ -119,7 +121,7 @@ export default class ChickenProfileDetail extends Component{
                     DateOfBirth: {
                         label: 'Date Of Birth:',
                         placeholder: 'Date Of Birth',
-                        minimumDate: new Date(),
+                        //minimumDate: new Date(),
                         mode: 'date',
                         config: {
                             format: (date) => String(moment(date).format("MM/DD/YYYY")),
@@ -167,14 +169,14 @@ export default class ChickenProfileDetail extends Component{
         this.AddChickenProfile=t.struct({
 
                             AnimalName:t.String,    
-                            AnimalCode:t.String,    
+                            AnimalCode:t.Number,    
                             AnimalSymbol:t.String,  
                             AnimalStatus:ChickenStatus, 
                             CauseOfDeath:t.String,  
                             DateOfBirth:t.Date,   
                             Gender:Gender,        
-                            SireCode:t.String,      
-                            BreederCode:t.String,  
+                            SireCode:t.Number,      
+                            BreederCode:t.Number,  
                             BreederFormula:t.String,
                             Talents:t.String,       
                             Weight:t.Number,       
@@ -228,9 +230,10 @@ export default class ChickenProfileDetail extends Component{
     
     pickMultiple() {
         ImagePicker.openPicker({
-            multiple: true,
+            //multiple: true,
             waitAnimationEnd: false,
             includeExif: true,
+            includeBase64: true,
         }).then(image => {
         debugger;
         this.setState({
@@ -300,7 +303,7 @@ export default class ChickenProfileDetail extends Component{
             .then(function (response) { 
               if(data.FarmID!=0){
                   alert('Animal profile saved successfully.')
-                  this.props.navigation.navigate('MainDashboard');
+                  this.props.navigation.navigate('ChickenProfileList');
               }
               else{
                   this.props.navigation.navigate('Navigation');
