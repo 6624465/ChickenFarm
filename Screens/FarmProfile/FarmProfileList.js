@@ -28,7 +28,7 @@ export default class FarmProfileList extends Component{
                 this.setState({
                     //status: (response.data.registration.IsOTPVerified === null || response.data.registration.IsOTPVerified === true) ? true : false,
                     FarmProfileDetails: response.data.farmProfile,
-                    imageLink: axios.defaults.baseURL+'/Uploads/FarmProfile/'+response.data.farmProfile.MobileNo+'/'+response.data.farmProfile.FarmLogo
+                    imageLink: axios.defaults.baseURL+'/Uploads/'+response.data.farmProfile.FarmID+'/FarmProfile/'+response.data.farmProfile.MobileNo+'/'+response.data.farmProfile.FarmLogo
                 });
             }
             //alert(this.state.status+'<<<<>>>>'+response.data.registration.IsOTPVerified);

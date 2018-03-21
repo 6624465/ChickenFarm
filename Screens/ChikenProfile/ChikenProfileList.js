@@ -111,7 +111,7 @@ export default class ChickenProfileList extends Component{
                                 <TouchableOpacity  onPress={() => this.NavigateToDetails(rowData.AnimalCode)}>
                                     <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
                                         <View style={{width:'20%', alignItems:'center'}}>
-                                            <Image source = { require('../../android/app/src/main/assets/chicken.png') } style={styles.photo}/>                       
+                                            <Image source = {{ uri: axios.defaults.baseURL+'/Uploads/'+rowData.FarmID+'/AnimalProfile/'+rowData.AnimalCode+'/'+rowData.AnimalPhoto}} style={styles.photo}/>                       
                                         </View>
                                         <View style={{width:'80%', alignItems:'flex-start'}}>
                                             <Text style={styles.text}>

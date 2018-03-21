@@ -42,7 +42,7 @@ export default class ChickenProfileDetail extends Component{
                     ChickenProfileDetails: dtls,
                     lstChickenStatus: t.enums(astatus),
                     lstGender: t.enums(gender),
-                    imageLink: axios.defaults.baseURL+'/Uploads/AnimalProfile/'+response.data.animalProfile.AnimalCode+'/'+response.data.animalProfile.AnimalPhoto
+                    imageLink: axios.defaults.baseURL+'/Uploads/'+response.data.animalProfile.FarmID+'/AnimalProfile/'+response.data.animalProfile.AnimalCode+'/'+response.data.animalProfile.AnimalPhoto
                 });
             }
             //alert(this.state.status+'<<<<>>>>'+response.data.registration.IsOTPVerified);
