@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet,TouchableOpacity,Image,Keyboard} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Image, Keyboard, ActivityIndicator} from 'react-native';
 import { Button } from 'native-base';
 import {StackNavigator} from 'react-navigation';
 
@@ -15,7 +15,7 @@ export default class Login extends Component{
      header:false
   }
   componentDidMount() {
-    axios.defaults.baseURL = 'http://192.168.0.107/FMS';
+    axios.defaults.baseURL = 'http://192.168.0.109/FMS';
     //axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com';
     axios.defaults.headers.common['AUTH_TOKEN'] = 'sdfsdfgsdfgsdfdsfgsdfgsdfg';
     axios.defaults.headers.common['Content-Type'] = 'application/json';    
@@ -31,7 +31,8 @@ export default class Login extends Component{
         user:{
           UserID:'',
           Password:''
-        }
+        },
+        isLoading: false,
     },
     this.LoginCredential = t.struct({
       UserID: t.Number,             
@@ -63,7 +64,14 @@ export default class Login extends Component{
   }
 
     render(){
-      //const { navigate } = this.props.navigation;
+      if (this.state.isLoading) {
+        return (
+            <View style={{flex: 1, justifyContent:'center', alignItems:'center'}}>
+            <ActivityIndicator />
+        </View>
+        );
+      }
+
       return(
       <View style={styles.login_container}>                 
         <View style={{alignItems:'center'}}>
@@ -103,6 +111,10 @@ export default class Login extends Component{
 
     LoginUser=()=>
     {
+      this.setState({
+        isLoading: true
+      });
+
       Keyboard.dismiss();
         var value = this.refs.form.getValue();
         if (value) {
@@ -112,6 +124,9 @@ export default class Login extends Component{
           }
          services.Login(data)
           .then(function (response) { 
+            this.setState({
+              isLoading: false
+            });
             axios.defaults.headers.common['MOBILE_NO'] = data.UserID; 
             if(response.data.message=="goto farm")
             {
