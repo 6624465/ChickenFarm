@@ -33,19 +33,16 @@ export default class ChickenProfileDetail extends Component{
     componentDidMount() {
         services.GetAnimalProfile(2,0)
         .then(function (response) {
-            //var regi= response.data.farmProfile;
             if(response.data.animalProfile!=null)
             {
                 var dtls = response.data.animalProfile;
-                //dtls.DateOfBirth = moment(dtls.DateOfBirth).format("MM/DD/YYYY")
-                debugger;
+                dtls.DateOfBirth = moment(dtls.DateOfBirth).toDate();
+               
                 this.setState({
-                    //status: (response.data.registration.IsOTPVerified === null || response.data.registration.IsOTPVerified === true) ? true : false,
                     ChickenProfileDetails: dtls,
-                    //imageLink: axios.defaults.baseURL+'/Uploads/AnimalProfile/'+response.data.animalProfile.AnimalCode+'/'+response.data.animalProfile.AnimalPhoto
+                    imageLink: axios.defaults.baseURL+'/Uploads/AnimalProfile/'+response.data.animalProfile.AnimalCode+'/'+response.data.animalProfile.AnimalPhoto
                 });
             }
-            //alert(this.state.status+'<<<<>>>>'+response.data.registration.IsOTPVerified);
             console.log(this.state.imageLink);
         }.bind(this))
         .catch(function (error) {
@@ -63,7 +60,7 @@ export default class ChickenProfileDetail extends Component{
                 AnimalSymbol:null,
                 AnimalStatus:null,
                 CauseOfDeath:null,
-                //DateOfBirth:null,
+                DateOfBirth:null,
                 Gender:null,
                 SireCode:null,
                 BreederCode:null,
