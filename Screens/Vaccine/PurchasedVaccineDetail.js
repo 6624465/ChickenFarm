@@ -202,7 +202,7 @@ export default class PurchasedVaccineDetail extends Component{
             .then(function (response) { 
               //if(response.data!=0){
                   alert('Vaccine profile saved successfully.')
-                  this.props.navigation.navigate('ChickenProfileList');
+                  this.props.navigation.navigate('PurchasedVaccineList');
               //}
                    
             }.bind(this))

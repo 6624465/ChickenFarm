@@ -15,7 +15,7 @@ export default class Login extends Component{
      header:false
   }
   componentDidMount() {
-    axios.defaults.baseURL = 'http://192.168.0.107/FMS';
+    axios.defaults.baseURL = 'http://192.168.0.109/FMS';
     //axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com';
     axios.defaults.headers.common['AUTH_TOKEN'] = 'sdfsdfgsdfgsdfdsfgsdfgsdfg';
     axios.defaults.headers.common['Content-Type'] = 'application/json';    
@@ -127,8 +127,9 @@ export default class Login extends Component{
             this.setState({
               isLoading: false
             });
-            axios.defaults.headers.common['MOBILE_NO'] = response.userid; 
-            axios.defaults.headers.common['FarmID'] = response.FarmID; 
+            axios.defaults.headers.common['MOBILE_NO'] = response.data.userid; 
+            axios.defaults.headers.common['FarmID'] = response.data.FarmID; 
+            debugger;
             if(response.data.message=="goto farm")
             {
               this.props.navigation.navigate('FarmProfile');
