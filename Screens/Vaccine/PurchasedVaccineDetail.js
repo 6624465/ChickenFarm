@@ -9,8 +9,8 @@ var t = require('tcomb-form-native');
 var Form = t.form.Form;
 var ImagePicker = NativeModules.ImageCropPicker;
 
-import axios from 'axios';
-import services from './Services';
+    import axios from 'axios';
+    import services from './Services';
 
 export default class PurchasedVaccineDetail extends Component{
     static navigationOptions={
