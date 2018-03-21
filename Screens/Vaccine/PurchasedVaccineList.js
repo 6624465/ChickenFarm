@@ -102,7 +102,7 @@ export default class PurchasedVaccineList extends Component{
                                 <TouchableOpacity  onPress={() => this.NavigateToDetails(rowData.VaccineCode)}>
                                     <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
                                         <View style={{width:'20%', alignItems:'center'}}>
-                                            <Image source = {{ uri: axios.defaults.baseURL+'/Uploads/'+rowData.FarmID+'/AnimalProfile/'+rowData.AnimalCode+'/'+rowData.AnimalPhoto}} style={styles.photo}/>                       
+                                            <Image source = {{ uri: axios.defaults.baseURL+'/Uploads/'+rowData.FarmID+'/VaccineMaster/'+rowData.VaccineCode+'/'+rowData.Photo}} style={styles.photo}/>   
                                         </View>
                                         <View style={{width:'80%', alignItems:'flex-start'}}>
                                             <Text style={styles.text}>

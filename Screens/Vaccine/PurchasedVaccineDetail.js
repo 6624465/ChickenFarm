@@ -51,9 +51,11 @@ export default class PurchasedVaccineDetail extends Component{
                 BatchNo:null,
                 Supplier:null,
                 Quantity:null,
-                Photo:null
+                Photo:null,
+                FileName:null
             },
-            isMedicinePhoto:false
+            isMedicinePhoto:false,
+            imageLink:null,
         },
 
         this.PurchasedVaccine=t.struct({
@@ -121,13 +123,6 @@ export default class PurchasedVaccineDetail extends Component{
     }    
 
     cleanupImages() {
-        // ImagePicker.clean().then(() => {
-
-        //   console.log('removed tmp images from tmp directory');
-        // }).catch(e => {
-        //   alert(e);
-        // });
-
         this.setState({
             PurchasedVaccineDetails:{    
                 VaccineCode:this.state.PurchasedVaccineDetails.VaccineCode,
@@ -137,7 +132,8 @@ export default class PurchasedVaccineDetail extends Component{
                 BatchNo:this.state.PurchasedVaccineDetails.BatchNo,
                 Supplier:this.state.PurchasedVaccineDetails.Supplier,
                 Quantity:this.state.PurchasedVaccineDetails.Quantity,
-                Photo:null
+                Photo:null,
+                FileName:null
             },
             isMedicinePhoto:false
         });
@@ -145,27 +141,31 @@ export default class PurchasedVaccineDetail extends Component{
     
     pickMultiple() {
         ImagePicker.openPicker({
-            multiple: true,
+            //multiple: true,
             waitAnimationEnd: false,
             includeExif: true,
-        }).then(images => {
-        this.setState({
-            PurchasedVaccineDetails:{
-                VaccineCode:this.state.PurchasedVaccineDetails.VaccineCode,
-                VaccineName:this.state.PurchasedVaccineDetails.VaccineName,
-                PurchaseDate:this.state.PurchasedVaccineDetails.PurchaseDate,
-                ExpiryDate:this.state.PurchasedVaccineDetails.ExpiryDate,
-                BatchNo:this.state.PurchasedVaccineDetails.BatchNo,
-                Supplier:this.state.PurchasedVaccineDetails.Supplier,
-                Quantity:this.state.PurchasedVaccineDetails.Quantity,
-               
-                Photo: images.map(i => {
-                    console.log('received image', i);
-                    return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
-                })
-            },
-            isMedicinePhoto:true
-          });
+            includeBase64: true,
+        }).then(image => {
+            this.setState({
+                PurchasedVaccineDetails:{
+                    VaccineCode:this.state.PurchasedVaccineDetails.VaccineCode,
+                    VaccineName:this.state.PurchasedVaccineDetails.VaccineName,
+                    PurchaseDate:this.state.PurchasedVaccineDetails.PurchaseDate,
+                    ExpiryDate:this.state.PurchasedVaccineDetails.ExpiryDate,
+                    BatchNo:this.state.PurchasedVaccineDetails.BatchNo,
+                    Supplier:this.state.PurchasedVaccineDetails.Supplier,
+                    Quantity:this.state.PurchasedVaccineDetails.Quantity,
+
+                    Photo: {uri: `data:${image.mime};base64,`+ image.data, width: image.width, height: image.height},
+                    FileName: image.data
+                
+                    // Photo: images.map(i => {
+                    //     console.log('received image', i);
+                    //     return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
+                    // })
+                },
+                isMedicinePhoto:true
+            });
         }).catch(e => alert(e));
     }
 
@@ -174,10 +174,6 @@ export default class PurchasedVaccineDetail extends Component{
     }
         
     renderAsset(image) {
-        // if (image.mime && image.mime.toLowerCase().indexOf('video/') !== -1) {
-        //   return this.renderVideo(image);
-        // }
-
         return this.renderImage(image);
     }
 
@@ -187,37 +183,36 @@ export default class PurchasedVaccineDetail extends Component{
         Keyboard.dismiss();
         var value = this.refs.form.getValue();
         if (value) {
-          var data = {
-            VaccineCode:this.state.PurchasedVaccineDetails.VaccineCode,
-            VaccineName:this.state.PurchasedVaccineDetails.VaccineName,
-            PurchaseDate:this.state.PurchasedVaccineDetails.PurchaseDate,
-            ExpiryDate:this.state.PurchasedVaccineDetails.ExpiryDate,
-            BatchNo:this.state.PurchasedVaccineDetails.BatchNo,
-            Supplier:this.state.PurchasedVaccineDetails.Supplier,
-            Quantity:this.state.PurchasedVaccineDetails.Quantity
-           
-          }
+            var data = {
+                VaccineCode:this.state.PurchasedVaccineDetails.VaccineCode,
+                VaccineName:this.state.PurchasedVaccineDetails.VaccineName,
+                PurchaseDate:this.state.PurchasedVaccineDetails.PurchaseDate,
+                ExpiryDate:this.state.PurchasedVaccineDetails.ExpiryDate,
+                BatchNo:this.state.PurchasedVaccineDetails.BatchNo,
+                Supplier:this.state.PurchasedVaccineDetails.Supplier,
+                Quantity:this.state.PurchasedVaccineDetails.Quantity,
+                FileName:this.state.PurchasedVaccineDetails.FileName,
+            }
      
-          services.SaveVaccineMaster(data)
-            .then(function (response) { 
-              //if(response.data!=0){
-                  alert('Vaccine profile saved successfully.')
-                  this.props.navigation.navigate('PurchasedVaccineList');
-              //}
-                   
-            }.bind(this))
-            .catch(function (error) {
-              console.log(error);
-          });
-      }
-        
+            services.SaveVaccineMaster(data)
+                .then(function (response) { 
+                //if(response.data!=0){
+                    alert('Vaccine profile saved successfully.')
+                    this.props.navigation.navigate('PurchasedVaccineList');
+                //}
+                    
+                }.bind(this))
+                .catch(function (error) {
+                console.log(error);
+            });
+        }
     }
-    ResetVaccineMaster=()=>{
 
+    ResetVaccineMaster=()=>{
         Keyboard.dismiss();
         this.setState({
             PurchasedVaccineDetails:{ }
-            })
+        })
     }
     render(){
         return(                  
@@ -245,8 +240,9 @@ export default class PurchasedVaccineDetail extends Component{
                             <Text style={{color:'blue'}}>{this.state.isMedicinePhoto ? 'Clear Photo' : 'Select Photo'}</Text>
                         </TouchableOpacity>
                         <ScrollView>
-                            {/* {this.state.value.image ? this.renderAsset(this.state.value.image) : null} */}
-                            {this.state.PurchasedVaccineDetails.MedicinePhoto ? this.state.PurchasedVaccineDetails.MedicinePhoto.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null}
+                            {(this.state.PurchasedVaccineDetails.Photo ? this.renderAsset(this.state.PurchasedVaccineDetails.Photo) : null)}
+                            <Image style={{width: 300, height: 300, resizeMode: 'contain'}} source={{uri: this.state.imageLink}}  />
+                           
                         </ScrollView>
                     </View>
                 </Content>
