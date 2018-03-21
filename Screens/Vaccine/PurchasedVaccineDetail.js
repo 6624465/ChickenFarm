@@ -21,7 +21,7 @@ export default class PurchasedVaccineDetail extends Component{
         super(props);
         this.state ={
             PurchasedVaccineDetails:{
-                //VaccineCode:null,
+                VaccineCode:null,
                 VaccineName:null,
                 PurchaseDate:null,
                 ExpiryDate:null,
@@ -107,7 +107,7 @@ export default class PurchasedVaccineDetail extends Component{
 
         this.setState({
             PurchasedVaccineDetails:{    
-                //VaccineCode:this.state.PurchasedVaccineDetails.VaccineCode,
+                VaccineCode:this.state.PurchasedVaccineDetails.VaccineCode,
                 VaccineName:this.state.PurchasedVaccineDetails.VaccineName,
                 PurchaseDate:this.state.PurchasedVaccineDetails.PurchaseDate,
                 ExpiryDate:this.state.PurchasedVaccineDetails.ExpiryDate,
@@ -128,14 +128,14 @@ export default class PurchasedVaccineDetail extends Component{
         }).then(images => {
         this.setState({
             PurchasedVaccineDetails:{
-                //VaccineCode:this.state.PurchasedVaccineDetails.VaccineCode,
+                VaccineCode:this.state.PurchasedVaccineDetails.VaccineCode,
                 VaccineName:this.state.PurchasedVaccineDetails.VaccineName,
                 PurchaseDate:this.state.PurchasedVaccineDetails.PurchaseDate,
                 ExpiryDate:this.state.PurchasedVaccineDetails.ExpiryDate,
                 BatchNo:this.state.PurchasedVaccineDetails.BatchNo,
                 Supplier:this.state.PurchasedVaccineDetails.Supplier,
                 Quantity:this.state.PurchasedVaccineDetails.Quantity,
-
+               
                 Photo: images.map(i => {
                     console.log('received image', i);
                     return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
@@ -163,24 +163,22 @@ export default class PurchasedVaccineDetail extends Component{
         var value = this.refs.form.getValue();
         if (value) {
           var data = {
-            //VaccineCode:this.state.PurchasedVaccineDetails.VaccineCode,
+            VaccineCode:this.state.PurchasedVaccineDetails.VaccineCode,
             VaccineName:this.state.PurchasedVaccineDetails.VaccineName,
             PurchaseDate:this.state.PurchasedVaccineDetails.PurchaseDate,
             ExpiryDate:this.state.PurchasedVaccineDetails.ExpiryDate,
             BatchNo:this.state.PurchasedVaccineDetails.BatchNo,
             Supplier:this.state.PurchasedVaccineDetails.Supplier,
-            Quantity:this.state.PurchasedVaccineDetails.Quantity,
+            Quantity:this.state.PurchasedVaccineDetails.Quantity
+           
           }
      
           services.SaveVaccineMaster(data)
             .then(function (response) { 
-              if(data.FarmID!=0){
+              //if(response.data!=0){
                   alert('Vaccine profile saved successfully.')
-                  this.props.navigation.navigate('PurchasedVaccineList');
-              }
-              else{
-                  this.props.navigation.navigate('Navigation');
-              }
+                  this.props.navigation.navigate('ChickenProfileList');
+              //}
                    
             }.bind(this))
             .catch(function (error) {

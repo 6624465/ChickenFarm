@@ -299,13 +299,10 @@ export default class ChickenProfileDetail extends Component{
      
           services.SaveAnimalProfile(data)
             .then(function (response) { 
-              if(data.FarmID!=0){
+              //if(data.FarmID!=0){
                   alert('Animal profile saved successfully.')
                   this.props.navigation.navigate('ChickenProfileList');
-              }
-              else{
-                  this.props.navigation.navigate('Navigation');
-              }
+              //}
                    
             }.bind(this))
             .catch(function (error) {
