@@ -1,14 +1,14 @@
 import axios from 'axios';
 var Vaccine={
     //VaccineMaster
-    GetVaccineMaster(VaccineCode,FarmId)
+    GetVaccineMaster(VaccineCode)
     {
-        return axios.get('/api/VaccineMaster/GetVaccineMaster/'+VaccineCode+'/'+FarmId)
+        return axios.get('/api/VaccineMaster/GetVaccineMaster/'+VaccineCode)
     },
 
-    GetVaccineMasterList(FarmId)
+    GetVaccineMasterList()
     {
-        return axios.get('/api/VaccineMaster/GetVaccineMasterList/'+FarmId)
+        return axios.get('/api/VaccineMaster/GetVaccineMasterList')
     },
 
     SaveVaccineMaster(obj)

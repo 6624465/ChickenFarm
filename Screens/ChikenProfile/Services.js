@@ -1,14 +1,14 @@
 import axios from 'axios';
 var Animal={
     //AnimalProfile
-    GetAnimalProfile(AnimalCode,FarmId)
+    GetAnimalProfile(AnimalCode)
     {
-        return axios.get('/api/AnimalProfile/GetAnimalProfile/'+AnimalCode+'/'+FarmId)
+        return axios.get('/api/AnimalProfile/GetAnimalProfile/'+AnimalCode)
     },
 
-    GetAnimalProfileList(FarmId)
+    GetAnimalProfileList()
     {
-        return axios.get('/api/AnimalProfile/GetAnimalProfileList/'+FarmId)
+        return axios.get('/api/AnimalProfile/GetAnimalProfileList')
     },
 
     SaveAnimalProfile(obj)

@@ -160,7 +160,7 @@ export default class PurchasedVaccineDetail extends Component{
 
 
     componentDidMount() {
-        services.GetVaccineMaster(this.props.navigation.state.params.VaccineCode, 0)
+        services.GetVaccineMaster(this.props.navigation.state.params.VaccineCode)
         .then(function (response) {
             if(response.data!=null)
             {

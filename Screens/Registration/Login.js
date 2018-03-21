@@ -127,7 +127,8 @@ export default class Login extends Component{
             this.setState({
               isLoading: false
             });
-            axios.defaults.headers.common['MOBILE_NO'] = data.UserID; 
+            axios.defaults.headers.common['MOBILE_NO'] = response.userid; 
+            axios.defaults.headers.common['FarmID'] = response.FarmID; 
             if(response.data.message=="goto farm")
             {
               this.props.navigation.navigate('FarmProfile');

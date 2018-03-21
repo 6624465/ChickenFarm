@@ -23,7 +23,7 @@ export default class PurchasedVaccineList extends Component{
     }
 
     componentDidMount() {
-        return services.GetVaccineMasterList(0)
+        return services.GetVaccineMasterList()
             .then((responseJson) => {
             let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
             this.setState({

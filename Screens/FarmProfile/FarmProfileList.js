@@ -234,7 +234,8 @@ export default class FarmProfileList extends Component{
         //   })
         services.SaveFarmProfile(data)
           .then(function (response) { 
-            if(data.FarmID!=0){
+            if(response.data>0){
+                axios.defaults.headers.common['FarmID'] = response.data;
                 alert('Farm profile saved successfully.')
                 this.props.navigation.navigate('MainDashboard');
             }

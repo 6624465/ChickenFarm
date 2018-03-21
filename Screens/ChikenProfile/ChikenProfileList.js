@@ -30,7 +30,7 @@ export default class ChickenProfileList extends Component{
     componentDidMount() {
     
      // axios.get('http://1tradeapi.logiconglobal.com/api/master/country/list')
-     services.GetAnimalProfileList(0)
+     services.GetAnimalProfileList()
             .then((responseJson) => {
                 //alert(responseJson)
              
@@ -90,7 +90,7 @@ export default class ChickenProfileList extends Component{
                         <Title>Chicken Profile List</Title>
                     </Body>
                     <Right>
-                        <Button transparent onPress={() => this.NavigateToDetails(0)}>
+                        <Button transparent onPress={() => this.NavigateToDetails(-1)}>
                             <Icon ios='ios-add-circle' android="md-add-circle"/>
                         </Button>
                     </Right>
