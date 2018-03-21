@@ -20,12 +20,12 @@ export default class ChickenProfileDetail extends Component{
     }
     
     componentDidMount() {
-        services.GetAnimalProfile(2,0)
+        services.GetAnimalProfile(this.props.navigation.state.params.animalCode, 0)
         .then(function (response) {
             if(response.data!=null)
             {
                 var dtls = response.data.animalProfile;
-                dtls.DateOfBirth = moment(dtls.DateOfBirth).toDate();
+                dtls.DateOfBirth = dtls.DateOfBirth != null ? moment(dtls.DateOfBirth).toDate() : null;
 
                 var astatus = {};
                 for(let i=0;i<response.data.animalStatus.length;i++)
