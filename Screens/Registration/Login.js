@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Image, Keyboard, ActivityIndicator} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Image, Keyboard, ActivityIndicator, ToastAndroid} from 'react-native';
 import { Button } from 'native-base';
 import {StackNavigator} from 'react-navigation';
 
@@ -15,7 +15,7 @@ export default class Login extends Component{
      header:false
   }
   componentDidMount() {
-    axios.defaults.baseURL = 'http://192.168.0.102/FMS';
+    axios.defaults.baseURL = 'http://192.168.0.108/FMS';
     //axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com';
     axios.defaults.headers.common['AUTH_TOKEN'] = 'sdfsdfgsdfgsdfdsfgsdfgsdfg';
     axios.defaults.headers.common['Content-Type'] = 'application/json';    
@@ -143,11 +143,22 @@ export default class Login extends Component{
             }
             else if(response.data.message=="goto registration")
             {
-              alert('MobileNo not registered.');
+              debugger;
+              ToastAndroid.showWithGravity(
+                'MobileNo not registered.',
+                ToastAndroid.LONG,
+                ToastAndroid.CENTER
+              );
+              //alert('MobileNo not registered.');
             }
             else if(response.data.message=="invalid password")
             {
-              alert('invalid credentials.');
+              ToastAndroid.showWithGravity(
+              'invalid credentials.',
+              ToastAndroid.LONG,
+              ToastAndroid.CENTER
+              );
+              //alert('invalid credentials.');
             }
             else
             {           
