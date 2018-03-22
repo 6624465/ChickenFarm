@@ -20,6 +20,7 @@ export default class GiveVaccineDetail extends Component{
         .then(function (response) {
             if(response.data!=null)
             {
+              
                 var dtls = response.data.vaccineEntry;
                 this.setState({
                     VaccineDetails: dtls,
@@ -48,7 +49,7 @@ export default class GiveVaccineDetail extends Component{
             }
         },
         this.GiveVaccine=t.struct({
-            AnimalCode:t.String,
+            AnimalCode:t.Number,
             AnimalAge:t.Number,
             VaccineType:t.String,
             VaccineName:t.String,
