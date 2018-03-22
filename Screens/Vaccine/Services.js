@@ -20,5 +20,26 @@ var Vaccine={
         })
     },
 
+    //VaccineEntry
+
+    GetVaccineEntry(RecordID)
+    {
+        return axios.get('/api/VaccineEntry/GetVaccineEntry/'+RecordID)
+    },
+
+    GetVaccineEntryList()
+    {
+        return axios.get('/api/VaccineEntry/GetVaccineEntryList')
+    },
+
+    SaveVaccineEntry(obj)
+    {   
+      return axios({
+            method: 'post',
+            url: '/api/VaccineEntry/save',
+            data: obj
+        })
+    },
+
 };
 module.exports=Vaccine;

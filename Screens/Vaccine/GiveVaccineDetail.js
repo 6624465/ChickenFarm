@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet} from 'react-native';
+import {View, Text,StyleSheet,Keyboard} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button,Footer } from 'native-base';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
+import axios from 'axios';
+import services from './Services';
 
 
 export default class GiveVaccineDetail extends Component{
@@ -13,58 +15,72 @@ export default class GiveVaccineDetail extends Component{
         drawerLabel: () => null
     }
 
+    componentDidMount() {
+        services.GetVaccineEntry(this.props.navigation.state.params.RecordID)
+        .then(function (response) {
+            if(response.data!=null)
+            {
+                var dtls = response.data.vaccineEntry;
+                this.setState({
+                    VaccineDetails: dtls,
+                });
+            }
+        
+            console.log(this.state.imageLink);
+        }.bind(this))
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
+
     constructor()
     {
         super();
         this.state ={
             VaccineDetails:{
-                ChickenCode:null,
-                ChickenAge:null,
-                TypeofVaccine:null,
+                AnimalCode:null,
+                AnimalAge:null,
+                VaccineType:null,
                 VaccineName:null,
                 VaccineCompany:null,
-                HowtogetVaccine:null
+                Remarks:null,
+                RecordID:null
             }
         },
         this.GiveVaccine=t.struct({
-            ChickenCode:t.String,
-            ChickenAge:t.Number,
-            TypeofVaccine:t.String,
+            AnimalCode:t.String,
+            AnimalAge:t.Number,
+            VaccineType:t.String,
             VaccineName:t.String,
             VaccineCompany:t.String,
-            HowtogetVaccine:t.String
+            Remarks:t.String
         })
         this.GiveVaccineOptions={
             fields:{
-                ChickenCode:{
-                    label: 'Chicken Code',
-                    placeholder:'Chicken Code',
-                    //error:'Please Enter Your Full Name'                
+                AnimalCode:{
+                    label: 'Animal Code',
+                    placeholder:'Animal Code'              
                 },
-                ChickenAge:{
-                    label: 'Chicken Age',
-                    placeholder:'Chicken Age',
-                    //error:'Please Enter Your Full Name'                
+                AnimalAge:{
+                    label: 'Animal Age',
+                    placeholder:'Animal Age'
+                                  
                 },
-                TypeofVaccine:{
-                    label: 'Type Of Vaccine',
-                    placeholder:'Type Of Vaccine',
-                    //error:'Please Enter Farm Address'                
+                VaccineType:{
+                    label: 'Vaccine Type',
+                    placeholder:'Vaccine Type'
                 },
                 VaccineName:{
                     label: 'Vaccine Name',
-                    placeholder:'Vaccine Name',
-                    //error:'Please Enter Tel/Line Number'                
+                    placeholder:'Vaccine Name'
                 },
                 VaccineCompany:{
                     label: 'Vaccine Company',
-                    placeholder:'Vaccine Company',
-                    // error:'Please Enter Your Full Name'                
+                    placeholder:'Vaccine Company'
                 },
-                HowtogetVaccine:{
-                    label: 'How To Get Vaccine',
-                    placeholder:'How To Get Vaccine',
-                    // error:'Please Enter Your Full Name'                
+                Remarks:{
+                    label: 'Remarks',
+                    placeholder:'Remarks'               
                 }
             }
         }
@@ -72,6 +88,40 @@ export default class GiveVaccineDetail extends Component{
 
     onChange = (VaccineDetails) => {
         this.setState({VaccineDetails});
+    }
+
+    SaveVaccineEntry=()=>{
+        Keyboard.dismiss();
+        var value = this.refs.form.getValue();
+        if (value) {
+            var data = {
+                AnimalCode:this.state.VaccineDetails.AnimalCode,
+                AnimalAge:this.state.VaccineDetails.AnimalAge,
+                VaccineType:this.state.VaccineDetails.VaccineType,
+                VaccineName:this.state.VaccineDetails.VaccineName,
+                VaccineCompany:this.state.VaccineDetails.VaccineCompany,
+                Remarks:this.state.VaccineDetails.Remarks,
+                RecordID:this.state.VaccineDetails.RecordID,
+            }
+     
+            services.SaveVaccineEntry(data)
+                .then(function (response) { 
+                //if(response.data!=0){
+                    alert('Vaccine Entry saved successfully.')
+                    this.props.navigation.navigate('GiveVaccineList');
+                //}
+                    
+                }.bind(this))
+                .catch(function (error) {
+                console.log(error);
+            });
+        }
+    }
+    ResetVaccineEntry=()=>{
+         Keyboard.dismiss();
+        this.setState({
+            VaccineDetails:{ }
+        })
     }
 
     render(){
@@ -101,12 +151,12 @@ export default class GiveVaccineDetail extends Component{
                 <Footer style={{backgroundColor:'white'}}>
                     <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
                         <View style={{width:'50%'}}>
-                            <Button success block rounded onPress={this.ResetFarmProfile} style={{width:'100%',justifyContent:'center'}}>
+                            <Button success block rounded onPress={this.ResetVaccineEntry} style={{width:'100%',justifyContent:'center'}}>
                                 <Text style={{color:'white'}} >Reset</Text>
                             </Button>
                         </View>
                         <View style={{width:'50%', alignItems:'flex-end'}}>
-                            <Button primary block rounded onPress={this.SaveFarmProfile} style={{width:'100%',justifyContent:'center'}}>
+                            <Button primary block rounded onPress={this.SaveVaccineEntry} style={{width:'100%',justifyContent:'center'}}>
                                 <Text style={{color:'white'}}>Save</Text>
                             </Button>
                         </View>
