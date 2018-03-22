@@ -48,7 +48,7 @@ export default class PurchasedVaccineList extends Component{
 
     FilterListData=(text)=>{   
         const newData = this.arrayholder.filter(function(item){
-            const itemData = item.VaccineCode.toUpperCase()
+            const itemData = item.VaccineName.toUpperCase()
             const textData = text.toUpperCase()
             return itemData.indexOf(textData) > -1
         })
