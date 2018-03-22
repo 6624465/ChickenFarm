@@ -20,10 +20,16 @@ export default class GiveVaccineDetail extends Component{
         .then(function (response) {
             if(response.data!=null)
             {
-              
+              debugger;
                 var dtls = response.data.vaccineEntry;
+                var astatus = {};
+                for(let i=0;i<response.data.lstAnimalProfile.length;i++)
+                {
+                    astatus[response.data.lstAnimalProfile[i].AnimalCode] = response.data.lstAnimalProfile[i].AnimalName;
+                }
                 this.setState({
                     VaccineDetails: dtls,
+                    lstAnimalCode: t.enums(astatus),
                 });
             }
         
@@ -46,16 +52,9 @@ export default class GiveVaccineDetail extends Component{
                 VaccineCompany:null,
                 Remarks:null,
                 RecordID:null
-            }
+            },
+            lstAnimalCode:t.enums({}),
         },
-        this.GiveVaccine=t.struct({
-            AnimalCode:t.Number,
-            AnimalAge:t.Number,
-            VaccineType:t.String,
-            VaccineName:t.String,
-            VaccineCompany:t.String,
-            Remarks:t.String
-        })
         this.GiveVaccineOptions={
             fields:{
                 AnimalCode:{
@@ -87,6 +86,17 @@ export default class GiveVaccineDetail extends Component{
         }
     }
 
+    GiveVaccine() { 
+        return ( t.struct({
+            AnimalCode:this.state.lstAnimalCode,
+            AnimalAge:t.Number,
+            VaccineType:t.String,
+            VaccineName:t.String,
+            VaccineCompany:t.String,
+            Remarks:t.String
+        })
+    )
+}
     onChange = (VaccineDetails) => {
         this.setState({VaccineDetails});
     }
@@ -142,7 +152,7 @@ export default class GiveVaccineDetail extends Component{
                     <View style={styles.container}>
                         <Form
                             ref='form'
-                            type={this.GiveVaccine}
+                            type={this.GiveVaccine()}
                             options={this.GiveVaccineOptions}
                             value={this.state.VaccineDetails}
                             onChange={this.onChange}
