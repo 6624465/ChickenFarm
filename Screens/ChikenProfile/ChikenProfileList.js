@@ -73,7 +73,7 @@ export default class ChickenProfileList extends Component{
         if (this.state.isLoading) {
             return (
                 <View style={{flex: 1, justifyContent:'center', alignItems:'center'}}>
-                <ActivityIndicator />
+                <ActivityIndicator size="large" color="#0000ff" />
             </View>
             );
         }
