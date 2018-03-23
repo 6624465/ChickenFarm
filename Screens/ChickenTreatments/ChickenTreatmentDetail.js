@@ -3,14 +3,13 @@ import {View, Text,StyleSheet,Keyboard} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button,Footer} from 'native-base';
-
-var t = require('tcomb-form-native');
-var Form = t.form.Form;
 import moment from 'moment';
 import services from './Services'
 import axios from 'axios';
 import styles from '../stylesheet';
 
+var t = require('tcomb-form-native');
+var Form = t.form.Form;
 
 export default class ChickenTreatmentDetail extends Component{
             static navigationOptions={
