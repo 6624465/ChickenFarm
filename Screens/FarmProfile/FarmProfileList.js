@@ -227,7 +227,9 @@ export default class FarmProfileList extends Component{
     {
         Keyboard.dismiss();
         this.setState({
-            FarmProfileDetails:{ }
+            FarmProfileDetails:{ },
+            isLogo:false,
+            imageLink:null
         })
     }
 
