@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import {View, Text,StyleSheet} from 'react-native';
-
 import {StackNavigator} from 'react-navigation';
-
-
 import { Container, Content, Header, Icon, Left, Title, Body, Button } from 'native-base';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
 import services from './Services';
+import styles from '../stylesheet';
 
 export default class ForgotPassword extends Component{
     static navigationOptions={
@@ -83,46 +81,34 @@ export default class ForgotPassword extends Component{
       }
 
     render(){
-            return(        
-                <Container>
-                <Header>
-                       <Left>
-                           <Button transparent onPress={() => this.props.navigation.goBack()}>
-                           <Icon name='arrow-back'/>
-                           </Button>
-                       </Left>
-                       <Body>
-                           <Title>Forgot Password</Title>
-                       </Body>
-                   </Header>
-                   <Content style={styles.container}>
-                       <View>
-                           <Form
-                           ref='form'
-                           type={this.forgotpassword}
-                           options={this.forgotpasswordOption}
-                           value={this.state.value}
-                           onChange={this.onChange}
-                           />
-                           <Button success block rounded onPress={this.ForgotPasswordContinue}>
-                            <Text style={{color:'#fff', fontWeight:'bold', fontSize:18}}>{'Continue'}</Text>
+        return(        
+            <Container>
+            <Header>
+                    <Left>
+                        <Button transparent onPress={() => this.props.navigation.goBack()}>
+                            <Icon name='arrow-back'/>
                         </Button>
-                       </View>
-                      
-                   </Content>
-               </Container>
-            );
-
+                    </Left>
+                    <Body>
+                        <Title>Forgot Password</Title>
+                    </Body>
+                </Header>
+                <Content style={styles.container}>
+                    <View>
+                        <Form
+                        ref='form'
+                        type={this.forgotpassword}
+                        options={this.forgotpasswordOption}
+                        value={this.state.value}
+                        onChange={this.onChange}
+                        />
+                        <Button success block rounded onPress={this.ForgotPasswordContinue}>
+                            <Text style={styles.button_text}>{'Continue'}</Text>
+                        </Button>
+                    </View>                      
+                </Content>
+            </Container>
+        );
     }
 }
 
-var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        //justifyContent: 'center',
-        //marginTop: 120,
-        padding: 20,
-        backgroundColor: '#ffffff',      
-    }
-  
-  });

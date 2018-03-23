@@ -230,7 +230,7 @@ export default class Registration extends Component {
                         <Title>Registration</Title>
                     </Body>
                 </Header>
-                <Content style={styles.regcontainer}>
+                <Content style={styles.container}>
                     <View>
                         <Form
                             ref='form'
@@ -241,12 +241,12 @@ export default class Registration extends Component {
                         />
                         
                         <TouchableOpacity onPress={this.ResendOTP.bind(this)}>
-                        <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
+                        <Text style={styles.touchableOpacity_text}>
                             {this.state.status?'':'Resend OTP'}
                         </Text>
                         </TouchableOpacity>
                         <Button success block rounded onPress={this.state.status ? this.SaveRegistration.bind(this):this.UpdateOTPStatus.bind(this)}>
-                            <Text style={{color:'#fff', fontWeight:'bold', fontSize:18}}>{this.state.status?'Sign Up':'Submit'}</Text>
+                            <Text style={styles.button_text}>{this.state.status?'Sign Up':'Submit'}</Text>
                         </Button>
                     </View>
                 </Content>

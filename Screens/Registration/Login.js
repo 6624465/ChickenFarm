@@ -15,8 +15,8 @@ export default class Login extends Component{
      header:false
   }
   componentDidMount() {
-    axios.defaults.baseURL = 'http://192.168.0.108/FMS';
-    //axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com';
+    //axios.defaults.baseURL = 'http://192.168.0.108/FMS';
+    axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com';
     axios.defaults.headers.common['AUTH_TOKEN'] = 'sdfsdfgsdfgsdfdsfgsdfgsdfg';
     axios.defaults.headers.common['Content-Type'] = 'application/json';    
     axios.defaults.headers.post['Content-Type'] = 'application/json';  
@@ -46,7 +46,7 @@ export default class Login extends Component{
         UserID: {
               label: 'Mobile No',
               placeholder:'Enter Your Mobile No',
-              maxLength:10 
+              maxLength:12 
               //error:'Please Enter Your Mobile Number'  
             },
             Password: {
@@ -66,7 +66,7 @@ export default class Login extends Component{
     render(){
       if (this.state.isLoading) {
         return (
-            <View style={{flex: 1, justifyContent:'center', alignItems:'center'}}>
+            <View style={styles.activeindicator}>
             <ActivityIndicator size="large" color="#0000ff"/>
         </View>
         );
@@ -86,20 +86,20 @@ export default class Login extends Component{
         />
         
         <Button primary block rounded onPress={this.LoginUser.bind(this)}>
-            <Text style={{color:'#fff', fontWeight:'bold', fontSize:18}}>Login</Text>
+            <Text style={styles.button_text}>Login</Text>
         </Button>
 
-        <View style={{flexDirection:'row', flexWrap:'wrap'}}>
-          <View style={{width:'50%'}}>
-            <TouchableOpacity style={{paddingTop:'10%'}} onPress={this.NewUserRegistration}>
-              <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
+        <View style={styles.flexDirectionWrap}>
+          <View style={styles.width_50}>
+            <TouchableOpacity style={styles.paddingtop_10} onPress={this.NewUserRegistration}>
+              <Text style={styles.touchableOpacity_text}>
                 New User?
               </Text>
             </TouchableOpacity>
           </View>
-          <View style={{width:'50%', alignItems:'flex-end'}}>
-            <TouchableOpacity style={{paddingTop:'10%'}} onPress={this.ForgotPassword}>
-              <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
+          <View style={styles.width_50_flex_end}>
+            <TouchableOpacity style={styles.paddingtop_10} onPress={this.ForgotPassword}>
+              <Text style={styles.touchableOpacity_text}>
                 Forgot Password?
               </Text>
             </TouchableOpacity>

@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import {View, Text,StyleSheet,TouchableOpacity} from 'react-native';
-
 import {StackNavigator} from 'react-navigation';
-
-
 import { Container, Content, Header, Icon, Left, Title, Body, Button } from 'native-base';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
 import services from './Services';
+import styles from '../stylesheet';
 
 export default class ForgotPasswordContinue extends Component{
     static navigationOptions={
@@ -25,22 +23,21 @@ export default class ForgotPasswordContinue extends Component{
           }
         }
         
-       this.forgotpasswordnew = t.struct({
+        this.forgotpasswordnew = t.struct({
             Otp:t.Number,
-          });
+        });
         
          this.forgotpasswordNewOption={
             fields:{
-                    Otp:{
-                            label: 'OTP',
-                            placeholder:'Pleasse Enter OTP Number',
-                            secureTextEntry: true,
-                    }
+                Otp:{
+                    label: 'OTP',
+                    placeholder:'Pleasse Enter OTP Number',
+                    secureTextEntry: true,
+                }
             }
         }
-
-      }
-      ForgotPasswordContinueOtp = () =>{
+    }
+    ForgotPasswordContinueOtp = () =>{
         var value = this.refs.form.getValue();
         if(value)
         {
@@ -52,28 +49,28 @@ export default class ForgotPasswordContinue extends Component{
             services.IsOtpVerify(data.MobileNo,data.OTP)
             .then(function (response) {
                 if(response.data=="Success")
-                {  
-                    
+                {                      
                     this.props.navigation.navigate(
                         'ForgotPasswordUpdate',
                         { MobileNo: data.MobileNo }
-                      );
+                    );
                 }
                 else
                 {  
-                        alert("Invalid Otp Number..Please Enter Valid Otp Number")
+                    alert("Invalid Otp Number..Please Enter Valid Otp Number")
                 }
                 console.log(this.state.status);
-                }.bind(this))
-                .catch(function (error) {
-                    console.log(error);
-                });
+            }.bind(this))
+            .catch(function (error) {
+                console.log(error);
+            });
         }   
     }
     IsResendOTP = () =>{
         var data = {
             MobileNo:this.props.navigation.state.params.MobileNo
         }
+
         services.IsMobileNoExists(data.MobileNo)
         .then(function (response) {
             if(response.data)
@@ -104,53 +101,40 @@ export default class ForgotPasswordContinue extends Component{
       }
 
     render(){
-            return(        
-                <Container>
+        return(        
+            <Container>
                 <Header>
-                       <Left>
-                           <Button transparent onPress={() => this.props.navigation.goBack()}>
-                           <Icon name='arrow-back'/>
-                           </Button>
-                       </Left>
-                       <Body>
-                           <Title>Forgot Password</Title>
-                       </Body>
-                   </Header>
-                   <Content style={styles.container}>
-                       <View>
-                           <Form
-                           ref='form'
-                           type={this.forgotpasswordnew}
-                           options={this.forgotpasswordNewOption}
-                           value={this.state.value}
-                           onChange={this.onChange}
-                           />
-
-                                <View>
-                                        <TouchableOpacity onPress={this.IsResendOTP}>
-                                        <Text style={{color:'blue'}}> Resend Otp </Text>
-                                        </TouchableOpacity>
-                                </View>
-
-                           <Button success block rounded onPress={this.ForgotPasswordContinueOtp}>
-                            <Text style={{color:'#fff', fontWeight:'bold', fontSize:18}}>{'Continue'}</Text>
+                    <Left>
+                        <Button transparent onPress={() => this.props.navigation.goBack()}>
+                        <Icon name='arrow-back'/>
                         </Button>
-                       </View>
-                      
-                   </Content>
-               </Container>
-            );
+                    </Left>
+                    <Body>
+                        <Title>Forgot Password</Title>
+                    </Body>
+                </Header>
+                <Content style={styles.container}>
+                    <View>
+                        <Form
+                            ref='form'
+                            type={this.forgotpasswordnew}
+                            options={this.forgotpasswordNewOption}
+                            value={this.state.value}
+                            onChange={this.onChange}
+                        />
 
+                        <View>
+                            <TouchableOpacity onPress={this.IsResendOTP}>
+                                <Text style={styles.touchableOpacity_text}> Resend Otp </Text>
+                            </TouchableOpacity>
+                        </View>
+
+                        <Button success block rounded onPress={this.ForgotPasswordContinueOtp}>
+                            <Text style={styles.button_text}>{'Continue'}</Text>
+                        </Button>
+                    </View>                      
+                </Content>
+            </Container>
+        );
     }
 }
-
-var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        //justifyContent: 'center',
-        //marginTop: 120,
-        padding: 20,
-        backgroundColor: '#ffffff',      
-    }
-  
-  });
