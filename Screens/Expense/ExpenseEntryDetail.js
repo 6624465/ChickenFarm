@@ -26,7 +26,7 @@ export default class ExpenseEntryDetail extends Component{
                     astatus[response.data.lstExpensesMaster[i].ExpensesCode] = response.data.lstExpensesMaster[i].ExpensesName;
                 }
                 this.setState({
-                    VaccineDetails: dtls,
+                    Expense: dtls,
                     lstExpensesCode: t.enums(astatus),
                 });
             }
@@ -109,7 +109,7 @@ export default class ExpenseEntryDetail extends Component{
                 .then(function (response) { 
                 //if(response.data!=0){
                     alert('Expenses Entry saved successfully.')
-                    this.props.navigation.navigate('MExpenseList');
+                    this.props.navigation.navigate('ExpenseEntryList');
                 //}
                     
                 }.bind(this))
@@ -134,7 +134,7 @@ export default class ExpenseEntryDetail extends Component{
                         </Button>
                     </Left>
                     <Body>
-                        <Title>My Expense Details</Title>
+                        <Title>Expense Entry Details</Title>
                     </Body>
                 </Header>
                 <Content>
@@ -167,12 +167,4 @@ export default class ExpenseEntryDetail extends Component{
     }
 }
 
-var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        //justifyContent: 'center',
-        //marginTop: 120,
-        padding: 20,
-        backgroundColor: '#ffffff',      
-    }
-  });
+

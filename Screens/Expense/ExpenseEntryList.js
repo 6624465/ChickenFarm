@@ -96,24 +96,19 @@ export default class ExpenseEntryList extends Component{
                             dataSource={this.state.dataSource}
                             renderRow={(rowData) => 
                             <View style={styles.listcontainer}>
-                                <TouchableOpacity  onPress={() => this.NavigateToDetails(rowData.CompanyCode)}>
+                                <TouchableOpacity  onPress={() => this.NavigateToDetails(rowData.RecordID)}>
                                     <View style={styles.flexDirectionWrap} >
                                         <View style={{width:'20%', alignItems:'center'}}>
                                             <Image source = { require('../../android/app/src/main/assets/chicken.png') } style={styles.photo}/>                       
                                         </View>
                                         <View style={{width:'80%', alignItems:'flex-start'}}>
                                             <Text style={styles.text}>
-                                                {rowData.CompanyCode}
+                                                {rowData.ExpensesCode}
                                             </Text>
                                             <Text style={styles.text}>
-                                                {rowData.CompanyName}
+                                                {rowData.VendorName}
                                             </Text>
-                                            <Text style={styles.text}>
-                                                {rowData.CompanyName}
-                                            </Text>
-                                            <Text style={styles.text}>
-                                                {rowData.CompanyName}
-                                            </Text>
+                                          
                                         </View>
                                     </View>                            
                                 </TouchableOpacity>
