@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet} from 'react-native';
+import {View, Text,StyleSheet,Keyboard} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button,Footer} from 'native-base';
@@ -7,101 +7,148 @@ import { Container, Content, Header, Icon, Left, Title, Body, Button,Footer} fro
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
 import moment from 'moment';
+import services from './Services'
+import axios from 'axios';
 
 export default class ChickenTreatmentDetail extends Component{
-    static navigationOptions={
-        drawerLabel: () => null
-     }
+            static navigationOptions={
+                drawerLabel: () => null
+            }
+            componentDidMount() {
+                services.GetTreatmentEntry(this.props.navigation.state.params.RecordID)
+                .then(function (response) {
+                    if(response.data!=null)
+                    {
+                        var dtls = response.data.treatmentEntry;
+                        dtls.StartDate = dtls.StartDate != null ? moment(dtls.StartDate).toDate() : null;
+                        dtls.EndDate = dtls.EndDate != null ? moment(dtls.EndDate).toDate() : null;
+                        var astatus = {};
+                        for(let i=0;i<response.data.lstAnimalProfile.length;i++)
+                        {
+                            astatus[response.data.lstAnimalProfile[i].AnimalCode] = response.data.lstAnimalProfile[i].AnimalName;
+                        }
+                        this.setState({
+                            TreatmentEntryDetail: dtls,
+                            lstAnimalCode: t.enums(astatus),
+                        });
+                    }
+                    console.log(this.state.imageLink);
+                }.bind(this))
+                .catch(function (error) {
+                    console.log(error);
+                });
+            }
             constructor()
                  {
-                super();
-                this.state ={
-                    value:{}
+                    super();
+                    this.state ={
+                        TreatmentEntryDetail:{
+                                    RecordID:null,
+                                    FarmID:null,
+                                    AnimalCode:null,
+                                    MedicineName:null,
+                                    Reason:null,
+                                    StartDate:null,
+                                    EndDate:null,
+                                    Dosage:null,
+                                    Remarks:null
+                        },
+                        lstAnimalCode:t.enums({}),
                 },
-                this.AddChickenTreatment=t.struct({
-                 AddTreatments:t.Number,
-                 TreatmentReason:t.String,
-                 MedicineName :t.String,
-                 ChickenCode:t.String,
-                 StartDateOfDosage:t.Date,
-                 EndDateOfDosage:t.Date,
-                 DaysInTotal:t.Number,
-                 DosePerChickenPerDay  :t.Number,
-                 AdditionalNotes:t.String
-
-                })
+               
                 this.AddChickenTreatmentOptions={
                     fields:{
-                        AddTreatments:{
-                            label: 'Add Treatments',
-                            placeholder:'Add Treatments',
-                            //error:'Please Enter Your Full Name'
-                        
-                        },
-                        TreatmentReason:{
-                            label: 'Treatment Reason',
-                            placeholder:'Treatment Reason',
-                            //error:'Please Enter Farm Address'
-                        
-                        },
                         MedicineName:{
                             label: 'Medicine Name',
-                            placeholder:'Medicine Name',
-                            //error:'Please Enter Tel/Line Number'
+                            placeholder:'Medicine Name'
                         
                         },
-                        ChickenCode:{
-                            label: 'Chicken Code',
-                            placeholder:'Chicken Code',
-                           // error:'Please Enter Your Full Name'
+                        Reason:{
+                            label: 'Reason',
+                            placeholder:'Reason'
                         
                         },
-                        StartDateOfDosage:{
-                            label: 'Start Date Of Dosage',
+                        StartDate:{
+                            label: 'Start Date',
                             //minimumDate: new Date(),
                             mode: 'date',
                             config: {
                               format: (date) => String(moment(date).format("MM/DD/YYYY")),
                             }
-                            //error:'Please Enter Tel/Line Number'
                         
                         },
-                        EndDateOfDosage:{
-                            label: 'End Date Of Dosage',
+                        EndDate:{
+                            label: 'End Date',
                             //minimumDate: new Date(),
                             mode: 'date',
                             config: {
                               format: (date) => String(moment(date).format("MM/DD/YYYY")),
                             }
-                            //error:'Please Enter Tel/Line Number'
                         
                         },
-                        DaysInTotal:{
-                            label: 'Days In Total',
-                            placeholder:'Days In Total',
-                            //error:'Please Enter Your Full Name'
-                        
+                        Dosage:{
+                            label: 'Dosage',
+                            placeholder:'Dosage'
                         },
-                        DosePerChickenPerDay:{
-                            label: 'Dose Per Chicken Per Day',
-                            placeholder:'Treatment Reason',
-                            //error:'Please Enter Farm Address'
-                        
-                        },
-                        AdditionalNotes:{
-                            label: 'Additional Notes',
-                            placeholder:'Additional Notes',
-                            //error:'Please Enter Tel/Line Number'
-                        
-                        }
+                        Remarks:{
+                            label: 'Remarks',
+                            placeholder:'Remarks',
                     }
                 }
         }
-        onChange = (value) => {
-            this.setState({value});
-          }
-    
+     }
 
+
+        AddChickenTreatment() { 
+        return ( t.struct({
+            AnimalCode:this.state.lstAnimalCode,
+            MedicineName :t.String,
+            Reason:t.String,
+            StartDate:t.Date,
+            EndDate:t.Date,
+            Dosage  :t.Number,
+            Remarks:t.String
+               }) )
+            }
+
+        onChange = (TreatmentEntryDetail) => {
+            this.setState({TreatmentEntryDetail:TreatmentEntryDetail});
+          }
+        
+        SaveTreatmentEntry=()=>{
+            Keyboard.dismiss();
+        debugger;
+            var value = this.refs.form.getValue();
+            if (value) {
+              var data = {
+                AnimalCode:this.state.TreatmentEntryDetail.AnimalCode,
+                MedicineName:this.state.TreatmentEntryDetail.MedicineName,
+                Reason:this.state.TreatmentEntryDetail.Reason,
+                StartDate:this.state.TreatmentEntryDetail.StartDate,
+                EndDate:this.state.TreatmentEntryDetail.EndDate,
+                Dosage:this.state.TreatmentEntryDetail.Dosage,
+                Remarks:this.state.TreatmentEntryDetail.Remarks,
+                RecordID:this.state.TreatmentEntryDetail.RecordID
+              }
+              services.SaveTreatmentEntry(data)
+                .then(function (response) { 
+                  //if(data.FarmID!=0){
+                      alert('Treatment Entry saved successfully.')
+                      this.props.navigation.navigate('ChickenTreatmentList');
+                  //}
+                       
+                }.bind(this))
+                .catch(function (error) {
+                  console.log(error);
+              });
+          }
+        }
+        ResetTreatmentEntry=()=>{
+            Keyboard.dismiss();
+            this.setState({
+                TreatmentEntryDetail:{ }
+                }) 
+        }
     render(){
             return(        
                   
@@ -121,9 +168,9 @@ export default class ChickenTreatmentDetail extends Component{
                        <View style={styles.container}>
                         <Form
                             ref='form'
-                            type={this.AddChickenTreatment}
+                            type={this.AddChickenTreatment()}
                             options={this.AddChickenTreatmentOptions}
-                            value={this.state.value}
+                            value={this.state.TreatmentEntryDetail}
                             onChange={this.onChange}
                         />
                     </View>
@@ -131,12 +178,12 @@ export default class ChickenTreatmentDetail extends Component{
                     <Footer style={{backgroundColor:'white'}}>
                         <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
                             <View style={{width:'50%'}}>
-                                <Button success block rounded onPress={this.ResetFarmProfile} style={{width:'100%',justifyContent:'center'}}>
+                                <Button success block rounded onPress={this.ResetTreatmentEntry} style={{width:'100%',justifyContent:'center'}}>
                                     <Text style={{color:'white'}} >Reset</Text>
                                 </Button>
                             </View>
                             <View style={{width:'50%', alignItems:'flex-end'}}>
-                                <Button primary block rounded onPress={this.SaveFarmProfile} style={{width:'100%',justifyContent:'center'}}>
+                                <Button primary block rounded onPress={this.SaveTreatmentEntry} style={{width:'100%',justifyContent:'center'}}>
                                     <Text style={{color:'white'}}>Save</Text>
                                 </Button>
                             </View>
