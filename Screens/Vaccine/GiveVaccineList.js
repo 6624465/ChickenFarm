@@ -3,7 +3,6 @@ import {View, Text, StyleSheet, ActivityIndicator, ListView, TouchableOpacity, I
 
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer, Right, Item, Input } from 'native-base';
-import axios from 'axios';
 import services from './Services';
 import styles from '../stylesheet';
   
