@@ -22,5 +22,25 @@ var Expenses={
         })
     },
 
+    //ExpensesEntry
+
+    GetExpensesEntry(RecordID)
+    {
+        return axios.get('/api/ExpensesEntry/GetExpensesEntry/'+RecordID)
+    },
+
+    GetExpensesEntryList()
+    {
+        return axios.get('/api/ExpensesEntry/GetExpensesEntryList')
+    },
+
+    SaveExpensesEntry(obj)
+    {   
+      return axios({
+            method: 'post',
+            url: '/api/ExpensesEntry/save',
+            data: obj
+        })
+    },
 };
 module.exports=Expenses;

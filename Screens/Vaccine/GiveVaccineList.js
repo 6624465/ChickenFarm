@@ -61,8 +61,8 @@ export default class GiveVaccineList extends Component{
         if (this.state.isLoading) {
             return (
                 <View style={styles.activeindicator}>
-                <ActivityIndicator size="large" color="#0000ff" />
-            </View>
+                    <ActivityIndicator size="large" color="#0000ff" />
+                </View>
             );
         }
 

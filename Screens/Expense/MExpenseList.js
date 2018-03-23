@@ -3,8 +3,8 @@ import {View, Text, StyleSheet, ActivityIndicator, ListView, TouchableOpacity, I
 
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer, Right, Item, Input } from 'native-base';
-import services from './Services'
-
+import services from './Services';
+import styles from '../stylesheet';
   
 export default class MExpenseList extends Component{
 
@@ -60,9 +60,9 @@ export default class MExpenseList extends Component{
         const {navigate}=this.props.navigation;
         if (this.state.isLoading) {
             return (
-                <View style={{flex: 1, justifyContent:'center', alignItems:'center'}}>
-                <ActivityIndicator size="large" color="#0000ff" />
-            </View>
+                <View style={styles.activeindicator}>
+                    <ActivityIndicator size="large" color="#0000ff" />
+                </View>
             );
         }
 
@@ -92,13 +92,13 @@ export default class MExpenseList extends Component{
                 </Header>
 
                 <Content>
-                    <View style={styles.container}>
+                <View style={styles.listcontainerView}>     
                         <ListView 
                             dataSource={this.state.dataSource}
                             renderRow={(rowData) => 
                             <View style={styles.listcontainer}>
                                 <TouchableOpacity  onPress={() => this.NavigateToDetails(rowData.ExpensesID)}>
-                                    <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
+                                    <View style={styles.flexDirectionWrap} >
                                         <View style={{width:'20%', alignItems:'center'}}>
                                             <Image source = { require('../../android/app/src/main/assets/chicken.png') } style={styles.photo}/>                       
                                         </View>
@@ -122,36 +122,4 @@ export default class MExpenseList extends Component{
             </Container>
         );
     }
-
 }
-
-var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        //marginTop: 120,
-        padding: 5,
-        backgroundColor: '#C1C1C1',      
-    },
-    listcontainer: {
-        flex: 1,
-        padding: 12,
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    text: {
-        marginLeft: 12,
-        fontSize: 18,
-        color:'#000'
-    },
-    photo: {
-        height: 70,
-        width: 70,
-        borderRadius: 35,
-    },
-    separator: {
-        flex: 1,
-        height: StyleSheet.hairlineWidth,
-        backgroundColor: '#8E8E8E',
-    },
-  });
