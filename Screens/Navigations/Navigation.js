@@ -33,8 +33,8 @@ import PurchasedMedicineDetail from '../ChickenTreatments/PurchasedMedicineDetai
 import Expense from '../Expense/ExpenseList';
 import MExpenseList from '../Expense/MExpenseList';
 import MExpenseDetail from '../Expense/MExpenseDetail';
-import MyExpenseList from '../Expense/MyExpenseList';
-import MyExpenseDetail from '../Expense/MyExpenseDetail';
+import ExpenseEntryList from '../Expense/ExpenseEntryList';
+import ExpenseEntryDetail from '../Expense/ExpenseEntryDetail';
 
 import Sales from '../Sales/SalesList';
 import PriceList from '../Sales/PriceList';
@@ -93,8 +93,8 @@ const NavLinks = DrawerNavigator({
       Expense:{screen:Expense},
       MExpenseList:{screen:MExpenseList},
       MExpenseDetail:{screen:MExpenseDetail},
-      MyExpenseList:{screen:MyExpenseList},
-      MyExpenseDetail:{screen:MyExpenseDetail},
+      ExpenseEntryList:{screen:ExpenseEntryList},
+      ExpenseEntryDetail:{screen:ExpenseEntryDetail},
 
       Sales:{screen:Sales},
       PriceList:{screen:PriceList},
