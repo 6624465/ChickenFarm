@@ -9,6 +9,8 @@ var Form = t.form.Form;
 import moment from 'moment';
 import services from './Services'
 import axios from 'axios';
+import styles from '../stylesheet';
+
 
 export default class ChickenTreatmentDetail extends Component{
             static navigationOptions={
@@ -175,20 +177,20 @@ export default class ChickenTreatmentDetail extends Component{
                         />
                     </View>
                     </Content>
-                    <Footer style={{backgroundColor:'white'}}>
-                        <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
-                            <View style={{width:'50%'}}>
-                                <Button success block rounded onPress={this.ResetTreatmentEntry} style={{width:'100%',justifyContent:'center'}}>
-                                    <Text style={{color:'white'}} >Reset</Text>
+                    <Footer style={styles.bgc_white}>
+                        <View style={styles.flexDirectionWrap} >
+                            <View style={styles.width_50}>
+                                <Button success block rounded onPress={this.ResetTreatmentEntry}>
+                                    <Text style={styles.white} >Reset</Text>
                                 </Button>
                             </View>
-                            <View style={{width:'50%', alignItems:'flex-end'}}>
-                                <Button primary block rounded onPress={this.SaveTreatmentEntry} style={{width:'100%',justifyContent:'center'}}>
-                                    <Text style={{color:'white'}}>Save</Text>
+                            <View style={styles.width_50_flex_end}>
+                                <Button primary block rounded onPress={this.SaveTreatmentEntry}>
+                                    <Text style={styles.white}>Save</Text>
                                 </Button>
                             </View>
                         </View>
-                    </Footer>
+                </Footer>
                 </Container>
                 
             );
@@ -196,12 +198,4 @@ export default class ChickenTreatmentDetail extends Component{
     }
 }
 
-var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        //justifyContent: 'center',
-        //marginTop: 120,
-        padding: 20,
-        backgroundColor: '#ffffff',      
-    }
-  });
+
