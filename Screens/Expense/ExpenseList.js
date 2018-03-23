@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { View, StyleSheet,TouchableOpacity,Image,Keyboard,Text} from 'react-native';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Right } from 'native-base';
 import {StackNavigator} from 'react-navigation';
+import styles from '../stylesheet';
+
 
 export default class Expense extends Component{
     render(){
@@ -30,13 +32,13 @@ export default class Expense extends Component{
                 }}>
                 <View>
                     <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('MExpenseList')}>
-                        <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
+                        <Text style={styles.touchableOpacity_text}>
                             Master Expense List
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('MyExpenseList')}>
-                        <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
-                            My Expense List
+                    <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('ExpenseEntryList')}>
+                        <Text style={styles.touchableOpacity_text}>
+                            Expense Entry List
                         </Text>
                     </TouchableOpacity>
                 </View>

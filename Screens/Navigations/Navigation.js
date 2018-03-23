@@ -93,8 +93,8 @@ const NavLinks = DrawerNavigator({
       Expense:{screen:Expense},
       MExpenseList:{screen:MExpenseList},
       MExpenseDetail:{screen:MExpenseDetail},
-      MyExpenseList:{screen:MyExpenseList},
-      MyExpenseDetail:{screen:MyExpenseDetail},
+      ExpenseEntryList:{screen:ExpenseEntryList},
+      ExpenseEntryDetail:{screen:ExpenseEntryDetail},
 
       Sales:{screen:Sales},
       PriceList:{screen:PriceList},
