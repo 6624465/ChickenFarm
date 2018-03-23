@@ -25,11 +25,11 @@ var styles = StyleSheet.create({
         fontWeight:'bold'
     },
     width_50_flex_end:{
-        width:'50%'
-    },
-    width_50:{
         width:'50%', 
         alignItems:'flex-end'
+    },
+    width_50:{
+        width:'50%'
     },
     flexDirectionWrap:{
         flexDirection:'row', 
