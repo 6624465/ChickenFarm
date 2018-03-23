@@ -10,6 +10,7 @@ var ImagePicker = NativeModules.ImageCropPicker;
 import axios from 'axios';
 
 import services from './Services';
+import styles from '../stylesheet';
 
 export default class FarmProfileList extends Component{
     static navigationOptions={
@@ -18,20 +19,16 @@ export default class FarmProfileList extends Component{
         headerTitleStyle:{color:'#212121'}
     }
     componentDidMount() {
-        //axios.get('/FarmProfile/GetFarmProfile/'+axios.defaults.headers.common['MOBILE_NO'])
         services.GetFarmProfile(axios.defaults.headers.common['MOBILE_NO'])
         .then(function (response) {
-            //var regi= response.data.farmProfile;
             if(response.data.farmProfile!=null)
             {
                 debugger;
                 this.setState({
-                    //status: (response.data.registration.IsOTPVerified === null || response.data.registration.IsOTPVerified === true) ? true : false,
                     FarmProfileDetails: response.data.farmProfile,
                     imageLink: axios.defaults.baseURL+'/Uploads/'+response.data.farmProfile.FarmID+'/FarmProfile/'+response.data.farmProfile.MobileNo+'/'+response.data.farmProfile.FarmLogo
                 });
             }
-            //alert(this.state.status+'<<<<>>>>'+response.data.registration.IsOTPVerified);
             console.log(this.state.imageLink);
         }.bind(this))
         .catch(function (error) {
@@ -39,9 +36,9 @@ export default class FarmProfileList extends Component{
         });
     }
 
-    constructor()
+    constructor(props)
     {
-        super();
+        super(props);
         this.state ={
             FarmProfileDetails:{
                 FarmID:0,
@@ -76,28 +73,23 @@ export default class FarmProfileList extends Component{
             fields:{
                 FarmName:{
                     label: 'Farm Name',
-                    placeholder:'Please Enter Your Farm Name',
-                    //error:'Please Enter Your Full Name'
+                    placeholder:'Please Enter Your Farm Name'
                 
                 },
                 FarmAddress:{
                     label: 'Farm Address',
-                    placeholder:'Please Enter Farm Address',
-                    //error:'Please Enter Farm Address'
+                    placeholder:'Please Enter Farm Address'
                 
                 },
                 PhoneNo:{
                     label: 'Phone Number',
-                    placeholder:'Please Enter Phone Number',
-                    //error:'Please Enter Tel/Line Number'
+                    placeholder:'Please Enter Phone Number'
                 
                 },
                 MobileNo:{
                     label: 'Mobile Number',
                     placeholder:'Please Enter Mobile Number',
-                    //error:'Please Enter Tel/Line Number'
                     editable:false
-                
                 },
                 SocialPage:{
                     label: 'Social Page',
@@ -107,20 +99,15 @@ export default class FarmProfileList extends Component{
                 },
                 WebSite:{
                     label: 'Website',
-                    placeholder:' Website Name',
-                    // error:'Please Enter Your Full Name'
-                
+                    placeholder:' Website Name'
                 },
                 AboutUs:{
                     label: 'About Us',
-                    placeholder:'About Us',
-                    multiline:true,                           
-                    //error:'Please Enter Your Full Name'                        
+                    placeholder:'About Us'              
                 },
                 LineID:{
                     label: 'LineID',
-                    placeholder:'LineID',
-                  
+                    placeholder:'LineID'
                 },
             }
         }
@@ -131,13 +118,6 @@ export default class FarmProfileList extends Component{
     }
 
     cleanupImages() {
-        // ImagePicker.clean().then(() => {
-
-        //   console.log('removed tmp images from tmp directory');
-        // }).catch(e => {
-        //   alert(e);
-        // });
-
         this.setState({
             FarmProfileDetails:{    
                 FarmID:this.state.FarmProfileDetails.FarmID,
@@ -200,68 +180,57 @@ export default class FarmProfileList extends Component{
     }
         
     renderAsset(image) {
-        // if (image.mime && image.mime.toLowerCase().indexOf('video/') !== -1) {
-        //   return this.renderVideo(image);
-        // }
-
         return this.renderImage(image);
     }
 
     SaveFarmProfile=()=>
     {
-
-      Keyboard.dismiss();
-      var value = this.refs.form.getValue();
-      if (value) {
-          debugger;
-        var data = {
-            FarmID:this.state.FarmProfileDetails.FarmID,
-            FarmName:this.state.FarmProfileDetails.FarmName,
-            FarmAddress:this.state.FarmProfileDetails.FarmAddress,
-            PhoneNo:this.state.FarmProfileDetails.PhoneNo,
-            MobileNo:this.state.FarmProfileDetails.MobileNo,
-            LineID:this.state.FarmProfileDetails.LineID,
-            SocialPage:this.state.FarmProfileDetails.SocialPage,
-            WebSite:this.state.FarmProfileDetails.WebSite,
-            AboutUs:this.state.FarmProfileDetails.AboutUs,
-            FileName:this.state.FarmProfileDetails.FileName,
-            Status:true
-        }
-        // axios({
-        //     method: 'post',
-        //     url: '/FarmProfile/save',
-        //     data: data
-        //   })
-        services.SaveFarmProfile(data)
-          .then(function (response) { 
-            if(response.data>0){
-                axios.defaults.headers.common['FarmID'] = response.data;
-                alert('Farm profile saved successfully.')
-                this.props.navigation.navigate('MainDashboard');
+        Keyboard.dismiss();
+        var value = this.refs.form.getValue();
+        if (value) {
+            debugger;
+            var data = {
+                FarmID:this.state.FarmProfileDetails.FarmID,
+                FarmName:this.state.FarmProfileDetails.FarmName,
+                FarmAddress:this.state.FarmProfileDetails.FarmAddress,
+                PhoneNo:this.state.FarmProfileDetails.PhoneNo,
+                MobileNo:this.state.FarmProfileDetails.MobileNo,
+                LineID:this.state.FarmProfileDetails.LineID,
+                SocialPage:this.state.FarmProfileDetails.SocialPage,
+                WebSite:this.state.FarmProfileDetails.WebSite,
+                AboutUs:this.state.FarmProfileDetails.AboutUs,
+                FileName:this.state.FarmProfileDetails.FileName,
+                Status:true
             }
-            else{
-                this.props.navigation.navigate('Navigation');
-            }
+            services.SaveFarmProfile(data)
+            .then(function (response) { 
+                if(response.data>0){
+                    axios.defaults.headers.common['FarmID'] = response.data;
+                    alert('Farm profile saved successfully.')
+                    this.props.navigation.navigate('MainDashboard');
+                }
+                else{
+                    this.props.navigation.navigate('Navigation');
+                }
             
             // this.setState({
             //     reg: response.data.registration,
             //     status: response.data.registration.IsOTPVerified===null || response.data.registration.IsOTPVerified===true ? true : false
             // });       
-          }.bind(this))
-          .catch(function (error) {
-            console.log(error);
-        });
-    }
+            }.bind(this))
+            .catch(function (error) {
+                console.log(error);
+            });
+        }
     }
     ResetFarmProfile=()=>
     {
-      Keyboard.dismiss();
+        Keyboard.dismiss();
         this.setState({
-        FarmProfileDetails:{
-
-        }
-    })
+            FarmProfileDetails:{ }
+        })
     }
+
     render(){
         return(
             <Container>
@@ -305,16 +274,16 @@ export default class FarmProfileList extends Component{
                     </View>
                 </Content>
                 
-                <Footer style={{backgroundColor:'white'}}>
-                    <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
-                        <View style={{width:'50%'}}>
-                            <Button success  block rounded onPress={this.ResetFarmProfile.bind(this)} style={{width:'100%',justifyContent:'center'}}>
-                                <Text style={{color:'white'}} >Reset</Text>
+                <Footer style={styles.bgc_white}>
+                    <View style={styles.flexDirectionWrap} >
+                        <View style={styles.width_50}>
+                            <Button success  block rounded onPress={this.ResetFarmProfile.bind(this)}>
+                                <Text style={styles.white} >Reset</Text>
                             </Button>
                         </View>
-                        <View style={{width:'50%', alignItems:'flex-end'}}>
-                            <Button primary  block rounded onPress={this.SaveFarmProfile.bind(this)} style={{width:'100%',justifyContent:'center'}}>
-                                <Text style={{color:'white'}}>Save</Text>
+                        <View style={styles.width_50_flex_end}>
+                            <Button primary  block rounded onPress={this.SaveFarmProfile.bind(this)}>
+                                <Text style={styles.white}>Save</Text>
                             </Button>
                         </View>
                     </View>
@@ -323,13 +292,3 @@ export default class FarmProfileList extends Component{
         );
     }
 }
-
-var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        //justifyContent: 'center',
-        //marginTop: 120,
-        padding: 20,
-        backgroundColor: '#ffffff',      
-    }
-  });

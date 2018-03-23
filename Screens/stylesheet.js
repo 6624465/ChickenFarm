@@ -38,11 +38,70 @@ var styles = StyleSheet.create({
     paddingtop_10:{
         paddingTop:'10%'
     },
+    paddingleft_10:{
+        paddingLeft:'10%'
+    },
+    paddingbottom_10:{
+        paddingBottom:'10%'
+    },
+    paddingright_10:{
+        paddingRight:'10%'
+    },
+    margintop_10:{
+        marginTop:'10%'
+    },
+    marginleft_10:{
+        marginLeft:'10%'
+    },
+    marginbottom_10:{
+        marginBottom:'10%'
+    },
+    marginright_10:{
+        marginRight:'10%'
+    },
     activeindicator:{
         flex: 1, 
         justifyContent:'center', 
         alignItems:'center'
     },
+    bgc_white:{
+        backgroundColor:'white'
+    },
+    white:{
+        color:'white'
+    },
+    blue:{
+        color:'blue'
+    },
+    listcontainer: {
+        flex: 1,
+        padding: 12,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    listcontainerView: {
+        flex: 1,
+        justifyContent: 'center',
+        //marginTop: 120,
+        padding: 5,
+        backgroundColor: '#C1C1C1',    
+    },
+    text: {
+        marginLeft: 12,
+        fontSize: 18,
+        color:'#000'
+    },
+    separator: {
+        flex: 1,
+        height: StyleSheet.hairlineWidth,
+        backgroundColor: '#8E8E8E',
+    },
+    photo: {
+        height: 70,
+        width: 70,
+        borderRadius: 35,
+    },
+
   });
 
   module.exports=styles;

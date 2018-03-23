@@ -8,7 +8,7 @@ import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer, Ri
 
 import axios from 'axios';
 import services from './Services';
-
+import styles from '../stylesheet';
   
 export default class ChickenProfileList extends Component{
 
@@ -28,22 +28,17 @@ export default class ChickenProfileList extends Component{
     }
 
     componentDidMount() {
-    
-     // axios.get('http://1tradeapi.logiconglobal.com/api/master/country/list')
-     services.GetAnimalProfileList()
-            .then((responseJson) => {
-                //alert(responseJson)
-             
+        services.GetAnimalProfileList()
+        .then((responseJson) => {
             let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
             this.setState({
                 isLoading: false,
                 dataSource: ds.cloneWithRows(responseJson.data.animalProfileList),
             }, function() {
-                // do something with new state
                 this.arrayholder = responseJson.data.animalProfileList ;
             });
-            })
-            .catch((error) => {
+        })
+        .catch((error) => {
             console.error(error);
         });
     }
@@ -52,8 +47,7 @@ export default class ChickenProfileList extends Component{
         this.props.navigation.navigate(
             'ChickenProfileDetail',
             { animalCode: animalCode }
-          );    
-        //this.props.navigation.navigate('ChickenProfileDetail');
+        );    
     }   
 
     FilterListData=(text)=>{   
@@ -72,7 +66,7 @@ export default class ChickenProfileList extends Component{
         const {navigate}=this.props.navigation;
         if (this.state.isLoading) {
             return (
-                <View style={{flex: 1, justifyContent:'center', alignItems:'center'}}>
+                <View style={styles.activeindicator}>
                 <ActivityIndicator size="large" color="#0000ff" />
             </View>
             );
@@ -103,13 +97,13 @@ export default class ChickenProfileList extends Component{
                     </Item>
                 </Header>
                 <Content>
-                    <View style={styles.container}>
+                    <View style={styles.listcontainerView}>
                         <ListView 
                             dataSource={this.state.dataSource}
                             renderRow={(rowData) => 
                             <View style={styles.listcontainer}>
                                 <TouchableOpacity  onPress={() => this.NavigateToDetails(rowData.AnimalCode)}>
-                                    <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
+                                    <View style={styles.flexDirectionWrap} >
                                         <View style={{width:'20%', alignItems:'center'}}>
                                             <Image source = {{ uri: axios.defaults.baseURL+'/Uploads/'+rowData.FarmID+'/AnimalProfile/'+rowData.AnimalCode+'/'+rowData.AnimalPhoto}} style={styles.photo}/>                       
                                         </View>
@@ -133,36 +127,4 @@ export default class ChickenProfileList extends Component{
             </Container>
         );
     }
-
 }
-
-var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        //marginTop: 120,
-        padding: 5,
-        backgroundColor: '#C1C1C1',      
-    },
-    listcontainer: {
-        flex: 1,
-        padding: 12,
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    text: {
-        marginLeft: 12,
-        fontSize: 18,
-        color:'#000'
-    },
-    photo: {
-        height: 70,
-        width: 70,
-        borderRadius: 35,
-    },
-    separator: {
-        flex: 1,
-        height: StyleSheet.hairlineWidth,
-        backgroundColor: '#8E8E8E',
-    },
-  });

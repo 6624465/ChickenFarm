@@ -3,11 +3,14 @@ import {View, Text,StyleSheet,Keyboard} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button,Footer } from 'native-base';
-
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
 import axios from 'axios';
 import services from './Services';
+import styles from '../stylesheet';
+
+var t = require('tcomb-form-native');
+var Form = t.form.Form;
 
 
 export default class GiveVaccineDetail extends Component{
@@ -159,16 +162,16 @@ export default class GiveVaccineDetail extends Component{
                         />
                     </View>
                 </Content>
-                <Footer style={{backgroundColor:'white'}}>
-                    <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
-                        <View style={{width:'50%'}}>
-                            <Button success block rounded onPress={this.ResetVaccineEntry} style={{width:'100%',justifyContent:'center'}}>
-                                <Text style={{color:'white'}} >Reset</Text>
+                <Footer style={styles.bgc_white}>
+                    <View style={styles.flexDirectionWrap} >
+                        <View style={styles.width_50}>
+                            <Button success block rounded onPress={this.ResetVaccineEntry}>
+                                <Text style={styles.white} >Reset</Text>
                             </Button>
                         </View>
-                        <View style={{width:'50%', alignItems:'flex-end'}}>
-                            <Button primary block rounded onPress={this.SaveVaccineEntry} style={{width:'100%',justifyContent:'center'}}>
-                                <Text style={{color:'white'}}>Save</Text>
+                        <View style={styles.width_50_flex_end}>
+                            <Button primary block rounded onPress={this.SaveVaccineEntry}>
+                                <Text style={styles.white}>Save</Text>
                             </Button>
                         </View>
                     </View>
@@ -177,13 +180,3 @@ export default class GiveVaccineDetail extends Component{
         );
     }
 }
-
-var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        //justifyContent: 'center',
-        //marginTop: 120,
-        padding: 20,
-        backgroundColor: '#ffffff',      
-    }
-  });

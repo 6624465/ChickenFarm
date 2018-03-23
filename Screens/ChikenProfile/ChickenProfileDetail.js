@@ -7,9 +7,11 @@ import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer } f
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
 import moment from 'moment';
-var ImagePicker = NativeModules.ImageCropPicker;
 import services from './Services'
 import axios from 'axios';
+import styles from '../stylesheet';
+
+var ImagePicker = NativeModules.ImageCropPicker;
   
 export default class ChickenProfileDetail extends Component{
     static navigationOptions={
@@ -85,8 +87,7 @@ export default class ChickenProfileDetail extends Component{
                
                     AnimalName:{
                         label: 'Name',
-                        placeholder:'Name',
-                        //error:'Please Enter Farm Address'                        
+                        placeholder:'Name'                       
                     },
                     // AnimalCode:{
                     //     label: 'Code',
@@ -95,35 +96,26 @@ export default class ChickenProfileDetail extends Component{
                     // },
                     AnimalSymbol:{
                         label: 'Symbol',
-                        placeholder:'Symbol',
-                        // error:'Please Enter Your Full Name'                        
+                        placeholder:'Symbol'                       
                     },
                     AnimalStatus:{
-                        label: 'Choose Staues',
-                        //placeholder:'Please Enter Your Full Name',
-                        //error:'Please Enter Your Full Name'                        
+                        label: 'Choose Staues'                       
                     },
                     CauseOfDeath:{
                         label: 'Cause Of Death',
                         placeholder:'CauseOfDeath',
-                        //error:'Please Enter Your Full Name'  
                         editable: false                      
                     },
                     Gender:{
-                        label: 'Gender',
-                        //placeholder:' Web Site Name',
-                        // error:'Please Enter Your Full Name'                        
+                        label: 'Gender'                        
                     },
                     SireCode:{
                         label: 'Sire Code',
-                        placeholder:'Sire Code',
-                        //multiline:true,
-                        //error:'Please Enter Your Full Name'                        
+                        placeholder:'Sire Code'                       
                     },
                     DateOfBirth: {
                         label: 'Date Of Birth:',
                         placeholder: 'Date Of Birth',
-                        //minimumDate: new Date(),
                         mode: 'date',
                         config: {
                             format: (date) => String(moment(date).format("MM/DD/YYYY")),
@@ -131,46 +123,40 @@ export default class ChickenProfileDetail extends Component{
                     },
                     BreederCode:{
                         label: 'Breeder Code',
-                        placeholder:'Breeder Code',
-                        //error:'Please Enter Your Full Name'                        
+                        placeholder:'Breeder Code'
                     },
                     BreederFormula:{
                         label: 'Breeder Formula',
-                        placeholder:'Breeder Formula',
-                        //error:'Please Enter Farm Address'                        
+                        placeholder:'Breeder Formula'
                     },
                     Talents:{
                         label: 'Talents',
-                        placeholder:'Talents',
-                        // error:'Please Enter ChikenCode'                        
+                        placeholder:'Talents'
                     },
                     Weight:{
                         label: 'Weight',
-                        placeholder:'Weight',
-                        // error:'Please Enter Your Full Name'                        
+                        placeholder:'Weight'
                     },
                     FightingRecord:{
                         label: 'Fighting Record',
-                        placeholder:'Fighting Record',
-                        //error:'Please Enter Your Full Name'                        
+                        placeholder:'Fighting Record'
                     },
                     StandardPrice:{
                         label: 'Standard Price',
-                        placeholder:'Standard Price',
-                        //error:'Please Enter Farm Address'                        
+                        placeholder:'Standard Price'
                     },
                     Remarks:{
                         label: 'Remarks',
-                        placeholder:'Remarks',
-                        // error:'Please Enter ChikenCode'                        
+                        placeholder:'Remarks'
                     }
                 }
             }
         }
     }
 
-        AddChickenProfile() { 
-            return ( t.struct({
+    AddChickenProfile() { 
+        return ( 
+            t.struct({
                 AnimalName:t.String,    
                 //AnimalCode:t.Number,    
                 AnimalSymbol:t.String,  
@@ -342,8 +328,8 @@ export default class ChickenProfileDetail extends Component{
                             value={this.state.ChickenProfileDetails}
                             onChange={this.onChange}
                         />
-                        <TouchableOpacity onPress={this.state.isPhoto ? this.cleanupImages.bind(this) : this.pickMultiple.bind(this)} style={{marginBottom: 10}}>
-                            <Text style={{color:'blue'}}>{this.state.isPhoto ? 'Clear Photo' : 'Select Photo'}</Text>
+                        <TouchableOpacity onPress={this.state.isPhoto ? this.cleanupImages.bind(this) : this.pickMultiple.bind(this)} style={styles.marginbottom_10}>
+                            <Text style={styles.blue}>{this.state.isPhoto ? 'Clear Photo' : 'Select Photo'}</Text>
                         </TouchableOpacity>
                         <ScrollView>
                             {/* this.state.ChickenProfileDetails.AnimalPhoto ? this.state.ChickenProfileDetails.AnimalPhoto.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null */}
@@ -352,16 +338,16 @@ export default class ChickenProfileDetail extends Component{
                         </ScrollView>
                     </View>
                 </Content>
-                <Footer style={{backgroundColor:'white'}}>
-                    <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
-                        <View style={{width:'50%'}}>
-                            <Button success block rounded onPress={this.ResetchikenProfile} style={{width:'100%',justifyContent:'center'}}>
-                                <Text style={{color:'white'}} >Reset</Text>
+                <Footer style={styles.bgc_white}>
+                    <View style={styles.flexDirectionWrap} >
+                        <View style={styles.width_50}>
+                            <Button success block rounded onPress={this.ResetchikenProfile}>
+                                <Text style={styles.white} >Reset</Text>
                             </Button>
                         </View>
-                        <View style={{width:'50%', alignItems:'flex-end'}}>
-                            <Button primary block rounded onPress={this.SavechikenProfile} style={{width:'100%',justifyContent:'center'}}>
-                                <Text style={{color:'white'}}>Save</Text>
+                        <View style={styles.width_50_flex_end}>
+                            <Button primary block rounded onPress={this.SavechikenProfile}>
+                                <Text style={styles.white}>Save</Text>
                             </Button>
                         </View>
                     </View>
@@ -370,13 +356,3 @@ export default class ChickenProfileDetail extends Component{
         );
     }
 }
-
-var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        //justifyContent: 'center',
-        //marginTop: 120,
-        padding: 20,
-        backgroundColor: '#ffffff',      
-    }
-  });
