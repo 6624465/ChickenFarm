@@ -6,6 +6,11 @@ import { Container, Content, Header, Icon, Left, Title, Body, Button, Right } fr
 import {StackNavigator} from 'react-navigation';
 
 export default class MainDashboard extends Component{
+    
+    static navigationOptions={
+        title : 'Main Dashboard'
+    }
+
     Logout=()=>{
         this.props.navigation.navigate('Logout');
     }

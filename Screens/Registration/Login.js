@@ -129,7 +129,6 @@ export default class Login extends Component{
             });
             axios.defaults.headers.common['MOBILE_NO'] = response.data.userid; 
             axios.defaults.headers.common['FarmID'] = response.data.FarmID; 
-            debugger;
             if(response.data.message=="goto farm")
             {
               this.props.navigation.navigate('FarmProfile');
@@ -143,7 +142,6 @@ export default class Login extends Component{
             }
             else if(response.data.message=="goto registration")
             {
-              debugger;
               ToastAndroid.showWithGravity(
                 'MobileNo not registered.',
                 ToastAndroid.LONG,

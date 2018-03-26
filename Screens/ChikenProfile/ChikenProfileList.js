@@ -13,9 +13,7 @@ import styles from '../stylesheet';
 export default class ChickenProfileList extends Component{
 
     static navigationOptions={
-        title : 'Chicken Profile List',
-        headerStyle:{backgroundColor:'#fff'},
-        headerTitleStyle:{color:'#212121'}
+        title : 'Chicken Profile List'
     }
 
     constructor(props) {

@@ -70,7 +70,7 @@ const DrawerContent = (props) => (
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-      <Image source = { require('../../android/app/src/main/assets/chicken.png') } style={{width:'100%',height:'100%'}}/>
+      <Image source = { require('../../android/app/src/main/assets/chicken.png') } style={{width:100,height:100}}/>
      
     </View>
     <DrawerItems {...props} />
