@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import ReactNative from 'react-native';
-
-import {DrawerNavigator} from 'react-navigation';
+import { Text, View,Image } from 'react-native';
+import {DrawerNavigator, DrawerItems} from 'react-navigation';
+import { Icon } from 'native-base';
 
 import MainDashboard from '../Dashboard/MainDashboard';
 import SalesReport from '../Reports/SalesReport';
@@ -61,21 +61,57 @@ import BreedDetail from '../Breed/BreedDetail';
 
 import Logout from '../Registration/Login';
 
+const DrawerContent = (props) => (
+  <View>
+    <View
+      style={{
+        backgroundColor: '#f50057',
+        height: 140,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+      <Image source = { require('../../android/app/src/main/assets/chicken.png') } style={{width:'100%',height:'100%'}}/>
+     
+    </View>
+    <DrawerItems {...props} />
+  </View>
+)
+
 const NavLinks = DrawerNavigator({
   
-      MainDashboard:{screen:MainDashboard},
+      MainDashboard:{
+        screen:MainDashboard,
+        navigationOptions:{
+          drawerIcon: <Icon ios='ios-home' android="md-home" size={16} />
+        }
+      },
 
-      FarmProfileList:{screen:FarmProfileList},
+      FarmProfileList:{
+        screen:FarmProfileList,
+        navigationOptions:{
+          drawerIcon: <Icon ios='ios-contract' android="md-contract" size={16} />
+        }
+      },
 
       SalesReport:{screen:SalesReport},
       ExpenseReport:{screen:ExpenseReport},
       ProfitsAndLossReport:{screen:ProfitsAndLossReport},
       StockReport:{screen:StockReport},
 
-      ChickenProfileList:{screen:ChickenProfileList},
+      ChickenProfileList:{
+        screen:ChickenProfileList,
+        navigationOptions:{
+          drawerIcon: <Icon ios='ios-egg' android="md-egg" size={16} />
+        }
+      },
       ChickenProfileDetail:{screen:ChickenProfileDetail},
 
-      Vaccine:{screen:Vaccine},
+      Vaccine:{
+        screen:Vaccine,
+        navigationOptions:{
+          drawerIcon: <Icon ios='ios-medical' android="md-medical" size={16} />
+        }
+      },
       PurchasedVaccineList:{screen:PurchasedVaccineList},
       PurchasedVaccineDetail:{screen:PurchasedVaccineDetail},
       VaccineScheduleList:{screen:VaccineScheduleList},
@@ -84,19 +120,34 @@ const NavLinks = DrawerNavigator({
       GiveVaccineDetail:{screen:GiveVaccineDetail},
       VaccineDue:{screen:VaccineDue},
 
-      ChickenTreatment:{screen:ChickenTreatment},
+      ChickenTreatment:{
+        screen:ChickenTreatment,
+        navigationOptions:{
+          drawerIcon: <Icon ios='ios-medkit' android="md-medkit" size={16} />
+        }
+      },
       ChickenTreatmentList:{screen:ChickenTreatmentList},
       ChickenTreatmentDetail:{screen:ChickenTreatmentDetail},
       PurchasedMedicineList:{screen:PurchasedMedicineList},
       PurchasedMedicineDetail:{screen:PurchasedMedicineDetail},
 
-      Expense:{screen:Expense},
+      Expense:{
+        screen:Expense,
+        navigationOptions:{
+          drawerIcon: <Icon ios='ios-cash' android="md-cash" size={16} />
+        }
+      },
       MExpenseList:{screen:MExpenseList},
       MExpenseDetail:{screen:MExpenseDetail},
       ExpenseEntryList:{screen:ExpenseEntryList},
       ExpenseEntryDetail:{screen:ExpenseEntryDetail},
 
-      Sales:{screen:Sales},
+      Sales:{
+        screen:Sales,
+        navigationOptions:{
+          drawerIcon: <Icon ios='ios-aperture' android="md-aperture" size={16} />
+        }
+      },
       PriceList:{screen:PriceList},
       PriceDetail:{screen:PriceDetail},
       ChickenForSaleList:{screen:ChickenForSaleList},
@@ -104,10 +155,20 @@ const NavLinks = DrawerNavigator({
       SaleEntryList:{screen:SaleEntryList},
       SaleEntryDetail:{screen:SaleEntryDetail},
 
-      BreedList:{screen:BreedList},
+      BreedList:{
+        screen:BreedList,
+        navigationOptions:{
+          drawerIcon: <Icon ios='ios-list' android="md-list" size={16} />
+        }
+      },
       BreedDetail:{screen:BreedDetail},
 
-      Logout:{screen:Logout},
+      Logout:{
+        screen:Logout,
+        navigationOptions:{
+          drawerIcon: <Icon ios='ios-log-out' android="md-log-out" size={16} />
+        }
+      },
 
       // FarmProfileDetails:{screen:FarmProfileDetails},
       // GeneticsTree:{screen: GeneticsTree},
@@ -121,6 +182,7 @@ const NavLinks = DrawerNavigator({
       // QuickSearch:{screen: QuickSearch}
     },
     {
+      contentComponent: DrawerContent,
       drawerPosition:'left',
       contentOptions: {
         activeTintColor:'red',
