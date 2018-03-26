@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View,Image } from 'react-native';
+import { Text, View, Image, ScrollView } from 'react-native';
 import {DrawerNavigator, DrawerItems, StackNavigator} from 'react-navigation';
 import { Icon } from 'native-base';
 
@@ -86,7 +86,7 @@ const NavLinksLogin = StackNavigator({
 )
 
 const DrawerContent = (props) => (
-  <View>
+  <ScrollView>
     <View
       style={{
         backgroundColor: '#f50057',
@@ -98,10 +98,11 @@ const DrawerContent = (props) => (
      
     </View>
     <DrawerItems {...props} />
-  </View>
+  </ScrollView>
 )
 
 const NavLinks = DrawerNavigator({
+  
       Home: {
         screen: NavLinksLogin,
       },
@@ -220,7 +221,9 @@ const NavLinks = DrawerNavigator({
 )
 
 export default class Navigation extends Component {
-    render(){  
-      return(<NavLinks/>);
+    render(){ 
+        return(
+            <NavLinks/>
+          );
     }
 }

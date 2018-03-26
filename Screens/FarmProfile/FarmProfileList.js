@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image, Keyboard} from 'react-native';
+import {View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image, Keyboard, ActivityIndicator} from 'react-native';
 
 //import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer } from 'native-base';
@@ -54,7 +54,8 @@ export default class FarmProfileList extends Component{
                 FileName:null
             },
             isLogo:false,
-            imageLink:null
+            imageLink:null,
+            isLoading: false,
         },
 
         this.AddFarmProfile=t.struct({
@@ -188,6 +189,9 @@ export default class FarmProfileList extends Component{
         Keyboard.dismiss();
         var value = this.refs.form.getValue();
         if (value) {
+            this.setState({
+                isLoading: true
+            });
             debugger;
             var data = {
                 FarmID:this.state.FarmProfileDetails.FarmID,
@@ -203,7 +207,10 @@ export default class FarmProfileList extends Component{
                 Status:true
             }
             services.SaveFarmProfile(data)
-            .then(function (response) { 
+            .then(function (response) {                 
+                this.setState({
+                isLoading: false
+                });
                 if(response.data>0){
                     axios.defaults.headers.common['FarmID'] = response.data;
                     alert('Farm profile saved successfully.')
@@ -234,6 +241,13 @@ export default class FarmProfileList extends Component{
     }
 
     render(){
+        if (this.state.isLoading) {
+            return (
+                <View style={styles.activeindicator}>
+                <ActivityIndicator size="large" color="#0000ff"/>
+            </View>
+            );
+          }
         return(
             <Container>
                 <Header>
