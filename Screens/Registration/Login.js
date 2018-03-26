@@ -160,7 +160,7 @@ export default class Login extends Component{
             }
             else
             {           
-              this.props.navigation.navigate('Navigation');
+              this.props.navigation.navigate('MainDashboard');
             }            
           }.bind(this))
           .catch(function (error) {

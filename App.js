@@ -9,12 +9,12 @@ import ReactNative from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
 
-import LoginNavigation from './Screens/Navigations/LoginNavigation';
+import Navigation from './Screens/Navigations/Navigation';
 
 
 
 const Application =StackNavigator({
-      Home:{screen:LoginNavigation}
+      Home:{screen:Navigation}
     },
     {
       navigationOptions:{

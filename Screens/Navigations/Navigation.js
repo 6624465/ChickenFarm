@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Text, View,Image } from 'react-native';
-import {DrawerNavigator, DrawerItems} from 'react-navigation';
+import {DrawerNavigator, DrawerItems, StackNavigator} from 'react-navigation';
 import { Icon } from 'native-base';
+
+
 
 import MainDashboard from '../Dashboard/MainDashboard';
 import SalesReport from '../Reports/SalesReport';
@@ -59,7 +61,29 @@ import BreedDetail from '../Breed/BreedDetail';
 // import Expense from '../Details/ThirdScreen';
 // import QuickSearch from './CompanyList';
 
-import Logout from '../Registration/Login';
+import Login from '../Registration/Login';
+
+import Registration from '../Registration/Registration';
+import ForgotPassword from '../Registration/ForgotPassword';
+import ForgotPasswordContinue from '../Registration/ForgotPasswordContinue';
+import ForgotPasswordUpdate from '../Registration/ForgotPasswordUpdate'
+
+
+const NavLinksLogin = StackNavigator({
+    Login:{screen:Login},
+    Registration:{screen:Registration},
+    ForgotPassword:{screen:ForgotPassword},
+    ForgotPasswordContinue:{screen:ForgotPasswordContinue}, 
+    ForgotPasswordUpdate:{screen:ForgotPasswordUpdate},
+    FarmProfile:{screen:FarmProfileList}
+  },
+  {
+    navigationOptions:{
+        header:false,
+        drawerLabel: () => null
+    }
+  }
+)
 
 const DrawerContent = (props) => (
   <View>
@@ -78,7 +102,9 @@ const DrawerContent = (props) => (
 )
 
 const NavLinks = DrawerNavigator({
-  
+      Home: {
+        screen: NavLinksLogin,
+      },
       MainDashboard:{
         screen:MainDashboard,
         navigationOptions:{
@@ -164,7 +190,7 @@ const NavLinks = DrawerNavigator({
       BreedDetail:{screen:BreedDetail},
 
       Logout:{
-        screen:Logout,
+        screen:Login,
         navigationOptions:{
           drawerIcon: <Icon ios='ios-log-out' android="md-log-out" size={16} />
         }
