@@ -75,7 +75,13 @@ const NavLinksLogin = StackNavigator({
     ForgotPassword:{screen:ForgotPassword},
     ForgotPasswordContinue:{screen:ForgotPasswordContinue}, 
     ForgotPasswordUpdate:{screen:ForgotPasswordUpdate},
-    FarmProfile:{screen:FarmProfileList}
+    FarmProfile:{screen:FarmProfileList},
+    MainDashboard:{
+      screen:MainDashboard,
+      navigationOptions:{
+        drawerIcon: <Icon ios='ios-home' android="md-home" size={16} />
+      }
+    },
   },
   {
     navigationOptions:{
@@ -104,14 +110,19 @@ const DrawerContent = (props) => (
 const NavLinks = DrawerNavigator({
   
       Home: {
-        screen: NavLinksLogin,
+        screen:NavLinksLogin,
       },
+
       MainDashboard:{
         screen:MainDashboard,
         navigationOptions:{
           drawerIcon: <Icon ios='ios-home' android="md-home" size={16} />
         }
       },
+      SalesReport:{screen:SalesReport},
+      ExpenseReport:{screen:ExpenseReport},
+      ProfitsAndLossReport:{screen:ProfitsAndLossReport},
+      StockReport:{screen:StockReport},
 
       FarmProfileList:{
         screen:FarmProfileList,
@@ -119,11 +130,6 @@ const NavLinks = DrawerNavigator({
           drawerIcon: <Icon ios='ios-contract' android="md-contract" size={16} />
         }
       },
-
-      SalesReport:{screen:SalesReport},
-      ExpenseReport:{screen:ExpenseReport},
-      ProfitsAndLossReport:{screen:ProfitsAndLossReport},
-      StockReport:{screen:StockReport},
 
       ChickenProfileList:{
         screen:ChickenProfileList,
