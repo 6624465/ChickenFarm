@@ -157,6 +157,7 @@ export default class Registration extends Component {
             services.RegistrationSave(data)
               .then(function (response) { 
                 debugger;   
+                axios.defaults.headers.common['MOBILE_NO'] = data.MobileNo;
                 this.setState({
                     reg: response.data.registration,
                     status: response.data.registration.IsOTPVerified===null || response.data.registration.IsOTPVerified===true ? true : false
