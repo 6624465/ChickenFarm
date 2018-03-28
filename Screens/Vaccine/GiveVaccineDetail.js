@@ -66,7 +66,8 @@ export default class GiveVaccineDetail extends Component{
                 },
                 AnimalAge:{
                     label: 'Animal Age',
-                    placeholder:'Animal Age'
+                    placeholder:'Animal Age',
+                    editable:false
                                   
                 },
                 VaccineType:{
