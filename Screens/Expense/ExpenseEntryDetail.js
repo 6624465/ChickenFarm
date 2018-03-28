@@ -56,7 +56,8 @@ export default class ExpenseEntryDetail extends Component{
             fields:{
                 ExpensesCode:{
                     label: 'Expense Name',
-                    placeholder:'Expense Name'
+                    //placeholder:'Expense Name',
+                    nullOption: {value: '', text: 'Select'} 
                 },
                 VendorName:{
                     label: 'Vendor Name',

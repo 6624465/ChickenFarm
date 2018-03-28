@@ -87,7 +87,7 @@ export default class ChickenProfileDetail extends Component{
                
                     AnimalName:{
                         label: 'Name',
-                        placeholder:'Name'                       
+                        placeholder:'Name'                     
                     },
                     // AnimalCode:{
                     //     label: 'Code',
@@ -99,7 +99,8 @@ export default class ChickenProfileDetail extends Component{
                         placeholder:'Symbol'                       
                     },
                     AnimalStatus:{
-                        label: 'Choose Staues'                       
+                        label: 'Choose Staues' ,
+                         nullOption: {value: '', text: 'Select'}                     
                     },
                     CauseOfDeath:{
                         label: 'Cause Of Death',
@@ -107,7 +108,8 @@ export default class ChickenProfileDetail extends Component{
                         editable: false                      
                     },
                     Gender:{
-                        label: 'Gender'                        
+                        label: 'Gender',
+                        nullOption: {value: '', text: 'Select'}                        
                     },
                     SireCode:{
                         label: 'Sire Code',
@@ -180,7 +182,8 @@ export default class ChickenProfileDetail extends Component{
         var options = t.update(this.state.options, {
             fields: {
                 CauseOfDeath: {
-                editable: { '$set': ChickenProfileDetails.AnimalStatus === '2003' ? true : false }
+                editable: { '$set': ChickenProfileDetails.AnimalStatus === '2003' ? true : false },
+                visible: { '$set': ChickenProfileDetails.AnimalStatus === '2003' ? true : false }
               }
             }
         });

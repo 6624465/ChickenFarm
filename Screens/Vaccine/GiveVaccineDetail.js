@@ -62,7 +62,8 @@ export default class GiveVaccineDetail extends Component{
             fields:{
                 AnimalCode:{
                     label: 'Animal Code',
-                    placeholder:'Animal Code'              
+                    placeholder:'Animal Code',
+                    nullOption: {value: '', text: 'Select'}               
                 },
                 AnimalAge:{
                     label: 'Animal Age',

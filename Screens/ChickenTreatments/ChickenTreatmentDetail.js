@@ -58,7 +58,13 @@ export default class ChickenTreatmentDetail extends Component{
                 },
                
                 this.AddChickenTreatmentOptions={
-                    fields:{
+                    fields:{ 
+                        AnimalCode:{
+                            label: 'Animal Code',
+                            //placeholder:'Medicine Name',
+                            nullOption: {value: '', text: 'Select'} 
+                        
+                        },
                         MedicineName:{
                             label: 'Medicine Name',
                             placeholder:'Medicine Name'
