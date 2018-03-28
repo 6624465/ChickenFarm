@@ -100,9 +100,58 @@ export default class GiveVaccineDetail extends Component{
         })
     )
 }
-    onChange = (VaccineDetails) => {
-        this.setState({VaccineDetails});
+    // onChange = (VaccineDetails) => {
+    //     this.setState({VaccineDetails});
+    // }
+
+
+    onChange = (vaccineDetail) => {
+        // var options = t.update(this.state.options, {
+        //     fields: {
+        //         CauseOfDeath: {
+        //         editable: { '$set': ChickenProfileDetails.AnimalStatus === '2003' ? true : false }
+        //       }
+        //     }
+        // });
+        debugger;
+        if(vaccineDetail.AnimalCode!="")
+        {
+            services.GetAnimalCodeList(vaccineDetail.AnimalCode)
+            .then(function (response) { 
+            if(response.data.age!=null){
+               this.setState({
+                VaccineDetails:{
+                    AnimalCode:vaccineDetail.AnimalCode,
+                    AnimalAge:response.data.age,
+                    VaccineType:vaccineDetail.VaccineType,
+                    VaccineName:vaccineDetail.VaccineName,
+                    VaccineCompany:vaccineDetail.VaccineCompany,
+                    Remarks:vaccineDetail.Remarks
+                }
+               })
+            }
+            
+                
+            }.bind(this))
+            .catch(function (error) {
+            console.log(error);
+        });
+        }
+        else{
+            this.setState({
+                VaccineDetails:{
+                    AnimalCode:vaccineDetail.AnimalCode,
+                    AnimalAge:null,
+                    VaccineType:vaccineDetail.VaccineType,
+                    VaccineName:vaccineDetail.VaccineName,
+                    VaccineCompany:vaccineDetail.VaccineCompany,
+                    Remarks:vaccineDetail.Remarks
+                }
+               })
+        }
+       // this.setState({VaccineDetails });
     }
+    
 
     SaveVaccineEntry=()=>{
         Keyboard.dismiss();

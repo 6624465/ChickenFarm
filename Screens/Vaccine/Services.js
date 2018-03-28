@@ -26,6 +26,10 @@ var Vaccine={
     {
         return axios.get('/api/VaccineEntry/GetVaccineEntry/'+RecordID)
     },
+    GetAnimalCodeList(AnimalCode)
+    {
+        return axios.get('/api/VaccineEntry/GetAnimalCodeList/'+AnimalCode)
+    },
 
     GetVaccineEntryList()
     {
