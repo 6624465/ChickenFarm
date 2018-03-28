@@ -105,7 +105,8 @@ export default class ChickenProfileDetail extends Component{
                     CauseOfDeath:{
                         label: 'Cause Of Death',
                         placeholder:'CauseOfDeath',
-                        editable: false                      
+                        editable: false,
+                        hidden: true                    
                     },
                     Gender:{
                         label: 'Gender',
@@ -163,7 +164,7 @@ export default class ChickenProfileDetail extends Component{
                 //AnimalCode:t.Number,    
                 AnimalSymbol:t.String,  
                 AnimalStatus:this.state.lstChickenStatus, 
-                CauseOfDeath:t.String,  
+                CauseOfDeath:t.maybe(t.String),  
                 DateOfBirth:t.Date,   
                 Gender:this.state.lstGender,        
                 SireCode:t.Number,      
@@ -183,7 +184,8 @@ export default class ChickenProfileDetail extends Component{
             fields: {
                 CauseOfDeath: {
                 editable: { '$set': ChickenProfileDetails.AnimalStatus === '2003' ? true : false },
-                visible: { '$set': ChickenProfileDetails.AnimalStatus === '2003' ? true : false }
+                hidden: { '$set': ChickenProfileDetails.AnimalStatus === '2003' ? false : true },
+                
               }
             }
         });
