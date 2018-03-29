@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Image, Keyboard, ActivityIndicator, ToastAndroid} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Image, Keyboard, ActivityIndicator} from 'react-native';
 import { Button } from 'native-base';
 import {StackNavigator} from 'react-navigation';
-
-var t = require('tcomb-form-native');
-var Form = t.form.Form;
+import Toast, {DURATION} from 'react-native-easy-toast'
 import axios from 'axios';
 import services from './Services';
 import styles from '../stylesheet';
+
+var t = require('tcomb-form-native');
+var Form = t.form.Form;
 
 export default class Login extends Component{
 
@@ -15,8 +16,8 @@ export default class Login extends Component{
      header:false
   }
   componentDidMount() {
-    axios.defaults.baseURL = 'http://192.168.0.110/FMS';
-    //axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com';
+    //axios.defaults.baseURL = 'http://192.168.0.102/FMS';
+    axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com';
     axios.defaults.headers.common['AUTH_TOKEN'] = 'sdfsdfgsdfgsdfdsfgsdfgsdfg';
     axios.defaults.headers.common['Content-Type'] = 'application/json';    
     axios.defaults.headers.post['Content-Type'] = 'application/json';  
@@ -104,6 +105,16 @@ export default class Login extends Component{
             </TouchableOpacity>
           </View>
         </View> 
+        {/* <Toast
+          ref="toast"
+          style={{backgroundColor:'red'}}
+          position='top'
+          positionValue={200}
+          fadeInDuration={750}
+          fadeOutDuration={1000}
+          opacity={0.8}
+          textStyle={{color:'white'}}
+        /> */}
         </View>
       );
     }
@@ -141,6 +152,7 @@ export default class Login extends Component{
             }
             else if(response.data.message=="goto registration")
             {
+              //this.refs.toast.show('MobileNo not registered.',DURATION.LENGTH_LONG);
               ToastAndroid.showWithGravity(
                 'MobileNo not registered.',
                 ToastAndroid.LONG,
