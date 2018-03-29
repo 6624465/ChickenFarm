@@ -73,8 +73,8 @@ export default class PriceDetail extends Component{
                     nullOption: {value: '', text: 'Select'}              
                 } ,
                 ExRate:{
-                    label: 'Ex. Rate',
-                    placeholder:'Ex. Rate'                
+                    label: 'Ex.Rate',
+                    placeholder:'Ex.Rate'                
                 },
                 LocalPrice:{
                     label: 'Local Price',
