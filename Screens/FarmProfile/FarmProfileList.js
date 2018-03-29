@@ -107,8 +107,8 @@ export default class FarmProfileList extends Component{
                     placeholder:'About Us'              
                 },
                 LineID:{
-                    label: 'LineID',
-                    placeholder:'LineID'
+                    label: 'Line ID',
+                    placeholder:'Line ID'
                 },
             }
         }
