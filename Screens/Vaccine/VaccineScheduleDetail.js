@@ -65,7 +65,8 @@ export default class VaccineScheduleDetail extends Component{
                 },
                 VaccineType:{
                     label: 'Vaccine Type',
-                    placeholder:'Vaccine Type'
+                    placeholder:'Vaccine Type',
+                    editable:false
                 },
                 VaccineCode:{
                     label: 'Vaccine Name',
@@ -74,7 +75,8 @@ export default class VaccineScheduleDetail extends Component{
                 },
                 VaccineCompany:{
                     label: 'Vaccine Company',
-                    placeholder:'Vaccine Company'
+                    placeholder:'Vaccine Company',
+                    editable:false
                 },
                 Remarks:{
                     label: 'Remarks',
