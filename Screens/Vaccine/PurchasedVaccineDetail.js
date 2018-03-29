@@ -45,6 +45,8 @@ export default class PurchasedVaccineDetail extends Component{
             PurchasedVaccineDetails:{
                 VaccineCode:null,
                 VaccineName:null,
+                VaccineType:null,
+                VaccineCompany:null,
                 PurchaseDate:null,
                 ExpiryDate:null,
                 BatchNo:null,
@@ -60,6 +62,8 @@ export default class PurchasedVaccineDetail extends Component{
         this.PurchasedVaccine=t.struct({
            // VaccineCode:t.String,
             VaccineName:t.String,
+            VaccineType:t.String,
+            VaccineCompany:t.String,
             PurchaseDate:t.Date,
             ExpiryDate:t.Date,
             BatchNo:t.String,
@@ -78,6 +82,14 @@ export default class PurchasedVaccineDetail extends Component{
                 VaccineName:{
                     label: 'Vaccine Name',
                     placeholder:'Vaccine Name'                
+                },
+                VaccineType:{
+                    label: 'Vaccine Type',
+                    placeholder:'Vaccine Type'                
+                },
+                VaccineCompany:{
+                    label: 'Vaccine Company',
+                    placeholder:'Vaccine Company'                
                 },
                 PurchaseDate:{
                     label: 'Purchase Date',
@@ -126,6 +138,8 @@ export default class PurchasedVaccineDetail extends Component{
             PurchasedVaccineDetails:{    
                 VaccineCode:this.state.PurchasedVaccineDetails.VaccineCode,
                 VaccineName:this.state.PurchasedVaccineDetails.VaccineName,
+                VaccineType:this.state.PurchasedVaccineDetails.VaccineType,
+                VaccineCompany:this.state.PurchasedVaccineDetails.VaccineCompany,
                 PurchaseDate:this.state.PurchasedVaccineDetails.PurchaseDate,
                 ExpiryDate:this.state.PurchasedVaccineDetails.ExpiryDate,
                 BatchNo:this.state.PurchasedVaccineDetails.BatchNo,
@@ -149,6 +163,8 @@ export default class PurchasedVaccineDetail extends Component{
                 PurchasedVaccineDetails:{
                     VaccineCode:this.state.PurchasedVaccineDetails.VaccineCode,
                     VaccineName:this.state.PurchasedVaccineDetails.VaccineName,
+                    VaccineType:this.state.PurchasedVaccineDetails.VaccineType,
+                    VaccineCompany:this.state.PurchasedVaccineDetails.VaccineCompany,
                     PurchaseDate:this.state.PurchasedVaccineDetails.PurchaseDate,
                     ExpiryDate:this.state.PurchasedVaccineDetails.ExpiryDate,
                     BatchNo:this.state.PurchasedVaccineDetails.BatchNo,
@@ -185,6 +201,8 @@ export default class PurchasedVaccineDetail extends Component{
             var data = {
                 VaccineCode:this.state.PurchasedVaccineDetails.VaccineCode,
                 VaccineName:this.state.PurchasedVaccineDetails.VaccineName,
+                VaccineType:this.state.PurchasedVaccineDetails.VaccineType,
+                VaccineCompany:this.state.PurchasedVaccineDetails.VaccineCompany,
                 PurchaseDate:this.state.PurchasedVaccineDetails.PurchaseDate,
                 ExpiryDate:this.state.PurchasedVaccineDetails.ExpiryDate,
                 BatchNo:this.state.PurchasedVaccineDetails.BatchNo,
