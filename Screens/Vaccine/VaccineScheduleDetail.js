@@ -1,73 +1,179 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet} from 'react-native';
+import {View, Text,StyleSheet,Keyboard} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button,Footer } from 'native-base';
+var t = require('tcomb-form-native');
+var Form = t.form.Form;
+import axios from 'axios';
+import services from './Services';
+import styles from '../stylesheet';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
+
 
 export default class VaccineScheduleDetail extends Component{
     static navigationOptions={
         drawerLabel: () => null
     }
-    
+
+    componentDidMount() {
+        services.GetVaccineSchedule(this.props.navigation.state.params.VaccineScheduleId)
+        .then(function (response) {
+            if(response.data!=null)
+            {
+              debugger;
+                var dtls = response.data.vaccineSchedule;
+                var astatus = {};
+                for(let i=0;i<response.data.lstVaccineMaster.length;i++)
+                {
+                    astatus[response.data.lstVaccineMaster[i].VaccineCode] = response.data.lstVaccineMaster[i].VaccineName;
+                }
+                this.setState({
+                    VaccineScheduleDetails: dtls,
+                    lstVaccineCode: t.enums(astatus),
+                });
+            }
+            
+        }.bind(this))
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
+
     constructor()
     {
         super();
         this.state ={
             VaccineScheduleDetails:{
-                ChickenAge:null,
-                TypeofVaccine:null,
+                AnimalAge:null,
+                VaccineType:null,
                 VaccineName:null,
+                VaccineCode:null,
                 VaccineCompany:null,
-                HowtogetVaccine:null
-            }
+                Remarks:null,
+                VaccineScheduleId:null
+            },
+            lstVaccineCode:t.enums({}),
         },
-        this.AddVaccineSchedule=t.struct({
-            ChickenAge:t.Number,
-            TypeofVaccine:t.String,
-            VaccineName:t.String,
-            VaccineCompany:t.String,
-            HowtogetVaccine:t.String
-        })
-        this.AddVaccineScheduleOptions={
+        this.VaccineScheduleOptions={
             fields:{
-                ChickenAge:{
-                    label: 'Chicken Age',
-                    placeholder:'Chicken Age',
-                    //error:'Please Enter Your Full Name'                
+                AnimalAge:{
+                    label: 'Animal Age',
+                    placeholder:'Animal Age'
                 },
-                TypeofVaccine:{
-                    label: 'Type Of Vaccine',
-                    placeholder:'Type Of Vaccine',
-                    //error:'Please Enter Farm Address'                
+                VaccineType:{
+                    label: 'Vaccine Type',
+                    placeholder:'Vaccine Type'
                 },
-                VaccineName:{
+                VaccineCode:{
                     label: 'Vaccine Name',
                     placeholder:'Vaccine Name',
-                    //error:'Please Enter Tel/Line Number'                
+                    nullOption: {value: "", text: 'Select'}  
                 },
                 VaccineCompany:{
                     label: 'Vaccine Company',
-                    placeholder:'Vaccine Company',
-                    // error:'Please Enter Your Full Name'                
+                    placeholder:'Vaccine Company'
                 },
-                HowtogetVaccine:{
-                    label: 'How To Get Vaccine',
-                    placeholder:'How To Get Vaccine',
-                    // error:'Please Enter Your Full Name'                
+                Remarks:{
+                    label: 'Remarks',
+                    placeholder:'Remarks'               
                 }
             }
         }
     }
 
+    VaccineSchedule() { 
+        return ( t.struct({
+            //AnimalCode:this.state.lstAnimalCode,
+            AnimalAge:t.Number,
+            VaccineCode:this.state.lstVaccineCode,
+            VaccineType:t.String,
+            VaccineCompany:t.String,
+            Remarks:t.String
+        })
+    )
+}
+   
+
     onChange = (VaccineScheduleDetails) => {
-        this.setState({VaccineScheduleDetails});
+        if(VaccineScheduleDetails.VaccineCode!="" && VaccineScheduleDetails.VaccineCode!=undefined)
+        {
+            services.GetVaccineMaster(VaccineScheduleDetails.VaccineCode)
+            .then(function (response) { 
+            if(response.data.vaccineMaster!=null){
+               this.setState({
+                VaccineScheduleDetails:{
+                    AnimalAge:VaccineScheduleDetails.AnimalAge,
+                    VaccineType:response.data.vaccineMaster.VaccineType,
+                    VaccineName:response.data.vaccineMaster.VaccineName,
+                    VaccineCode:response.data.vaccineMaster.VaccineCode,
+                    VaccineCompany:response.data.vaccineMaster.VaccineCompany,
+                    Remarks:VaccineScheduleDetails.Remarks,
+                    VaccineScheduleId:VaccineScheduleDetails.VaccineScheduleId,
+                }
+               })
+            }
+            
+                
+            }.bind(this))
+            .catch(function (error) {
+            console.log(error);
+        });
+        }
+        else{
+            this.setState({
+                VaccineScheduleDetails:{
+                    AnimalAge:VaccineScheduleDetails.AnimalAge,
+                    VaccineType:null,
+                    VaccineName:null,
+                    VaccineCode:null,
+                    VaccineCompany:null,
+                    Remarks:VaccineScheduleDetails.Remarks,
+                    VaccineScheduleId:VaccineScheduleDetails.VaccineScheduleId,
+                }
+               })
+        }
     }
     
+
+    SaveVaccineSchedule=()=>{
+        Keyboard.dismiss();
+        var value = this.refs.form.getValue();
+        if (value) {
+            var data = {
+                AnimalAge:this.state.VaccineScheduleDetails.AnimalAge,
+                VaccineName:this.state.VaccineScheduleDetails.VaccineName,
+                VaccineCode:this.state.VaccineScheduleDetails.VaccineCode,
+                VaccineType:this.state.VaccineScheduleDetails.VaccineType,
+                VaccineCompany:this.state.VaccineScheduleDetails.VaccineCompany,
+                Remarks:this.state.VaccineScheduleDetails.Remarks,
+                VaccineScheduleId:this.state.VaccineScheduleDetails.VaccineScheduleId,
+            }
+     
+            services.SaveVaccineSchedule(data)
+                .then(function (response) { 
+                //if(response.data!=0){
+                    alert('Vaccine Schedule saved successfully.')
+                    this.props.navigation.navigate('VaccineScheduleList');
+                //}
+                    
+                }.bind(this))
+                .catch(function (error) {
+                console.log(error);
+            });
+        }
+    }
+    ResetVaccineSchedule=()=>{
+         Keyboard.dismiss();
+        this.setState({
+            VaccineScheduleDetails:{ }
+        })
+    }
+
     render(){
-        return(
+        return( 
             <Container>
                 <Header>
                     <Left>
@@ -83,39 +189,28 @@ export default class VaccineScheduleDetail extends Component{
                     <View style={styles.container}>
                         <Form
                             ref='form'
-                            type={this.AddVaccineSchedule}
-                            options={this.AddVaccineScheduleOptions}
+                            type={this.VaccineSchedule()}
+                            options={this.VaccineScheduleOptions}
                             value={this.state.VaccineScheduleDetails}
                             onChange={this.onChange}
                         />
                     </View>
                 </Content>
-                <Footer style={{backgroundColor:'white'}}>
-                    <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
-                        <View style={{width:'50%'}}>
-                            <Button success block rounded onPress={this.ResetFarmProfile} style={{width:'100%',justifyContent:'center'}}>
-                                <Text style={{color:'white'}} >Reset</Text>
+                <Footer style={styles.bgc_white}>
+                    <View style={styles.flexDirectionWrap} >
+                        <View style={styles.width_50}>
+                            <Button success block rounded onPress={this.ResetVaccineSchedule}>
+                                <Text style={styles.white} >Reset</Text>
                             </Button>
                         </View>
-                        <View style={{width:'50%', alignItems:'flex-end'}}>
-                            <Button primary block rounded onPress={this.SaveFarmProfile} style={{width:'100%',justifyContent:'center'}}>
-                                <Text style={{color:'white'}}>Save</Text>
+                        <View style={styles.width_50_flex_end}>
+                            <Button primary block rounded onPress={this.SaveVaccineSchedule}>
+                                <Text style={styles.white}>Save</Text>
                             </Button>
                         </View>
                     </View>
                 </Footer>
             </Container>
         );
-
     }
 }
-
-var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        //justifyContent: 'center',
-        //marginTop: 120,
-        padding: 20,
-        backgroundColor: '#ffffff',      
-    }
-  });

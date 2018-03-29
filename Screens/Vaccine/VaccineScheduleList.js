@@ -3,9 +3,11 @@ import {View, Text, StyleSheet, ActivityIndicator, ListView, TouchableOpacity, I
 
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer, Right, Item, Input } from 'native-base';
-//import Search from '../Common/Search'
-import api from '../../API/API';
-  
+
+import axios from 'axios';
+import services from './Services';
+import styles from '../stylesheet'
+
 export default class VaccineScheduleList extends Component{
 
     static navigationOptions={
@@ -16,21 +18,19 @@ export default class VaccineScheduleList extends Component{
         this.state = {
           isLoading: true,
           text: '',
-        }
+        },
         this.arrayholder = [] ;
     }
 
     componentDidMount() {
-        return api.getCountryList()
+        return services.GetVaccineScheduleList()
             .then((responseJson) => {
-                
             let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
             this.setState({
                 isLoading: false,
-                dataSource: ds.cloneWithRows(responseJson),
+                dataSource: ds.cloneWithRows(responseJson.data.vaccineScheduleList),
             }, function() {
-                // do something with new state
-                this.arrayholder = responseJson ;
+            this.arrayholder = responseJson.data.vaccineScheduleList ;
             });
             })
             .catch((error) => {
@@ -38,13 +38,16 @@ export default class VaccineScheduleList extends Component{
         });
     }
 
-    NavigateToDetails=(companycode)=>{            
-        this.props.navigation.navigate('VaccineScheduleDetail');
+    NavigateToDetails=(VaccineScheduleId)=>{    
+        this.props.navigation.navigate(
+            'VaccineScheduleDetail',
+            { VaccineScheduleId: VaccineScheduleId }
+          ); 
     }   
 
     FilterListData=(text)=>{   
         const newData = this.arrayholder.filter(function(item){
-            const itemData = item.CompanyName.toUpperCase()
+            const itemData = item.VaccineName.toUpperCase()
             const textData = text.toUpperCase()
             return itemData.indexOf(textData) > -1
         })
@@ -58,7 +61,7 @@ export default class VaccineScheduleList extends Component{
         const {navigate}=this.props.navigation;
         if (this.state.isLoading) {
             return (
-                <View style={{flex: 1, justifyContent:'center', alignItems:'center'}}>
+                <View style={styles.activeindicator}>
                 <ActivityIndicator size="large" color="#0000ff" />
             </View>
             );
@@ -90,28 +93,22 @@ export default class VaccineScheduleList extends Component{
                 </Header>
 
                 <Content>
-                    <View style={styles.container}>
+                    <View style={styles.listcontainerView}>
                         <ListView 
                             dataSource={this.state.dataSource}
                             renderRow={(rowData) => 
                             <View style={styles.listcontainer}>
-                                <TouchableOpacity  onPress={() => this.NavigateToDetails(rowData.CompanyCode)}>
-                                    <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
-                                        <View style={{width:'20%', alignItems:'center'}}>
-                                            <Image source = { require('../../android/app/src/main/assets/chicken.png') } style={styles.photo}/>                       
-                                        </View>
+                                <TouchableOpacity  onPress={() => this.NavigateToDetails(rowData.VaccineScheduleId)}>
+                                    <View style={styles.flexDirectionWrap} >
+                                        {/* <View style={{width:'20%', alignItems:'center'}}>
+                                            <Image source = {{ uri: axios.defaults.baseURL+'/Uploads/'+rowData.FarmID+'/VaccineMaster/'+rowData.VaccineCode+'/'+rowData.Photo}} style={styles.photo}/>   
+                                        </View> */}
                                         <View style={{width:'80%', alignItems:'flex-start'}}>
                                             <Text style={styles.text}>
-                                                {rowData.CompanyCode}
+                                                {rowData.VaccineName}
                                             </Text>
                                             <Text style={styles.text}>
-                                                {rowData.CompanyName}
-                                            </Text>
-                                            <Text style={styles.text}>
-                                                {rowData.CompanyName}
-                                            </Text>
-                                            <Text style={styles.text}>
-                                                {rowData.CompanyName}
+                                                {rowData.AnimalAge}
                                             </Text>
                                         </View>
                                     </View>                            
@@ -126,35 +123,5 @@ export default class VaccineScheduleList extends Component{
             </Container>
         );
     }
-}
 
-var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        //marginTop: 120,
-        padding: 5,
-        backgroundColor: '#C1C1C1',      
-    },
-    listcontainer: {
-        flex: 1,
-        padding: 12,
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    text: {
-        marginLeft: 12,
-        fontSize: 18,
-        color:'#000'
-    },
-    photo: {
-        height: 70,
-        width: 70,
-        borderRadius: 35,
-    },
-    separator: {
-        flex: 1,
-        height: StyleSheet.hairlineWidth,
-        backgroundColor: '#8E8E8E',
-    },
-  });
+}

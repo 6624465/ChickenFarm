@@ -44,6 +44,25 @@ var Vaccine={
             data: obj
         })
     },
+    //VaccineSchedule
+    GetVaccineSchedule(VaccineScheduleId)
+    {
+        return axios.get('/api/VaccineSchedule/GetVaccineSchedule/'+VaccineScheduleId)
+    },
+
+    GetVaccineScheduleList()
+    {
+        return axios.get('/api/VaccineSchedule/GetVaccineScheduleList')
+    },
+
+    SaveVaccineSchedule(obj)
+    {   
+      return axios({
+            method: 'post',
+            url: '/api/VaccineSchedule/save',
+            data: obj
+        })
+    },
 
 };
 module.exports=Vaccine;
