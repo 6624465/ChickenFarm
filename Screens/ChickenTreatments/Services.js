@@ -22,5 +22,26 @@ var Treatment={
         })
     },
 
+        //MedicineMaster
+        GetMedicineMaster(MedicineCode)
+        {
+            return axios.get('/api/MedicineMaster/GetMedicineMaster/'+MedicineCode)
+        },
+    
+        GetMedicineMasterList()
+        {
+            return axios.get('/api/MedicineMaster/GetMedicineMasterList')
+        },
+    
+        SaveMedicineMaster(obj)
+        {   
+          return axios({
+                method: 'post',
+                url: '/api/MedicineMaster/save',
+                data: obj
+            })
+        },
+    
+
 };
 module.exports=Treatment;

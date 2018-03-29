@@ -1,202 +1,283 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image} from 'react-native';
-
+import {View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image,Keyboard} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer } from 'native-base';
+import moment from 'moment';
+import axios from 'axios';
+import services from './Services';
+import styles from '../stylesheet';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
-import moment from 'moment';
 var ImagePicker = NativeModules.ImageCropPicker;
 
 export default class PurchasedMedicineDetail extends Component{
     static navigationOptions={
         drawerLabel: () => null
     }
-            constructor()
-                 {
-                super();
-                this.state ={
-                    AddPurchasedMedicine:{
-                        AddNewMedicine:null,
-                        DateOfPurchased:null,
-                        BatchNumberOfMedicine:null,
-                        QuantityPurchased:null,
-                        SuppliedBy:null,
-                        AddMedicinePhoto:null
-                    },
-                    isLogo:false
+
+    componentDidMount() {
+        services.GetMedicineMaster(this.props.navigation.state.params.MedicineCode)
+        .then(function (response) {
+            if(response.data!=null)
+            {
+                var dtls = response.data.medicineMaster;
+                dtls.PurchaseDate = dtls.PurchaseDate != null ? moment(dtls.PurchaseDate).toDate() : null;
+                dtls.ExpiryDate = dtls.ExpiryDate != null ? moment(dtls.ExpiryDate).toDate() : null;
+
+                this.setState({
+                    PurchasedMedicineDetails: dtls,
+                   // imageLink: axios.defaults.baseURL+'/Uploads/'+response.data.medicineMaster.FarmID+'/MedicineMaster/'+response.data.medicineMaster.MedicineCode+'/'+response.data.medicineMaster.Photo
+                });
+            }
+        
+            console.log(this.state.imageLink);
+        }.bind(this))
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
+
+    constructor(props)
+    {
+        super(props);
+        this.state ={
+            PurchasedMedicineDetails:{
+                MedicineCode:null,
+                MedicineName:null,
+                MedicineType:null,
+                MedicineCompany:null,
+                PurchaseDate:null,
+                ExpiryDate:null,
+                BatchNo:null,
+                Supplier:null,
+                Quantity:null,
+                Photo:null,
+               // FileName:null
+            },
+           // isMedicinePhoto:false,
+           // imageLink:null,
+        },
+
+        this.PurchasedMedicine=t.struct({
+           // MedicineCode:t.String,
+            MedicineName:t.String,
+            MedicineType:t.String,
+            MedicineCompany:t.String,
+            PurchaseDate:t.Date,
+            ExpiryDate:t.Date,
+            BatchNo:t.String,
+            Supplier:t.String,
+            Quantity:t.Number,
+           
+            //MedicinePhoto:t.String
+        }),
+
+        this.AddPurchasedMedicineOptions={
+            fields:{
+                // MedicineCode:{
+                //     label: 'Medicine Code',
+                //     placeholder:'Medicine Code'
+                // },
+                MedicineName:{
+                    label: 'Medicine Name',
+                    placeholder:'Medicine Name'                
                 },
-                this.AddPurchasedMedicine=t.struct({
-                AddNewMedicine:t.String,
-                DateOfPurchased:t.Date,
-                BatchNumberOfMedicine:t.String,
-                QuantityPurchased:t.Number,
-                SuppliedBy:t.String,
-                //AddMedicinePhoto:t.String
-                })
-                this.AddPurchasedMedicineOptions={
-                    fields:{
-                        AddNewMedicine:{
-                            label: 'Add New Medicine',
-                            placeholder:'Add New Medicine',
-                            //error:'Please Enter Your Full Name'
-                        
-                        },
-                        BatchNumberOfMedicine:{
-                            label: 'Batch Number Of Medicine',
-                            placeholder:'Batch Number Of Medicine',
-                            //error:'Please Enter Farm Address'
-                        
-                        },
-                        QuantityPurchased:{
-                            label: 'Quantity Purchased',
-                            placeholder:'Quantity Purchased',
-                            //error:'Please Enter Tel/Line Number'
-                        
-                        },
-                        SuppliedBy:{
-                            label: 'Supplied By',
-                            placeholder:'Supplied By',
-                           // error:'Please Enter Your Full Name'
-                        
-                        },
-                        DateOfPurchased:{
-                            label: 'Date Of Purchased',
-                            //minimumDate: new Date(),
-                            mode: 'date',
-                            config: {
-                              format: (date) => String(moment(date).format("MM/DD/YYYY")),
-                            }
-                            //error:'Please Enter Tel/Line Number'
-                        
-                        }
+                MedicineType:{
+                    label: 'Medicine Type',
+                    placeholder:'Medicine Type'                
+                },
+                MedicineCompany:{
+                    label: 'Medicine Company',
+                    placeholder:'Medicine Company'                
+                },
+                PurchaseDate:{
+                    label: 'Purchase Date',
+                    placeholder:'Purchase Date',
+                    // minimumDate: new Date(),
+                    mode: 'date',
+                    config: {
+                        format: (date) => String(moment(date).format("MM/DD/YYYY")),
+                    }            
+                },
+                ExpiryDate:{
+                    label: 'Expiry Date',
+                    placeholder:'Expiry Date',
+                    // minimumDate: new Date(),
+                    mode: 'date',
+                    config: {
+                        format: (date) => String(moment(date).format("MM/DD/YYYY")),
                     }
-                }
-        }
-        onChange = (AddPurchasedMedicine) => {
-            this.setState({AddPurchasedMedicine});
-        }
-    
-        cleanupImages() {
-            // ImagePicker.clean().then(() => {
-    
-            //   console.log('removed tmp images from tmp directory');
-            // }).catch(e => {
-            //   alert(e);
-            // });
-    
-            this.setState({
-                AddPurchasedMedicine:{    
-                    AddNewMedicine:this.state.AddPurchasedMedicine.AddNewMedicine,
-                    DateOfPurchased:this.state.AddPurchasedMedicine.DateOfPurchased,
-                    BatchNumberOfMedicine:this.state.AddPurchasedMedicine.BatchNumberOfMedicine,
-                    QuantityPurchased:this.state.AddPurchasedMedicine.QuantityPurchased,
-                    SuppliedBy:this.state.AddPurchasedMedicine.SuppliedBy,
-    
-                    AddMedicinePhoto: null
+                                 
                 },
-                isLogo:false
+                BatchNo:{
+                    label: 'Batch No',
+                    placeholder:'BatchNo'
+                                
+                },
+                Quantity:{
+                    label: 'Quantity ',
+                    placeholder:'Quantity '
+                                
+                },
+                Supplier:{
+                    label: 'Supplied By',
+                    placeholder:'Supplied By',
+                                
+                }
+            }
+        }
+    }
+    
+    onChange = (PurchasedMedicineDetails) => {
+        this.setState({PurchasedMedicineDetails});
+    }    
+
+    // cleanupImages() {
+    //     this.setState({
+    //         PurchasedMedicineDetails:{    
+    //             MedicineCode:this.state.PurchasedMedicineDetails.MedicineCode,
+    //             MedicineName:this.state.PurchasedMedicineDetails.MedicineName,
+    //             MedicineType:this.state.PurchasedMedicineDetails.MedicineType,
+    //             MedicineCompany:this.state.PurchasedMedicineDetails.MedicineCompany,
+    //             PurchaseDate:this.state.PurchasedMedicineDetails.PurchaseDate,
+    //             ExpiryDate:this.state.PurchasedMedicineDetails.ExpiryDate,
+    //             BatchNo:this.state.PurchasedMedicineDetails.BatchNo,
+    //             Supplier:this.state.PurchasedMedicineDetails.Supplier,
+    //             Quantity:this.state.PurchasedMedicineDetails.Quantity,
+    //             Photo:null,
+    //             FileName:null
+    //         },
+    //         isMedicinePhoto:false
+    //     });
+    // }
+    
+    // pickMultiple() {
+    //     ImagePicker.openPicker({
+    //         //multiple: true,
+    //         waitAnimationEnd: false,
+    //         includeExif: true,
+    //         includeBase64: true,
+    //     }).then(image => {
+    //         this.setState({
+    //             PurchasedMedicineDetails:{
+    //                 MedicineCode:this.state.PurchasedMedicineDetails.MedicineCode,
+    //                 MedicineName:this.state.PurchasedMedicineDetails.MedicineName,
+    //                 MedicineType:this.state.PurchasedMedicineDetails.MedicineType,
+    //                 MedicineCompany:this.state.PurchasedMedicineDetails.MedicineCompany,
+    //                 PurchaseDate:this.state.PurchasedMedicineDetails.PurchaseDate,
+    //                 ExpiryDate:this.state.PurchasedMedicineDetails.ExpiryDate,
+    //                 BatchNo:this.state.PurchasedMedicineDetails.BatchNo,
+    //                 Supplier:this.state.PurchasedMedicineDetails.Supplier,
+    //                 Quantity:this.state.PurchasedMedicineDetails.Quantity,
+
+    //                 Photo: {uri: `data:${image.mime};base64,`+ image.data, width: image.width, height: image.height},
+    //                 FileName: image.data
+                
+    //                 // Photo: images.map(i => {
+    //                 //     console.log('received image', i);
+    //                 //     return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
+    //                 // })
+    //             },
+    //             isMedicinePhoto:true
+    //         });
+    //     }).catch(e => alert(e));
+    // }
+
+    // renderImage(image) {
+    //     return <Image style={{width: 300, height: 300, resizeMode: 'contain'}} source={image} />
+    // }
+        
+    // renderAsset(image) {
+    //     return this.renderImage(image);
+    // }
+
+
+
+    SaveMedicineMaster=()=>{
+        Keyboard.dismiss();
+        var value = this.refs.form.getValue();
+        if (value) {
+            var data = {
+                MedicineCode:this.state.PurchasedMedicineDetails.MedicineCode,
+                MedicineName:this.state.PurchasedMedicineDetails.MedicineName,
+                MedicineType:this.state.PurchasedMedicineDetails.MedicineType,
+                MedicineCompany:this.state.PurchasedMedicineDetails.MedicineCompany,
+                PurchaseDate:this.state.PurchasedMedicineDetails.PurchaseDate,
+                ExpiryDate:this.state.PurchasedMedicineDetails.ExpiryDate,
+                BatchNo:this.state.PurchasedMedicineDetails.BatchNo,
+                Supplier:this.state.PurchasedMedicineDetails.Supplier,
+                Quantity:this.state.PurchasedMedicineDetails.Quantity,
+                //FileName:this.state.PurchasedMedicineDetails.FileName,
+            }
+     
+            services.SaveMedicineMaster(data)
+                .then(function (response) { 
+                //if(response.data!=0){
+                    alert('Medicine profile saved successfully.')
+                    this.props.navigation.navigate('PurchasedMedicineList');
+                //}
+                    
+                }.bind(this))
+                .catch(function (error) {
+                console.log(error);
             });
         }
-        
-        pickMultiple() {
-            ImagePicker.openPicker({
-                multiple: true,
-                waitAnimationEnd: false,
-                includeExif: true,
-            }).then(images => {
-            debugger;
-            this.setState({
-                AddPurchasedMedicine:{
-                    AddNewMedicine:this.state.AddPurchasedMedicine.AddNewMedicine,
-                    DateOfPurchased:this.state.AddPurchasedMedicine.DateOfPurchased,
-                    BatchNumberOfMedicine:this.state.AddPurchasedMedicine.BatchNumberOfMedicine,
-                    QuantityPurchased:this.state.AddPurchasedMedicine.QuantityPurchased,
-                    SuppliedBy:this.state.AddPurchasedMedicine.SuppliedBy,
-    
-                    AddMedicinePhoto: images.map(i => {
-                        console.log('received image', i);
-                        return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
-                    })
-                },
-                isLogo:true
-              });
-            }).catch(e => alert(e));
-        }
-    
-        renderImage(image) {
-            return <Image style={{width: 300, height: 300, resizeMode: 'contain'}} source={image} />
-        }
-            
-        renderAsset(image) {
-            // if (image.mime && image.mime.toLowerCase().indexOf('video/') !== -1) {
-            //   return this.renderVideo(image);
-            // }
-    
-            return this.renderImage(image);
-        }
+    }
 
+    ResetMedicineMaster=()=>{
+        Keyboard.dismiss();
+        this.setState({
+            PurchasedMedicineDetails:{ }
+        })
+    }
     render(){
-            return(        
-                  
+        return(                  
             <Container>
-                     <Header>
-                        <Left>
-                            <Button transparent onPress={()=>this.props.navigation.navigate('PurchasedMedicineList')}>
-                                <Icon name='arrow-back'/>
-                            </Button>
-                        </Left>
-                        <Body>
-                            <Title>Purchased Medicine Detail</Title>
-                        </Body>
-                  </Header>
-
-                    <Content>
-                       <View style={styles.container}>
+                <Header>
+                    <Left>
+                        <Button transparent onPress={()=>this.props.navigation.navigate('PurchasedMedicineList')}>
+                            <Icon name='arrow-back'/>
+                        </Button>
+                    </Left>
+                    <Body>
+                        <Title>Purchased Medicine</Title>
+                    </Body>
+                </Header>
+                <Content>
+                    <View style={styles.container}>
                         <Form
                             ref='form'
-                            type={this.AddPurchasedMedicine}
+                            type={this.PurchasedMedicine}
                             options={this.AddPurchasedMedicineOptions}
-                            value={this.state.AddPurchasedMedicine}
+                            value={this.state.PurchasedMedicineDetails}
                             onChange={this.onChange}
                         />
-                          <TouchableOpacity onPress={this.state.isLogo ? this.cleanupImages.bind(this) : this.pickMultiple.bind(this)} style={{marginBottom: 10}}>
-                            <Text style={{color:'blue'}}>{this.state.isLogo ? 'Clear Medicine Photo' : 'Select Medicine Photo'}</Text>
+                        {/* <TouchableOpacity onPress={this.state.isMedicinePhoto ? this.cleanupImages.bind(this) : this.pickMultiple.bind(this)} style={{marginBottom: 10}}>
+                            <Text style={{color:'blue'}}>{this.state.isMedicinePhoto ? 'Clear Photo' : 'Select Photo'}</Text>
                         </TouchableOpacity>
-
-
                         <ScrollView>
-                            {this.state.AddPurchasedMedicine.AddMedicinePhoto ? this.state.AddPurchasedMedicine.AddMedicinePhoto.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null}
-                        </ScrollView>
+                            {(this.state.PurchasedMedicineDetails.Photo ? this.renderAsset(this.state.PurchasedMedicineDetails.Photo) : null)}
+                            <Image style={{width: 300, height: 300, resizeMode: 'contain'}} source={{uri: this.state.imageLink}}  />
+                           
+                        </ScrollView> */}
                     </View>
-                    </Content>
-                    <Footer style={{backgroundColor:'white'}}>
-                        <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
-                            <View style={{width:'50%'}}>
-                                <Button success block rounded onPress={this.ResetFarmProfile} style={{width:'100%',justifyContent:'center'}}>
-                                    <Text style={{color:'white'}} >Reset</Text>
-                                </Button>
-                            </View>
-                            <View style={{width:'50%', alignItems:'flex-end'}}>
-                                <Button primary onPress={this.SaveFarmProfile} style={{width:'100%',justifyContent:'center'}}>
-                                    <Text style={{color:'white'}}>Save</Text>
-                                </Button>
-                            </View>
+                </Content>
+                <Footer style={styles.bgc_white}>
+                    <View style={styles.flexDirectionWrap} >
+                        <View style={styles.width_50}>
+                            <Button success block rounded onPress={this.ResetMedicineMaster}>
+                                <Text style={styles.white} >Reset</Text>
+                            </Button>
                         </View>
-                    </Footer>
-                </Container>
-            );
-
+                        <View style={styles.width_50_flex_end}>
+                            <Button primary block rounded onPress={this.SaveMedicineMaster}>
+                                <Text style={styles.white}>Save</Text>
+                            </Button>
+                        </View>
+                    </View>
+                </Footer>                    
+            </Container>
+        );
     }
 }
-
-var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        //justifyContent: 'center',
-        //marginTop: 120,
-        padding: 20,
-        backgroundColor: '#ffffff',      
-    }
-  });
