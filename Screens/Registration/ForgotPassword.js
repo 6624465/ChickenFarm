@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet} from 'react-native';
+import {View, Text,StyleSheet,ToastAndroid} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button } from 'native-base';
 
@@ -54,9 +54,15 @@ export default class ForgotPassword extends Component{
                 services.ResendOTP(data.MobileNo)
                 .then(function (response) {
                     
-                        alert('OTP successfully send to registered mobile number.');
+                        //alert('OTP successfully send to registered mobile number.');
                         // axios.defaults.headers.common['MOBILE_NO'] = data.MobileNo; 
                         // this.props.navigation.navigate('ForgotPasswordContinoue');
+
+                        ToastAndroid.showWithGravity(
+                            'OTP successfully send to registered mobile number...',
+                            ToastAndroid.LONG,
+                            ToastAndroid.CENTER
+                          );
                         this.props.navigation.navigate(
                             'ForgotPasswordContinue',
                             { MobileNo: data.MobileNo }

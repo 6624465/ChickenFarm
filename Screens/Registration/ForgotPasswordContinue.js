@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet,TouchableOpacity} from 'react-native';
+import {View, Text,StyleSheet,TouchableOpacity,ToastAndroid} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button } from 'native-base';
 
@@ -57,7 +57,12 @@ export default class ForgotPasswordContinue extends Component{
                 }
                 else
                 {  
-                    alert("Invalid Otp Number..Please Enter Valid Otp Number")
+                    ToastAndroid.showWithGravity(
+                        'Invalid Otp Number..Please Enter Valid Otp Number..',
+                        ToastAndroid.LONG,
+                        ToastAndroid.CENTER
+                      );
+                   // alert("Invalid Otp Number..Please Enter Valid Otp Number")
                 }
                 console.log(this.state.status);
             }.bind(this))

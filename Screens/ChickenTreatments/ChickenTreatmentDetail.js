@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet,Keyboard} from 'react-native';
+import {View, Text,StyleSheet,Keyboard,ToastAndroid} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button,Footer} from 'native-base';
@@ -140,7 +140,11 @@ export default class ChickenTreatmentDetail extends Component{
               services.SaveTreatmentEntry(data)
                 .then(function (response) { 
                   //if(data.FarmID!=0){
-                      alert('Treatment Entry saved successfully.')
+                      ToastAndroid.showWithGravity(
+                        'Treatment Entry saved successfully..',
+                        ToastAndroid.LONG,
+                        ToastAndroid.CENTER
+                      );
                       this.props.navigation.navigate('ChickenTreatmentList');
                   //}
                        
@@ -148,6 +152,14 @@ export default class ChickenTreatmentDetail extends Component{
                 .catch(function (error) {
                   console.log(error);
               });
+          }
+          else
+          {
+              ToastAndroid.showWithGravity(
+                  'Please Enter all manadatary fields...',
+                  ToastAndroid.LONG,
+                  ToastAndroid.CENTER
+                );
           }
         }
         ResetTreatmentEntry=()=>{

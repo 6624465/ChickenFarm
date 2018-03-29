@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image,Keyboard} from 'react-native';
+import {View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image,Keyboard,ToastAndroid} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer } from 'native-base';
 import moment from 'moment';
@@ -214,7 +214,12 @@ export default class PurchasedMedicineDetail extends Component{
             services.SaveMedicineMaster(data)
                 .then(function (response) { 
                 //if(response.data!=0){
-                    alert('Medicine profile saved successfully.')
+                    //alert('Medicine profile saved successfully.')
+                    ToastAndroid.showWithGravity(
+                        'Medicine profile saved successfully..',
+                        ToastAndroid.LONG,
+                        ToastAndroid.CENTER
+                      );
                     this.props.navigation.navigate('PurchasedMedicineList');
                 //}
                     
@@ -222,6 +227,14 @@ export default class PurchasedMedicineDetail extends Component{
                 .catch(function (error) {
                 console.log(error);
             });
+        }
+        else
+        {
+            ToastAndroid.showWithGravity(
+                'Please Enter all manadatary fields...',
+                ToastAndroid.LONG,
+                ToastAndroid.CENTER
+              );
         }
     }
 

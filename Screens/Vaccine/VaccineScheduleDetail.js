@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet,Keyboard} from 'react-native';
+import {View, Text,StyleSheet,Keyboard,ToastAndroid} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button,Footer } from 'native-base';
@@ -157,7 +157,12 @@ export default class VaccineScheduleDetail extends Component{
             services.SaveVaccineSchedule(data)
                 .then(function (response) { 
                 //if(response.data!=0){
-                    alert('Vaccine Schedule saved successfully.')
+                    //alert('Vaccine Schedule saved successfully.')
+                    ToastAndroid.showWithGravity(
+                        'Vaccine Schedule saved successfully...',
+                        ToastAndroid.LONG,
+                        ToastAndroid.CENTER
+                      );
                     this.props.navigation.navigate('VaccineScheduleList');
                 //}
                     
@@ -165,6 +170,14 @@ export default class VaccineScheduleDetail extends Component{
                 .catch(function (error) {
                 console.log(error);
             });
+        }
+        else{
+            ToastAndroid.showWithGravity(
+                'Please Enter all manadatary fields...',
+                ToastAndroid.LONG,
+                ToastAndroid.CENTER
+              );
+
         }
     }
     ResetVaccineSchedule=()=>{

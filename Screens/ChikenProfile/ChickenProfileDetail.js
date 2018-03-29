@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image,Keyboard } from 'react-native';
+import { View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image,Keyboard,ToastAndroid } from 'react-native';
 
 import { StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer } from 'native-base';
@@ -291,7 +291,12 @@ export default class ChickenProfileDetail extends Component{
           services.SaveAnimalProfile(data)
             .then(function (response) { 
               //if(data.FarmID!=0){
-                  alert('Animal profile saved successfully.')
+                  //alert('Animal profile saved successfully.')
+                  ToastAndroid.showWithGravity(
+                    'Animal profile saved successfully...',
+                    ToastAndroid.LONG,
+                    ToastAndroid.CENTER
+                  );
                   this.props.navigation.navigate('ChickenProfileList');
               //}
                    
@@ -299,6 +304,14 @@ export default class ChickenProfileDetail extends Component{
             .catch(function (error) {
               console.log(error);
           });
+      }
+      else
+      {
+          ToastAndroid.showWithGravity(
+              'Please Enter all manadatary fields...',
+              ToastAndroid.LONG,
+              ToastAndroid.CENTER
+            );
       }
 
     }

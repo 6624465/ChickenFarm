@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, TouchableOpacity, Keyboard} from 'react-native';
+import {View, Text, TouchableOpacity, Keyboard,ToastAndroid} from 'react-native';
 
 import { Container, Content, Header, Icon, Left, Title, Body, Button } from 'native-base';
 
@@ -88,7 +88,14 @@ export default class Registration extends Component {
                             .then(function (response) {
                                 if(response.data)
                                 {
-                                    alert('MobileNo Already Exists...');
+                                    
+                                   // alert('MobileNo Already Exists...');
+
+                                    ToastAndroid.showWithGravity(
+                                        'MobileNo Already Exists....',
+                                        ToastAndroid.LONG,
+                                        ToastAndroid.CENTER
+                                      );
                                     this.refs.form.getComponent('MobileNo').refs.input.focus()
                                 }
                                  console.log(this.state.status);
@@ -188,7 +195,13 @@ export default class Registration extends Component {
             .then(function (response) { 
                 debugger;  
                 if(response.data.msg=="Failed"){
-                    alert("Invalid OTP. Please try with correct OTP.");
+                    //alert("Invalid OTP. Please try with correct OTP.");
+
+                    ToastAndroid.showWithGravity(
+                        'Invalid OTP. Please try with correct OTP...',
+                        ToastAndroid.LONG,
+                        ToastAndroid.CENTER
+                      );
                 }
                 else
                 {
@@ -207,7 +220,12 @@ export default class Registration extends Component {
         services.ResendOTP(this.state.reg.MobileNo)
         .then(function (response) { 
             debugger;  
-                alert('OTP successfully resend to registered mobile number.');
+                //alert('OTP successfully resend to registered mobile number.');
+                ToastAndroid.showWithGravity(
+                    'OTP successfully resend to registered mobile number..',
+                    ToastAndroid.LONG,
+                    ToastAndroid.CENTER
+                  );
         }.bind(this))
         .catch(function (error) {
             console.log(error);

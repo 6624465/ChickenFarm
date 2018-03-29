@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet} from 'react-native';
+import {View, Text,StyleSheet,ToastAndroid} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button } from 'native-base';
 
@@ -65,12 +65,22 @@ ForgotPasswordUpdate = () =>
         .then(function (response) {
             if(response.data=="Success")
             {  
-                alert("Successfully Changed Your Password..")
+                ToastAndroid.showWithGravity(
+                    'Successfully Changed Your Password...',
+                    ToastAndroid.LONG,
+                    ToastAndroid.CENTER
+                  );
+               // alert("Successfully Changed Your Password..")
                 this.props.navigation.navigate('Login');                
             }
             else
             {  
-              alert("Invalid Otp Number..Please Enter Valid Otp Number")
+                ToastAndroid.showWithGravity(
+                    'Invalid Otp Number..Please Enter Valid Otp Number..',
+                    ToastAndroid.LONG,
+                    ToastAndroid.CENTER
+                  );
+            //  alert("Invalid Otp Number..Please Enter Valid Otp Number")
             }
             console.log(this.state.status);
         }.bind(this))
@@ -78,6 +88,7 @@ ForgotPasswordUpdate = () =>
                 console.log(error);
         });
     }
+    
 }
 
     onChange = (value) => {
