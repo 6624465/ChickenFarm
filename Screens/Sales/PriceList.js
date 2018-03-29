@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import {View, Text, StyleSheet, ActivityIndicator, ListView, TouchableOpacity, Image, TextInput} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
-import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer, Right,Item,Input } from 'native-base';
-//import Search from '../Common/Search'
-import api from '../../API/API';
-  
+import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer, Right, Item, Input } from 'native-base';
+
+import axios from 'axios';
+import services from './Services';
+import styles from '../stylesheet'
+
 export default class PriceList extends Component{
 
     static navigationOptions={
@@ -16,21 +18,19 @@ export default class PriceList extends Component{
         this.state = {
           isLoading: true,
           text: '',
-        }
+        },
         this.arrayholder = [] ;
     }
 
     componentDidMount() {
-        return api.getCountryList()
+        return services.GetStandardPriceList()
             .then((responseJson) => {
-                
             let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
             this.setState({
                 isLoading: false,
-                dataSource: ds.cloneWithRows(responseJson),
+                dataSource: ds.cloneWithRows(responseJson.data.standardPriceList),
             }, function() {
-                // do something with new state
-                this.arrayholder = responseJson ;
+            this.arrayholder = responseJson.data.standardPriceList ;
             });
             })
             .catch((error) => {
@@ -38,14 +38,17 @@ export default class PriceList extends Component{
         });
     }
 
-    NavigateToDetails=(companycode)=>{            
-        this.props.navigation.navigate('PriceDetail');
+    NavigateToDetails=(StandardPriceId)=>{    
+        this.props.navigation.navigate(
+            'PriceDetail',
+            { StandardPriceId: StandardPriceId }
+          ); 
     }   
 
     FilterListData=(text)=>{   
         const newData = this.arrayholder.filter(function(item){
-            const itemData = item.CompanyName.toUpperCase()
-            const textData = text.toUpperCase()
+            const itemData = item.Price
+            const textData = text
             return itemData.indexOf(textData) > -1
         })
         this.setState({
@@ -58,7 +61,7 @@ export default class PriceList extends Component{
         const {navigate}=this.props.navigation;
         if (this.state.isLoading) {
             return (
-                <View style={{flex: 1, justifyContent:'center', alignItems:'center'}}>
+                <View style={styles.activeindicator}>
                 <ActivityIndicator size="large" color="#0000ff" />
             </View>
             );
@@ -68,7 +71,7 @@ export default class PriceList extends Component{
             <Container>
                 <Header>
                     <Left>
-                    <Button transparent onPress={()=>this.props.navigation.navigate('Sales')}>
+                    <Button transparent onPress={()=>this.props.navigation.navigate('Sale')}>
                             <Icon name='arrow-back'/>
                         </Button>
                     </Left>
@@ -90,29 +93,25 @@ export default class PriceList extends Component{
                 </Header>
 
                 <Content>
-                    <View style={styles.container}>
-                     
+                    <View style={styles.listcontainerView}>
                         <ListView 
                             dataSource={this.state.dataSource}
                             renderRow={(rowData) => 
                             <View style={styles.listcontainer}>
-                                <TouchableOpacity  onPress={() => this.NavigateToDetails(rowData.CompanyCode)}>
-                                    <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
-                                        <View style={{width:'20%', alignItems:'center'}}>
-                                            <Image source = { require('../../android/app/src/main/assets/chicken.png') } style={styles.photo}/>                       
-                                        </View>
+                                <TouchableOpacity  onPress={() => this.NavigateToDetails(rowData.StandardPriceId)}>
+                                    <View style={styles.flexDirectionWrap} >
+                                        {/* <View style={{width:'20%', alignItems:'center'}}>
+                                            <Image source = {{ uri: axios.defaults.baseURL+'/Uploads/'+rowData.FarmID+'/VaccineMaster/'+rowData.VaccineCode+'/'+rowData.Photo}} style={styles.photo}/>   
+                                        </View> */}
                                         <View style={{width:'80%', alignItems:'flex-start'}}>
                                             <Text style={styles.text}>
-                                                {rowData.CompanyCode}
+                                                {rowData.Price}
                                             </Text>
                                             <Text style={styles.text}>
-                                                {rowData.CompanyName}
+                                                {rowData.SireCode}
                                             </Text>
                                             <Text style={styles.text}>
-                                                {rowData.CompanyName}
-                                            </Text>
-                                            <Text style={styles.text}>
-                                                {rowData.CompanyName}
+                                                {rowData.BreederCode}
                                             </Text>
                                         </View>
                                     </View>                            
@@ -129,34 +128,3 @@ export default class PriceList extends Component{
     }
 
 }
-
-var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        //marginTop: 120,
-        padding: 5,
-        backgroundColor: '#C1C1C1',      
-    },
-    listcontainer: {
-        flex: 1,
-        padding: 12,
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    text: {
-        marginLeft: 12,
-        fontSize: 18,
-        color:'#000'
-    },
-    photo: {
-        height: 70,
-        width: 70,
-        borderRadius: 35,
-    },
-    separator: {
-        flex: 1,
-        height: StyleSheet.hairlineWidth,
-        backgroundColor: '#8E8E8E',
-    },
-  });

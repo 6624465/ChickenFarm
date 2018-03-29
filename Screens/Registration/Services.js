@@ -4,6 +4,7 @@ var reg={
         
     Login(obj)
     {   
+        debugger;
         return  axios({
             method: 'post',
             url: '/api/Register/Login',
