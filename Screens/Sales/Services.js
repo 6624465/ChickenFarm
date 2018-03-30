@@ -17,6 +17,27 @@ var sales={
             data: obj
         })
     },
+        //AnimalForSale
+        GetAnimalForSale(SaleID)
+        {
+            return axios.get('/api/AnimalForSale/GetAnimalForSale/'+SaleID)
+        },
+        GetAnimalForSaleList()
+        {
+            return axios.get('/api/AnimalForSale/GetAnimalForSaleList')
+        },
+        GetAnimalCodeList(AnimalCode)
+        {
+            return axios.get('/api/AnimalProfile/GetAnimalCodeList/'+AnimalCode)
+        },
+        SaveAnimalForSale(obj)
+        {   
+          return axios({
+                method: 'post',
+                url: '/api/AnimalForSale/save',
+                data: obj
+            })
+        },
 
 };
 module.exports=sales;

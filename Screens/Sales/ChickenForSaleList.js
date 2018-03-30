@@ -4,13 +4,21 @@ import {View, Text, StyleSheet, ActivityIndicator, ListView, TouchableOpacity, I
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer, Right, Item, Input } from 'native-base';
 //import Search from '../Common/Search'
-import api from '../../API/API';
+//import api from '../../API/API';
+
+import axios from 'axios';
+import services from './Services';
+import styles from '../stylesheet';
   
 export default class ChickenForSaleList extends Component{
 
     static navigationOptions={
+        title : 'Animal For Sale List',
+        headerStyle:{backgroundColor:'#fff'},
+        headerTitleStyle:{color:'#212121'},
         drawerLabel: () => null
     }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -21,31 +29,32 @@ export default class ChickenForSaleList extends Component{
     }
 
     componentDidMount() {
-        return api.getCountryList()
-            .then((responseJson) => {
-                
+        services.GetAnimalForSaleList()
+        .then((responseJson) => {
             let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
             this.setState({
                 isLoading: false,
-                dataSource: ds.cloneWithRows(responseJson),
+                dataSource: ds.cloneWithRows(responseJson.data.animalForSaleList),
             }, function() {
-                // do something with new state
-                this.arrayholder = responseJson ;
+                this.arrayholder = responseJson.data.animalForSaleList ;
             });
-            })
-            .catch((error) => {
+        })
+        .catch((error) => {
             console.error(error);
         });
     }
 
-    NavigateToDetails=(companycode)=>{            
-        this.props.navigation.navigate('ChickenForSaleDetail');
+    NavigateToDetails=(SaleID)=>{        
+        this.props.navigation.navigate(
+            'ChickenForSaleDetail',
+            { SaleID: SaleID }
+        );    
     }   
 
     FilterListData=(text)=>{   
         const newData = this.arrayholder.filter(function(item){
-            const itemData = item.CompanyName.toUpperCase()
-            const textData = text.toUpperCase()
+            const itemData = item.Breed
+            const textData = text
             return itemData.indexOf(textData) > -1
         })
         this.setState({
@@ -58,7 +67,7 @@ export default class ChickenForSaleList extends Component{
         const {navigate}=this.props.navigation;
         if (this.state.isLoading) {
             return (
-                <View style={{flex: 1, justifyContent:'center', alignItems:'center'}}>
+                <View style={styles.activeindicator}>
                 <ActivityIndicator size="large" color="#0000ff" />
             </View>
             );
@@ -68,12 +77,12 @@ export default class ChickenForSaleList extends Component{
             <Container>
                 <Header>
                     <Left>
-                    <Button transparent onPress={()=>this.props.navigation.navigate('Sales')}>
-                            <Icon name='arrow-back'/>
+                        <Button transparent onPress={()=>this.props.navigation.navigate('DrawerOpen')}>
+                            <Icon ios='ios-menu' android="md-menu" />
                         </Button>
                     </Left>
                     <Body>
-                        <Title>Chicken For Sale List</Title>
+                        <Title>Animal For Sale List</Title>
                     </Body>
                     <Right>
                         <Button transparent onPress={() => this.NavigateToDetails(-1)}>
@@ -88,30 +97,23 @@ export default class ChickenForSaleList extends Component{
                         {/* <Icon name="ios-people" /> */}
                     </Item>
                 </Header>
-
                 <Content>
-                    <View style={styles.container}>
+                    <View style={styles.listcontainerView}>
                         <ListView 
                             dataSource={this.state.dataSource}
                             renderRow={(rowData) => 
                             <View style={styles.listcontainer}>
-                                <TouchableOpacity  onPress={() => this.NavigateToDetails(rowData.CompanyCode)}>
-                                    <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
+                                <TouchableOpacity  onPress={() => this.NavigateToDetails(rowData.SaleID)}>
+                                    <View style={styles.flexDirectionWrap} >
                                         <View style={{width:'20%', alignItems:'center'}}>
-                                            <Image source = { require('../../android/app/src/main/assets/chicken.png') } style={styles.photo}/>                       
+                                            <Image source = {{ uri: axios.defaults.baseURL+'/Uploads/'+rowData.FarmID+'/AnimalForSale/'+rowData.SaleID+'/'+rowData.AnimalPhoto}} style={styles.photo}/>                       
                                         </View>
                                         <View style={{width:'80%', alignItems:'flex-start'}}>
                                             <Text style={styles.text}>
-                                                {rowData.CompanyCode}
+                                                {rowData.AnimalCode}
                                             </Text>
                                             <Text style={styles.text}>
-                                                {rowData.CompanyName}
-                                            </Text>
-                                            <Text style={styles.text}>
-                                                {rowData.CompanyName}
-                                            </Text>
-                                            <Text style={styles.text}>
-                                                {rowData.CompanyName}
+                                                {rowData.Breed}
                                             </Text>
                                         </View>
                                     </View>                            
@@ -126,36 +128,4 @@ export default class ChickenForSaleList extends Component{
             </Container>
         );
     }
-
 }
-
-var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        //marginTop: 120,
-        padding: 5,
-        backgroundColor: '#C1C1C1',      
-    },
-    listcontainer: {
-        flex: 1,
-        padding: 12,
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    text: {
-        marginLeft: 12,
-        fontSize: 18,
-        color:'#000'
-    },
-    photo: {
-        height: 70,
-        width: 70,
-        borderRadius: 35,
-    },
-    separator: {
-        flex: 1,
-        height: StyleSheet.hairlineWidth,
-        backgroundColor: '#8E8E8E',
-    },
-  });

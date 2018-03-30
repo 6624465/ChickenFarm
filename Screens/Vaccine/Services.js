@@ -28,7 +28,7 @@ var Vaccine={
     },
     GetAnimalCodeList(AnimalCode)
     {
-        return axios.get('/api/VaccineEntry/GetAnimalCodeList/'+AnimalCode)
+        return axios.get('/api/AnimalProfile/GetAnimalCodeList/'+AnimalCode)
     },
 
     GetVaccineEntryList()

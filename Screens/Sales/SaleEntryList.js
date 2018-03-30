@@ -68,7 +68,7 @@ export default class SaleEntryList extends Component{
             <Container>
                 <Header>
                     <Left>
-                    <Button transparent onPress={()=>this.props.navigation.navigate('Sales')}>
+                    <Button transparent onPress={()=>this.props.navigation.navigate('Sale')}>
                             <Icon name='arrow-back'/>
                         </Button>
                     </Left>

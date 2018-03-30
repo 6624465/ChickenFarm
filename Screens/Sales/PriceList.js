@@ -71,7 +71,7 @@ export default class PriceList extends Component{
             <Container>
                 <Header>
                     <Left>
-                    <Button transparent onPress={()=>this.props.navigation.navigate('Sale')}>
+                    <Button transparent onPress={()=>this.props.navigation.navigate('Sales')}>
                             <Icon name='arrow-back'/>
                         </Button>
                     </Left>
