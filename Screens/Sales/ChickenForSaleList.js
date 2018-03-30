@@ -77,8 +77,8 @@ export default class ChickenForSaleList extends Component{
             <Container>
                 <Header>
                     <Left>
-                        <Button transparent onPress={()=>this.props.navigation.navigate('DrawerOpen')}>
-                            <Icon ios='ios-menu' android="md-menu" />
+                    <Button transparent onPress={()=>this.props.navigation.navigate('Sales')}>
+                            <Icon name='arrow-back'/>
                         </Button>
                     </Left>
                     <Body>

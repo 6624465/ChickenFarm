@@ -35,8 +35,7 @@ export default class GiveVaccineDetail extends Component{
                     lstAnimalCode: t.enums(astatus),
                 });
             }
-        
-            console.log(this.state.imageLink);
+           
         }.bind(this))
         .catch(function (error) {
             console.log(error);

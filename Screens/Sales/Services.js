@@ -38,6 +38,26 @@ var sales={
                 data: obj
             })
         },
-
+         //AnimalSaleEntry
+         GetAnimalSaleEntry(AnimalSaleEntryId)
+         {
+             return axios.get('/api/AnimalSaleEntry/GetAnimalSaleEntry/'+AnimalSaleEntryId)
+         },
+         GetAnimalSaleEntryList()
+         {
+             return axios.get('/api/AnimalSaleEntry/GetAnimalSaleEntryList')
+         },
+         SaveAnimalSaleEntry(obj)
+         {   
+           return axios({
+                 method: 'post',
+                 url: '/api/AnimalSaleEntry/save',
+                 data: obj
+             })
+         },
+         GetAnimalStatusCode(AnimalCode)
+         {
+             return axios.get('/api/AnimalProfile/GetAnimalStatusCode/'+AnimalCode)
+         }
 };
 module.exports=sales;
