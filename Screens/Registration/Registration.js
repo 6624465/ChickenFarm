@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {View, Text, TouchableOpacity, Keyboard,ToastAndroid} from 'react-native';
 
-import { Container, Content, Header, Icon, Left, Title, Body, Button } from 'native-base';
+import { Container, Content, Header, Icon, Left, Title, Body, Button,Right } from 'native-base';
 
 import {StackNavigator} from 'react-navigation';
 
@@ -245,9 +245,13 @@ export default class Registration extends Component {
                         <Icon name='arrow-back'/>
                         </Button>
                     </Left>
+                    
                     <Body>
-                        <Title>Registration</Title>
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>Registration</Title>
+                        </View>
                     </Body>
+                    <Right></Right>
                 </Header>
                 <Content style={styles.container}>
                     <View>

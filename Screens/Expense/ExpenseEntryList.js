@@ -74,7 +74,9 @@ export default class ExpenseEntryList extends Component{
                         </Button>
                     </Left>
                     <Body>
-                        <Title>Expense Entry List</Title>
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>Expense Entry List</Title>
+                        </View>
                     </Body>
                     <Right>
                         <Button transparent onPress={() => this.NavigateToDetails(-1)}>

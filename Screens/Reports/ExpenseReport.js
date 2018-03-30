@@ -19,9 +19,13 @@ export default class ExpenseReport extends Component{
                                 <Icon name='arrow-back'/>
                             </Button>
                         </Left>
-                        <Body>
-                            <Title >Expense Report</Title>
-                        </Body>
+                    
+                    <Body>
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>Expense Report</Title>
+                        </View>
+                    </Body>
+                    <Right></Right>
                     </Header>
 
                     <Content contentContainerStyle={{

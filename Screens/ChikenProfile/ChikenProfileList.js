@@ -78,8 +78,11 @@ export default class ChickenProfileList extends Component{
                             <Icon ios='ios-menu' android="md-menu" />
                         </Button>
                     </Left>
+                    
                     <Body>
-                        <Title>Chicken Profile List</Title>
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>Chicken Profile List</Title>
+                        </View>
                     </Body>
                     <Right>
                         <Button transparent onPress={() => this.NavigateToDetails(-1)}>

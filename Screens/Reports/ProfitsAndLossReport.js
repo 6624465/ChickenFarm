@@ -19,14 +19,13 @@ export default class ProfitsAndLossReport extends Component{
                            <Icon name='arrow-back'/>
                            </Button>
                        </Left>
-                        <Body>
-                            <Title >Profits & Loss Report</Title>
-                        </Body>
-                        {/* <Right>
-                        <Button transparent onPress={this.Logout}>
-                            <Icon ios='ios-menu' android="md-menu" />
-                            </Button>
-                        </Right> */}
+                    
+                    <Body>
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>Profits & Loss Report</Title>
+                        </View>
+                    </Body>
+                    <Right></Right>
                     </Header>
 
                     <Content contentContainerStyle={{

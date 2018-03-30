@@ -19,14 +19,12 @@ export default class StockReport extends Component{
                            <Icon name='arrow-back'/>
                            </Button>
                        </Left>
-                        <Body>
-                            <Title >Stock Report</Title>
-                        </Body>
-                        {/* <Right>
-                        <Button transparent onPress={this.Logout}>
-                            <Icon ios='ios-menu' android="md-menu" />
-                            </Button>
-                        </Right> */}
+                    <Body>
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>Stock Report</Title>
+                        </View>
+                    </Body>
+                    <Right></Right>
                     </Header>
 
                     <Content contentContainerStyle={{

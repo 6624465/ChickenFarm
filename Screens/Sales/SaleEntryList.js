@@ -82,7 +82,9 @@ export default class SaleEntryList extends Component{
                         </Button>
                     </Left>
                     <Body>
-                        <Title>Animal Sale Entry List</Title>
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>Animal Sale Entry List</Title>
+                        </View>
                     </Body>
                     <Right>
                         <Button transparent onPress={() => this.NavigateToDetails(-1)}>

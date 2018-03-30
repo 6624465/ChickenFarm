@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image, Keyboard, ActivityIndicator,ToastAndroid} from 'react-native';
 
 //import {StackNavigator} from 'react-navigation';
-import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer } from 'native-base';
+import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer,Right } from 'native-base';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
@@ -269,8 +269,11 @@ export default class FarmProfileList extends Component{
                         </Button>                        
                     </Left>
                     <Body>
-                        <Title>Add Farm Profile</Title>
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>Add Farm Profile</Title>
+                        </View>
                     </Body>
+                    <Right></Right>
                 </Header>
 
                 <Content>

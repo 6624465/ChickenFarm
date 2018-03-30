@@ -76,8 +76,11 @@ export default class PurchasedMedicineList extends Component{
                             <Icon name='arrow-back'/>
                         </Button>
                     </Left>
+                    
                     <Body>
-                        <Title>Purchased Medicine List</Title>
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>Purchased Medicine List</Title>
+                        </View>
                     </Body>
                     <Right>
                         <Button transparent onPress={() => this.NavigateToDetails(-1)}>

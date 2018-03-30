@@ -16,13 +16,13 @@ export default class Expense extends Component{
                         </Button>
                     </Left>
                     <Body>
-                        <Title>Expenses</Title>
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>Expenses</Title>
+                        </View>
                     </Body>
-                    {/* <Right>
-                        <Button transparent onPress={this.Logout}>
-                            <Icon ios='ios-menu' android="md-menu" />
-                        </Button>
-                    </Right> */}
+                    <Right>
+                        
+                    </Right>
                 </Header>
 
                 <Content contentContainerStyle={{

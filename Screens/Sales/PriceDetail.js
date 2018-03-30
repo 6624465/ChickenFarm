@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image,Keyboard,ToastAndroid} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
-import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer } from 'native-base';
+import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer,Right } from 'native-base';
 import services from './Services'
 import styles from '../stylesheet';
 
@@ -158,8 +158,11 @@ export default class PriceDetail extends Component{
                         </Button>
                     </Left>
                     <Body>
-                        <Title>Standard Price Details</Title>
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>Standard Price Details</Title>
+                        </View>
                     </Body>
+                    <Right></Right>
                 </Header>
                 <Content>
                     <View style={styles.container}>

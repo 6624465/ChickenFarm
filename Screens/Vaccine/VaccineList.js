@@ -13,14 +13,12 @@ export default class Vaccine extends Component{
                     <Icon ios='ios-menu' android="md-menu" />
                     </Button>
                 </Left>
-                <Body>
-                    <Title>Vaccine</Title>
-                </Body>
-                {/* <Right>
-                    <Button transparent onPress={this.Logout}>
-                        <Icon ios='ios-menu' android="md-menu" />
-                    </Button>
-                </Right> */}
+                    <Body>
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>Vaccine</Title>
+                        </View>
+                    </Body>
+                    <Right></Right>
             </Header>
 
             <Content contentContainerStyle={{

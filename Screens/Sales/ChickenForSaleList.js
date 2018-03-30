@@ -82,7 +82,9 @@ export default class ChickenForSaleList extends Component{
                         </Button>
                     </Left>
                     <Body>
-                        <Title>Animal For Sale List</Title>
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>Animal For Sale List</Title>
+                        </View>
                     </Body>
                     <Right>
                         <Button transparent onPress={() => this.NavigateToDetails(-1)}>

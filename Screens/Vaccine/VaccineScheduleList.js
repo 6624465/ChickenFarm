@@ -76,7 +76,9 @@ export default class VaccineScheduleList extends Component{
                         </Button>
                     </Left>
                     <Body>
-                        <Title>Vaccine Schedule List</Title>
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>Vaccine Schedule List</Title>
+                        </View>
                     </Body>
                     <Right>
                         <Button transparent onPress={() => this.NavigateToDetails(-1)}>

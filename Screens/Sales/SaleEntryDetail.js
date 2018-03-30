@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {View, Text,StyleSheet,Keyboard,ToastAndroid} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
-import { Container, Content, Header, Icon, Left, Title, Body, Button,Footer } from 'native-base';
+import { Container, Content, Header, Icon, Left, Title, Body, Button,Footer,Right } from 'native-base';
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
 import axios from 'axios';
@@ -239,8 +239,11 @@ export default class SaleEntryDetail extends Component{
                         </Button>
                     </Left>
                     <Body>
-                        <Title>Animal Sale Entry Details</Title>
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>Animal Sale Entry Details</Title>
+                        </View>
                     </Body>
+                    <Right></Right>
                 </Header>
                 <Content>
                     <View style={styles.container}>

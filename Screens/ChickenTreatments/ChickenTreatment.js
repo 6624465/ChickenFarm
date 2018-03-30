@@ -16,14 +16,15 @@ export default class ChickenTreatment extends Component{
                         <Icon ios='ios-menu' android="md-menu" />
                         </Button>
                     </Left>
+                    
                     <Body>
-                        <Title>Chicken Treatment</Title>
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>Chicken Treatment</Title>
+                        </View>
                     </Body>
-                    {/* <Right>
-                        <Button transparent onPress={this.Logout}>
-                            <Icon ios='ios-menu' android="md-menu" />
-                        </Button>
-                    </Right> */}
+                    <Right>
+                        
+                    </Right>
                 </Header>
 
                 <Content contentContainerStyle={{

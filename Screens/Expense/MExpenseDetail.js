@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image,Keyboard,ToastAndroid} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
-import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer } from 'native-base';
+import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer,Right } from 'native-base';
 import styles from '../stylesheet';
 import services from './Services';
 
@@ -125,8 +125,13 @@ export default class MExpenseDetail extends Component{
                         </Button>
                     </Left>
                     <Body>
-                        <Title>Master Expense Details</Title>
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>Master Expense Details</Title>
+                        </View>
                     </Body>
+                    <Right>
+                        
+                    </Right>
                 </Header>
                 <Content>
                     <View style={styles.container}>

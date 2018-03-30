@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {View, Text,StyleSheet,ToastAndroid} from 'react-native';
 import {StackNavigator} from 'react-navigation';
-import { Container, Content, Header, Icon, Left, Title, Body, Button } from 'native-base';
+import { Container, Content, Header, Icon, Left, Title, Body, Button,Right } from 'native-base';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
@@ -105,8 +105,11 @@ ForgotPasswordUpdate = () =>
                         </Button>
                     </Left>
                     <Body>
-                        <Title>Forgot Password</Title>
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>Forgot Password</Title>
+                        </View>
                     </Body>
+                    <Right></Right>
                 </Header>
                 <Content style={styles.container}>
                     <View>

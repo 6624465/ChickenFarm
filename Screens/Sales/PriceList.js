@@ -76,7 +76,9 @@ export default class PriceList extends Component{
                         </Button>
                     </Left>
                     <Body>
-                        <Title>Price List</Title>
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>Price List</Title>
+                        </View>
                     </Body>
                     <Right>
                         <Button transparent onPress={() => this.NavigateToDetails(-1)}>

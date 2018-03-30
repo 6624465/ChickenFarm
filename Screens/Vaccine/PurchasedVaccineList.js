@@ -77,7 +77,9 @@ export default class PurchasedVaccineList extends Component{
                         </Button>
                     </Left>
                     <Body>
-                        <Title>Purchased Vaccine List</Title>
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>Purchased Vaccine List</Title>
+                        </View>
                     </Body>
                     <Right>
                         <Button transparent onPress={() => this.NavigateToDetails(-1)}>

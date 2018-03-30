@@ -14,13 +14,11 @@ export default class Sale extends Component{
                         </Button>
                     </Left>
                     <Body>
-                        <Title>Sales</Title>
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>Sales</Title>
+                        </View>
                     </Body>
-                    {/* <Right>
-                        <Button transparent onPress={this.Logout}>
-                            <Icon ios='ios-menu' android="md-menu" />
-                        </Button>
-                    </Right> */}
+                    <Right></Right>
                 </Header>
 
                 <Content contentContainerStyle={{

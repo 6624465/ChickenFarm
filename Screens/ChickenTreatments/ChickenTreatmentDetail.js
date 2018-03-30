@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {View, Text,StyleSheet,Keyboard,ToastAndroid} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
-import { Container, Content, Header, Icon, Left, Title, Body, Button,Footer} from 'native-base';
+import { Container, Content, Header, Icon, Left, Title, Body, Button,Footer,Right} from 'native-base';
 import moment from 'moment';
 import services from './Services'
 import axios from 'axios';
@@ -179,8 +179,13 @@ export default class ChickenTreatmentDetail extends Component{
                         </Button>
                     </Left>
                     <Body>
-                        <Title>Chicken Treatment Detail</Title>
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>Chicken Treatment Detail</Title>
+                        </View>
                     </Body>
+                    <Right>
+                        
+                    </Right>
                 </Header>
 
                     <Content>

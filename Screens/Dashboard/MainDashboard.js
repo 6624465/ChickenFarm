@@ -24,19 +24,19 @@ export default class MainDashboard extends Component{
                             <Icon ios='ios-menu' android="md-menu" />
                             </Button>
                         </Left>
-                        <Body>
-                            <Title >My Farm Dashboard</Title>
-                        </Body>
-                        {/* <Right>
-                            <Button transparent onPress={this.Logout}>
-                                <Icon ios='ios-menu' android="md-menu" />
-                            </Button>
-                        </Right> */}
+                    <Body>
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>My Farm Dashboard</Title>
+                        </View>
+                    </Body>
+                    <Right>
+                        
+                    </Right>
                     </Header>
 
                     <Content contentContainerStyle={styles.contentContainer}>
                     <View style={styles.Dashboard_container}>
-                        <View style={{flexDirection:'row', padding:3, flexWrap:'wrap', height:'17%'}} >
+                        <View style={{flexDirection:'row', padding:3, flexWrap:'wrap', height:'20%'}} >
                             <View style={styles.width_25_align_center}>
                                 <TouchableOpacity style={{width:70,height:70}} onPress={()=>this.props.navigation.navigate('SalesReport')}>
                                     <Image source = { require('../../android/app/src/main/assets/Sales.png') } style={{width:'100%',height:'100%'}}/>
@@ -79,7 +79,7 @@ export default class MainDashboard extends Component{
                             </View>
                         </View>
                         <View style={styles.separator} />
-                        <View style={{flexDirection:'row' ,flexWrap:'wrap', height:'83%', backgroundColor:'gray', alignItems:'center', height:'100%', justifyContent:'center'}} >
+                        <View style={{flexDirection:'row' ,flexWrap:'wrap', height:'80%', backgroundColor:'gray', alignItems:'center', justifyContent:'center'}} >
                             <Text style={{color:'red',fontSize:24,fontWeight:'bold'}}>
                                     Report Content....
                                 </Text>

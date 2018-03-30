@@ -74,9 +74,12 @@ export default class ChickenTreatmentList extends Component{
                             <Icon name='arrow-back'/>
                         </Button>
                     </Left>
+
                     <Body>
-                        <Title>Treatment Entry List</Title>
-                    </Body>                    
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>Treatment Entry List</Title>
+                        </View>
+                    </Body>           
                     <Right>
                         <Button transparent onPress={() => this.NavigateToDetails(-1)}>
                             <Icon ios='ios-add-circle' android="md-add-circle"/>

@@ -75,7 +75,9 @@ export default class MExpenseList extends Component{
                         </Button>
                     </Left>
                     <Body>
-                        <Title>Master Expense List</Title>
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>Master Expense List</Title>
+                        </View>
                     </Body>
                     <Right>
                         <Button transparent onPress={() => this.NavigateToDetails(-1)}>

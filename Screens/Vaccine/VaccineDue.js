@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {View, Text,StyleSheet} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
-import { Container, Content, Header, Icon, Left, Title, Body, Button } from 'native-base';
+import { Container, Content, Header, Icon, Left, Title, Body, Button,Right } from 'native-base';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
@@ -58,9 +58,12 @@ export default class AddVaccineSchedule extends Component{
                                 <Icon name='arrow-back'/>
                             </Button>
                         </Left>
-                        <Body>
-                            <Title>Vaccine Due</Title>
-                        </Body>
+                    <Body>
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>Vaccine Due</Title>
+                        </View>
+                    </Body>
+                    <Right></Right>
                     </Header>
                     <View style={styles.container}>
                         <Form

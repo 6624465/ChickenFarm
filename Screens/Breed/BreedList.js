@@ -75,8 +75,11 @@ export default class BreedList extends Component{
                             <Icon ios='ios-menu' android="md-menu" />
                         </Button>
                     </Left>
+                    
                     <Body>
-                        <Title>Breed List</Title>
+                        <View style={{width:230,alignItems:'flex-start'}}>
+                             <Title>Breed List </Title>
+                        </View>
                     </Body>
                     <Right>
                         <Button transparent onPress={() => this.NavigateToDetails(-1)}>
