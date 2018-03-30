@@ -1,186 +1,236 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image} from 'react-native';
+import { View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image,Keyboard,ToastAndroid } from 'react-native';
 
-import {StackNavigator} from 'react-navigation';
+import { StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer } from 'native-base';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
-var ImagePicker = NativeModules.ImageCropPicker;
+import moment from 'moment';
+import services from './Services'
+import axios from 'axios';
+import styles from '../stylesheet';
 
+var ImagePicker = NativeModules.ImageCropPicker;
+  
 export default class ChickenForSaleDetail extends Component{
     static navigationOptions={
+        title : 'Animal For Sale',
+        headerStyle:{backgroundColor:'#fff'},
+        headerTitleStyle:{color:'#212121'},
         drawerLabel: () => null
     }
     
+    componentDidMount() {
+        services.GetAnimalForSale(this.props.navigation.state.params.SaleID)
+        .then(function (response) {
+            if(response.data!=null)
+            {
+                var dtls = response.data.animalForSale;
+                var astatus = {};
+                for(let i=0;i<response.data.animalProfile.length;i++)
+                {
+                    astatus[response.data.animalProfile[i].AnimalCode] = response.data.animalProfile[i].AnimalName;
+                }
+                var gender = {};
+                this.setState({
+                    AnimalForSaleDetails: dtls,
+                    lstAnimalCode: t.enums(astatus),
+                    imageLink: axios.defaults.baseURL+'/Uploads/'+response.data.animalForSale.FarmID+'/AnimalForSale/'+response.data.animalForSale.SaleID+'/'+response.data.animalForSale.AnimalPhoto
+                });
+            }
+            console.log(this.state.imageLink);
+        }.bind(this))
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
+   
     constructor()
     {
         super();
-        this.state ={
-            ChickenForSaleDetail:{
-                ChickenCode:null,
-                Seller:null,
+        this.state ={            
+            AnimalForSaleDetails:{
+                SaleID:null,
+                AnimalCode:null,
+                AnimalAge:null,
                 Breed:null,
                 SireCode:null,
                 BreederCode:null,
                 Talents:null,
-                Age:null,
                 Weight:null,
                 FightingRecord:null,
-                StandardPrice:null,
-                Status:null,
-                AddPhoto:null,
-                AddClip:null,
+                IsShowStandardPrice:null,
+                AnimalPhoto:null,
+                IsActive:null,
+                FileName:null
             },
-            isLogo:false
-        },
-
-        this.ChickenForSaleDetail=t.struct({
-            ChickenCode:t.String,
-            Seller:t.String,
-            Breed:t.String,
-            SireCode:t.String,
-            BreederCode:t.String,
-            Talents:t.String,
-            Age:t.Number,
-            Weight:t.Number,
-            FightingRecord:t.String,
-            StandardPrice:t.String,
-            Status:t.String 
-            //AddLogo:t.String
-        }),
-
-        this.ChickenForSaleDetailOptions={
-            fields:{
-                ChickenCode:{
-                    label: 'Chicken Code',
-                    placeholder:'Chicken Code',
-                    //error:'Please Enter Your Full Name'
-                
-                },
-                Seller:{
-                    label: 'Seller',
-                    placeholder:'Seller',
-                    //error:'Please Enter Farm Address'
-                
-                },
-                Breed:{
-                    label: 'Breed',
-                    placeholder:'Breed',
-                    //error:'Please Enter Tel/Line Number'
-                
-                },
-                SireCode:{
-                    label: 'Sire Code',
-                    placeholder:'Sire Code',
-                    // error:'Please Enter Your Full Name'
-                
-                },
-                BreederCode:{
-                    label: 'Breeder Code',
-                    placeholder:' Breeder Code',
-                    // error:'Please Enter Your Full Name'
-                
-                },
-                Talents:{
-                    label: 'Talents',
-                    placeholder:'Talents',
-                                          
-                },
-                Age:{
-                    label: 'Age',
-                    placeholder:'Age',
-                    //error:'Please Enter Farm Address'
-                
-                },
-                Weight:{
-                    label: 'Weight',
-                    placeholder:'Weight',
-                    //error:'Please Enter Tel/Line Number'
-                
-                },
-                FightingRecord:{
-                    label: 'Fighting Record',
-                    placeholder:'Fighting Record',
-                    // error:'Please Enter Your Full Name'
-                
-                },
-                StandardPrice:{
-                    label: 'Standard Price',
-                    placeholder:' Standard Price',
-                    // error:'Please Enter Your Full Name'
-                
-                },
-                Status:{
-                    label: 'Status',
-                    placeholder:'Status',
-                                          
-                },
-
+            isPhoto:false,
+            imageLink:null,
+            lstAnimalCode:t.enums({}),
+            options:{
+                fields:{
+               
+                    AnimalCode:{
+                        label: 'Animal Name',
+                         nullOption: {value: '', text: 'Select'} 
+                    },
+                    AnimalAge:{
+                        label: 'Animal Age',
+                        placeholder:'Animal Age'                       
+                    },
+                   
+                    SireCode:{
+                        label: 'Sire Code',
+                        placeholder:'Sire Code'                       
+                    },
+                   
+                    BreederCode:{
+                        label: 'Breeder Code',
+                        placeholder:'Breeder Code'
+                    },
+                    Breed:{
+                        label: 'Breed',
+                        placeholder:'Breed'
+                    },
+                    Talents:{
+                        label: 'Talents',
+                        placeholder:'Talents'
+                    },
+                    Weight:{
+                        label: 'Weight',
+                        placeholder:'Weight'
+                    },
+                    FightingRecord:{
+                        label: 'Fighting Record',
+                        placeholder:'Fighting Record'
+                    },
+                    IsShowStandardPrice:{
+                        label: 'Standard Price'
+                    }
+                }
             }
         }
     }
 
-    onChange = (ChickenForSaleDetail) => {
-        this.setState({ChickenForSaleDetail});
+    AnimalForSaleDetails() { 
+        return ( 
+            t.struct({
+                AnimalCode:this.state.lstAnimalCode, 
+                AnimalAge:t.Number,  
+                Breed:t.String, 
+                SireCode:t.Number,      
+                BreederCode:t.Number,
+                Talents:t.String,       
+                Weight:t.Number,       
+                FightingRecord:t.String,
+                IsShowStandardPrice:t.Boolean
+            })
+        )
     }
 
+    onChange = (AnimalForSaleDetails) => {
+        if(AnimalForSaleDetails.AnimalCode!="")
+        {
+            services.GetAnimalCodeList(AnimalForSaleDetails.AnimalCode)
+            .then(function (response) { 
+            if(response.data.age!=null){
+               this.setState({
+                AnimalForSaleDetails:{
+                    SaleID:AnimalForSaleDetails.SaleID,
+                    AnimalCode:AnimalForSaleDetails.AnimalCode,
+                    AnimalAge:response.data.age,
+                    Breed:AnimalForSaleDetails.Breed,
+                    SireCode:AnimalForSaleDetails.SireCode,
+                    BreederCode:AnimalForSaleDetails.BreederCode,
+                    Talents:AnimalForSaleDetails.Talents,
+                    Weight:AnimalForSaleDetails.Weight,
+                    FightingRecord:AnimalForSaleDetails.FightingRecord,
+                    IsShowStandardPrice:AnimalForSaleDetails.IsShowStandardPrice,
+                    IsActive:AnimalForSaleDetails.IsActive,
+                    FileName:AnimalForSaleDetails.FileName
+                },
+                isPhoto:true
+               })
+            }
+                
+            }.bind(this))
+            .catch(function (error) {
+            console.log(error);
+        });
+        }
+        else{
+            this.setState({
+                AnimalForSaleDetails:{
+                    SaleID:AnimalForSaleDetails.SaleID,
+                    AnimalCode:AnimalForSaleDetails.AnimalCode,
+                    AnimalAge:null,
+                    Breed:AnimalForSaleDetails.Breed,
+                    SireCode:AnimalForSaleDetails.SireCode,
+                    BreederCode:AnimalForSaleDetails.BreederCode,
+                    Talents:AnimalForSaleDetails.Talents,
+                    Weight:AnimalForSaleDetails.Weight,
+                    FightingRecord:AnimalForSaleDetails.FightingRecord,
+                    IsShowStandardPrice:AnimalForSaleDetails.IsShowStandardPrice,
+                    IsActive:AnimalForSaleDetails.IsActive,
+                    FileName:AnimalForSaleDetails.FileName
+                },
+                isPhoto:true
+               })
+        }
+
+       // this.setState({AnimalForSaleDetails: AnimalForSaleDetails });
+    }
+    
     cleanupImages() {
-        // ImagePicker.clean().then(() => {
-
-        //   console.log('removed tmp images from tmp directory');
-        // }).catch(e => {
-        //   alert(e);
-        // });
-
         this.setState({
-            ChickenForSaleDetail:{    
-                ChickenCode:this.state.ChickenForSaleDetail.ChickenCode,
-                Seller:this.state.ChickenForSaleDetail.Seller,
-                Breed:this.state.ChickenForSaleDetail.Breed,
-                SireCode:this.state.ChickenForSaleDetail.SireCode,
-                BreederCode:this.state.ChickenForSaleDetail.BreederCode,
-                Talents:this.state.ChickenForSaleDetail.Talents,
-                Age:this.state.ChickenForSaleDetail.Age,
-                Weight:this.state.ChickenForSaleDetail.Weight,
-                FightingRecord:this.state.ChickenForSaleDetail.FightingRecord,
-                StandardPrice:this.state.ChickenForSaleDetail.StandardPrice,
-                Status:this.state.ChickenForSaleDetail.Status,
-
-                AddPhoto: null,
-                AddClip:null
+            AnimalForSaleDetails:{  
+                SaleID:this.state.AnimalForSaleDetails.SaleID,
+                AnimalCode:this.state.AnimalForSaleDetails.AnimalCode,
+                AnimalAge:this.state.AnimalForSaleDetails.AnimalAge,
+                Breed:this.state.AnimalForSaleDetails.Breed,
+                SireCode:this.state.AnimalForSaleDetails.SireCode,
+                BreederCode:this.state.AnimalForSaleDetails.BreederCode,
+                Talents:this.state.AnimalForSaleDetails.Talents,
+                Weight:this.state.AnimalForSaleDetails.Weight,
+                FightingRecord :this.state.AnimalForSaleDetails.FightingRecord,
+                IsShowStandardPrice :this.state.AnimalForSaleDetails.IsShowStandardPrice,
+                AnimalPhoto: null,
+                FileName:null
             },
-            isLogo:false
+            isPhoto:false
         });
     }
     
     pickMultiple() {
         ImagePicker.openPicker({
-            multiple: true,
+            //multiple: true,
             waitAnimationEnd: false,
             includeExif: true,
-        }).then(images => {
-        debugger;
+            includeBase64: true,
+        }).then(image => {
+       
         this.setState({
-            ChickenForSaleDetail:{
-                ChickenCode:this.state.ChickenForSaleDetail.ChickenCode,
-                Seller:this.state.ChickenForSaleDetail.Seller,
-                Breed:this.state.ChickenForSaleDetail.Breed,
-                SireCode:this.state.ChickenForSaleDetail.SireCode,
-                BreederCode:this.state.ChickenForSaleDetail.BreederCode,
-                Talents:this.state.ChickenForSaleDetail.Talents,
-                Age:this.state.ChickenForSaleDetail.Age,
-                Weight:this.state.ChickenForSaleDetail.Weight,
-                FightingRecord:this.state.ChickenForSaleDetail.FightingRecord,
-                StandardPrice:this.state.ChickenForSaleDetail.StandardPrice,
-                Status:this.state.ChickenForSaleDetail.Status,
+            AnimalForSaleDetails:{
+                SaleID:this.state.AnimalForSaleDetails.SaleID,
+                AnimalCode:this.state.AnimalForSaleDetails.AnimalCode,
+                AnimalAge:this.state.AnimalForSaleDetails.AnimalAge,
+                Breed:this.state.AnimalForSaleDetails.Breed,
+                SireCode:this.state.AnimalForSaleDetails.SireCode,
+                BreederCode:this.state.AnimalForSaleDetails.BreederCode,
+                Talents:this.state.AnimalForSaleDetails.Talents,
+                Weight:this.state.AnimalForSaleDetails.Weight,
+                FightingRecord :this.state.AnimalForSaleDetails.FightingRecord,
+                IsShowStandardPrice :this.state.AnimalForSaleDetails.IsShowStandardPrice,
+                AnimalPhoto: {uri: `data:${image.mime};base64,`+ image.data, width: image.width, height: image.height},
+                FileName: image.data
 
-                AddPhoto: images.map(i => {
-                    console.log('received image', i);
-                    return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
-                })
+                // AnimalPhoto: images.map(i => {
+                //     console.log('received image', i);
+                //     return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
+                // })
             },
-            isLogo:true
+            isPhoto:true
           });
         }).catch(e => alert(e));
     }
@@ -190,13 +240,61 @@ export default class ChickenForSaleDetail extends Component{
     }
         
     renderAsset(image) {
-        // if (image.mime && image.mime.toLowerCase().indexOf('video/') !== -1) {
-        //   return this.renderVideo(image);
-        // }
-
         return this.renderImage(image);
     }
-    
+    SaveAnimalForSale=()=>{
+        Keyboard.dismiss();
+        var value = this.refs.form.getValue();
+        if (value) {
+          var data = {
+                 SaleID:this.state.AnimalForSaleDetails.SaleID,
+                AnimalCode:this.state.AnimalForSaleDetails.AnimalCode,
+                AnimalAge:this.state.AnimalForSaleDetails.AnimalAge,
+                Breed:this.state.AnimalForSaleDetails.Breed,
+                SireCode:this.state.AnimalForSaleDetails.SireCode,
+                BreederCode:this.state.AnimalForSaleDetails.BreederCode,
+                Talents:this.state.AnimalForSaleDetails.Talents,
+                Weight:this.state.AnimalForSaleDetails.Weight,
+                FightingRecord :this.state.AnimalForSaleDetails.FightingRecord,
+                IsShowStandardPrice :this.state.AnimalForSaleDetails.IsShowStandardPrice,
+               FileName:this.state.AnimalForSaleDetails.FileName,
+          }
+     
+          services.SaveAnimalForSale(data)
+            .then(function (response) { 
+              //if(data.FarmID!=0){
+                  //alert('Animal profile saved successfully.')
+                  ToastAndroid.showWithGravity(
+                    'Animal For Sale saved successfully...',
+                    ToastAndroid.LONG,
+                    ToastAndroid.CENTER
+                  );
+                  this.props.navigation.navigate('ChickenForSaleList');
+              //}
+                   
+            }.bind(this))
+            .catch(function (error) {
+              console.log(error);
+          });
+      }
+      else
+      {
+          ToastAndroid.showWithGravity(
+              'Please Enter all manadatary fields...',
+              ToastAndroid.LONG,
+              ToastAndroid.CENTER
+            );
+      }
+
+    }
+    ResetAnimalForSale=()=>{
+        Keyboard.dismiss();
+        this.setState({
+            AnimalForSaleDetails:{ }
+            })
+    }
+
+
     render(){
         return(
             <Container>
@@ -207,52 +305,44 @@ export default class ChickenForSaleDetail extends Component{
                         </Button>
                     </Left>
                     <Body>
-                        <Title> Chicken For Sale Detail</Title>
+                        <Title>Animal For Sale Details</Title>
                     </Body>
                 </Header>
+
                 <Content>
                     <View style={styles.container}>
                         <Form
                             ref='form'
-                            type={this.ChickenForSaleDetail}
-                            options={this.ChickenForSaleDetailOptions}
-                            value={this.state.ChickenForSaleDetail}
+                            type={this.AnimalForSaleDetails()}
+                            options={this.state.options}
+                            value={this.state.AnimalForSaleDetails}
                             onChange={this.onChange}
                         />
-                         <TouchableOpacity onPress={this.state.isLogo ? this.cleanupImages.bind(this) : this.pickMultiple.bind(this)} style={{marginBottom: 10}}>
-                            <Text style={{color:'blue'}}>{this.state.isLogo ? 'Clear Photo' : 'Select Photo'}</Text>
+                        <TouchableOpacity onPress={this.state.isPhoto ? this.cleanupImages.bind(this) : this.pickMultiple.bind(this)} style={styles.marginbottom_10}>
+                            <Text style={styles.blue}>{this.state.isPhoto ? 'Clear Photo' : 'Select Photo'}</Text>
                         </TouchableOpacity>
                         <ScrollView>
-                            {this.state.ChickenForSaleDetail.AddPhoto ? this.state.ChickenForSaleDetail.AddPhoto.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null}
+                            {/* this.state.ChickenProfileDetails.AnimalPhoto ? this.state.ChickenProfileDetails.AnimalPhoto.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null */}
+                            {(this.state.AnimalForSaleDetails.AnimalPhoto ? this.renderAsset(this.state.AnimalForSaleDetails.AnimalPhoto) : null)}
+                            <Image style={{width: 300, height: 300, resizeMode: 'contain'}} source={{uri: this.state.imageLink}}  />
                         </ScrollView>
                     </View>
                 </Content>
-                <Footer style={{backgroundColor:'white'}}>
-                    <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
-                        <View style={{width:'50%'}}>
-                            <Button success block rounded onPress={this.ResetFarmProfile} style={{width:'100%',justifyContent:'center'}}>
-                                <Text style={{color:'white'}} >Reset</Text>
+                <Footer style={styles.bgc_white}>
+                    <View style={styles.flexDirectionWrap} >
+                        <View style={styles.width_50}>
+                            <Button success block rounded onPress={this.ResetAnimalForSale}>
+                                <Text style={styles.white} >Reset</Text>
                             </Button>
                         </View>
-                        <View style={{width:'50%', alignItems:'flex-end'}}>
-                            <Button primary block rounded onPress={this.SaveFarmProfile} style={{width:'100%',justifyContent:'center'}}>
-                                <Text style={{color:'white'}}>Save</Text>
+                        <View style={styles.width_50_flex_end}>
+                            <Button primary block rounded onPress={this.SaveAnimalForSale}>
+                                <Text style={styles.white}>Save</Text>
                             </Button>
                         </View>
                     </View>
                 </Footer>
             </Container>
         );
-
     }
 }
-
-var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        //justifyContent: 'center',
-        //marginTop: 120,
-        padding: 20,
-        backgroundColor: '#ffffff',      
-    }
-  });
