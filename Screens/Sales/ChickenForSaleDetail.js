@@ -150,10 +150,9 @@ export default class ChickenForSaleDetail extends Component{
                     IsActive:AnimalForSaleDetails.IsActive,
                     FileName:AnimalForSaleDetails.FileName
                 },
-                
+                isPhoto:true
                })
             }
-            
                 
             }.bind(this))
             .catch(function (error) {
@@ -175,7 +174,8 @@ export default class ChickenForSaleDetail extends Component{
                     IsShowStandardPrice:AnimalForSaleDetails.IsShowStandardPrice,
                     IsActive:AnimalForSaleDetails.IsActive,
                     FileName:AnimalForSaleDetails.FileName
-                }
+                },
+                isPhoto:true
                })
         }
 
@@ -211,7 +211,7 @@ export default class ChickenForSaleDetail extends Component{
         }).then(image => {
        
         this.setState({
-            ChickenProfileDetails:{
+            AnimalForSaleDetails:{
                 SaleID:this.state.AnimalForSaleDetails.SaleID,
                 AnimalCode:this.state.AnimalForSaleDetails.AnimalCode,
                 AnimalAge:this.state.AnimalForSaleDetails.AnimalAge,
@@ -257,7 +257,7 @@ export default class ChickenForSaleDetail extends Component{
                 Weight:this.state.AnimalForSaleDetails.Weight,
                 FightingRecord :this.state.AnimalForSaleDetails.FightingRecord,
                 IsShowStandardPrice :this.state.AnimalForSaleDetails.IsShowStandardPrice,
-                 FileName:this.state.AnimalForSaleDetails.FileName,
+               FileName:this.state.AnimalForSaleDetails.FileName,
           }
      
           services.SaveAnimalForSale(data)
