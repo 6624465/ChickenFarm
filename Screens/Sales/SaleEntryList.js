@@ -103,7 +103,7 @@ export default class SaleEntryList extends Component{
                             dataSource={this.state.dataSource}
                             renderRow={(rowData) => 
                             <View style={styles.listcontainer}>
-                                <TouchableOpacity  onPress={() => this.NavigateToDetails(rowData.AnimalSaleEntryId)}>
+                                <TouchableOpacity  onPress={() => this.NavigateToDetails(rowData.SaleEntryID)}>
                                     <View style={styles.flexDirectionWrap} >
                                         {/* <View style={{width:'20%', alignItems:'center'}}>
                                             <Image source = {{ uri: axios.defaults.baseURL+'/Uploads/'+rowData.FarmID+'/AnimalForSale/'+rowData.SaleID+'/'+rowData.AnimalPhoto}} style={styles.photo}/>                       
