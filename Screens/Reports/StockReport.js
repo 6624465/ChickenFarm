@@ -1,19 +1,51 @@
 import React, { Component } from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text,StyleSheet, Image} from 'react-native';
 
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Right } from 'native-base';
 
 import {StackNavigator} from 'react-navigation';
 // import LoginNavigation from '../Registration/Login'
-
+import {BarChart} from 'react-native-mp-android-chart';
 export default class StockReport extends Component{
     static navigationOptions={
         drawerLabel: () => null
     }
-    render(){
-            return(     
-            <Container>
-                    <Header>
+    constructor() {
+        super();
+    
+        this.state = {
+          legend: {
+            enabled: true,
+            textSize: 14,
+            form: 'SQUARE',
+            formSize: 14,
+            xEntrySpace: 10,
+            yEntrySpace: 5,
+            formToTextSpace: 5,
+            wordWrapEnabled: true,
+            maxSizePercent: 0.5
+          },
+          data: {
+            datasets: [{
+              yValues: [100, 105, 102, 110, 114, 109, 105, 99, 95],
+              label: 'Bar dataset',
+              config: {
+                color: 'teal',
+                barSpacePercent: 40,
+                barShadowColor: 'lightgrey',
+                highlightAlpha: 90,
+                highlightColor: 'red'
+              }
+            }],
+            xValues: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
+          }
+        };
+      }
+    
+      render() {
+        return (
+          <View style={styles.container}>
+           <Header>
                     <Left>
                            <Button transparent onPress={() => this.props.navigation.navigate('MainDashboard')}>
                            <Icon name='arrow-back'/>
@@ -26,20 +58,28 @@ export default class StockReport extends Component{
                     </Body>
                     <Right></Right>
                     </Header>
-
-                    <Content contentContainerStyle={{
-                        flex:1,
-                        alignItems:'center',
-                        justifyContent:'center'
-                    }}>
-                    <View style={{alignItems:'center'}}>
-                            <Image source = { require('../../android/app/src/main/assets/capture.png') }/>
-                        </View>
-                        {/* <Text style={{fontSize:30}}>Stock Report</Text> */}
-                    </Content>
-                </Container>
-            );
-
+            <BarChart
+              style={styles.chart}
+              data={this.state.data}
+              animation={{durationX: 2000}}
+              legend={this.state.legend}
+              gridBackgroundColor={'#ffffff'}
+    
+              drawBarShadow={false}
+              drawValueAboveBar={true}
+              drawHighlightArrow={true}
+            />
+          </View>
+        );
+      }
     }
     
-}
+    const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        backgroundColor: '#F5FCFF'
+      },
+      chart: {
+        flex: 1
+      }
+    });
