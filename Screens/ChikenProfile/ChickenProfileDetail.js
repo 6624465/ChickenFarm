@@ -99,14 +99,14 @@ export default class ChickenProfileDetail extends Component{
                         placeholder:'Symbol'                       
                     },
                     AnimalStatus:{
-                        label: 'Choose Staues' ,
+                        label: 'Choose Status' ,
                          nullOption: {value: '', text: 'Select'}                     
                     },
                     CauseOfDeath:{
                         label: 'Cause Of Death',
                         placeholder:'CauseOfDeath',
                         editable: false,
-                        hidden: true                    
+                        hidden: true                   
                     },
                     Gender:{
                         label: 'Gender',

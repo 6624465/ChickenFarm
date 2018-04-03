@@ -28,7 +28,7 @@ export default class SalesReport extends Component{
               yValues: [40, 21, 15, 9],
               label: '',
               config: {
-                colors: ['#C0FF8C', '#FFF78C', '#FFD08C', '#8CEAFF'],
+                colors: ['#0000FF', '#8B008B', '#1E90FF', '#008000'],
     
                 sliceSpace: 5,
                 selectionShift: 13
