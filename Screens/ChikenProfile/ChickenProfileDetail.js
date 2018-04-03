@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image,Keyboard,ToastAndroid } from 'react-native';
+import { View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image,Keyboard,ActivityIndicator,ToastAndroid } from 'react-native';
 
 import { StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer ,Right} from 'native-base';
@@ -79,6 +79,7 @@ export default class ChickenProfileDetail extends Component{
                 FileName:null
             },
             isPhoto:false,
+            isLoading: false,
             imageLink:null,
             lstChickenStatus:t.enums({}),
             lstGender:t.enums({}),
@@ -269,6 +270,9 @@ export default class ChickenProfileDetail extends Component{
         Keyboard.dismiss();
         var value = this.refs.form.getValue();
         if (value) {
+            this.setState({
+                isLoading: true
+            });
           var data = {
             AnimalName:this.state.ChickenProfileDetails.AnimalName,
             AnimalCode:this.state.ChickenProfileDetails.AnimalCode,
@@ -290,6 +294,9 @@ export default class ChickenProfileDetail extends Component{
      
           services.SaveAnimalProfile(data)
             .then(function (response) { 
+                this.setState({
+                    isLoading: true
+                });
               //if(data.FarmID!=0){
                   //alert('Animal profile saved successfully.')
                   ToastAndroid.showWithGravity(
@@ -324,6 +331,13 @@ export default class ChickenProfileDetail extends Component{
 
 
     render(){
+        if (this.state.isLoading) {
+            return (
+                <View style={styles.activeindicator}>
+                <ActivityIndicator size="large" color="#0000ff"/>
+            </View>
+            );
+          }
         return(
             <Container>
                 <Header>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet,Keyboard,ToastAndroid} from 'react-native';
+import {View, Text,StyleSheet,Keyboard,ToastAndroid,ActivityIndicator} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button,Footer,Right } from 'native-base';
@@ -56,6 +56,7 @@ export default class VaccineScheduleDetail extends Component{
                 VaccineScheduleId:null
             },
             lstVaccineCode:t.enums({}),
+            isLoading:false
         },
         this.VaccineScheduleOptions={
             fields:{
@@ -144,6 +145,9 @@ export default class VaccineScheduleDetail extends Component{
         Keyboard.dismiss();
         var value = this.refs.form.getValue();
         if (value) {
+            this.setState({
+                isLoading: true
+            });
             var data = {
                 AnimalAge:this.state.VaccineScheduleDetails.AnimalAge,
                 VaccineName:this.state.VaccineScheduleDetails.VaccineName,
@@ -156,6 +160,9 @@ export default class VaccineScheduleDetail extends Component{
      
             services.SaveVaccineSchedule(data)
                 .then(function (response) { 
+                    this.setState({
+                        isLoading: true
+                    });
                 //if(response.data!=0){
                     //alert('Vaccine Schedule saved successfully.')
                     ToastAndroid.showWithGravity(
@@ -188,6 +195,13 @@ export default class VaccineScheduleDetail extends Component{
     }
 
     render(){
+        if (this.state.isLoading) {
+            return (
+                <View style={styles.activeindicator}>
+                <ActivityIndicator size="large" color="#0000ff"/>
+            </View>
+            );
+          }
         return( 
             <Container>
                 <Header>

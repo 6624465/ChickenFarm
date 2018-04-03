@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet,Keyboard,ToastAndroid} from 'react-native';
+import {View, Text,StyleSheet,Keyboard,ToastAndroid,ActivityIndicator} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button,Footer,Right } from 'native-base';
@@ -66,7 +66,8 @@ export default class SaleEntryDetail extends Component{
                 IsActive:null
             },
             lstAnimalCode:t.enums({}),
-            lstAnimalStatus:t.enums({})
+            lstAnimalStatus:t.enums({}),
+            isLoading:false
         },  
         this.AnimalSaleEntryDetailsOptions={
             fields:{
@@ -183,6 +184,9 @@ export default class SaleEntryDetail extends Component{
         Keyboard.dismiss();
         var value = this.refs.form.getValue();
         if (value) {
+            this.setState({
+                isLoading: true
+            });
             var data = {
                     SaleEntryID:this.state.AnimalSaleEntryDetails.SaleEntryID,
                     AnimalCode:this.state.AnimalSaleEntryDetails.AnimalCode,
@@ -199,6 +203,9 @@ export default class SaleEntryDetail extends Component{
      debugger;
             services.SaveAnimalSaleEntry(data)
                 .then(function (response) { 
+                    this.setState({
+                        isLoading: true
+                    });
                 //if(response.data!=0){
                     //alert('Vaccine Entry saved successfully.')
                     ToastAndroid.showWithGravity(
@@ -230,6 +237,13 @@ export default class SaleEntryDetail extends Component{
     }
 
     render(){
+        if (this.state.isLoading) {
+            return (
+                <View style={styles.activeindicator}>
+                <ActivityIndicator size="large" color="#0000ff"/>
+            </View>
+            );
+          }
         return( 
             <Container>
                 <Header>

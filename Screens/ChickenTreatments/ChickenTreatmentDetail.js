@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet,Keyboard,ToastAndroid} from 'react-native';
+import {View, Text,StyleSheet,Keyboard,ToastAndroid,ActivityIndicator} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button,Footer,Right} from 'native-base';
@@ -55,6 +55,7 @@ export default class ChickenTreatmentDetail extends Component{
                                     Remarks:null
                         },
                         lstAnimalCode:t.enums({}),
+                        isLoading:false
                 },
                
                 this.AddChickenTreatmentOptions={
@@ -127,6 +128,9 @@ export default class ChickenTreatmentDetail extends Component{
         debugger;
             var value = this.refs.form.getValue();
             if (value) {
+                this.setState({
+                    isLoading: true
+                });
               var data = {
                 AnimalCode:this.state.TreatmentEntryDetail.AnimalCode,
                 MedicineName:this.state.TreatmentEntryDetail.MedicineName,
@@ -139,6 +143,9 @@ export default class ChickenTreatmentDetail extends Component{
               }
               services.SaveTreatmentEntry(data)
                 .then(function (response) { 
+                    this.setState({
+                        isLoading: true
+                    });
                   //if(data.FarmID!=0){
                       ToastAndroid.showWithGravity(
                         'Treatment Entry saved successfully..',
@@ -169,6 +176,13 @@ export default class ChickenTreatmentDetail extends Component{
                 }) 
         }
     render(){
+        if (this.state.isLoading) {
+            return (
+                <View style={styles.activeindicator}>
+                <ActivityIndicator size="large" color="#0000ff"/>
+            </View>
+            );
+          }
             return(        
                   
             <Container>

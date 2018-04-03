@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image,Keyboard,ToastAndroid} from 'react-native';
+import {View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity,ActivityIndicator, Image,Keyboard,ToastAndroid} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer,Right } from 'native-base';
@@ -39,7 +39,8 @@ export default class MExpenseDetail extends Component{
                 ExpensesCode:null,
                 ExpensesName:null,
                 ExpensesType:null
-            }
+            },
+            isLoading:false
         },
 
         this.AddNewExpense=t.struct({
@@ -77,6 +78,9 @@ export default class MExpenseDetail extends Component{
         debugger;
             var value = this.refs.form.getValue();
             if (value) {
+                this.setState({
+                    isLoading: true
+                });
               var data = {
                 ExpensesName:this.state.ExpenseDetails.ExpensesName,
                 ExpensesID:this.state.ExpenseDetails.ExpensesID,
@@ -85,6 +89,9 @@ export default class MExpenseDetail extends Component{
               }
               services.SaveExpensesMaster(data)
                 .then(function (response) { 
+                    this.setState({
+                        isLoading: true
+                    });
                   //if(data.FarmID!=0){
                      // alert('Expenses Master saved successfully.')
                       ToastAndroid.showWithGravity(
@@ -116,6 +123,13 @@ export default class MExpenseDetail extends Component{
     }
 
     render(){
+        if (this.state.isLoading) {
+            return (
+                <View style={styles.activeindicator}>
+                <ActivityIndicator size="large" color="#0000ff"/>
+            </View>
+            );
+          }
         return(
             <Container>
                 <Header>

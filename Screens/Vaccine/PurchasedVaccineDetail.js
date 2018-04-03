@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image,Keyboard,ToastAndroid} from 'react-native';
+import {View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image,Keyboard,ActivityIndicator,ToastAndroid} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer ,Right} from 'native-base';
 import moment from 'moment';
@@ -57,6 +57,7 @@ export default class PurchasedVaccineDetail extends Component{
             },
             isMedicinePhoto:false,
             imageLink:null,
+            isLoading:false
         },
 
         this.PurchasedVaccine=t.struct({
@@ -198,6 +199,9 @@ export default class PurchasedVaccineDetail extends Component{
         Keyboard.dismiss();
         var value = this.refs.form.getValue();
         if (value) {
+            this.setState({
+                isLoading: true
+            });
             var data = {
                 VaccineCode:this.state.PurchasedVaccineDetails.VaccineCode,
                 VaccineName:this.state.PurchasedVaccineDetails.VaccineName,
@@ -212,7 +216,10 @@ export default class PurchasedVaccineDetail extends Component{
             }
      
             services.SaveVaccineMaster(data)
-                .then(function (response) { 
+                .then(function (response) {
+                    this.setState({
+                        isLoading: true
+                    }); 
                 //if(response.data!=0){
                     //alert('Vaccine profile saved successfully.')
                     ToastAndroid.showWithGravity(
@@ -244,6 +251,13 @@ export default class PurchasedVaccineDetail extends Component{
         })
     }
     render(){
+        if (this.state.isLoading) {
+            return (
+                <View style={styles.activeindicator}>
+                <ActivityIndicator size="large" color="#0000ff"/>
+            </View>
+            );
+          }
         return(                  
             <Container>
                 <Header>

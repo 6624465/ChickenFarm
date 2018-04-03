@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image,Keyboard,ToastAndroid} from 'react-native';
+import {View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity,ActivityIndicator, Image,Keyboard,ToastAndroid} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer,Right } from 'native-base';
@@ -52,6 +52,7 @@ export default class PriceDetail extends Component{
                 IsActive:null
             },
             lstCurrencyCode:t.enums({}),
+            isLoading:false
         },
      
         this.SalesStandardPriceOptions={
@@ -105,6 +106,9 @@ export default class PriceDetail extends Component{
         Keyboard.dismiss();
         var value = this.refs.form.getValue();
         if (value) {
+            this.setState({
+                isLoading: true
+            });
             var data = {
                 StandardPriceId:this.state.SalesStandardPrice.StandardPriceId,
                 SireCode:this.state.SalesStandardPrice.SireCode,
@@ -118,6 +122,9 @@ export default class PriceDetail extends Component{
             }
             services.SaveStandardPrice(data)
                 .then(function (response) { 
+                    this.setState({
+                        isLoading: true
+                    });
                 //if(response.data!=0){
                
                    ToastAndroid.showWithGravity(
@@ -149,6 +156,13 @@ export default class PriceDetail extends Component{
         })
     }
     render(){
+        if (this.state.isLoading) {
+            return (
+                <View style={styles.activeindicator}>
+                <ActivityIndicator size="large" color="#0000ff"/>
+            </View>
+            );
+          }
         return(
             <Container>
                 <Header>

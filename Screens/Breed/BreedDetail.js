@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity,ActivityIndicator, Image } from 'react-native';
 
 import { StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer ,Right} from 'native-base';
@@ -22,6 +22,7 @@ export default class BreedDetail extends Component{
             BreedDetails:{
                 BreedName:null
             },
+            isLoading:false,
             options:{
                 fields:{
                     BreedName:{
@@ -43,6 +44,13 @@ export default class BreedDetail extends Component{
     }
 
     render(){
+        if (this.state.isLoading) {
+            return (
+                <View style={styles.activeindicator}>
+                <ActivityIndicator size="large" color="#0000ff"/>
+            </View>
+            );
+          }
         return(
             <Container>
                 <Header>
