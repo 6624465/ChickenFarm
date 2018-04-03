@@ -179,7 +179,7 @@ export default class ChickenTreatmentDetail extends Component{
                         </Button>
                     </Left>
                     <Body>
-                        <View style={{width:230,alignItems:'flex-start'}}>
+                        <View style={{width:250,alignItems:'flex-start'}}>
                              <Title>Chicken Treatment Detail</Title>
                         </View>
                     </Body>

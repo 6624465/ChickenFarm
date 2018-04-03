@@ -77,7 +77,7 @@ export default class PurchasedVaccineList extends Component{
                         </Button>
                     </Left>
                     <Body>
-                        <View style={{width:230,alignItems:'flex-start'}}>
+                        <View style={{width:240,alignItems:'flex-start'}}>
                              <Title>Purchased Vaccine List</Title>
                         </View>
                     </Body>

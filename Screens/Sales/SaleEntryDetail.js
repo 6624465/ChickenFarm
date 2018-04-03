@@ -239,7 +239,7 @@ export default class SaleEntryDetail extends Component{
                         </Button>
                     </Left>
                     <Body>
-                        <View style={{width:230,alignItems:'flex-start'}}>
+                        <View style={{width:250,alignItems:'flex-start'}}>
                              <Title>Animal Sale Entry Details</Title>
                         </View>
                     </Body>

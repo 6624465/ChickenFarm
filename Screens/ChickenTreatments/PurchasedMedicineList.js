@@ -78,7 +78,7 @@ export default class PurchasedMedicineList extends Component{
                     </Left>
                     
                     <Body>
-                        <View style={{width:230,alignItems:'flex-start'}}>
+                        <View style={{width:250,alignItems:'flex-start'}}>
                              <Title>Purchased Medicine List</Title>
                         </View>
                     </Body>

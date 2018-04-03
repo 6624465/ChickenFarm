@@ -29,7 +29,6 @@ export default class SalesReport extends Component{
               label: '',
               config: {
                 colors: ['#0000FF', '#8B008B', '#1E90FF', '#008000'],
-    
                 sliceSpace: 5,
                 selectionShift: 13
               }

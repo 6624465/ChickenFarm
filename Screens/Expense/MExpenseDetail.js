@@ -125,7 +125,7 @@ export default class MExpenseDetail extends Component{
                         </Button>
                     </Left>
                     <Body>
-                        <View style={{width:230,alignItems:'flex-start'}}>
+                        <View style={{width:250,alignItems:'flex-start'}}>
                              <Title>Master Expense Details</Title>
                         </View>
                     </Body>
