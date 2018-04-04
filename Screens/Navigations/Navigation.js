@@ -62,6 +62,7 @@ import BreedDetail from '../Breed/BreedDetail';
 // import QuickSearch from './CompanyList';
 
 import Login from '../Registration/Login';
+import Logout from '../Registration/Logout';
 
 import Registration from '../Registration/Registration';
 import ForgotPassword from '../Registration/ForgotPassword';
@@ -109,7 +110,7 @@ const DrawerContent = (props) => (
 
 const NavLinks = DrawerNavigator({
   
-      Home: {
+  NavLinksLogin: {
         screen:NavLinksLogin,
       },
 
@@ -197,7 +198,7 @@ const NavLinks = DrawerNavigator({
       BreedDetail:{screen:BreedDetail},
 
       Logout:{
-        screen:Login,
+        screen:Logout,
         navigationOptions:{
           drawerIcon: <Icon ios='ios-log-out' android="md-log-out" size={16} />
         }

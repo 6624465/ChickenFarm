@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Image, Keyboard, ActivityIndicator, ToastAndroid} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Image, Keyboard, ActivityIndicator, ToastAndroid, AsyncStorage} from 'react-native';
 import { Button } from 'native-base';
 import {StackNavigator} from 'react-navigation';
 //import Toast, {DURATION} from 'react-native-easy-toast'
@@ -7,6 +7,7 @@ import axios from 'axios';
 import services from './Services';
 import styles from '../stylesheet';
 
+import Navigation from '../Navigations/Navigation';
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
 
@@ -15,12 +16,57 @@ export default class Login extends Component{
   static navigationOptions={
      header:false
   }
-  componentDidMount() {
-    axios.defaults.baseURL = 'http://192.168.0.103/FMS';
+
+  async componentDidMount() {
+    axios.defaults.baseURL = 'http://192.168.0.100/FMS';
     //axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com';
     axios.defaults.headers.common['AUTH_TOKEN'] = 'sdfsdfgsdfgsdfdsfgsdfgsdfg';
     axios.defaults.headers.common['Content-Type'] = 'application/json';    
     axios.defaults.headers.post['Content-Type'] = 'application/json';  
+
+    await AsyncStorage.getItem('uid').then((value)=> 
+      this.setState({}, function() {
+        debugger;
+        this.usrid = value ;
+      })
+    );
+    await AsyncStorage.getItem('pwd').then((value)=> 
+      this.setState({}, function() {
+        debugger;
+        this.pass = value;
+      })
+    );
+if(this.usrid==null || this.pass==null)
+{ 
+//alert(this.usrid+"  <<>>  "+this.pass)
+  this.props.navigation.navigate('Navigation');
+}
+else{
+  var data = {
+    UserID:this.usrid,
+    Password:this.pass
+  }
+   services.Login(data)
+    .then(function (response) { 
+      this.setState({
+        isLoading: false
+      });
+      axios.defaults.headers.common['MOBILE_NO'] = response.data.userid; 
+      axios.defaults.headers.common['FarmID'] = response.data.FarmID; 
+      if(response.data.message=="goto menu")
+      {      
+        //AsyncStorage.setItem('uid', data.UserID.toString());
+        //AsyncStorage.setItem('pwd', data.Password);   
+        this.props.navigation.navigate('MainDashboard');
+      }  
+      else{
+        this.props.navigation.navigate('Home');
+      }          
+    }.bind(this))
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
   }
 
   constructor(props)
@@ -34,6 +80,8 @@ export default class Login extends Component{
         },
         isLoading: false,
     },
+    this.usrid='',
+    this.pass='',
     this.LoginCredential = t.struct({
       UserID: t.Number,             
       Password: t.String,  
@@ -170,7 +218,9 @@ export default class Login extends Component{
               //alert('invalid credentials.');
             }
             else
-            {           
+            {        
+              AsyncStorage.setItem('uid', data.UserID.toString());
+              AsyncStorage.setItem('pwd', data.Password);   
               this.props.navigation.navigate('MainDashboard');
             }            
           }.bind(this))
