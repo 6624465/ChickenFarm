@@ -119,7 +119,7 @@ export default class ExpenseEntryDetail extends Component{
                    // alert('Expenses Entry saved successfully.')
                    ToastAndroid.showWithGravity(
                     'Expenses Entry saved successfully....',
-                    ToastAndroid.LONG,
+                    ToastAndroid.SHORT,
                     ToastAndroid.CENTER
                   );
                     this.props.navigation.navigate('ExpenseEntryList');
@@ -134,7 +134,7 @@ export default class ExpenseEntryDetail extends Component{
         {
             ToastAndroid.showWithGravity(
                 'Please Enter all manadatary fields...',
-                ToastAndroid.LONG,
+                ToastAndroid.SHORT,
                 ToastAndroid.CENTER
               );
         }

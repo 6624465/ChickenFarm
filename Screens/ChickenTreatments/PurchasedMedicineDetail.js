@@ -224,7 +224,7 @@ export default class PurchasedMedicineDetail extends Component{
                     //alert('Medicine profile saved successfully.')
                     ToastAndroid.showWithGravity(
                         'Medicine profile saved successfully..',
-                        ToastAndroid.LONG,
+                        ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );
                     this.props.navigation.navigate('PurchasedMedicineList');
@@ -239,7 +239,7 @@ export default class PurchasedMedicineDetail extends Component{
         {
             ToastAndroid.showWithGravity(
                 'Please Enter all manadatary fields...',
-                ToastAndroid.LONG,
+                ToastAndroid.SHORT,
                 ToastAndroid.CENTER
               );
         }

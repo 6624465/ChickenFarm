@@ -67,7 +67,7 @@ ForgotPasswordUpdate = () =>
             {  
                 ToastAndroid.showWithGravity(
                     'Successfully Changed Your Password...',
-                    ToastAndroid.LONG,
+                    ToastAndroid.SHORT,
                     ToastAndroid.CENTER
                   );
                // alert("Successfully Changed Your Password..")
@@ -77,7 +77,7 @@ ForgotPasswordUpdate = () =>
             {  
                 ToastAndroid.showWithGravity(
                     'Invalid Otp Number..Please Enter Valid Otp Number..',
-                    ToastAndroid.LONG,
+                    ToastAndroid.SHORT,
                     ToastAndroid.CENTER
                   );
             //  alert("Invalid Otp Number..Please Enter Valid Otp Number")

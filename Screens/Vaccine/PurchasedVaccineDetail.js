@@ -224,7 +224,7 @@ export default class PurchasedVaccineDetail extends Component{
                     //alert('Vaccine profile saved successfully.')
                     ToastAndroid.showWithGravity(
                         'Vaccine profile saved successfully...',
-                        ToastAndroid.LONG,
+                        ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );
                     this.props.navigation.navigate('PurchasedVaccineList');
@@ -238,7 +238,7 @@ export default class PurchasedVaccineDetail extends Component{
         else{
             ToastAndroid.showWithGravity(
                 'Please Enter all manadatary fields...',
-                ToastAndroid.LONG,
+                ToastAndroid.SHORT,
                 ToastAndroid.CENTER
               );
         }

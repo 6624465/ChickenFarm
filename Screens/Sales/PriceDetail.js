@@ -129,7 +129,7 @@ export default class PriceDetail extends Component{
                
                    ToastAndroid.showWithGravity(
                     'Standard Price saved successfully....',
-                    ToastAndroid.LONG,
+                    ToastAndroid.SHORT,
                     ToastAndroid.CENTER
                   );
                     this.props.navigation.navigate('PriceList');
@@ -144,7 +144,7 @@ export default class PriceDetail extends Component{
         {
             ToastAndroid.showWithGravity(
                 'Please Enter all manadatary fields...',
-                ToastAndroid.LONG,
+                ToastAndroid.SHORT,
                 ToastAndroid.CENTER
               );
         }

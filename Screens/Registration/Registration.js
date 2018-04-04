@@ -93,7 +93,7 @@ export default class Registration extends Component {
 
                                     ToastAndroid.showWithGravity(
                                         'MobileNo Already Exists....',
-                                        ToastAndroid.LONG,
+                                        ToastAndroid.SHORT,
                                         ToastAndroid.CENTER
                                       );
                                     this.refs.form.getComponent('MobileNo').refs.input.focus()
@@ -199,7 +199,7 @@ export default class Registration extends Component {
 
                     ToastAndroid.showWithGravity(
                         'Invalid OTP. Please try with correct OTP...',
-                        ToastAndroid.LONG,
+                        ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );
                 }
@@ -223,7 +223,7 @@ export default class Registration extends Component {
                 //alert('OTP successfully resend to registered mobile number.');
                 ToastAndroid.showWithGravity(
                     'OTP successfully resend to registered mobile number..',
-                    ToastAndroid.LONG,
+                    ToastAndroid.SHORT,
                     ToastAndroid.CENTER
                   );
         }.bind(this))

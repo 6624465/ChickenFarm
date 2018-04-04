@@ -58,8 +58,8 @@ export default class ForgotPasswordContinue extends Component{
                 else
                 {  
                     ToastAndroid.showWithGravity(
-                        'Invalid Otp Number..Please Enter Valid Otp Number..',
-                        ToastAndroid.LONG,
+                        'Invalid Otp Number..Please Enter Valid Otp Number.',
+                        ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );
                    // alert("Invalid Otp Number..Please Enter Valid Otp Number")
@@ -82,8 +82,13 @@ export default class ForgotPasswordContinue extends Component{
             {
                 services.ResendOTP(data.MobileNo)
                 .then(function (response) {
+                    ToastAndroid.showWithGravity(
+                        'OTP successfully send to registered mobile number.',
+                        ToastAndroid.SHORT,
+                        ToastAndroid.CENTER
+                      );
                     
-                        alert('OTP successfully send to registered mobile number.');
+                        //alert('OTP successfully send to registered mobile number.');
                         // this.props.navigation.navigate(
                         //     'ForgotPasswordContinue',
                         //     { MobileNo: data.MobileNo }

@@ -16,7 +16,7 @@ export default class Login extends Component{
      header:false
   }
   componentDidMount() {
-    axios.defaults.baseURL = 'http://192.168.0.109/FMS';
+    axios.defaults.baseURL = 'http://192.168.0.102/FMS';
     //axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com';
     axios.defaults.headers.common['AUTH_TOKEN'] = 'sdfsdfgsdfgsdfdsfgsdfgsdfg';
     axios.defaults.headers.common['Content-Type'] = 'application/json';    
@@ -155,7 +155,7 @@ export default class Login extends Component{
               //this.refs.toast.show('MobileNo not registered.',DURATION.LENGTH_LONG);
               ToastAndroid.showWithGravity(
                 'MobileNo not registered.',
-                ToastAndroid.LONG,
+                ToastAndroid.SHORT,
                 ToastAndroid.CENTER
               );
               //alert('MobileNo not registered.');
@@ -164,7 +164,7 @@ export default class Login extends Component{
             {
               ToastAndroid.showWithGravity(
               'invalid credentials.',
-              ToastAndroid.LONG,
+              ToastAndroid.SHORT,
               ToastAndroid.CENTER
               );
               //alert('invalid credentials.');

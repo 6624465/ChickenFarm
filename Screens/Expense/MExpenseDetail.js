@@ -96,7 +96,7 @@ export default class MExpenseDetail extends Component{
                      // alert('Expenses Master saved successfully.')
                       ToastAndroid.showWithGravity(
                         'Expenses Master saved successfully...',
-                        ToastAndroid.LONG,
+                        ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );
                       this.props.navigation.navigate('MExpenseList');
@@ -110,7 +110,7 @@ export default class MExpenseDetail extends Component{
           else{
             ToastAndroid.showWithGravity(
                 'Please Enter all manadatary fields...',
-                ToastAndroid.LONG,
+                ToastAndroid.SHORT,
                 ToastAndroid.CENTER
               );
           }

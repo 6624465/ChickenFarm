@@ -41,7 +41,7 @@ export default class FarmProfileList extends Component{
         super(props);
         this.state ={
             FarmProfileDetails:{
-                FarmID:0,
+                FarmID:null,
                 FarmName:null,
                 FarmAddress:null,
                 PhoneNo:null,
@@ -216,7 +216,7 @@ export default class FarmProfileList extends Component{
                     //alert('Farm profile saved successfully.')
                     ToastAndroid.showWithGravity(
                         'Farm profile saved successfully...',
-                        ToastAndroid.LONG,
+                        ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );
                     this.props.navigation.navigate('MainDashboard');
@@ -237,7 +237,7 @@ export default class FarmProfileList extends Component{
         else{
             ToastAndroid.showWithGravity(
                 'Please Enter all manadatary fields...',
-                ToastAndroid.LONG,
+                ToastAndroid.SHORT,
                 ToastAndroid.CENTER
               );
         }
@@ -263,10 +263,11 @@ export default class FarmProfileList extends Component{
         return(
             <Container>
                 <Header>
-                    <Left>                        
+                    <Left>    
+                        {this.state.FarmProfileDetails.FarmID!='-1'? 
                         <Button transparent onPress={()=>this.props.navigation.navigate('DrawerOpen')}>
                             <Icon ios='ios-menu' android="md-menu" />
-                        </Button>                        
+                        </Button>  :null}     
                     </Left>
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>

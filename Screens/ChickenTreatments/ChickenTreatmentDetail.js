@@ -149,7 +149,7 @@ export default class ChickenTreatmentDetail extends Component{
                   //if(data.FarmID!=0){
                       ToastAndroid.showWithGravity(
                         'Treatment Entry saved successfully..',
-                        ToastAndroid.LONG,
+                        ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );
                       this.props.navigation.navigate('ChickenTreatmentList');
@@ -164,7 +164,7 @@ export default class ChickenTreatmentDetail extends Component{
           {
               ToastAndroid.showWithGravity(
                   'Please Enter all manadatary fields...',
-                  ToastAndroid.LONG,
+                  ToastAndroid.SHORT,
                   ToastAndroid.CENTER
                 );
           }

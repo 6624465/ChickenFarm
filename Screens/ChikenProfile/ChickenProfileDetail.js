@@ -301,7 +301,7 @@ export default class ChickenProfileDetail extends Component{
                   //alert('Animal profile saved successfully.')
                   ToastAndroid.showWithGravity(
                     'Animal profile saved successfully...',
-                    ToastAndroid.LONG,
+                    ToastAndroid.SHORT,
                     ToastAndroid.CENTER
                   );
                   this.props.navigation.navigate('ChickenProfileList');
@@ -316,7 +316,7 @@ export default class ChickenProfileDetail extends Component{
       {
           ToastAndroid.showWithGravity(
               'Please Enter all manadatary fields...',
-              ToastAndroid.LONG,
+              ToastAndroid.SHORT,
               ToastAndroid.CENTER
             );
       }

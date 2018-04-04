@@ -210,7 +210,7 @@ export default class SaleEntryDetail extends Component{
                     //alert('Vaccine Entry saved successfully.')
                     ToastAndroid.showWithGravity(
                         'Animal Sale Entry saved successfully..',
-                        ToastAndroid.LONG,
+                        ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );
                     this.props.navigation.navigate('SaleEntryList');
@@ -224,7 +224,7 @@ export default class SaleEntryDetail extends Component{
         else{
             ToastAndroid.showWithGravity(
                 'Please Enter all manadatary fields...',
-                ToastAndroid.LONG,
+                ToastAndroid.SHORT,
                 ToastAndroid.CENTER
               );
         }

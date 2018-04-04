@@ -273,7 +273,7 @@ export default class ChickenForSaleDetail extends Component{
                   //alert('Animal profile saved successfully.')
                   ToastAndroid.showWithGravity(
                     'Animal For Sale saved successfully...',
-                    ToastAndroid.LONG,
+                    ToastAndroid.SHORT,
                     ToastAndroid.CENTER
                   );
                   this.props.navigation.navigate('ChickenForSaleList');
@@ -288,7 +288,7 @@ export default class ChickenForSaleDetail extends Component{
       {
           ToastAndroid.showWithGravity(
               'Please Enter all manadatary fields...',
-              ToastAndroid.LONG,
+              ToastAndroid.SHORT,
               ToastAndroid.CENTER
             );
       }
