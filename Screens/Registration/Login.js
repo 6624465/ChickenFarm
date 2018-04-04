@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Image, Keyboard, ActivityIndicator} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Image, Keyboard, ActivityIndicator, ToastAndroid} from 'react-native';
 import { Button } from 'native-base';
 import {StackNavigator} from 'react-navigation';
-import Toast, {DURATION} from 'react-native-easy-toast'
+//import Toast, {DURATION} from 'react-native-easy-toast'
 import axios from 'axios';
 import services from './Services';
 import styles from '../stylesheet';
@@ -16,7 +16,7 @@ export default class Login extends Component{
      header:false
   }
   componentDidMount() {
-    axios.defaults.baseURL = 'http://192.168.0.102/FMS';
+    axios.defaults.baseURL = 'http://192.168.0.103/FMS';
     //axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com';
     axios.defaults.headers.common['AUTH_TOKEN'] = 'sdfsdfgsdfgsdfdsfgsdfgsdfg';
     axios.defaults.headers.common['Content-Type'] = 'application/json';    
@@ -181,6 +181,14 @@ export default class Login extends Component{
 
           //   this.props.navigation.navigate('Navigation');
           // }
+        }
+        else{
+          ToastAndroid.showWithGravity(
+            'Please fill mandatory fields.',
+            ToastAndroid.SHORT,
+            ToastAndroid.CENTER
+            );
+          //this.refs.toast.show('Please fill mandatory fields.',DURATION.LENGTH_LONG);
         }
     }
 
