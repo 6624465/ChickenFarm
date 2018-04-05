@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Image, ScrollView } from 'react-native';
+import { Text, View, Image, ScrollView,AsyncStorage } from 'react-native';
 import {DrawerNavigator, DrawerItems, StackNavigator} from 'react-navigation';
 import { Icon } from 'native-base';
 
@@ -227,10 +227,149 @@ const NavLinks = DrawerNavigator({
   }
 )
 
+const NavLinks1 = DrawerNavigator({
+      MainDashboard:{
+        screen:MainDashboard,
+        navigationOptions:{
+          drawerIcon: <Icon ios='ios-home' android="md-home" size={16} />
+        }
+      },
+      NavLinksLogin: {
+        screen:NavLinksLogin,
+      },
+      SalesReport:{screen:SalesReport},
+      ExpenseReport:{screen:ExpenseReport},
+      ProfitsAndLossReport:{screen:ProfitsAndLossReport},
+      StockReport:{screen:StockReport},
+
+      FarmProfileList:{
+        screen:FarmProfileList,
+        navigationOptions:{
+          drawerIcon: <Icon ios='ios-contract' android="md-contract" size={16} />
+        }
+      },
+
+      ChickenProfileList:{
+        screen:ChickenProfileList,
+        navigationOptions:{
+          drawerIcon: <Icon ios='ios-egg' android="md-egg" size={16} />
+        }
+      },
+      ChickenProfileDetail:{screen:ChickenProfileDetail},
+
+      Vaccine:{
+        screen:Vaccine,
+        navigationOptions:{
+          drawerIcon: <Icon ios='ios-medical' android="md-medical" size={16} />
+        }
+      },
+      PurchasedVaccineList:{screen:PurchasedVaccineList},
+      PurchasedVaccineDetail:{screen:PurchasedVaccineDetail},
+      VaccineScheduleList:{screen:VaccineScheduleList},
+      VaccineScheduleDetail:{screen:VaccineScheduleDetail},
+      GiveVaccineList:{screen:GiveVaccineList},
+      GiveVaccineDetail:{screen:GiveVaccineDetail},
+      VaccineDue:{screen:VaccineDue},
+
+      ChickenTreatment:{
+        screen:ChickenTreatment,
+        navigationOptions:{
+          drawerIcon: <Icon ios='ios-medkit' android="md-medkit" size={16} />
+        }
+      },
+      ChickenTreatmentList:{screen:ChickenTreatmentList},
+      ChickenTreatmentDetail:{screen:ChickenTreatmentDetail},
+      PurchasedMedicineList:{screen:PurchasedMedicineList},
+      PurchasedMedicineDetail:{screen:PurchasedMedicineDetail},
+
+      Expense:{
+        screen:Expense,
+        navigationOptions:{
+          drawerIcon: <Icon ios='ios-cash' android="md-cash" size={16} />
+        }
+      },
+      MExpenseList:{screen:MExpenseList},
+      MExpenseDetail:{screen:MExpenseDetail},
+      ExpenseEntryList:{screen:ExpenseEntryList},
+      ExpenseEntryDetail:{screen:ExpenseEntryDetail},
+
+      Sales:{
+        screen:Sales,
+        navigationOptions:{
+          drawerIcon: <Icon ios='ios-aperture' android="md-aperture" size={16} />
+        }
+      },
+      PriceList:{screen:PriceList},
+      PriceDetail:{screen:PriceDetail},
+      ChickenForSaleList:{screen:ChickenForSaleList},
+      ChickenForSaleDetail:{screen:ChickenForSaleDetail},
+      SaleEntryList:{screen:SaleEntryList},
+      SaleEntryDetail:{screen:SaleEntryDetail},
+
+      BreedList:{
+        screen:BreedList,
+        navigationOptions:{
+          drawerIcon: <Icon ios='ios-list' android="md-list" size={16} />
+        }
+      },
+      BreedDetail:{screen:BreedDetail},
+
+      Logout:{
+        screen:Logout,
+        navigationOptions:{
+          drawerIcon: <Icon ios='ios-log-out' android="md-log-out" size={16} />
+        }
+      },
+    },
+    {
+      contentComponent: DrawerContent,
+      drawerPosition:'left',
+      contentOptions: {
+        activeTintColor:'red',
+      },
+      navigationOptions:{
+        header:false,
+    }
+  }
+)
+
+
 export default class Navigation extends Component {
-    render(){ 
+  async componentDidMount() {
+    this.setState({
+      condition:true
+    })
+    await AsyncStorage.getItem('uid').then((value)=> 
+      this.setState({}, function() {
+        debugger;
+        this.usrid = value ;
+      })
+    );
+    await AsyncStorage.getItem('pwd').then((value)=> 
+      this.setState({}, function() {
+        debugger;
+        this.pass = value;
+      })
+    );
+    debugger;
+if(this.usrid==null || this.pass==null)
+{ 
+  this.setState({
+    condition:false
+  })
+}
+  }
+  constructor(props)
+  {
+    super(props);
+    this.state ={
+      condition: true,
+    }}
+    
+    render(){  
+      debugger;     
         return(
-            <NavLinks/>
+           this.state.condition ? <NavLinks1 /> : <NavLinks />
           );
     }
 }

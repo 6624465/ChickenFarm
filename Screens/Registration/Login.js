@@ -18,8 +18,8 @@ export default class Login extends Component{
   }
 
   async componentDidMount() {
-    axios.defaults.baseURL = 'http://192.168.0.100/FMS';
-    //axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com';
+    //axios.defaults.baseURL = 'http://192.168.0.110/FMS';
+    axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com';
     axios.defaults.headers.common['AUTH_TOKEN'] = 'sdfsdfgsdfgsdfdsfgsdfgsdfg';
     axios.defaults.headers.common['Content-Type'] = 'application/json';    
     axios.defaults.headers.post['Content-Type'] = 'application/json';  
@@ -36,12 +36,14 @@ export default class Login extends Component{
         this.pass = value;
       })
     );
+    debugger;
 if(this.usrid==null || this.pass==null)
 { 
 //alert(this.usrid+"  <<>>  "+this.pass)
-  this.props.navigation.navigate('Navigation');
+  //this.props.navigation.navigate('NavLinksLogin');
 }
 else{
+  debugger
   var data = {
     UserID:this.usrid,
     Password:this.pass
@@ -187,6 +189,9 @@ else{
             });
             axios.defaults.headers.common['MOBILE_NO'] = response.data.userid; 
             axios.defaults.headers.common['FarmID'] = response.data.FarmID; 
+            
+            AsyncStorage.setItem('uid', data.UserID.toString());
+            AsyncStorage.setItem('pwd', data.Password);   
             if(response.data.message=="goto farm")
             {
               this.props.navigation.navigate('FarmProfile');
@@ -219,8 +224,6 @@ else{
             }
             else
             {        
-              AsyncStorage.setItem('uid', data.UserID.toString());
-              AsyncStorage.setItem('pwd', data.Password);   
               this.props.navigation.navigate('MainDashboard');
             }            
           }.bind(this))
