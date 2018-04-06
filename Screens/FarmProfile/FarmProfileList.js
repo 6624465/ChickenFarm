@@ -215,7 +215,7 @@ export default class FarmProfileList extends Component{
                     axios.defaults.headers.common['FarmID'] = response.data;
                     //alert('Farm profile saved successfully.')
                     ToastAndroid.showWithGravity(
-                        'Farm profile saved successfully...',
+                        'Saved successfully...',
                         ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );
@@ -288,7 +288,7 @@ export default class FarmProfileList extends Component{
                         />
 
                          <TouchableOpacity onPress={this.state.isLogo ? this.cleanupImages.bind(this) : this.pickMultiple.bind(this)} style={{marginBottom: 10}}>
-                            <Text style={{color:'blue'}}>{this.state.isLogo ? 'Clear Logos' : 'Select Logos'}</Text>
+                            <Text style={{color:'blue'}}>{this.state.isLogo ? 'Clear Logo' : 'Select Logo'}</Text>
                         </TouchableOpacity>
 
                         {/* <TouchableOpacity onPress={this.cleanupImages.bind(this)} style={{marginBottom: 10}}>

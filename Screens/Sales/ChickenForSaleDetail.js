@@ -272,7 +272,7 @@ export default class ChickenForSaleDetail extends Component{
               //if(data.FarmID!=0){
                   //alert('Animal profile saved successfully.')
                   ToastAndroid.showWithGravity(
-                    'Animal For Sale saved successfully...',
+                    'Saved successfully...',
                     ToastAndroid.SHORT,
                     ToastAndroid.CENTER
                   );

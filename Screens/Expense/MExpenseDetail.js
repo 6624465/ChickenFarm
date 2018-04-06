@@ -95,7 +95,7 @@ export default class MExpenseDetail extends Component{
                   //if(data.FarmID!=0){
                      // alert('Expenses Master saved successfully.')
                       ToastAndroid.showWithGravity(
-                        'Expenses Master saved successfully...',
+                        'Saved successfully...',
                         ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );

@@ -180,7 +180,7 @@ export default class GiveVaccineDetail extends Component{
                 //if(response.data!=0){
                     //alert('Vaccine Entry saved successfully.')
                     ToastAndroid.showWithGravity(
-                        'Vaccine Entry saved successfully..',
+                        'Saved successfully..',
                         ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );
