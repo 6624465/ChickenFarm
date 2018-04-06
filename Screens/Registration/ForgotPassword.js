@@ -59,7 +59,7 @@ export default class ForgotPassword extends Component{
                         // this.props.navigation.navigate('ForgotPasswordContinoue');
 
                         ToastAndroid.showWithGravity(
-                            'OTP successfully send to registered mobile number...',
+                            'OTP successfully sent to registered mobile number...',
                             ToastAndroid.SHORT,
                             ToastAndroid.CENTER
                           );

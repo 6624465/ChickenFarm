@@ -83,7 +83,7 @@ export default class ForgotPasswordContinue extends Component{
                 services.ResendOTP(data.MobileNo)
                 .then(function (response) {
                     ToastAndroid.showWithGravity(
-                        'OTP successfully send to registered mobile number.',
+                        'OTP successfully sent to registered mobile number.',
                         ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );

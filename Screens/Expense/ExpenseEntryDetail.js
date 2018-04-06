@@ -118,7 +118,7 @@ export default class ExpenseEntryDetail extends Component{
                 //if(response.data!=0){
                    // alert('Expenses Entry saved successfully.')
                    ToastAndroid.showWithGravity(
-                    'Expenses Entry saved successfully....',
+                    'Saved successfully....',
                     ToastAndroid.SHORT,
                     ToastAndroid.CENTER
                   );

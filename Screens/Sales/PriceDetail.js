@@ -128,7 +128,7 @@ export default class PriceDetail extends Component{
                 //if(response.data!=0){
                
                    ToastAndroid.showWithGravity(
-                    'Standard Price saved successfully....',
+                    'Saved successfully....',
                     ToastAndroid.SHORT,
                     ToastAndroid.CENTER
                   );

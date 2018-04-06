@@ -166,7 +166,7 @@ export default class VaccineScheduleDetail extends Component{
                 //if(response.data!=0){
                     //alert('Vaccine Schedule saved successfully.')
                     ToastAndroid.showWithGravity(
-                        'Vaccine Schedule saved successfully...',
+                        'Saved successfully...',
                         ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );

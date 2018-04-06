@@ -223,7 +223,7 @@ export default class PurchasedVaccineDetail extends Component{
                 //if(response.data!=0){
                     //alert('Vaccine profile saved successfully.')
                     ToastAndroid.showWithGravity(
-                        'Vaccine profile saved successfully...',
+                        'Saved successfully...',
                         ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );

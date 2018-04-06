@@ -223,7 +223,7 @@ export default class PurchasedMedicineDetail extends Component{
                 //if(response.data!=0){
                     //alert('Medicine profile saved successfully.')
                     ToastAndroid.showWithGravity(
-                        'Medicine profile saved successfully..',
+                        'Saved successfully..',
                         ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );

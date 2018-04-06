@@ -148,7 +148,7 @@ export default class ChickenTreatmentDetail extends Component{
                     });
                   //if(data.FarmID!=0){
                       ToastAndroid.showWithGravity(
-                        'Treatment Entry saved successfully..',
+                        'Saved successfully..',
                         ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );

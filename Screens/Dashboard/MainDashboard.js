@@ -69,7 +69,7 @@ export default class MainDashboard extends Component{
                             </View>
                             <View style={styles.width_25_align_center}>
                                 <Text style={styles.bold_12}>
-                                    P & L
+                                    Profit & Loss
                                 </Text>
                             </View>
                             <View style={styles.width_25_align_center}>

@@ -209,7 +209,7 @@ export default class SaleEntryDetail extends Component{
                 //if(response.data!=0){
                     //alert('Vaccine Entry saved successfully.')
                     ToastAndroid.showWithGravity(
-                        'Animal Sale Entry saved successfully..',
+                        'Saved successfully..',
                         ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );
