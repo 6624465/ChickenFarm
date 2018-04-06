@@ -10,10 +10,11 @@ import axios from 'axios';
 import services from './Services';
 import styles from '../stylesheet';
   
+import {strings} from '../Localization';
 export default class ChickenForSaleList extends Component{
 
     static navigationOptions={
-        title : 'Animal For Sale List',
+        title : strings.Animal_ForSale_List,
         headerStyle:{backgroundColor:'#fff'},
         headerTitleStyle:{color:'#212121'},
         drawerLabel: () => null
@@ -83,7 +84,7 @@ export default class ChickenForSaleList extends Component{
                     </Left>
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Animal For Sale List</Title>
+                             <Title>{strings.Animal_ForSale_List}</Title>
                         </View>
                     </Body>
                     <Right>
@@ -95,7 +96,7 @@ export default class ChickenForSaleList extends Component{
                 <Header searchBar rounded>
                     <Item>
                         <Icon ios="ios-search" android='md-search' />
-                        <Input placeholder="Search"  onChangeText={(text) => this.FilterListData(text)}/>
+                        <Input placeholder={strings.Search}  onChangeText={(text) => this.FilterListData(text)}/>
                         {/* <Icon name="ios-people" /> */}
                     </Item>
                 </Header>

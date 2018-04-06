@@ -9,11 +9,13 @@ import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer, Ri
 import axios from 'axios';
 import services from './Services';
 import styles from '../stylesheet';
+
+import {strings} from '../Localization';
   
 export default class SaleEntryList extends Component{
 
     static navigationOptions={
-        title : 'Sale Entry List',
+        title : strings.Sale_EntryList,
         headerStyle:{backgroundColor:'#fff'},
         headerTitleStyle:{color:'#212121'},
         drawerLabel: () => null
@@ -83,7 +85,7 @@ export default class SaleEntryList extends Component{
                     </Left>
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Animal Sale Entry List</Title>
+                             <Title>{strings.Animal_SaleEntryList}</Title>
                         </View>
                     </Body>
                     <Right>
@@ -95,7 +97,7 @@ export default class SaleEntryList extends Component{
                 <Header searchBar rounded>
                     <Item>
                         <Icon ios="ios-search" android='md-search' />
-                        <Input placeholder="Search"  onChangeText={(text) => this.FilterListData(text)}/>
+                        <Input placeholder={strings.Search}  onChangeText={(text) => this.FilterListData(text)}/>
                         {/* <Icon name="ios-people" /> */}
                     </Item>
                 </Header>

@@ -6,7 +6,9 @@ import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer, Ri
 
 import axios from 'axios';
 import services from './Services';
-import styles from '../stylesheet'
+import styles from '../stylesheet';
+
+import {strings} from '../Localization';
 
 export default class PriceList extends Component{
 
@@ -77,7 +79,7 @@ export default class PriceList extends Component{
                     </Left>
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Price List</Title>
+                             <Title>{strings.Price_List}</Title>
                         </View>
                     </Body>
                     <Right>
@@ -89,7 +91,7 @@ export default class PriceList extends Component{
                 <Header searchBar rounded>
                     <Item>
                         <Icon ios="ios-search" android='md-search' />
-                        <Input placeholder="Search"  onChangeText={(text) => this.FilterListData(text)}/>
+                        <Input placeholder={strings.Search}  onChangeText={(text) => this.FilterListData(text)}/>
                         {/* <Icon name="ios-people" /> */}
                     </Item>
                 </Header>
