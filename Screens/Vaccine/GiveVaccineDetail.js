@@ -3,11 +3,11 @@ import {View, Text,StyleSheet,Keyboard,ToastAndroid,ActivityIndicator} from 'rea
 
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button,Footer,Right } from 'native-base';
-var t = require('tcomb-form-native');
-var Form = t.form.Form;
+
 import axios from 'axios';
 import services from './Services';
 import styles from '../stylesheet';
+import {strings} from '../Localization';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
@@ -61,31 +61,31 @@ export default class GiveVaccineDetail extends Component{
         this.GiveVaccineOptions={
             fields:{
                 AnimalCode:{
-                    label: 'Animal Code',
-                    placeholder:'Animal Code',
+                    label: strings.Animal_Code,
+                    placeholder:strings.Animal_Code,
                     nullOption: {value: '', text: 'Select'}               
                 },
                 AnimalAge:{
-                    label: 'Animal Age',
-                    placeholder:'Animal Age',
+                    label: strings.Animal_Age,
+                    placeholder:strings.Animal_Age,
                     editable:false
                                   
                 },
                 VaccineType:{
-                    label: 'Vaccine Type',
-                    placeholder:'Vaccine Type'
+                    label: strings.Vaccine_Type,
+                    placeholder:strings.Vaccine_Type
                 },
                 VaccineName:{
-                    label: 'Vaccine Name',
-                    placeholder:'Vaccine Name'
+                    label: strings.Vaccine_Name,
+                    placeholder:strings.Vaccine_Name
                 },
                 VaccineCompany:{
-                    label: 'Vaccine Company',
-                    placeholder:'Vaccine Company'
+                    label: strings.Vaccine_Company,
+                    placeholder:strings.Vaccine_Company
                 },
                 Remarks:{
-                    label: 'Remarks',
-                    placeholder:'Remarks'               
+                    label: strings.Remarks,
+                    placeholder:strings.Remarks               
                 }
             }
         }
@@ -180,7 +180,7 @@ export default class GiveVaccineDetail extends Component{
                 //if(response.data!=0){
                     //alert('Vaccine Entry saved successfully.')
                     ToastAndroid.showWithGravity(
-                        'Saved successfully..',
+                        strings.Saved_successfully,
                         ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );
@@ -194,7 +194,7 @@ export default class GiveVaccineDetail extends Component{
         }
         else{
             ToastAndroid.showWithGravity(
-                'Please Enter all manadatary fields...',
+                strings.Mandatory_fields,
                 ToastAndroid.SHORT,
                 ToastAndroid.CENTER
               );
@@ -225,7 +225,7 @@ export default class GiveVaccineDetail extends Component{
                     </Left>
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Give Vaccine </Title>
+                             <Title>{strings.Give_Vaccine} </Title>
                         </View>
                     </Body>
                     <Right></Right>
@@ -245,12 +245,12 @@ export default class GiveVaccineDetail extends Component{
                     <View style={styles.flexDirectionWrap} >
                         <View style={styles.width_50}>
                             <Button success block rounded onPress={this.ResetVaccineEntry}>
-                                <Text style={styles.white} >Reset</Text>
+                                <Text style={styles.white} >{strings.Reset}</Text>
                             </Button>
                         </View>
                         <View style={styles.width_50_flex_end}>
                             <Button primary block rounded onPress={this.SaveVaccineEntry}>
-                                <Text style={styles.white}>Save</Text>
+                                <Text style={styles.white}>{strings.Save}</Text>
                             </Button>
                         </View>
                     </View>

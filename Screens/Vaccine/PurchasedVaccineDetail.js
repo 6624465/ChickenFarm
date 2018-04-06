@@ -6,6 +6,7 @@ import moment from 'moment';
 import axios from 'axios';
 import services from './Services';
 import styles from '../stylesheet';
+import {strings} from '../Localization';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
@@ -81,20 +82,20 @@ export default class PurchasedVaccineDetail extends Component{
                 //     placeholder:'Vaccine Code'
                 // },
                 VaccineName:{
-                    label: 'Vaccine Name',
-                    placeholder:'Vaccine Name'                
+                    label: strings.Vaccine_Name,
+                    placeholder:strings.Vaccine_Name                
                 },
                 VaccineType:{
-                    label: 'Vaccine Type',
-                    placeholder:'Vaccine Type'                
+                    label: strings.Vaccine_Type,
+                    placeholder:strings.Vaccine_Type               
                 },
                 VaccineCompany:{
-                    label: 'Vaccine Company',
-                    placeholder:'Vaccine Company'                
+                    label: strings.Vaccine_Type,
+                    placeholder:strings.Vaccine_Type                
                 },
                 PurchaseDate:{
-                    label: 'Purchase Date',
-                    placeholder:'Purchase Date',
+                    label: strings.Purchase_Date,
+                    placeholder:strings.Purchase_Date,
                     // minimumDate: new Date(),
                     mode: 'date',
                     config: {
@@ -102,8 +103,8 @@ export default class PurchasedVaccineDetail extends Component{
                     }            
                 },
                 ExpiryDate:{
-                    label: 'Expiry Date',
-                    placeholder:'Expiry Date',
+                    label: strings.Expiry_Date,
+                    placeholder:strings.Expiry_Date,
                     // minimumDate: new Date(),
                     mode: 'date',
                     config: {
@@ -112,18 +113,18 @@ export default class PurchasedVaccineDetail extends Component{
                                  
                 },
                 BatchNo:{
-                    label: 'Batch No',
-                    placeholder:'BatchNo'
+                    label: strings.Batch_No,
+                    placeholder:strings.Batch_No
                                 
                 },
                 Quantity:{
-                    label: 'Quantity ',
-                    placeholder:'Quantity '
+                    label: strings.Quantity,
+                    placeholder:strings.Quantity
                                 
                 },
                 Supplier:{
-                    label: 'Supplied By',
-                    placeholder:'Supplied By',
+                    label: strings.Supplied_By,
+                    placeholder:strings.Supplied_By,
                                 
                 }
             }
@@ -223,7 +224,7 @@ export default class PurchasedVaccineDetail extends Component{
                 //if(response.data!=0){
                     //alert('Vaccine profile saved successfully.')
                     ToastAndroid.showWithGravity(
-                        'Saved successfully...',
+                        strings.Saved_successfully,
                         ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );
@@ -237,7 +238,7 @@ export default class PurchasedVaccineDetail extends Component{
         }
         else{
             ToastAndroid.showWithGravity(
-                'Please Enter all manadatary fields...',
+                strings.Mandatory_fields,
                 ToastAndroid.SHORT,
                 ToastAndroid.CENTER
               );
@@ -268,7 +269,7 @@ export default class PurchasedVaccineDetail extends Component{
                     </Left>
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Purchased Vaccine</Title>
+                             <Title>{strings.Purchased_Vaccine}</Title>
                         </View>
                     </Body>
                     <Right></Right>
@@ -283,7 +284,7 @@ export default class PurchasedVaccineDetail extends Component{
                             onChange={this.onChange}
                         />
                         <TouchableOpacity onPress={this.state.isMedicinePhoto ? this.cleanupImages.bind(this) : this.pickMultiple.bind(this)} style={{marginBottom: 10}}>
-                            <Text style={{color:'blue'}}>{this.state.isMedicinePhoto ? 'Clear Photo' : 'Select Photo'}</Text>
+                            <Text style={{color:'blue'}}>{this.state.isMedicinePhoto ? strings.Clear_Photo : strings.Select_Photo}</Text>
                         </TouchableOpacity>
                         <ScrollView>
                             {(this.state.PurchasedVaccineDetails.Photo ? this.renderAsset(this.state.PurchasedVaccineDetails.Photo) : null)}
@@ -296,12 +297,12 @@ export default class PurchasedVaccineDetail extends Component{
                     <View style={styles.flexDirectionWrap} >
                         <View style={styles.width_50}>
                             <Button success block rounded onPress={this.ResetVaccineMaster}>
-                                <Text style={styles.white} >Reset</Text>
+                                <Text style={styles.white} >{strings.Reset}</Text>
                             </Button>
                         </View>
                         <View style={styles.width_50_flex_end}>
                             <Button primary block rounded onPress={this.SaveVaccineMaster}>
-                                <Text style={styles.white}>Save</Text>
+                                <Text style={styles.white}>{strings.Save}</Text>
                             </Button>
                         </View>
                     </View>

@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import { View, StyleSheet,TouchableOpacity,Image,Keyboard,Text} from 'react-native';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Right } from 'native-base';
 import {StackNavigator} from 'react-navigation';
+import {strings} from '../Localization';
 
 export default class Sale extends Component{
+    static navigationOptions={
+        title : strings.Sales
+    }
     render(){
         return(     
             <Container>
@@ -15,7 +19,7 @@ export default class Sale extends Component{
                     </Left>
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Sales</Title>
+                             <Title>{strings.Sales}</Title>
                         </View>
                     </Body>
                     <Right></Right>
@@ -29,19 +33,19 @@ export default class Sale extends Component{
                     <View>
                         <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('PriceList')}>
                             <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
-                                Price List
+                                {strings.Price_List}
                             </Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('ChickenForSaleList')}>
                             <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
-                                Chicken For Sales
+                                {strings.Chicken_ForSales}
                             </Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('SaleEntryList')}>
                             <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
-                                Sale Entry
+                                {strings.Sale_Entry}
                             </Text>
                         </TouchableOpacity>
                     </View>

@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import { View, StyleSheet,TouchableOpacity,Image,Keyboard,Text} from 'react-native';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Right } from 'native-base';
 import {StackNavigator} from 'react-navigation';
+import {strings} from '../Localization';
 
 export default class Vaccine extends Component{
+    static navigationOptions={
+        title : strings.Vaccine
+    }
   render(){
     return(     
     <Container>
@@ -15,7 +19,7 @@ export default class Vaccine extends Component{
                 </Left>
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Vaccine</Title>
+                             <Title>{strings.Vaccine}</Title>
                         </View>
                     </Body>
                     <Right></Right>
@@ -29,22 +33,22 @@ export default class Vaccine extends Component{
             <View>
                 <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('PurchasedVaccineList')}>
                     <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
-                      Purchased Vaccine List
+                      {strings.Purchased_VaccineList}
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('VaccineScheduleList')}>
                     <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
-                      Vaccine Schedule List
+                     {strings.Vaccine_ScheduleList}
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('GiveVaccineList')}>
                     <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
-                      Give Vaccine List
+                     {strings.Give_VaccineList}
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('VaccineDue')}>
                     <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
-                      Vaccine Due 
+                     {strings.Vaccine_Due}
                     </Text>
                 </TouchableOpacity>
             </View>

@@ -8,6 +8,7 @@ var Form = t.form.Form;
 import axios from 'axios';
 import services from './Services';
 import styles from '../stylesheet';
+import {strings} from '../Localization';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
@@ -61,27 +62,27 @@ export default class VaccineScheduleDetail extends Component{
         this.VaccineScheduleOptions={
             fields:{
                 AnimalAge:{
-                    label: 'Animal Age',
-                    placeholder:'Animal Age'
+                    label: strings.Animal_Age,
+                    placeholder:strings.Animal_Age
                 },
                 VaccineType:{
-                    label: 'Vaccine Type',
-                    placeholder:'Vaccine Type',
+                    label: strings.Vaccine_Type,
+                    placeholder:strings.Vaccine_Type,
                     editable:false
                 },
                 VaccineCode:{
-                    label: 'Vaccine Name',
-                    placeholder:'Vaccine Name',
+                    label: strings.Vaccine_Name,
+                    placeholder:strings.Vaccine_Name,
                     nullOption: {value: "", text: 'Select'}  
                 },
                 VaccineCompany:{
-                    label: 'Vaccine Company',
-                    placeholder:'Vaccine Company',
+                    label: strings.Vaccine_Company,
+                    placeholder:strings.Vaccine_Company,
                     editable:false
                 },
                 Remarks:{
-                    label: 'Remarks',
-                    placeholder:'Remarks'               
+                    label: strings.Remarks,
+                    placeholder:strings.Remarks               
                 }
             }
         }
@@ -166,7 +167,7 @@ export default class VaccineScheduleDetail extends Component{
                 //if(response.data!=0){
                     //alert('Vaccine Schedule saved successfully.')
                     ToastAndroid.showWithGravity(
-                        'Saved successfully...',
+                        strings.Saved_successfully,
                         ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );
@@ -180,7 +181,7 @@ export default class VaccineScheduleDetail extends Component{
         }
         else{
             ToastAndroid.showWithGravity(
-                'Please Enter all manadatary fields...',
+               strings.Mandatory_fields,
                 ToastAndroid.SHORT,
                 ToastAndroid.CENTER
               );
@@ -212,7 +213,7 @@ export default class VaccineScheduleDetail extends Component{
                     </Left>
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Vaccine Schedule</Title>
+                             <Title>{strings.Vaccine_Schedule}</Title>
                         </View>
                     </Body>
                     <Right></Right>
@@ -232,12 +233,12 @@ export default class VaccineScheduleDetail extends Component{
                     <View style={styles.flexDirectionWrap} >
                         <View style={styles.width_50}>
                             <Button success block rounded onPress={this.ResetVaccineSchedule}>
-                                <Text style={styles.white} >Reset</Text>
+                                <Text style={styles.white} >{strings.Reset}</Text>
                             </Button>
                         </View>
                         <View style={styles.width_50_flex_end}>
                             <Button primary block rounded onPress={this.SaveVaccineSchedule}>
-                                <Text style={styles.white}>Save</Text>
+                                <Text style={styles.white}>{strings.Save}</Text>
                             </Button>
                         </View>
                     </View>

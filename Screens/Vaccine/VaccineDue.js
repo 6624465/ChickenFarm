@@ -3,10 +3,11 @@ import {View, Text,StyleSheet} from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button,Right } from 'native-base';
+import {strings} from '../Localization';
+import moment from 'moment';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
-import moment from 'moment';
 
 export default class AddVaccineSchedule extends Component{
     static navigationOptions={
@@ -60,7 +61,7 @@ export default class AddVaccineSchedule extends Component{
                         </Left>
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Vaccine Due</Title>
+                             <Title>{strings.Vaccine_Due}</Title>
                         </View>
                     </Body>
                     <Right></Right>
