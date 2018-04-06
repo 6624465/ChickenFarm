@@ -8,7 +8,7 @@ import services from './Services';
 import styles from '../stylesheet';
 
 import Navigation from '../Navigations/Navigation';
-import { strings } from '../Localization';
+import {strings} from '../Localization';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
@@ -20,8 +20,8 @@ export default class Login extends Component{
   }
 
   async componentDidMount() {
-    axios.defaults.baseURL = 'http://192.168.56.1/FMS';
-    //axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com';
+    //axios.defaults.baseURL = 'http://192.168.56.1/FMS';
+    axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com';
     axios.defaults.headers.common['AUTH_TOKEN'] = 'sdfsdfgsdfgsdfdsfgsdfgsdfg';
     axios.defaults.headers.common['Content-Type'] = 'application/json';    
     axios.defaults.headers.post['Content-Type'] = 'application/json';  
@@ -57,6 +57,7 @@ else{
       });
       axios.defaults.headers.common['MOBILE_NO'] = response.data.userid; 
       axios.defaults.headers.common['FarmID'] = response.data.FarmID; 
+      AsyncStorage.setItem('FarmID', response.data.toString()); 
       if(response.data.message=="goto menu")
       {      
         //AsyncStorage.setItem('uid', data.UserID.toString());
@@ -194,6 +195,7 @@ else{
             
             AsyncStorage.setItem('uid', data.UserID.toString());
             AsyncStorage.setItem('pwd', data.Password);   
+            AsyncStorage.setItem('FarmID', response.data.FarmID.toString()); 
             if(response.data.message=="goto farm")
             {
               this.props.navigation.navigate('FarmProfile');

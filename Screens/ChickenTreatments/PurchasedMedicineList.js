@@ -7,7 +7,7 @@ import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer, Ri
 import axios from 'axios';
 import services from './Services';
 import styles from '../stylesheet'
-import { strings } from '../Localization';
+import {strings} from '../Localization';
 
 export default class PurchasedMedicineList extends Component{
 

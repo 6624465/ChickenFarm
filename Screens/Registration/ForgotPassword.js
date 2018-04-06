@@ -3,14 +3,16 @@ import {View, Text,StyleSheet,ToastAndroid} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button,Right } from 'native-base';
 
-var t = require('tcomb-form-native');
-var Form = t.form.Form;
 import services from './Services';
 import styles from '../stylesheet';
+import {strings} from '../Localization';
+
+var t = require('tcomb-form-native');
+var Form = t.form.Form;
 
 export default class ForgotPassword extends Component{
     static navigationOptions={
-        title : 'Forgot Password',
+        title :strings.Forgot_Password,
         headerStyle:{backgroundColor:'#fff'},
         headerTitleStyle:{color:'#212121'}
     }
@@ -28,8 +30,8 @@ export default class ForgotPassword extends Component{
        this.forgotpasswordOption={
             fields:{
                 MobileNo:{
-                    label: 'Mobile No',
-                    placeholder:'Pleasse Enter Mobile Number',
+                    label: strings.Mobile_Number,
+                    placeholder:strings.Mobile_Number,
                     maxLength:10
                    
                 }
@@ -59,7 +61,7 @@ export default class ForgotPassword extends Component{
                         // this.props.navigation.navigate('ForgotPasswordContinoue');
 
                         ToastAndroid.showWithGravity(
-                            'OTP successfully sent to registered mobile number...',
+                            strings.OTP_Sent,
                             ToastAndroid.SHORT,
                             ToastAndroid.CENTER
                           );
@@ -73,14 +75,25 @@ export default class ForgotPassword extends Component{
                 });
             }
             else{
-                alert('Mobile Number Is Not Exists....')
+                ToastAndroid.showWithGravity(
+                    strings.Mobile_NumberNotExists,
+                    ToastAndroid.SHORT,
+                    ToastAndroid.CENTER
+                  );
             }
              console.log(this.state.status);
             }.bind(this))
             .catch(function (error) {
                 console.log(error);
             });
-        }   
+        }  
+        else{
+            ToastAndroid.showWithGravity(
+                strings.Mandatory_fields,
+                ToastAndroid.SHORT,
+                ToastAndroid.CENTER
+              );
+        } 
     }
     onChange = (value) => {
         this.setState({value});
@@ -98,7 +111,7 @@ export default class ForgotPassword extends Component{
                     
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Forgot Password</Title>
+                             <Title>{strings.Forgot_Password}</Title>
                         </View>
                     </Body>
                     <Right></Right>
@@ -113,7 +126,7 @@ export default class ForgotPassword extends Component{
                         onChange={this.onChange}
                         />
                         <Button success block rounded onPress={this.ForgotPasswordContinue}>
-                            <Text style={styles.button_text}>{'Continue'}</Text>
+                            <Text style={styles.button_text}>{strings.Continue}</Text>
                         </Button>
                     </View>                      
                 </Content>

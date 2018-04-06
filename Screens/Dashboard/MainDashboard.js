@@ -5,11 +5,12 @@ import { Container, Content, Header, Icon, Left, Title, Body, Button, Right } fr
 
 import {StackNavigator} from 'react-navigation';
 import styles from '../stylesheet';
+import {strings} from '../Localization';
 
 export default class MainDashboard extends Component{
     
     static navigationOptions={
-        title : 'Main Dashboard'
+        title : strings.Main_Dashboard
     }
 
     Logout=()=>{
@@ -26,7 +27,7 @@ export default class MainDashboard extends Component{
                         </Left>
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>My Farm Dashboard</Title>
+                             <Title>{strings.My_Farm_Dashboard}</Title>
                         </View>
                     </Body>
                     <Right>
@@ -59,22 +60,22 @@ export default class MainDashboard extends Component{
                             </View>
                             <View style={styles.width_25_align_center}>
                                 <Text style={styles.bold_12}>
-                                    Sales
+                                    {strings.Sales}
                                 </Text>
                             </View>
                             <View style={styles.width_25_align_center}>
                                 <Text style={styles.bold_12}>
-                                    Expense
+                                    {strings.Expense}
                                 </Text>
                             </View>
                             <View style={styles.width_25_align_center}>
                                 <Text style={styles.bold_12}>
-                                    Profit & Loss
+                                    {strings.Profit_Loss}
                                 </Text>
                             </View>
                             <View style={styles.width_25_align_center}>
                                 <Text style={styles.bold_12}>
-                                    Stock
+                                    {strings.Stock}
                                 </Text>
                             </View>
                         </View>

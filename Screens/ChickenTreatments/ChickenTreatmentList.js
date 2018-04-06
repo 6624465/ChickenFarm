@@ -5,7 +5,7 @@ import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer, Right, Item, Input } from 'native-base';
 import services from './Services';
 import styles from '../stylesheet';
-import { strings } from '../Localization';
+import {strings} from '../Localization';
   
 export default class ChickenTreatmentList extends Component{
 

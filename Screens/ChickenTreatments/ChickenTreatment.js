@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet,TouchableOpacity,Image,Keyboard,Text} from 'react-native';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Right } from 'native-base';
 import {StackNavigator} from 'react-navigation';
-import { strings } from '../Localization';
+import {strings} from '../Localization';
 
 export default class ChickenTreatment extends Component{
     static navigationOptions={

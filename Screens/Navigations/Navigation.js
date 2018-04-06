@@ -351,6 +351,12 @@ export default class Navigation extends Component {
         this.pass = value;
       })
     );
+    await AsyncStorage.getItem('FarmID').then((value)=> 
+      this.setState({}, function() {
+        debugger;
+        this.farm = value;
+      })
+    );
     debugger;
     if(this.usrid==null || this.pass==null)
     { 
@@ -359,11 +365,14 @@ export default class Navigation extends Component {
       })
     }
     else{
-      axios.defaults.baseURL = 'http://192.168.56.1/FMS';
-      //axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com';
+      //axios.defaults.baseURL = 'http://192.168.56.1/FMS';
+      axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com';
       axios.defaults.headers.common['AUTH_TOKEN'] = 'sdfsdfgsdfgsdfdsfgsdfgsdfg';
       axios.defaults.headers.common['Content-Type'] = 'application/json';    
-      axios.defaults.headers.post['Content-Type'] = 'application/json';  
+      axios.defaults.headers.post['Content-Type'] = 'application/json'; 
+       
+      axios.defaults.headers.common['MOBILE_NO'] = this.usrid; 
+      axios.defaults.headers.common['FarmID'] = this.farm;       
     }
   }
   constructor(props)
@@ -371,7 +380,11 @@ export default class Navigation extends Component {
     super(props);
     this.state ={
       condition: true,
-    }}
+    },
+    this.usrid='',
+    this.pass='',
+    this.farm=''
+  }
     
     render(){  
       debugger;     

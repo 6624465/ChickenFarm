@@ -10,12 +10,13 @@ var Form = t.form.Form;
 import axios from 'axios';
 import services from './Services';
 import styles from '../stylesheet';
+import {strings} from '../Localization';
 
 
 export default class Registration extends Component {
     
     static navigationOptions={
-        title : 'Registration',
+        title : strings.Registration,
         headerStyle:{backgroundColor:'#fff'},
         headerTitleStyle:{color:'#212121'},
         Header:true
@@ -60,9 +61,8 @@ export default class Registration extends Component {
             OtpOptions:{
                 fields:{
                     OTPN:{
-                        label: 'OTP',
-                        placeholder:'Please Enter OTP Number',
-                        //help: 'Resend OTP'
+                        label: strings.OTP,
+                        placeholder:strings.OTP,
                         secureTextEntry: true,
                     }
                 }
@@ -71,12 +71,12 @@ export default class Registration extends Component {
                 //auto: 'placeholders'
                 fields:{
                     FullName: {
-                        label: 'Full Name',
-                        placeholder:'Enter Your Full Name',
+                        label: strings.Full_Name,
+                        placeholder:strings.Full_Name,
                         //error:'Please Enter Your Name'        
                     },
                     MobileNo: {
-                        label: 'Mobile No',
+                        label: strings.Mobile_Number,
                         placeholder:'Enter Your Mobile No',
                         maxLength:10,
                         onBlur:()=>{
@@ -92,7 +92,7 @@ export default class Registration extends Component {
                                    // alert('MobileNo Already Exists...');
 
                                     ToastAndroid.showWithGravity(
-                                        'MobileNo Already Exists....',
+                                        strings.MobileNo_Already_Exists,
                                         ToastAndroid.SHORT,
                                         ToastAndroid.CENTER
                                       );
@@ -106,22 +106,21 @@ export default class Registration extends Component {
                           },
                     },
                     Email: {
-                        label: 'Email ID',
-                        placeholder:'Enter Your Email ID'
+                        label: strings.Email_ID,
+                        placeholder:strings.Email_ID
                     },
                     Password: {
-                        label: 'Password',
-                        placeholder:'Enter Your Password',
+                        label: strings.Password,
+                        placeholder:strings.Password,
                         password: true,
-                        secureTextEntry: true,
-                        //error:'Please Enter Your Password'        
+                        secureTextEntry: true
                     } ,
                     ReEnterPassword: {
-                        label: 'Re-Password',
-                        placeholder:'Re-Enter Your Password',
+                        label: strings.Re_Password,
+                        placeholder:strings.Re_Password,
                         password: true,
                         secureTextEntry: true,
-                        error:'Password Mismatch'        
+                        error:strings.Password_Mismatch        
                     }
                 }
             }
@@ -174,6 +173,13 @@ export default class Registration extends Component {
                 console.log(error);
             });
         }
+        else{
+            ToastAndroid.showWithGravity(
+                strings.Mandatory_fields,
+                ToastAndroid.SHORT,
+                ToastAndroid.CENTER
+              );
+        }
     }
 
     
@@ -198,7 +204,7 @@ export default class Registration extends Component {
                     //alert("Invalid OTP. Please try with correct OTP.");
 
                     ToastAndroid.showWithGravity(
-                        'Invalid OTP. Please try with correct OTP...',
+                        strings.Invalid_OTPNumber,
                         ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );
@@ -222,7 +228,7 @@ export default class Registration extends Component {
             debugger;  
                 //alert('OTP successfully resend to registered mobile number.');
                 ToastAndroid.showWithGravity(
-                    'OTP successfully resend to registered mobile number..',
+                    strings.OTPsuccessfully_resend,
                     ToastAndroid.SHORT,
                     ToastAndroid.CENTER
                   );
@@ -248,7 +254,7 @@ export default class Registration extends Component {
                     
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Registration</Title>
+                             <Title>{strings.Registration}</Title>
                         </View>
                     </Body>
                     <Right></Right>
@@ -265,11 +271,11 @@ export default class Registration extends Component {
                         
                         <TouchableOpacity onPress={this.ResendOTP.bind(this)}>
                         <Text style={styles.touchableOpacity_text}>
-                            {this.state.status?'':'Resend OTP'}
+                            {this.state.status?'':strings.Resend_OTP}
                         </Text>
                         </TouchableOpacity>
                         <Button success block rounded onPress={this.state.status ? this.SaveRegistration.bind(this):this.UpdateOTPStatus.bind(this)}>
-                            <Text style={styles.button_text}>{this.state.status?'Sign Up':'Submit'}</Text>
+                            <Text style={styles.button_text}>{this.state.status?strings.Sign_Up:strings.Submit}</Text>
                         </Button>
                     </View>
                 </Content>

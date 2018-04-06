@@ -6,6 +6,8 @@ import { Container, Content, Header, Icon, Left, Title, Body, Button, Right } fr
 import {StackNavigator} from 'react-navigation';
 // import LoginNavigation from '../Registration/Login'
 import {BarChart} from 'react-native-mp-android-chart';
+import {strings} from '../Localization';
+
 export default class StockReport extends Component{
     static navigationOptions={
         drawerLabel: () => null
@@ -53,7 +55,7 @@ export default class StockReport extends Component{
                        </Left>
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Stock Report</Title>
+                             <Title>{strings.Stock_Report}</Title>
                         </View>
                     </Body>
                     <Right></Right>

@@ -3,9 +3,12 @@ import { View, StyleSheet,TouchableOpacity,Image,Keyboard,Text} from 'react-nati
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Right } from 'native-base';
 import {StackNavigator} from 'react-navigation';
 import styles from '../stylesheet';
-
+import {strings} from '../Localization';
 
 export default class Expense extends Component{
+    static navigationOptions={
+        title : strings.Expense
+    }
     render(){
         return(     
             <Container>
@@ -17,7 +20,7 @@ export default class Expense extends Component{
                     </Left>
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Expenses</Title>
+                             <Title>{strings.Expenses}</Title>
                         </View>
                     </Body>
                     <Right>
@@ -33,12 +36,12 @@ export default class Expense extends Component{
                 <View>
                     <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('MExpenseList')}>
                         <Text style={styles.touchableOpacity_text}>
-                            Master Expense List
+                            {strings.Master_Expense_List}
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('ExpenseEntryList')}>
                         <Text style={styles.touchableOpacity_text}>
-                            Expense Entry List
+                            {strings.Expense_Entry_List}
                         </Text>
                     </TouchableOpacity>
                 </View>

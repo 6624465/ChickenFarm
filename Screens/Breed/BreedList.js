@@ -4,7 +4,7 @@ import {View, Text, StyleSheet, ActivityIndicator, ListView, TouchableOpacity, I
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer, Right, Item, Input } from 'native-base';
 import api from '../../API/API';
-import { strings } from '../Localization';
+import {strings} from '../Localization';
 
 export default class BreedList extends Component{
 

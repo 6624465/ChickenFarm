@@ -3,14 +3,16 @@ import {View, Text,StyleSheet,ToastAndroid} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button,Right } from 'native-base';
 
-var t = require('tcomb-form-native');
-var Form = t.form.Form;
 import services from './Services';
 import styles from '../stylesheet';
+import {strings} from '../Localization';
+
+var t = require('tcomb-form-native');
+var Form = t.form.Form;
 
 export default class ForgotPasswordContinoue extends Component{
     static navigationOptions={
-        title : 'Forgot Password',
+        title : strings.Forgot_Password,
         headerStyle:{backgroundColor:'#fff'},
         headerTitleStyle:{color:'#212121'}
     }
@@ -34,18 +36,18 @@ export default class ForgotPasswordContinoue extends Component{
         this.forgotpasswordUpdateOption={
             fields:{
                 Password: {
-                    label: 'New Password',
-                    placeholder:'Enter New Password',
+                    label: strings.New_Password,
+                    placeholder:strings.New_Password,
                     password: true,
                     secureTextEntry: true,
         
                 } ,
                 ConfirmPassword: {
-                    label: 'Confirm Password',
-                    placeholder:'Confirm New Password',
+                    label:strings.Confirm_Password,
+                    placeholder:strings.Confirm_Password,
                     password: true,
                     secureTextEntry: true,
-                    error:'Password Mismatch',
+                    error:strings.Password_Mismatch,
                 }
             }
         }
@@ -66,7 +68,7 @@ ForgotPasswordUpdate = () =>
             if(response.data=="Success")
             {  
                 ToastAndroid.showWithGravity(
-                    'Successfully Changed Your Password...',
+                    strings.Successfully_ChangedPassword,
                     ToastAndroid.SHORT,
                     ToastAndroid.CENTER
                   );
@@ -76,7 +78,7 @@ ForgotPasswordUpdate = () =>
             else
             {  
                 ToastAndroid.showWithGravity(
-                    'Invalid Otp Number..Please Enter Valid Otp Number..',
+                    strings.Invalid_OTPNumber,
                     ToastAndroid.SHORT,
                     ToastAndroid.CENTER
                   );
@@ -87,6 +89,13 @@ ForgotPasswordUpdate = () =>
         .catch(function (error) {
                 console.log(error);
         });
+    }
+    else{
+        ToastAndroid.showWithGravity(
+            strings.Mandatory_fields,
+            ToastAndroid.SHORT,
+            ToastAndroid.CENTER
+          );
     }
     
 }
@@ -106,7 +115,7 @@ ForgotPasswordUpdate = () =>
                     </Left>
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Forgot Password</Title>
+                             <Title>{strings.Forgot_Password}</Title>
                         </View>
                     </Body>
                     <Right></Right>
@@ -121,7 +130,7 @@ ForgotPasswordUpdate = () =>
                             onChange={this.onChange}
                         />
                         <Button success block rounded onPress={this.ForgotPasswordUpdate}>
-                            <Text style={styles.button_text}>{'Submit'}</Text>
+                            <Text style={styles.button_text}>{strings.Submit}</Text>
                         </Button>
                     </View>
                 </Content>

@@ -3,13 +3,13 @@ import {View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Imag
 
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer,Right } from 'native-base';
-
-
 import styles from '../stylesheet';
+import {strings} from '../Localization';
+
 
 export default class Logout extends Component{
     static navigationOptions={
-        title : 'Logout',
+        title : strings.Logout,
         headerStyle:{backgroundColor:'#fff'},
         headerTitleStyle:{color:'#212121'}
     }
@@ -38,7 +38,7 @@ export default class Logout extends Component{
                     </Left>
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Logout</Title>
+                             <Title>{strings.Logout}</Title>
                         </View>
                     </Body>
                     <Right></Right>
@@ -46,9 +46,9 @@ export default class Logout extends Component{
 
                 <Content>
                     <View style={styles.container}>
-                    <Text>Your session got closed....</Text>
+                    <Text>Your session got cleared....</Text>
                         <Button success  block rounded onPress={this.clearStorage.bind(this)}>
-                            <Text style={styles.white} >Logout</Text>
+                            <Text style={styles.white} >{strings.Logout}</Text>
                         </Button>
                     </View>
                 </Content>

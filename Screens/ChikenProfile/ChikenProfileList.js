@@ -3,8 +3,7 @@ import {View, Text, StyleSheet, ActivityIndicator, ListView, TouchableOpacity, I
 
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer, Right, Item, Input } from 'native-base';
-//import Search from '../Common/Search'
-//import api from '../../API/API';
+import {strings} from '../Localization';
 
 import axios from 'axios';
 import services from './Services';
@@ -13,7 +12,7 @@ import styles from '../stylesheet';
 export default class ChickenProfileList extends Component{
 
     static navigationOptions={
-        title : 'Chicken Profile List'
+        title : strings.Chicken_Profile_List
     }
 
     constructor(props) {
@@ -81,7 +80,7 @@ export default class ChickenProfileList extends Component{
                     
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Chicken Profile List</Title>
+                             <Title>{strings.Chicken_Profile_List}</Title>
                         </View>
                     </Body>
                     <Right>
@@ -93,7 +92,7 @@ export default class ChickenProfileList extends Component{
                 <Header searchBar rounded>
                     <Item>
                         <Icon ios="ios-search" android='md-search' />
-                        <Input placeholder="Search"  onChangeText={(text) => this.FilterListData(text)}/>
+                        <Input placeholder={strings.Search}  onChangeText={(text) => this.FilterListData(text)}/>
                         {/* <Icon name="ios-people" /> */}
                     </Item>
                 </Header>

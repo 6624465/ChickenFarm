@@ -5,6 +5,7 @@ import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer,Right } from 'native-base';
 import styles from '../stylesheet';
 import services from './Services';
+import {strings} from '../Localization';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
@@ -52,18 +53,18 @@ export default class MExpenseDetail extends Component{
         this.AddNewExpenseOptions={
             fields:{
                 ExpensesName:{
-                    label: 'Expense Name',
-                    placeholder:'Expense Name',
+                    label: strings.Expense_Name,
+                    placeholder:strings.Expense_Name,
                     //error:'Please Enter Your Full Name'                
                 },
                 ExpensesCode:{
-                    label: 'Expense Code',
-                    placeholder:'Expense Code',
+                    label: strings.Expense_Code,
+                    placeholder:strings.Expense_Code,
                     //error:'Please Enter Farm Address'                
                 },
                 ExpensesType:{
-                    label: 'Expense Type',
-                    placeholder:'Expense Type',
+                    label: strings.Expense_Type,
+                    placeholder:strings.Expense_Type,
                     //error:'Please Enter Tel/Line Number'                
                 }
             }
@@ -95,7 +96,7 @@ export default class MExpenseDetail extends Component{
                   //if(data.FarmID!=0){
                      // alert('Expenses Master saved successfully.')
                       ToastAndroid.showWithGravity(
-                        'Saved successfully...',
+                        strings.Saved_successfully,
                         ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );
@@ -109,7 +110,7 @@ export default class MExpenseDetail extends Component{
           }
           else{
             ToastAndroid.showWithGravity(
-                'Please Enter all manadatary fields...',
+                strings.Mandatory_fields,
                 ToastAndroid.SHORT,
                 ToastAndroid.CENTER
               );
@@ -140,7 +141,7 @@ export default class MExpenseDetail extends Component{
                     </Left>
                     <Body>
                         <View style={{width:250,alignItems:'flex-start'}}>
-                             <Title>Master Expense Details</Title>
+                             <Title>{strings.Master_Expense_Details}</Title>
                         </View>
                     </Body>
                     <Right>
@@ -162,12 +163,12 @@ export default class MExpenseDetail extends Component{
                         <View style={styles.flexDirectionWrap} >
                             <View style={styles.width_50}>
                                 <Button success block rounded onPress={this.ResetExpensesMaster}>
-                                    <Text style={styles.white} >Reset</Text>
+                                    <Text style={styles.white} >{strings.Reset}</Text>
                                 </Button>
                             </View>
                             <View style={styles.width_50_flex_end}>
                                 <Button primary block rounded onPress={this.SaveExpensesMaster}>
-                                    <Text style={styles.white}>Save</Text>
+                                    <Text style={styles.white}>{strings.Save}</Text>
                                 </Button>
                             </View>
                         </View>

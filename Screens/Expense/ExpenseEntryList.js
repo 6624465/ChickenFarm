@@ -5,7 +5,8 @@ import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer, Right, Item, Input } from 'native-base';
 import services from './Services';
 import styles from '../stylesheet';
-  
+import {strings} from '../Localization';
+
 export default class ExpenseEntryList extends Component{
 
     static navigationOptions={
@@ -75,7 +76,7 @@ export default class ExpenseEntryList extends Component{
                     </Left>
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Expense Entry List</Title>
+                             <Title>{strings.Expense_Entry_List}</Title>
                         </View>
                     </Body>
                     <Right>
@@ -87,7 +88,7 @@ export default class ExpenseEntryList extends Component{
                 <Header searchBar rounded>
                     <Item>
                         <Icon ios="ios-search" android='md-search' />
-                        <Input placeholder="Search"  onChangeText={(text) => this.FilterListData(text)}/>
+                        <Input placeholder={strings.Search}  onChangeText={(text) => this.FilterListData(text)}/>
                         {/* <Icon name="ios-people" /> */}
                     </Item>
                 </Header>

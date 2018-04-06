@@ -3,14 +3,15 @@ import {View, Text,StyleSheet,TouchableOpacity,ToastAndroid} from 'react-native'
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button,Right } from 'native-base';
 
-var t = require('tcomb-form-native');
-var Form = t.form.Form;
 import services from './Services';
 import styles from '../stylesheet';
+import {strings} from '../Localization';
+var t = require('tcomb-form-native');
+var Form = t.form.Form;
 
 export default class ForgotPasswordContinue extends Component{
     static navigationOptions={
-        title : 'Forgot Password',
+        title : strings.Forgot_Password,
         headerStyle:{backgroundColor:'#fff'},
         headerTitleStyle:{color:'#212121'}
     }
@@ -30,8 +31,8 @@ export default class ForgotPasswordContinue extends Component{
          this.forgotpasswordNewOption={
             fields:{
                 Otp:{
-                    label: 'OTP',
-                    placeholder:'Pleasse Enter OTP Number',
+                    label: strings.OTP,
+                    placeholder:strings.OTP,
                     secureTextEntry: true,
                 }
             }
@@ -58,7 +59,7 @@ export default class ForgotPasswordContinue extends Component{
                 else
                 {  
                     ToastAndroid.showWithGravity(
-                        'Invalid Otp Number..Please Enter Valid Otp Number.',
+                        strings.Invalid_OTPNumber,
                         ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );
@@ -69,7 +70,14 @@ export default class ForgotPasswordContinue extends Component{
             .catch(function (error) {
                 console.log(error);
             });
-        }   
+        } 
+        else{
+            ToastAndroid.showWithGravity(
+                strings.Mandatory_fields,
+                ToastAndroid.SHORT,
+                ToastAndroid.CENTER
+              );
+        }  
     }
     IsResendOTP = () =>{
         var data = {
@@ -83,7 +91,7 @@ export default class ForgotPasswordContinue extends Component{
                 services.ResendOTP(data.MobileNo)
                 .then(function (response) {
                     ToastAndroid.showWithGravity(
-                        'OTP successfully sent to registered mobile number.',
+                       strings.OTP_Sent,
                         ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );
@@ -122,7 +130,7 @@ export default class ForgotPasswordContinue extends Component{
                     
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Forgot Password</Title>
+                             <Title>{strings.Forgot_Password}</Title>
                         </View>
                     </Body>
                     <Right></Right>
@@ -139,12 +147,12 @@ export default class ForgotPasswordContinue extends Component{
 
                         <View>
                             <TouchableOpacity onPress={this.IsResendOTP}>
-                                <Text style={styles.touchableOpacity_text}> Resend Otp </Text>
+                                <Text style={styles.touchableOpacity_text}> strings.Resend_OTP </Text>
                             </TouchableOpacity>
                         </View>
 
                         <Button success block rounded onPress={this.ForgotPasswordContinueOtp}>
-                            <Text style={styles.button_text}>{'Continue'}</Text>
+                            <Text style={styles.button_text}>{strings.Continue}</Text>
                         </Button>
                     </View>                      
                 </Content>

@@ -5,6 +5,7 @@ import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer,Right } from 'native-base';
 import services from './Services'
 import styles from '../stylesheet';
+import {strings} from '../Localization';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
@@ -56,25 +57,24 @@ export default class ExpenseEntryDetail extends Component{
         this.ExpenseEntryOptions={
             fields:{
                 ExpensesCode:{
-                    label: 'Expense Name',
-                    //placeholder:'Expense Name',
+                    label: strings.Expense_Name,
                     nullOption: {value: '', text: 'Select'} 
                 },
                 VendorName:{
-                    label: 'Vendor Name',
-                    placeholder:'Vendor Name'
+                    label: strings.Vendor_Name,
+                    placeholder:strings.Vendor_Name
                 },
                 VendorAddress:{
-                    label: 'Vendor Address',
-                    placeholder:'Vendor Address'                
+                    label: strings.Vendor_Address,
+                    placeholder:strings.Vendor_Address                
                 },
                 Amount:{
-                    label: 'Amount',
-                    placeholder:'Amount'                
+                    label: strings.Amount,
+                    placeholder:strings.Amount                
                 } ,
                 Remarks:{
-                    label: 'Remarks',
-                    placeholder:'Remarks'                
+                    label: strings.Remarks,
+                    placeholder:strings.Remarks                
                 }
             }
         }
@@ -118,7 +118,7 @@ export default class ExpenseEntryDetail extends Component{
                 //if(response.data!=0){
                    // alert('Expenses Entry saved successfully.')
                    ToastAndroid.showWithGravity(
-                    'Saved successfully....',
+                    strings.Saved_successfully,
                     ToastAndroid.SHORT,
                     ToastAndroid.CENTER
                   );
@@ -133,7 +133,7 @@ export default class ExpenseEntryDetail extends Component{
         else
         {
             ToastAndroid.showWithGravity(
-                'Please Enter all manadatary fields...',
+                strings.Mandatory_fields,
                 ToastAndroid.SHORT,
                 ToastAndroid.CENTER
               );
@@ -163,7 +163,7 @@ export default class ExpenseEntryDetail extends Component{
                     </Left>
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Expense Entry Details</Title>
+                             <Title>{strings.Expense_Entry_Details}</Title>
                         </View>
                     </Body>
                     <Right>
@@ -185,12 +185,12 @@ export default class ExpenseEntryDetail extends Component{
                         <View style={styles.flexDirectionWrap} >
                             <View style={styles.width_50}>
                                 <Button success block rounded onPress={this.ResetExpenseEntry}>
-                                    <Text style={styles.white} >Reset</Text>
+                                    <Text style={styles.white} >{strings.Reset}</Text>
                                 </Button>
                             </View>
                             <View style={styles.width_50_flex_end}>
                                 <Button primary block rounded onPress={this.SaveExpenseEntry}>
-                                    <Text style={styles.white}>Save</Text>
+                                    <Text style={styles.white}>{strings.Save}</Text>
                                 </Button>
                             </View>
                         </View>

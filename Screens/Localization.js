@@ -65,7 +65,6 @@ export let strings = new LocalizedStrings({
     Expense_Entry_List:"Expense entry list",
     Expenses:"Expenses",
     Master_Expense_List:"Master expense list",
-    Expense_Entry_List:"Expense entry list",
     Master_Expense_Details:"Master expense details",
     Farm_Profile:"Farm profile",
     Farm_Name:"Farm name",
@@ -79,7 +78,7 @@ export let strings = new LocalizedStrings({
     Add_Farm_Profile:"Add farm profile",
     Clear_Logo:"Clear logo",
     Select_Logo:"Select logo",
-    OTP_Sent:"OTP successfully send to registered mobile number",
+    OTP_Sent:"OTP successfully sent to registered mobile number",
     Mobile_NumberNotExists:"Mobile number is not exists",
     Forgot_Password:"Forgot password",
     Continue:"Continue",
@@ -137,7 +136,12 @@ export let strings = new LocalizedStrings({
     Vaccine_Type:"Vaccine type",
     Vaccine_Name:"Vaccine name",
     Vaccine_Company:"Vaccine company",
-    Vaccine_Schedule:"Vaccine schedule"
+    Vaccine_Schedule:"Vaccine schedule",
+    Expense_Report:"Expense report",
+    Profit_Loss_Report:"Profit & loss report",
+    Stock_Report:"Stock report",
+    Sales_Report:"Sales report",
+    MobileNo_Already_Exists:"MobileNo already exists"
   },
   en:{
     Breed_Details:"Breed details",
@@ -203,7 +207,6 @@ export let strings = new LocalizedStrings({
     Expense_Entry_List:"Expense entry list",
     Expenses:"Expenses",
     Master_Expense_List:"Master expense list",
-    Expense_Entry_List:"Expense entry list",
     Master_Expense_Details:"Master expense details",
     Farm_Profile:"Farm profile",
     Farm_Name:"Farm name",
@@ -275,7 +278,12 @@ export let strings = new LocalizedStrings({
     Vaccine_Type:"Vaccine type",
     Vaccine_Name:"Vaccine name",
     Vaccine_Company:"Vaccine company",
-    Vaccine_Schedule:"Vaccine schedule"
+    Vaccine_Schedule:"Vaccine schedule",
+    Expense_Report:"Expense report",
+    Profit_Loss_Report:"Profit & loss report",
+    Stock_Report:"Stock report",
+    Sales_Report:"Sales report",
+    MobileNo_Already_Exists:"MobileNo already exists"
   },
   th: {
     Breed_Details:"รายละเอียดพันธุ์",
@@ -341,7 +349,6 @@ export let strings = new LocalizedStrings({
     Expense_Entry_List:"รายการค่าใช้จ่าย",
     Expenses:"รายจ่าย",
     Master_Expense_List:"รายการค่าใช้จ่ายหลัก",
-    Expense_Entry_List:"รายการค่าใช้จ่าย",
     Master_Expense_Details:"รายละเอียดค่าใช้จ่ายหลัก",
     Farm_Profile:"รายละเอียดฟาร์ม",
     Farm_Name:"ชื่อฟาร์ม",
@@ -413,7 +420,12 @@ export let strings = new LocalizedStrings({
     Vaccine_Type:"วัคซีนชนิด",
     Vaccine_Name:"ชื่อวัคซีน",
     Vaccine_Company:"บริษัท วัคซีน",
-    Vaccine_Schedule:"กำหนดการวัคซีน"
+    Vaccine_Schedule:"กำหนดการวัคซีน",
+    Expense_Report:"รายงานค่าใช้จ่าย",
+    Profit_Loss_Report:"รายงานกำไรและขาดทุน",
+    Stock_Report:"รายงานสต็อค",
+    Sales_Report:"รายงานการขาย",
+    MobileNo_Already_Exists:"หมายเลขโทรศัพท์มือถือมีอยู่แล้ว"
   },
   hi:{
     Breed_Details: "नस्ल विवरण", 
@@ -479,7 +491,6 @@ export let strings = new LocalizedStrings({
     Expense_Entry_List: "व्यय प्रविष्टि सूची", 
     Expenses: "खच", 
     Master_Expense_List: "मास्टर व्यय सूची", 
-    Expense_Entry_List: "व्यय प्रविष्टि सूची", 
     Master_Expense_Details: "मास्टर व्यय विवरण", 
     Master_Expense_List: "मास्टर व्यय सूची", 
     Farm_Profile: "फार्म प्रोफाइल", 
@@ -553,6 +564,11 @@ export let strings = new LocalizedStrings({
     Vaccine_Type: "वैक्सीन प्रकार", 
     Vaccine_Name: "वैक्सीन का नाम", 
     Vaccine_Company: "वैक्सीन कंपनी", 
-    Vaccine_Schedule: "वैक्सीन अनुसूची"
+    Vaccine_Schedule: "वैक्सीन अनुसूची",
+    Expense_Report:"व्यय आख्या",
+    Profit_Loss_Report:"लाभ और हानि रिपोर्ट",
+    Stock_Report:"स्टॉक रिपोर्ट",
+    Sales_Report:"बिक्री रिपोर्ट",
+    MobileNo_Already_Exists:"मोबाइल नंबर पहले से मौजूद है"
   }
 });

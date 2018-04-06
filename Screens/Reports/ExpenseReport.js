@@ -6,6 +6,7 @@ import { Container, Content, Header, Icon, Left, Title, Body, Button, Right } fr
 import {StackNavigator} from 'react-navigation';
 // import LoginNavigation from '../Registration/Login'
 import {PieChart} from 'react-native-mp-android-chart';
+import {strings} from '../Localization';
 
 export default class ExpenseReport extends Component{
     static navigationOptions={
@@ -56,7 +57,7 @@ export default class ExpenseReport extends Component{
                        </Left>
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Expense Report</Title>
+                             <Title>{strings.Expense_Report}</Title>
                         </View>
                     </Body>
                     <Right></Right>

@@ -4,18 +4,19 @@ import { View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity, Ima
 import { StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer ,Right} from 'native-base';
 
-var t = require('tcomb-form-native');
-var Form = t.form.Form;
 import moment from 'moment';
 import services from './Services'
 import axios from 'axios';
 import styles from '../stylesheet';
+import {strings} from '../Localization';
 
+var t = require('tcomb-form-native');
+var Form = t.form.Form;
 var ImagePicker = NativeModules.ImageCropPicker;
   
 export default class ChickenProfileDetail extends Component{
     static navigationOptions={
-        title : 'Chicken Profile Details',
+        title : strings.Chicken_Profile_Details,
         headerStyle:{backgroundColor:'#fff'},
         headerTitleStyle:{color:'#212121'},
         drawerLabel: () => null
@@ -87,8 +88,8 @@ export default class ChickenProfileDetail extends Component{
                 fields:{
                
                     AnimalName:{
-                        label: 'Name',
-                        placeholder:'Name'                     
+                        label: strings.Animal_Name,
+                        placeholder:strings.Animal_Name                     
                     },
                     // AnimalCode:{
                     //     label: 'Code',
@@ -96,62 +97,62 @@ export default class ChickenProfileDetail extends Component{
                     //     // error:'Please Enter ChikenCode'                        
                     // },
                     AnimalSymbol:{
-                        label: 'Symbol',
-                        placeholder:'Symbol'                       
+                        label: strings.Animal_Symbol,
+                        placeholder:strings.Animal_Symbol                       
                     },
                     AnimalStatus:{
-                        label: 'Choose Status' ,
+                        label: strings.Animal_Status ,
                          nullOption: {value: '', text: 'Select'}                     
                     },
                     CauseOfDeath:{
-                        label: 'Cause Of Death',
-                        placeholder:'CauseOfDeath',
+                        label: strings.Cause_Of_Death,
+                        placeholder:strings.Cause_Of_Death,
                         editable: false,
                         hidden: true                   
                     },
                     Gender:{
-                        label: 'Gender',
+                        label: strings.Gender,
                         nullOption: {value: '', text: 'Select'}                        
                     },
                     SireCode:{
-                        label: 'Sire Code',
-                        placeholder:'Sire Code'                       
+                        label: strings.Sire_Code,
+                        placeholder:strings.Sire_Code                      
                     },
                     DateOfBirth: {
-                        label: 'Date Of Birth:',
-                        placeholder: 'Date Of Birth',
+                        label: strings.Date_Of_Birth,
+                        placeholder: strings.Date_Of_Birth,
                         mode: 'date',
                         config: {
                             format: (date) => String(moment(date).format("MM/DD/YYYY")),
                         }
                     },
                     BreederCode:{
-                        label: 'Breeder Code',
-                        placeholder:'Breeder Code'
+                        label: strings.Breeder_Code,
+                        placeholder:strings.Breeder_Code
                     },
                     BreederFormula:{
-                        label: 'Breeder Formula',
-                        placeholder:'Breeder Formula'
+                        label: strings.Breeder_Formula,
+                        placeholder: strings.Breeder_Formula
                     },
                     Talents:{
-                        label: 'Talents',
-                        placeholder:'Talents'
+                        label: strings.Talents,
+                        placeholder:strings.Talents
                     },
                     Weight:{
-                        label: 'Weight',
-                        placeholder:'Weight'
+                        label: strings.Weight,
+                        placeholder:strings.Weight
                     },
                     FightingRecord:{
-                        label: 'Fighting Record',
-                        placeholder:'Fighting Record'
+                        label: strings.Fighting_Record,
+                        placeholder:strings.Fighting_Record
                     },
                     StandardPrice:{
-                        label: 'Standard Price',
-                        placeholder:'Standard Price'
+                        label: strings.Standard_Price,
+                        placeholder:strings.Standard_Price
                     },
                     Remarks:{
-                        label: 'Remarks',
-                        placeholder:'Remarks'
+                        label: strings.Remarks,
+                        placeholder:strings.Remarks
                     }
                 }
             }
@@ -300,7 +301,7 @@ export default class ChickenProfileDetail extends Component{
               //if(data.FarmID!=0){
                   //alert('Animal profile saved successfully.')
                   ToastAndroid.showWithGravity(
-                    'Saved successfully...',
+                    strings.Saved_successfully,
                     ToastAndroid.SHORT,
                     ToastAndroid.CENTER
                   );
@@ -315,7 +316,7 @@ export default class ChickenProfileDetail extends Component{
       else
       {
           ToastAndroid.showWithGravity(
-              'Please Enter all manadatary fields...',
+              strings.Mandatory_fields,
               ToastAndroid.SHORT,
               ToastAndroid.CENTER
             );
@@ -348,7 +349,7 @@ export default class ChickenProfileDetail extends Component{
                     </Left>
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Chicken Details</Title>
+                             <Title>{strings.Chicken_Details}</Title>
                         </View>
                     </Body>
                     <Right>
@@ -366,7 +367,7 @@ export default class ChickenProfileDetail extends Component{
                             onChange={this.onChange}
                         />
                         <TouchableOpacity onPress={this.state.isPhoto ? this.cleanupImages.bind(this) : this.pickMultiple.bind(this)} style={styles.marginbottom_10}>
-                            <Text style={styles.blue}>{this.state.isPhoto ? 'Clear Photo' : 'Select Photo'}</Text>
+                            <Text style={styles.blue}>{this.state.isPhoto ? strings.Clear_Photo : strings.Select_Photo}</Text>
                         </TouchableOpacity>
                         <ScrollView>
                             {/* this.state.ChickenProfileDetails.AnimalPhoto ? this.state.ChickenProfileDetails.AnimalPhoto.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null */}
@@ -379,12 +380,12 @@ export default class ChickenProfileDetail extends Component{
                     <View style={styles.flexDirectionWrap} >
                         <View style={styles.width_50}>
                             <Button success block rounded onPress={this.ResetchikenProfile}>
-                                <Text style={styles.white} >Reset</Text>
+                                <Text style={styles.white} >{strings.Reset}</Text>
                             </Button>
                         </View>
                         <View style={styles.width_50_flex_end}>
                             <Button primary block rounded onPress={this.SavechikenProfile}>
-                                <Text style={styles.white}>Save</Text>
+                                <Text style={styles.white}>{strings.Save}</Text>
                             </Button>
                         </View>
                     </View>

@@ -7,7 +7,7 @@ import moment from 'moment';
 import services from './Services'
 import axios from 'axios';
 import styles from '../stylesheet';
-import { strings } from '../Localization';
+import {strings} from '../Localization';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;

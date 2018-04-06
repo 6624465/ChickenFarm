@@ -3,7 +3,7 @@ import { View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity,Acti
 
 import { StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer ,Right} from 'native-base';
-import { strings } from '../Localization';
+import {strings} from '../Localization';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
