@@ -109,7 +109,7 @@ export default class ChickenForSaleDetail extends Component{
                         placeholder:strings.Fighting_Record
                     },
                     IsShowStandardPrice:{
-                        label:string.Standard_Price
+                        label:strings.Standard_Price
                     }
                 }
             }
