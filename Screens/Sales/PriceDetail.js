@@ -6,6 +6,7 @@ import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer,Rig
 import services from './Services'
 import styles from '../stylesheet';
 
+import {strings} from '../Localization';
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
 
@@ -58,28 +59,28 @@ export default class PriceDetail extends Component{
         this.SalesStandardPriceOptions={
             fields:{
                 SireCode:{
-                    label: 'Sire Code',
-                    placeholder:'Sire Code'
+                    label: strings.Sire_Code,
+                    placeholder:strings.Sire_Code
                 },
                 BreederCode:{
-                    label: 'Breeder Code',
-                    placeholder:'Breeder Code'
+                    label: strings.Breeder_Code,
+                    placeholder:strings.Breeder_Code
                 },
                 Price:{
-                    label: 'Price',
-                    placeholder:'Price'                
+                    label: strings.Price,
+                    placeholder:strings.Price                
                 },
                 CurrencyCode:{
-                    label: 'Currency',
+                    label: strings.Currency,
                     nullOption: {value: '', text: 'Select'}              
                 } ,
                 ExRate:{
-                    label: 'Ex.Rate',
-                    placeholder:'Ex.Rate'                
+                    label: string.Ex_Rate,
+                    placeholder:string.Ex_Rate                
                 },
                 LocalPrice:{
-                    label: 'Local Price',
-                    placeholder:'Local Price',
+                    label: strings.Local_Price,
+                    placeholder: strings.Local_Price,
                     editable:false                
                 }
             }
@@ -128,7 +129,7 @@ export default class PriceDetail extends Component{
                 //if(response.data!=0){
                
                    ToastAndroid.showWithGravity(
-                    'Saved successfully....',
+                    strings.Saved_successfully,
                     ToastAndroid.SHORT,
                     ToastAndroid.CENTER
                   );
@@ -143,7 +144,7 @@ export default class PriceDetail extends Component{
         else
         {
             ToastAndroid.showWithGravity(
-                'Please Enter all manadatary fields...',
+              strings.Mandatory_fields,
                 ToastAndroid.SHORT,
                 ToastAndroid.CENTER
               );
@@ -173,7 +174,7 @@ export default class PriceDetail extends Component{
                     </Left>
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Standard Price Details</Title>
+                             <Title>{strings.Standard_PriceDetails}</Title>
                         </View>
                     </Body>
                     <Right></Right>
@@ -193,12 +194,12 @@ export default class PriceDetail extends Component{
                         <View style={styles.flexDirectionWrap} >
                             <View style={styles.width_50}>
                                 <Button success block rounded onPress={this.ResetStandardPrice}>
-                                    <Text style={styles.white} >Reset</Text>
+                                    <Text style={styles.white} >{strings.Reset}</Text>
                                 </Button>
                             </View>
                             <View style={styles.width_50_flex_end}>
                                 <Button primary block rounded onPress={this.SaveStandardPrice}>
-                                    <Text style={styles.white}>Save</Text>
+                                    <Text style={styles.white}>{strings.Save}</Text>
                                 </Button>
                             </View>
                         </View>

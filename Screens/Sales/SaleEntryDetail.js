@@ -9,6 +9,8 @@ import axios from 'axios';
 import services from './Services';
 import styles from '../stylesheet';
 
+import {strings} from '../Localization';
+
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
 
@@ -72,42 +74,42 @@ export default class SaleEntryDetail extends Component{
         this.AnimalSaleEntryDetailsOptions={
             fields:{
                 AnimalCode:{
-                    label: 'Animal Name',
+                    label: strings.Animal_Name,
                     nullOption: {value: '', text: 'Select'}               
                 },
                 AnimalStatus:{
-                    label: 'Animal Status',
+                    label: strings.Animal_Status,
                     nullOption: {value: '', text: 'Select'},
                     editable:false
                                   
                 },
                 BuyerName:{
-                    label: 'Buyer Name',
-                    placeholder:'Buyer Name'
+                    label: strings.Buyer_Name,
+                    placeholder: strings.Buyer_Name
                 },
                 BuyerAddress:{
-                    label: 'Buyer Address',
-                    placeholder:'Buyer Address'
+                    label: strings.Buyer_Address,
+                    placeholder:strings.Buyer_Address
                 },
                 BuyerPhoneNo:{
-                    label: 'Buyer PhoneNo',
-                    placeholder:'Buyer PhoneNo'
+                    label: strings.Buyer_PhoneNo,
+                    placeholder:strings.Buyer_PhoneNo
                 },
                 BuyerMobileNo:{
-                    label: 'Buyer MobileNo',
-                    placeholder:'Buyer MobileNo'               
+                    label: strings.Buyer_MobileNo,
+                    placeholder:strings.Buyer_MobileNo               
                 },
                 Price:{
-                    label: 'Price',
-                    placeholder:'Price'
+                    label: strings.Price,
+                    placeholder:strings.Price
                 },
                 Discount:{
-                    label: 'Discount',
-                    placeholder:'Discount'
+                    label: strings.Discount,
+                    placeholder:strings.Discount
                 },
                 TotalPrice:{
-                    label: 'Total Price',
-                    placeholder:'Total Price'               
+                    label: strings.Total_Price,
+                    placeholder: strings.Total_Price               
                 }
             }
         }
@@ -209,7 +211,7 @@ export default class SaleEntryDetail extends Component{
                 //if(response.data!=0){
                     //alert('Vaccine Entry saved successfully.')
                     ToastAndroid.showWithGravity(
-                        'Saved successfully..',
+                       strings.Saved_successfully,
                         ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );
@@ -223,7 +225,7 @@ export default class SaleEntryDetail extends Component{
         }
         else{
             ToastAndroid.showWithGravity(
-                'Please Enter all manadatary fields...',
+               strings.Mandatory_fields,
                 ToastAndroid.SHORT,
                 ToastAndroid.CENTER
               );
@@ -254,7 +256,7 @@ export default class SaleEntryDetail extends Component{
                     </Left>
                     <Body>
                         <View style={{width:250,alignItems:'flex-start'}}>
-                             <Title>Animal Sale Entry Details</Title>
+                             <Title>{strings.Animal_SaleEntryDetails}</Title>
                         </View>
                     </Body>
                     <Right></Right>
@@ -274,12 +276,12 @@ export default class SaleEntryDetail extends Component{
                     <View style={styles.flexDirectionWrap} >
                         <View style={styles.width_50}>
                             <Button success block rounded onPress={this.ResetAnimalSaleEntry}>
-                                <Text style={styles.white} >Reset</Text>
+                                <Text style={styles.white} >{strings.Reset}</Text>
                             </Button>
                         </View>
                         <View style={styles.width_50_flex_end}>
                             <Button primary block rounded onPress={this.SaveAnimalSaleEntry}>
-                                <Text style={styles.white}>Save</Text>
+                                <Text style={styles.white}>{strings.Save}</Text>
                             </Button>
                         </View>
                     </View>
