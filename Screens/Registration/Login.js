@@ -8,6 +8,8 @@ import services from './Services';
 import styles from '../stylesheet';
 
 import Navigation from '../Navigations/Navigation';
+import { strings } from '../Localization';
+
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
 

@@ -3,6 +3,8 @@ package com.chickenfarm;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.github.reactNativeMPAndroidChart.MPAndroidChartPackage;
+import com.babisoft.ReactNativeLocalization.ReactNativeLocalizationPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.github.reactNativeMPAndroidChart.MPAndroidChartPackage;
@@ -26,6 +28,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new MPAndroidChartPackage(),
+            new ReactNativeLocalizationPackage(),
           new PickerPackage(),
           new MPAndroidChartPackage(),
           new VectorIconsPackage()
