@@ -3,13 +3,14 @@ import { View, Text,StyleSheet, NativeModules, ScrollView, TouchableOpacity,Acti
 
 import { StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer ,Right} from 'native-base';
+import { strings } from '../Localization';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
 
 export default class BreedDetail extends Component{
     static navigationOptions={
-        title : 'Breed Details',
+        title : strings.Breed_Details,
         headerStyle:{backgroundColor:'#fff'},
         headerTitleStyle:{color:'#212121'},
         drawerLabel: () => null
@@ -26,9 +27,7 @@ export default class BreedDetail extends Component{
             options:{
                 fields:{
                     BreedName:{
-                        label: 'Breed Name',
-                        //placeholder:'Please Enter Your Full Name',
-                        //error:'Please Enter Your Full Name'                        
+                        label: strings.Breed_Name                      
                     }
                 }
             }
@@ -61,7 +60,7 @@ export default class BreedDetail extends Component{
                     </Left>
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Breed Details </Title>
+                             <Title>{strings.Breed_Details} </Title>
                         </View>
                     </Body>
                     <Right>
@@ -84,12 +83,12 @@ export default class BreedDetail extends Component{
                     <View style={{flexDirection:'row' ,flexWrap:'wrap'}} >
                         <View style={{width:'50%'}}>
                             <Button success block rounded onPress={this.ResetFarmProfile} style={{width:'100%',justifyContent:'center'}}>
-                                <Text style={{color:'white'}} >Reset</Text>
+                                <Text style={{color:'white'}} >{strings.Reset}</Text>
                             </Button>
                         </View>
                         <View style={{width:'50%', alignItems:'flex-end'}}>
                             <Button primary block rounded onPress={this.SaveFarmProfile} style={{width:'100%',justifyContent:'center'}}>
-                                <Text style={{color:'white'}}>Save</Text>
+                                <Text style={{color:'white'}}>{strings.Save}</Text>
                             </Button>
                         </View>
                     </View>

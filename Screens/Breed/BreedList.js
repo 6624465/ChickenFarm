@@ -3,13 +3,13 @@ import {View, Text, StyleSheet, ActivityIndicator, ListView, TouchableOpacity, I
 
 import {StackNavigator} from 'react-navigation';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Footer, Right, Item, Input } from 'native-base';
-//import Search from '../Common/Search'
 import api from '../../API/API';
-  
+import { strings } from '../Localization';
+
 export default class BreedList extends Component{
 
     static navigationOptions={
-        title : 'Breed List',
+        title : strings.Breed_List,
         headerStyle:{backgroundColor:'#fff'},
         headerTitleStyle:{color:'#212121'}
     }
@@ -78,7 +78,7 @@ export default class BreedList extends Component{
                     
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Breed List </Title>
+                             <Title>{strings.Breed_List} </Title>
                         </View>
                     </Body>
                     <Right>

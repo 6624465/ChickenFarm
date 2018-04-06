@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, Image, ScrollView,AsyncStorage } from 'react-native';
 import {DrawerNavigator, DrawerItems, StackNavigator} from 'react-navigation';
 import { Icon } from 'native-base';
-
+import axios from 'axios';
 
 
 import MainDashboard from '../Dashboard/MainDashboard';
@@ -352,12 +352,19 @@ export default class Navigation extends Component {
       })
     );
     debugger;
-if(this.usrid==null || this.pass==null)
-{ 
-  this.setState({
-    condition:false
-  })
-}
+    if(this.usrid==null || this.pass==null)
+    { 
+      this.setState({
+        condition:false
+      })
+    }
+    else{
+      axios.defaults.baseURL = 'http://192.168.56.1/FMS';
+      //axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com';
+      axios.defaults.headers.common['AUTH_TOKEN'] = 'sdfsdfgsdfgsdfdsfgsdfgsdfg';
+      axios.defaults.headers.common['Content-Type'] = 'application/json';    
+      axios.defaults.headers.post['Content-Type'] = 'application/json';  
+    }
   }
   constructor(props)
   {

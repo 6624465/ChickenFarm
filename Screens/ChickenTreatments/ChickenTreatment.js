@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { View, StyleSheet,TouchableOpacity,Image,Keyboard,Text} from 'react-native';
 import { Container, Content, Header, Icon, Left, Title, Body, Button, Right } from 'native-base';
 import {StackNavigator} from 'react-navigation';
+import { strings } from '../Localization';
 
 export default class ChickenTreatment extends Component{
     static navigationOptions={
-        title : 'Chicken Treatment'
+        title : strings.Chicken_Treatment
     }
     render(){
         return(     
@@ -16,14 +17,12 @@ export default class ChickenTreatment extends Component{
                         <Icon ios='ios-menu' android="md-menu" />
                         </Button>
                     </Left>
-                    
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Chicken Treatment</Title>
+                             <Title>{strings.Chicken_Treatment}</Title>
                         </View>
                     </Body>
                     <Right>
-                        
                     </Right>
                 </Header>
 
@@ -35,12 +34,12 @@ export default class ChickenTreatment extends Component{
                     <View>
                         <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('ChickenTreatmentList')}>
                             <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
-                            Chicken Treatment List
+                            {strings.Chicken_Treatment_List}
                             </Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={{paddingTop:'10%', alignItems:'center'}} onPress={()=>this.props.navigation.navigate('PurchasedMedicineList')}>
                             <Text style={{color:'blue',fontSize:15,fontWeight:'bold'}}>
-                            Purchased Medicine List
+                            {strings.Purchased_Medicine_List}
                             </Text>
                         </TouchableOpacity>
                     </View>

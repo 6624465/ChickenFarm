@@ -6,6 +6,7 @@ import moment from 'moment';
 import axios from 'axios';
 import services from './Services';
 import styles from '../stylesheet';
+import { strings } from '../Localization';
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
@@ -81,20 +82,20 @@ export default class PurchasedMedicineDetail extends Component{
                 //     placeholder:'Medicine Code'
                 // },
                 MedicineName:{
-                    label: 'Medicine Name',
-                    placeholder:'Medicine Name'                
+                    label: strings.Medicine_Name,
+                    placeholder:strings.Medicine_Name                
                 },
                 MedicineType:{
-                    label: 'Medicine Type',
-                    placeholder:'Medicine Type'                
+                    label: strings.Medicine_Type,
+                    placeholder:strings.Medicine_Type               
                 },
                 MedicineCompany:{
-                    label: 'Medicine Company',
-                    placeholder:'Medicine Company'                
+                    label: strings.Medicine_Company,
+                    placeholder:strings.Medicine_Company                
                 },
                 PurchaseDate:{
-                    label: 'Purchase Date',
-                    placeholder:'Purchase Date',
+                    label: strings.Purchase_Date,
+                    placeholder: strings.Purchase_Date,
                     // minimumDate: new Date(),
                     mode: 'date',
                     config: {
@@ -102,29 +103,25 @@ export default class PurchasedMedicineDetail extends Component{
                     }            
                 },
                 ExpiryDate:{
-                    label: 'Expiry Date',
-                    placeholder:'Expiry Date',
+                    label: strings.Expiry_Date,
+                    placeholder:strings.Expiry_Date,
                     // minimumDate: new Date(),
                     mode: 'date',
                     config: {
                         format: (date) => String(moment(date).format("MM/DD/YYYY")),
-                    }
-                                 
+                    }                                 
                 },
                 BatchNo:{
-                    label: 'Batch No',
-                    placeholder:'BatchNo'
-                                
+                    label: strings.Batch_No,
+                    placeholder:strings.Batch_No                                
                 },
                 Quantity:{
-                    label: 'Quantity ',
-                    placeholder:'Quantity '
-                                
+                    label: strings.Quantity,
+                    placeholder:strings.Quantity                                
                 },
                 Supplier:{
-                    label: 'Supplied By',
-                    placeholder:'Supplied By',
-                                
+                    label: strings.Supplied_By,
+                    placeholder:strings.Supplied_By                                
                 }
             }
         }
@@ -223,7 +220,7 @@ export default class PurchasedMedicineDetail extends Component{
                 //if(response.data!=0){
                     //alert('Medicine profile saved successfully.')
                     ToastAndroid.showWithGravity(
-                        'Saved successfully..',
+                        strings.Saved_successfully,
                         ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );
@@ -238,7 +235,7 @@ export default class PurchasedMedicineDetail extends Component{
         else
         {
             ToastAndroid.showWithGravity(
-                'Please Enter all manadatary fields...',
+                strings.Mandatory_fields,
                 ToastAndroid.SHORT,
                 ToastAndroid.CENTER
               );
@@ -269,7 +266,7 @@ export default class PurchasedMedicineDetail extends Component{
                     </Left>
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Purchased Medicine</Title>
+                             <Title>{strings.Purchased_Medicine}</Title>
                         </View>
                     </Body>
                     <Right>
@@ -299,12 +296,12 @@ export default class PurchasedMedicineDetail extends Component{
                     <View style={styles.flexDirectionWrap} >
                         <View style={styles.width_50}>
                             <Button success block rounded onPress={this.ResetMedicineMaster}>
-                                <Text style={styles.white} >Reset</Text>
+                                <Text style={styles.white} >{strings.Reset}</Text>
                             </Button>
                         </View>
                         <View style={styles.width_50_flex_end}>
                             <Button primary block rounded onPress={this.SaveMedicineMaster}>
-                                <Text style={styles.white}>Save</Text>
+                                <Text style={styles.white}>{strings.Save}</Text>
                             </Button>
                         </View>
                     </View>
