@@ -96,14 +96,14 @@ else{
       //auto: 'placeholders'
       fields:{
         UserID: {
-              label: 'Mobile No',
-              placeholder:'Enter Your Mobile No',
+              label: strings.Mobile_Number,
+              placeholder:strings.Mobile_Number,
               maxLength:12 
               //error:'Please Enter Your Mobile Number'  
             },
             Password: {
-              label: 'Password',
-              placeholder:'Enter Your Password',
+              label: strings.Password,
+              placeholder:strings.Password,
               secureTextEntry: true,
               //error:'Please Enter Your Password'  
             }
@@ -138,21 +138,21 @@ else{
         />
         
         <Button primary block rounded onPress={this.LoginUser.bind(this)}>
-            <Text style={styles.button_text}>Login</Text>
+            <Text style={styles.button_text}>{strings.Login}</Text>
         </Button>
 
         <View style={styles.flexDirectionWrap}>
           <View style={styles.width_50}>
             <TouchableOpacity style={styles.paddingtop_10} onPress={this.NewUserRegistration}>
               <Text style={styles.touchableOpacity_text}>
-                New User?
+                {strings.New_User}
               </Text>
             </TouchableOpacity>
           </View>
           <View style={styles.width_50_flex_end}>
             <TouchableOpacity style={styles.paddingtop_10} onPress={this.ForgotPassword}>
               <Text style={styles.touchableOpacity_text}>
-                Forgot Password?
+                {strings.Forgot_Password}
               </Text>
             </TouchableOpacity>
           </View>
