@@ -45,7 +45,7 @@ export default class MainDashboard extends Component{
                             </View>
                             <View style={styles.width_25_align_center}>
                                 <TouchableOpacity  style={{width:70,height:70}}  onPress={()=>this.props.navigation.navigate('ExpenseReport')}>
-                                    <Image source = { require('../../android/app/src/main/assets/Expenses.png') } style={{width:'100%',height:'100%'}}/>
+                                    <Image source = { require('../../android/app/src/main/assets/Expenses_report.png') } style={{width:'100%',height:'100%'}}/>
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.width_25_align_center}>
