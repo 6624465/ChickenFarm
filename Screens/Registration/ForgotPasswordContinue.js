@@ -147,7 +147,7 @@ export default class ForgotPasswordContinue extends Component{
 
                         <View>
                             <TouchableOpacity onPress={this.IsResendOTP}>
-                                <Text style={styles.touchableOpacity_text}> strings.Resend_OTP </Text>
+                                <Text style={styles.touchableOpacity_text}>{strings.Resend_OTP}</Text>
                             </TouchableOpacity>
                         </View>
 
