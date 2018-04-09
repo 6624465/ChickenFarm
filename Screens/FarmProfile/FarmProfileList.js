@@ -8,13 +8,13 @@ var t = require('tcomb-form-native');
 var Form = t.form.Form;
 var ImagePicker = NativeModules.ImageCropPicker;
 import axios from 'axios';
-
+import {strings} from '../Localization';
 import services from './Services';
 import styles from '../stylesheet';
 
 export default class FarmProfileList extends Component{
     static navigationOptions={
-        title : 'Farm Profile',
+        title : strings.Farm_Profile,
         headerStyle:{backgroundColor:'#fff'},
         headerTitleStyle:{color:'#212121'}
     }
@@ -73,42 +73,42 @@ export default class FarmProfileList extends Component{
         this.AddFarmProfileOptions={
             fields:{
                 FarmName:{
-                    label: 'Farm Name',
-                    placeholder:'Please Enter Your Farm Name'
+                    label: strings.Farm_Name,
+                    placeholder:strings.Farm_Name
                 
                 },
                 FarmAddress:{
-                    label: 'Farm Address',
-                    placeholder:'Please Enter Farm Address'
+                    label: strings.Farm_Address,
+                    placeholder:strings.Farm_Address
                 
                 },
                 PhoneNo:{
-                    label: 'Phone Number',
-                    placeholder:'Please Enter Phone Number'
+                    label: strings.Phone_Number,
+                    placeholder:strings.Phone_Number
                 
                 },
                 MobileNo:{
-                    label: 'Mobile Number',
-                    placeholder:'Please Enter Mobile Number',
+                    label: strings.Mobile_Number,
+                    placeholder:strings.Mobile_Number,
                     editable:false
                 },
                 SocialPage:{
-                    label: 'Social Page',
-                    placeholder:'Social Page ',
+                    label: strings.Social_Page,
+                    placeholder:strings.Social_Page,
                     // error:'Please Enter Your Full Name'
                 
                 },
                 WebSite:{
-                    label: 'Website',
-                    placeholder:' Website Name'
+                    label: strings.Website,
+                    placeholder: strings.Website
                 },
                 AboutUs:{
-                    label: 'About Us',
-                    placeholder:'About Us'              
+                    label: strings.About_Us,
+                    placeholder:strings.About_Us              
                 },
                 LineID:{
-                    label: 'Line ID',
-                    placeholder:'Line ID'
+                    label: strings.Line_ID,
+                    placeholder:strings.Line_ID
                 },
             }
         }
@@ -216,7 +216,7 @@ export default class FarmProfileList extends Component{
                     AsyncStorage.setItem('FarmID', response.data.toString()); 
                     //alert('Farm profile saved successfully.')
                     ToastAndroid.showWithGravity(
-                        'Saved successfully...',
+                        strings.Saved_successfully,
                         ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                       );
@@ -237,7 +237,7 @@ export default class FarmProfileList extends Component{
         }
         else{
             ToastAndroid.showWithGravity(
-                'Please Enter all manadatary fields...',
+                strings.Mandatory_fields,
                 ToastAndroid.SHORT,
                 ToastAndroid.CENTER
               );
@@ -272,7 +272,7 @@ export default class FarmProfileList extends Component{
                     </Left>
                     <Body>
                         <View style={{width:230,alignItems:'flex-start'}}>
-                             <Title>Add Farm Profile</Title>
+                             <Title>{strings.Add_Farm_Profile}</Title>
                         </View>
                     </Body>
                     <Right></Right>
@@ -289,7 +289,7 @@ export default class FarmProfileList extends Component{
                         />
 
                          <TouchableOpacity onPress={this.state.isLogo ? this.cleanupImages.bind(this) : this.pickMultiple.bind(this)} style={{marginBottom: 10}}>
-                            <Text style={{color:'blue'}}>{this.state.isLogo ? 'Clear Logo' : 'Select Logo'}</Text>
+                            <Text style={{color:'blue'}}>{this.state.isLogo ? strings.Clear_Logo : strings.Select_Logo}</Text>
                         </TouchableOpacity>
 
                         {/* <TouchableOpacity onPress={this.cleanupImages.bind(this)} style={{marginBottom: 10}}>
@@ -311,12 +311,12 @@ export default class FarmProfileList extends Component{
                     <View style={styles.flexDirectionWrap} >
                         <View style={styles.width_50}>
                             <Button success  block rounded onPress={this.ResetFarmProfile.bind(this)}>
-                                <Text style={styles.white} >Reset</Text>
+                                <Text style={styles.white} >{strings.Reset}</Text>
                             </Button>
                         </View>
                         <View style={styles.width_50_flex_end}>
                             <Button primary  block rounded onPress={this.SaveFarmProfile.bind(this)}>
-                                <Text style={styles.white}>Save</Text>
+                                <Text style={styles.white}>{strings.Save}</Text>
                             </Button>
                         </View>
                     </View>

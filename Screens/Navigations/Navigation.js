@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Text, View, Image, ScrollView,AsyncStorage } from 'react-native';
+import { Text, View, Image, ScrollView,AsyncStorage,ActivityIndicator } from 'react-native';
 import {DrawerNavigator, DrawerItems, StackNavigator} from 'react-navigation';
 import { Icon } from 'native-base';
 import axios from 'axios';
-
+import styles from '../stylesheet';
 
 import MainDashboard from '../Dashboard/MainDashboard';
 import SalesReport from '../Reports/SalesReport';
@@ -337,7 +337,7 @@ const NavLinks1 = DrawerNavigator({
 export default class Navigation extends Component {
   async componentDidMount() {
     this.setState({
-      condition:true
+      condition:null
     })
     await AsyncStorage.getItem('uid').then((value)=> 
       this.setState({}, function() {
@@ -365,21 +365,24 @@ export default class Navigation extends Component {
       })
     }
     else{
-      //axios.defaults.baseURL = 'http://192.168.56.1/FMS';
-      axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com';
+      axios.defaults.baseURL = 'http://192.168.56.1/FMS';
+      //axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com';
       axios.defaults.headers.common['AUTH_TOKEN'] = 'sdfsdfgsdfgsdfdsfgsdfgsdfg';
       axios.defaults.headers.common['Content-Type'] = 'application/json';    
       axios.defaults.headers.post['Content-Type'] = 'application/json'; 
        
       axios.defaults.headers.common['MOBILE_NO'] = this.usrid; 
-      axios.defaults.headers.common['FarmID'] = this.farm;       
+      axios.defaults.headers.common['FarmID'] = this.farm;     
+      this.setState({
+        condition:true
+      })  
     }
   }
   constructor(props)
   {
     super(props);
     this.state ={
-      condition: true,
+      condition: null,
     },
     this.usrid='',
     this.pass='',
@@ -387,9 +390,24 @@ export default class Navigation extends Component {
   }
     
     render(){  
+      if (this.state.condition==null) {
+        return (
+            <View style={styles.activeindicator}>
+            <ActivityIndicator size="large" color="#0000ff"/>
+             {/* <Image source = { require('../../android/app/src/main/assets/capture.png') } 
+             style={{resizeMode: 'cover' }}/> */}
+           </View>
+        );
+      }
       debugger;     
         return(
            this.state.condition ? <NavLinks1 /> : <NavLinks />
           );
     }
 }
+// let styles = StyleSheet.create({
+//   backgroundImage: {
+//     flex: 1,
+//     resizeMode: 'cover', // or 'stretch'
+//   }
+// });
