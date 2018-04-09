@@ -23,8 +23,8 @@ export default class PurchasedVaccineDetail extends Component{
             if(response.data!=null)
             {
                 var dtls = response.data.vaccineMaster;
-                dtls.PurchaseDate = dtls.PurchaseDate != null ? moment(dtls.PurchaseDate).toDate() : null;
-                dtls.ExpiryDate = dtls.ExpiryDate != null ? moment(dtls.ExpiryDate).toDate() : null;
+                dtls.PurchaseDate = dtls.PurchaseDate != null ? moment(dtls.PurchaseDate).toDate() : moment(new Date()).toDate();
+                dtls.ExpiryDate = dtls.ExpiryDate != null ? moment(dtls.ExpiryDate).toDate() : moment(new Date()).toDate();
 
                 this.setState({
                     PurchasedVaccineDetails: dtls,

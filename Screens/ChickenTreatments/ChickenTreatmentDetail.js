@@ -22,8 +22,8 @@ componentDidMount() {
         if(response.data!=null)
         {
             var dtls = response.data.treatmentEntry;
-            dtls.StartDate = dtls.StartDate != null ? moment(dtls.StartDate).toDate() : null;
-            dtls.EndDate = dtls.EndDate != null ? moment(dtls.EndDate).toDate() : null;
+            dtls.StartDate = dtls.StartDate != null ? moment(dtls.StartDate).toDate() : moment(new Date()).toDate();
+            dtls.EndDate = dtls.EndDate != null ? moment(dtls.EndDate).toDate() : moment(new Date()).toDate();
             var astatus = {};
             for(let i=0;i<response.data.lstAnimalProfile.length;i++)
             {

@@ -28,7 +28,7 @@ export default class ChickenProfileDetail extends Component{
             if(response.data!=null)
             {
                 var dtls = response.data.animalProfile;
-                dtls.DateOfBirth = dtls.DateOfBirth != null ? moment(dtls.DateOfBirth).toDate() : null;
+                dtls.DateOfBirth = dtls.DateOfBirth != null ? moment(dtls.DateOfBirth).toDate() :moment(new Date()).toDate();
 
                 var astatus = {};
                 for(let i=0;i<response.data.animalStatus.length;i++)
@@ -188,6 +188,9 @@ export default class ChickenProfileDetail extends Component{
                 editable: { '$set': ChickenProfileDetails.AnimalStatus === '2003' ? true : false },
                 hidden: { '$set': ChickenProfileDetails.AnimalStatus === '2003' ? false : true },
                 
+              },
+              DateOfBirth:{
+
               }
             }
         });
