@@ -10,7 +10,10 @@ import {strings} from '../Localization';
 export default class MainDashboard extends Component{
     
     static navigationOptions={
-        title : strings.Main_Dashboard
+        title : strings.Main_Dashboard,
+        
+        headerStyle:{backgroundColor:'#fff'},
+        headerTitleStyle:{color:'#212121'},
     }
 
     Logout=()=>{
