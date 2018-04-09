@@ -143,7 +143,7 @@ const NavLinks = DrawerNavigator({
       Vaccine:{
         screen:Vaccine,
         navigationOptions:{
-          drawerIcon: <Icon ios='ios-medical' android="md-medical" size={16} />
+          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/vaccine.png') } style={{width:24,height:24}}/>
         }
       },
       PurchasedVaccineList:{screen:PurchasedVaccineList},
@@ -260,7 +260,7 @@ const NavLinks1 = DrawerNavigator({
       Vaccine:{
         screen:Vaccine,
         navigationOptions:{
-          drawerIcon: <Icon ios='ios-medical' android="md-medical" size={16} />
+          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/vaccine.png') } style={{width:30,height:30}}/>
         }
       },
       PurchasedVaccineList:{screen:PurchasedVaccineList},
@@ -365,8 +365,8 @@ export default class Navigation extends Component {
       })
     }
     else{
-      axios.defaults.baseURL = 'http://192.168.0.108/FMS';
-      //axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com';
+      //axios.defaults.baseURL = 'http://192.168.56.1/FMS';
+      axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com';
       axios.defaults.headers.common['AUTH_TOKEN'] = 'sdfsdfgsdfgsdfdsfgsdfgsdfg';
       axios.defaults.headers.common['Content-Type'] = 'application/json';    
       axios.defaults.headers.post['Content-Type'] = 'application/json'; 

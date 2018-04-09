@@ -20,8 +20,8 @@ export default class Login extends Component{
   }
 
   async componentDidMount() {
-    axios.defaults.baseURL = 'http://192.168.0.108/FMS';
-    //axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com';
+    //axios.defaults.baseURL = 'http://192.168.56.1/FMS';
+    axios.defaults.baseURL = 'http://fmsapi.logiconglobal.com';
     axios.defaults.headers.common['AUTH_TOKEN'] = 'sdfsdfgsdfgsdfdsfgsdfgsdfg';
     axios.defaults.headers.common['Content-Type'] = 'application/json';    
     axios.defaults.headers.post['Content-Type'] = 'application/json';  
