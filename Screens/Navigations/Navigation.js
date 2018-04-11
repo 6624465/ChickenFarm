@@ -135,7 +135,7 @@ const NavLinks = DrawerNavigator({
       ChickenProfileList:{
         screen:ChickenProfileList,
         navigationOptions:{
-          drawerIcon: <Icon ios='ios-egg' android="md-egg" size={16} />
+          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/chicken-profile.png') } style={{width:25,height:25}}/>
         }
       },
       ChickenProfileDetail:{screen:ChickenProfileDetail},
@@ -143,7 +143,7 @@ const NavLinks = DrawerNavigator({
       Vaccine:{
         screen:Vaccine,
         navigationOptions:{
-          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/vaccine.png') } style={{width:24,height:24}}/>
+          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/vaccine.png') } style={{width:25,height:25}}/>
         }
       },
       PurchasedVaccineList:{screen:PurchasedVaccineList},
@@ -168,7 +168,7 @@ const NavLinks = DrawerNavigator({
       Expense:{
         screen:Expense,
         navigationOptions:{
-          drawerIcon: <Icon ios='ios-cash' android="md-cash" size={16} />
+          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/expence.png') } style={{width:25,height:25}}/>
         }
       },
       MExpenseList:{screen:MExpenseList},
@@ -252,7 +252,7 @@ const NavLinks1 = DrawerNavigator({
       ChickenProfileList:{
         screen:ChickenProfileList,
         navigationOptions:{
-          drawerIcon: <Icon ios='ios-egg' android="md-egg" size={16} />
+          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/chicken-profile.png') } style={{width:25,height:25}}/>
         }
       },
       ChickenProfileDetail:{screen:ChickenProfileDetail},
@@ -260,7 +260,7 @@ const NavLinks1 = DrawerNavigator({
       Vaccine:{
         screen:Vaccine,
         navigationOptions:{
-          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/vaccine.png') } style={{width:30,height:30}}/>
+          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/vaccine.png') } style={{width:25,height:25}}/>
         }
       },
       PurchasedVaccineList:{screen:PurchasedVaccineList},
@@ -285,7 +285,7 @@ const NavLinks1 = DrawerNavigator({
       Expense:{
         screen:Expense,
         navigationOptions:{
-          drawerIcon: <Icon ios='ios-cash' android="md-cash" size={16} />
+          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/expence.png') } style={{width:25,height:25}}/>
         }
       },
       MExpenseList:{screen:MExpenseList},
