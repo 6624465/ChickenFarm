@@ -117,7 +117,7 @@ const NavLinks = DrawerNavigator({
       MainDashboard:{
         screen:MainDashboard,
         navigationOptions:{
-          drawerIcon: <Icon ios='ios-home' android="md-home" size={16} />
+          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/dashboard.png') } style={{width:24,height:24}}/>
         }
       },
       SalesReport:{screen:SalesReport},
@@ -128,14 +128,14 @@ const NavLinks = DrawerNavigator({
       FarmProfileList:{
         screen:FarmProfileList,
         navigationOptions:{
-          drawerIcon: <Icon ios='ios-contract' android="md-contract" size={16} />
+          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/farm-profile.png') } style={{width:24,height:24}}/>
         }
       },
 
       ChickenProfileList:{
         screen:ChickenProfileList,
         navigationOptions:{
-          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/chicken-profile.png') } style={{width:25,height:25}}/>
+          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/chicken-profile.png') } style={{width:24,height:24}}/>
         }
       },
       ChickenProfileDetail:{screen:ChickenProfileDetail},
@@ -143,7 +143,7 @@ const NavLinks = DrawerNavigator({
       Vaccine:{
         screen:Vaccine,
         navigationOptions:{
-          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/vaccine.png') } style={{width:25,height:25}}/>
+          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/vaccine.png') } style={{width:24,height:24}}/>
         }
       },
       PurchasedVaccineList:{screen:PurchasedVaccineList},
@@ -157,7 +157,7 @@ const NavLinks = DrawerNavigator({
       ChickenTreatment:{
         screen:ChickenTreatment,
         navigationOptions:{
-          drawerIcon: <Icon ios='ios-medkit' android="md-medkit" size={16} />
+          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/treatment.png') } style={{width:24,height:24}}/>
         }
       },
       ChickenTreatmentList:{screen:ChickenTreatmentList},
@@ -168,7 +168,7 @@ const NavLinks = DrawerNavigator({
       Expense:{
         screen:Expense,
         navigationOptions:{
-          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/expence.png') } style={{width:25,height:25}}/>
+          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/expence.png') } style={{width:24,height:24}}/>
         }
       },
       MExpenseList:{screen:MExpenseList},
@@ -179,7 +179,7 @@ const NavLinks = DrawerNavigator({
       Sales:{
         screen:Sales,
         navigationOptions:{
-          drawerIcon: <Icon ios='ios-aperture' android="md-aperture" size={16} />
+          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/sales.png') } style={{width:24,height:24}}/>
         }
       },
       PriceList:{screen:PriceList},
@@ -192,7 +192,7 @@ const NavLinks = DrawerNavigator({
       BreedList:{
         screen:BreedList,
         navigationOptions:{
-          drawerIcon: <Icon ios='ios-list' android="md-list" size={16} />
+          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/breed.png') } style={{width:24,height:24}}/>
         }
       },
       BreedDetail:{screen:BreedDetail},
@@ -200,7 +200,7 @@ const NavLinks = DrawerNavigator({
       Logout:{
         screen:Logout,
         navigationOptions:{
-          drawerIcon: <Icon ios='ios-log-out' android="md-log-out" size={16} />
+          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/logout.png') } style={{width:24,height:24}}/>
         }
       },
 
@@ -231,7 +231,7 @@ const NavLinks1 = DrawerNavigator({
       MainDashboard:{
         screen:MainDashboard,
         navigationOptions:{
-          drawerIcon: <Icon ios='ios-home' android="md-home" size={16} />
+          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/dashboard.png') } style={{width:24,height:24}}/>
         }
       },
       NavLinksLogin: {
@@ -245,14 +245,14 @@ const NavLinks1 = DrawerNavigator({
       FarmProfileList:{
         screen:FarmProfileList,
         navigationOptions:{
-          drawerIcon: <Icon ios='ios-contract' android="md-contract" size={16} />
+          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/farm-profile.png') } style={{width:24,height:24}}/>
         }
       },
 
       ChickenProfileList:{
         screen:ChickenProfileList,
         navigationOptions:{
-          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/chicken-profile.png') } style={{width:25,height:25}}/>
+          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/chicken-profile.png') } style={{width:24,height:24}}/>
         }
       },
       ChickenProfileDetail:{screen:ChickenProfileDetail},
@@ -260,7 +260,7 @@ const NavLinks1 = DrawerNavigator({
       Vaccine:{
         screen:Vaccine,
         navigationOptions:{
-          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/vaccine.png') } style={{width:25,height:25}}/>
+          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/vaccine.png') } style={{width:24,height:24}}/>
         }
       },
       PurchasedVaccineList:{screen:PurchasedVaccineList},
@@ -274,7 +274,7 @@ const NavLinks1 = DrawerNavigator({
       ChickenTreatment:{
         screen:ChickenTreatment,
         navigationOptions:{
-          drawerIcon: <Icon ios='ios-medkit' android="md-medkit" size={16} />
+          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/treatment.png') } style={{width:24,height:24}}/>
         }
       },
       ChickenTreatmentList:{screen:ChickenTreatmentList},
@@ -285,7 +285,7 @@ const NavLinks1 = DrawerNavigator({
       Expense:{
         screen:Expense,
         navigationOptions:{
-          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/expence.png') } style={{width:25,height:25}}/>
+          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/expence.png') } style={{width:24,height:24}}/>
         }
       },
       MExpenseList:{screen:MExpenseList},
@@ -296,7 +296,7 @@ const NavLinks1 = DrawerNavigator({
       Sales:{
         screen:Sales,
         navigationOptions:{
-          drawerIcon: <Icon ios='ios-aperture' android="md-aperture" size={16} />
+          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/sales.png') } style={{width:24,height:24}}/>
         }
       },
       PriceList:{screen:PriceList},
@@ -309,7 +309,7 @@ const NavLinks1 = DrawerNavigator({
       BreedList:{
         screen:BreedList,
         navigationOptions:{
-          drawerIcon: <Icon ios='ios-list' android="md-list" size={16} />
+          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/breed.png') } style={{width:24,height:24}}/>
         }
       },
       BreedDetail:{screen:BreedDetail},
@@ -317,7 +317,7 @@ const NavLinks1 = DrawerNavigator({
       Logout:{
         screen:Logout,
         navigationOptions:{
-          drawerIcon: <Icon ios='ios-log-out' android="md-log-out" size={16} />
+          drawerIcon:  <Image source = { require('../../android/app/src/main/assets/logout.png') } style={{width:24,height:24}}/>
         }
       },
     },

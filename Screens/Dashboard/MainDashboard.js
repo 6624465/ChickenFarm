@@ -43,7 +43,7 @@ export default class MainDashboard extends Component{
                         <View style={{flexDirection:'row', padding:3, flexWrap:'wrap', height:'20%'}} >
                             <View style={styles.width_25_align_center}>
                                 <TouchableOpacity style={{width:70,height:70}} onPress={()=>this.props.navigation.navigate('SalesReport')}>
-                                    <Image source = { require('../../android/app/src/main/assets/Sales.png') } style={{width:'100%',height:'100%'}}/>
+                                    <Image source = { require('../../android/app/src/main/assets/Sales_report.png') } style={{width:'100%',height:'100%'}}/>
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.width_25_align_center}>
@@ -53,12 +53,12 @@ export default class MainDashboard extends Component{
                             </View>
                             <View style={styles.width_25_align_center}>
                                 <TouchableOpacity  style={{width:70,height:70}}  onPress={()=>this.props.navigation.navigate('ProfitsAndLossReport')}>
-                                    <Image source = { require('../../android/app/src/main/assets/P&L.png') } style={{width:'100%',height:'100%'}}/>
+                                    <Image source = { require('../../android/app/src/main/assets/P&L_report.png') } style={{width:'100%',height:'100%'}}/>
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.width_25_align_center}>
                                 <TouchableOpacity  style={{width:70,height:70}}  onPress={()=>this.props.navigation.navigate('StockReport')}>
-                                    <Image source = { require('../../android/app/src/main/assets/Stock.png') } style={{width:'100%',height:'100%'}}/>
+                                    <Image source = { require('../../android/app/src/main/assets/Stock_report.png') } style={{width:'100%',height:'100%'}}/>
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.width_25_align_center}>
